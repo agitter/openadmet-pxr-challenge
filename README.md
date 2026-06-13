@@ -1,4 +1,9 @@
 # OpenADMET PXR Blind Challenge
+- `/claude`: Scripts and files downloaded from a Claude session
+- `/data`: Data files from HuggingFace
+- `/docking`: Files for docking with GNINA
+- `/external`: Refined PXR structures
+- `/openfe`: Files for running OpenFE
 
 Most code written or drafted by Claude Sonnet 4.6 and GPT-5.5 Instant.
 
