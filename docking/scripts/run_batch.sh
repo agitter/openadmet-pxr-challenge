@@ -35,23 +35,12 @@ mkdir -p "results/${cluster_id}"
 
 # ---------------------------------------------------------------
 # Ensure python deps available (rdkit + meeko for ligand prep).
-# Pinned rdkit==2024.3.2 and meeko==0.5.0.
-#
-# meeko==0.7.1 does not actually support Python 3.8 (its
-# utils/jsonutils.py uses PEP 585 generic syntax like dict[str, Any]
-# without `from __future__ import annotations`, which raises
-# "'type' object is not subscriptable" at import time on 3.8), and it
-# additionally requires gemmi, whose newer releases (>=0.7.1) need
-# nanobind/Python>=3.9 and have no cp38 wheel. The gnina/gnina:v1.3.1
-# image ships Python 3.8.10.
-#
-# meeko==0.5.0 supports Python 3.5-3.9 (per its own classifiers), has
-# no gemmi dependency (only numpy>=1.18), and provides the same
-# mk_prepare_ligand.py CLI used below.
+# Pinned rdkit==2023.9.6 and meeko==0.5.0.
+# The gnina/gnina:v1.3.1 image ships Python 3.8.10.
 # ---------------------------------------------------------------
 python3 -c "import rdkit, meeko" 2>/dev/null || {
     echo "Installing rdkit + meeko ..."
-    pip install --user --quiet "rdkit==2024.3.2" "meeko==0.5.0"
+    pip install --user --quiet "rdkit==2023.9.6" "meeko==0.5.0"
 }
 python3 -c "import rdkit, meeko" || {
     echo "FATAL: required python deps unavailable after install attempt"
