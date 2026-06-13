@@ -35,16 +35,27 @@ mkdir -p "results/${cluster_id}"
 
 # ---------------------------------------------------------------
 # Ensure python deps available (gemmi + rdkit + meeko for ligand prep).
-# Pinned meeko==0.7.1, which requires gemmi explicitly.
+# Pinned rdkit==2025.09.5 and meeko==0.7.1, which requires gemmi explicitly.
 # ---------------------------------------------------------------
 python3 -c "import gemmi, rdkit, meeko" 2>/dev/null || {
     echo "Installing gemmi + rdkit + meeko ..."
-    pip install --user --quiet gemmi rdkit "meeko==0.7.1"
+    pip install --user --quiet gemmi "rdkit==2025.09.5" "meeko==0.7.1"
 }
 python3 -c "import gemmi, rdkit, meeko" || {
     echo "FATAL: required python deps unavailable after install attempt"
     exit 1
 }
+
+# Log the versions actually in use for this job (whether from the base
+# image or the pinned install above), so results can be traced back to
+# a known dependency combination regardless of which path was taken.
+python3 -c "
+import gemmi, rdkit, meeko
+print(f'gemmi={gemmi.__version__}')
+print(f'rdkit={rdkit.__version__}')
+print(f'meeko={meeko.__version__}')
+" > "results/${cluster_id}/dep_versions.txt"
+cat "results/${cluster_id}/dep_versions.txt"
 
 # ---------------------------------------------------------------
 # Unzip the shared receptor archive (one file transferred per job)

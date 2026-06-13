@@ -1,4 +1,4 @@
-# docking/submit_docking.sub  (v2 - one job per ligand)
+# docking/submit_docking.sub  (one job per ligand)
 #
 # HTCondor submit file for GNINA ensemble docking, one job per
 # cluster-representative ligand. Each job docks 1 ligand against ALL
@@ -41,24 +41,25 @@ transfer_output_files = results
 when_to_transfer_output = ON_EXIT
 
 # ---------------------------------------------------------------
-# Logging - one log/out/err per ligand
+# Logging - one log/out/err per job, named by HTCondor cluster/process
+# ID (simple and always available, no filename parsing needed).
+# With 124 jobs in one queue command, this gives e.g.
+# logs/7676557.0.log ... logs/7676557.123.log
 # ---------------------------------------------------------------
-log    = logs/$(job_name).log
-output = logs/$(job_name).out
-error  = logs/$(job_name).err
+log    = logs/$(Cluster).$(Process).log
+output = logs/$(Cluster).$(Process).out
+error  = logs/$(Cluster).$(Process).err
 
 # ---------------------------------------------------------------
 # Resource requests
 # ---------------------------------------------------------------
 request_cpus   = 1
 request_memory = 4GB
-request_disk   = 4GB
+request_disk   = 8GB
+
+# ~62 receptors x 1-5 min/docking at exhaustiveness=8 -> ~62-310 min/job.
 
 # ---------------------------------------------------------------
 # Queue: one job per line in work_units/batch_list.txt
-#
-# job_name is the work-unit filename without .csv (used for log
-# naming); work_unit is the full filename (used as the script argument).
 # ---------------------------------------------------------------
-job_name = $Fnx(work_unit:r)
 queue work_unit from work_units/batch_list.txt
