@@ -34,28 +34,39 @@ echo "=== Starting ligand ${ligand_name} (cluster ${cluster_id}) at $(date) ==="
 mkdir -p "results/${cluster_id}"
 
 # ---------------------------------------------------------------
-# Ensure python deps available (gemmi + rdkit + meeko for ligand prep).
-# Pinned gemmi==0.7.0 (last version with a Python 3.8 manylinux wheel -
-# the gnina/gnina:v1.3.1 image ships Python 3.8.10; gemmi>=0.7.1 requires
-# nanobind, which needs Python>=3.9 and has no cp38 wheel, so it would
-# fall back to a source build that fails), rdkit==2024.3.2, and
-# meeko==0.7.1 (which requires gemmi explicitly).
+# Ensure python deps available (rdkit + meeko for ligand prep).
+# Pinned rdkit==2024.3.2 and meeko==0.5.0.
+#
+# meeko==0.7.1 does not actually support Python 3.8 (its
+# utils/jsonutils.py uses PEP 585 generic syntax like dict[str, Any]
+# without `from __future__ import annotations`, which raises
+# "'type' object is not subscriptable" at import time on 3.8), and it
+# additionally requires gemmi, whose newer releases (>=0.7.1) need
+# nanobind/Python>=3.9 and have no cp38 wheel. The gnina/gnina:v1.3.1
+# image ships Python 3.8.10.
+#
+# meeko==0.5.0 supports Python 3.5-3.9 (per its own classifiers), has
+# no gemmi dependency (only numpy>=1.18), and provides the same
+# mk_prepare_ligand.py CLI used below.
 # ---------------------------------------------------------------
-python3 -c "import gemmi, rdkit, meeko" 2>/dev/null || {
-    echo "Installing gemmi + rdkit + meeko ..."
-    pip install --user --quiet "gemmi==0.7.0" "rdkit==2024.3.2" "meeko==0.7.1"
+python3 -c "import rdkit, meeko" 2>/dev/null || {
+    echo "Installing rdkit + meeko ..."
+    pip install --user --quiet "rdkit==2024.3.2" "meeko==0.5.0"
 }
-python3 -c "import gemmi, rdkit, meeko" || {
+python3 -c "import rdkit, meeko" || {
     echo "FATAL: required python deps unavailable after install attempt"
     exit 1
 }
+
+# --user installs place console scripts (mk_prepare_ligand.py etc.) in
+# ~/.local/bin, which is not on PATH by default.
+export PATH="${HOME}/.local/bin:${PATH}"
 
 # Log the versions actually in use for this job (whether from the base
 # image or the pinned install above), so results can be traced back to
 # a known dependency combination regardless of which path was taken.
 python3 -c "
-import gemmi, rdkit, meeko
-print(f'gemmi={gemmi.__version__}')
+import rdkit, meeko
 print(f'rdkit={rdkit.__version__}')
 print(f'meeko={meeko.__version__}')
 " > "results/${cluster_id}/dep_versions.txt"
