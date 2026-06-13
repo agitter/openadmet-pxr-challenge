@@ -1,12 +1,13 @@
 # OpenADMET PXR Blind Challenge
 - `/claude`: Scripts and files downloaded from a Claude session
-- `/data`: Data files from HuggingFace
-- `/docking`: Files for docking with GNINA
-- `/external`: Refined PXR structures
-- `/openfe`: Files for running OpenFE
+- `/data`: Data files from [Hugging Face](https://huggingface.co/datasets/openadmet/pxr-challenge-train-test)
+- `/docking`: Files for docking with [GNINA](https://github.com/gnina/gnina)
+- `/external`: Refined PXR structures as a [submodule](https://github.com/OpenADMET/pxr_xtal_re-refinement)
+- `/openfe`: Files for running [OpenFE](https://github.com/OpenFreeEnergy/openfe)
 
 Most code written or drafted by Claude Sonnet 4.6 and GPT-5.5 Instant.
 
+## Preparing OpenFE
 The Apptainer command was run within an interactive Docker session using `ghcr.io/apptainer/apptainer:1.4.5`:
 ```
 apptainer pull openfe_1.11.1.sif \
