@@ -1,8 +1,17 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
-echo "Host: $(hostname)"
-echo "Starting OpenMM test..."
+nvidia-smi || true
+
+source /usr/local/bin/_activate_current_env.sh
+
+echo "Python:"
+command -v python
+python --version
+
+echo "OpenFE:"
+command -v openfe
+openfe --version
 
 python -m openmm.testInstallation
