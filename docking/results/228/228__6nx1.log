@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/6nx1_protein.pdbqt -l ligand_3d/228.pdbqt --center_x 30.01 --center_y -32.952 --center_z -29.402 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/228/228__6nx1_docked.sdf --log results/228/228__6nx1.log
+Using random seed: -985976132
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.05        0.37       0.6778      7.267
+    2       -7.71       -0.10       0.5991      7.143
+    3       -7.38       -0.39       0.5550      7.061
+    4       -7.42        0.21       0.5253      7.422
+    5       -5.88       -0.10       0.5109      7.458

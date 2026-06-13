@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/6xp9_protein.pdbqt -l ligand_3d/413.pdbqt --center_x -27.317 --center_y 9.217 --center_z -24.547 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/413/413__6xp9_docked.sdf --log results/413/413__6xp9.log
+Using random seed: 1598261888
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.36        1.06       0.9287      8.049
+    2       -8.44        0.56       0.8368      7.621
+    3       -7.32       -0.94       0.6831      7.609
+    4       -7.88       -0.94       0.5853      6.906
+    5       -6.90       -0.85       0.5568      7.311

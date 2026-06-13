@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7axk_protein.pdbqt -l ligand_3d/311.pdbqt --center_x 10.94 --center_y 79.624 --center_z 0.312 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/311/311__7axk_docked.sdf --log results/311/311__7axk.log
+Using random seed: -475483352
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.07       -0.83       0.5943      7.153
+    2       -8.74       -1.08       0.5289      6.605
+    3       -9.54       -0.68       0.5082      6.893
+    4       -8.96       -1.36       0.5058      6.723
+    5       -7.87       -1.42       0.4720      7.250

@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/3hvl_protein.pdbqt -l ligand_3d/228.pdbqt --center_x 11.855 --center_y 32.389 --center_z 23.75 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/228/228__3hvl_docked.sdf --log results/228/228__3hvl.log
+Using random seed: 290984488
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.74       -0.77       0.5117      6.188
+    2       -7.87       -0.72       0.5039      6.037
+    3       -8.08        0.00       0.4957      5.841
+    4       -7.79       -0.45       0.4863      6.414
+    5       -8.83        0.01       0.4237      5.872
