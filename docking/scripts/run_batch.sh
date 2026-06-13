@@ -35,11 +35,15 @@ mkdir -p "results/${cluster_id}"
 
 # ---------------------------------------------------------------
 # Ensure python deps available (gemmi + rdkit + meeko for ligand prep).
-# Pinned rdkit==2024.3.2 and meeko==0.7.1, which requires gemmi explicitly.
+# Pinned gemmi==0.7.0 (last version with a Python 3.8 manylinux wheel -
+# the gnina/gnina:v1.3.1 image ships Python 3.8.10; gemmi>=0.7.1 requires
+# nanobind, which needs Python>=3.9 and has no cp38 wheel, so it would
+# fall back to a source build that fails), rdkit==2024.3.2, and
+# meeko==0.7.1 (which requires gemmi explicitly).
 # ---------------------------------------------------------------
 python3 -c "import gemmi, rdkit, meeko" 2>/dev/null || {
     echo "Installing gemmi + rdkit + meeko ..."
-    pip install --user --quiet gemmi "rdkit==2024.3.2" "meeko==0.7.1"
+    pip install --user --quiet "gemmi==0.7.0" "rdkit==2024.3.2" "meeko==0.7.1"
 }
 python3 -c "import gemmi, rdkit, meeko" || {
     echo "FATAL: required python deps unavailable after install attempt"
