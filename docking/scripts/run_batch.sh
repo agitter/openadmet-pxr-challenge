@@ -63,7 +63,7 @@ cat "results/${cluster_id}/dep_versions.txt"
 # Unzip the shared receptor archive (one file transferred per job)
 # ---------------------------------------------------------------
 mkdir -p receptors
-unzip -o -q receptors.zip -d receptors
+python3 -c "import zipfile; zipfile.ZipFile('receptors.zip').extractall('receptors')"
 n_receptors=$(find receptors -name "*_protein.pdbqt" | wc -l)
 echo "Unzipped ${n_receptors} receptor PDBQTs"
 
