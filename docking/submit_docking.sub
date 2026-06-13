@@ -1,0 +1,70 @@
+# docking/submit_docking.sub
+#
+# HTCondor submit file for batched GNINA ensemble docking.
+#
+# Each job runs scripts/run_batch.sh on one work_units/batch_NNNN.csv,
+# which docks ~20 (cluster representative ligand, receptor) pairs
+# sequentially -> ~20-100 min runtime per job.
+#
+# Run from the docking/ directory:
+#   condor_submit submit_docking.sub
+#
+# Prerequisites (run once, before submitting):
+#   1. python scripts/prep_receptors.py     (produces receptors/*.pdbqt
+#                                              + receptors/boxes.csv)
+#   2. python scripts/make_work_units.py    (produces work_units/batch_*.csv
+#                                              + work_units/batch_list.txt)
+
+universe   = container
+container_image = docker://gnina/gnina:v1.3.1
+
+executable = scripts/run_batch.sh
+arguments  = $(batch_file)
+
+# ---------------------------------------------------------------
+# Input files transferred to each job's working directory:
+#   - the specific work-unit CSV for this job
+#   - the full receptors/ directory (PDBQTs + boxes.csv) - shared
+#     across all jobs, so consider using a shared/staging location
+#     if this becomes large (64 receptors should be small, ~tens of MB
+#     total, fine for transfer_input_files)
+#   - the run_batch.sh script itself (transferred automatically as
+#     part of the executable)
+# ---------------------------------------------------------------
+transfer_input_files = work_units/$(batch_file), receptors/
+
+# Output: each job produces a results/<batch_name>/ directory plus a
+# results/<batch_name>_summary.csv. With transfer_output_files unset,
+# HTCondor transfers back the whole working directory delta by default
+# under the container universe with should_transfer_files - be explicit
+# to avoid transferring ligands_3d/ scratch files back:
+transfer_output_files = results
+when_to_transfer_output = ON_EXIT
+
+# ---------------------------------------------------------------
+# Logging - one log/out/err per batch, named by batch
+# ---------------------------------------------------------------
+log    = logs/$(batch_name).log
+output = logs/$(batch_name).out
+error  = logs/$(batch_name).err
+
+# ---------------------------------------------------------------
+# Resource requests
+# ---------------------------------------------------------------
+request_cpus   = 1
+request_memory = 4GB
+request_disk   = 4GB
+
+# Each batch of 20 dockings at default exhaustiveness=8 should take
+# roughly 20-100 minutes on a typical CHTC execute-node CPU core.
+# Give generous headroom for slower nodes / larger ligands.
++JobDurationCategory = "Medium"
+
+# ---------------------------------------------------------------
+# Queue: one job per line in work_units/batch_list.txt
+#
+# batch_name is the filename without .csv (used for log naming);
+# batch_file is the full filename (used as the script argument).
+# ---------------------------------------------------------------
+batch_name = $Fnx(batch_file:r)
+queue batch_file from work_units/batch_list.txt
