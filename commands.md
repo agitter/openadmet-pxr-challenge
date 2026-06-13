@@ -149,3 +149,16 @@ Converting to PDBQT ...
 
 Converted 62/62 receptors to PDBQT
 ```
+
+```commandline
+$ python docking/scripts/make_work_units.py
+Ligands (cluster representatives): 124
+Receptors: 62
+Total (ligand, receptor) pairs: 7688
+Batch size: 20 -> 385 batches
+
+Wrote 385 work-unit files to docking\work_units/
+Wrote batch list to docking\work_units/batch_list.txt
+
+Estimated wall-clock per batch at ~1-5 min/docking: 20-100 minutes
+```
