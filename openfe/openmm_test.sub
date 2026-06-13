@@ -1,0 +1,16 @@
+container_image = osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif
+
+executable = openmm_test.sh
+
+request_cpus = 1
+request_memory = 4GB
+request_disk = 8GB
+request_gpus = 1
+
++GPUJobLength = "short"
+
+log    = logs/openmm.$(Cluster).$(Process).log
+output = logs/openmm.$(Cluster).$(Process).out
+error  = logs/openmm.$(Cluster).$(Process).err
+
+queue
