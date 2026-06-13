@@ -34,15 +34,14 @@ echo "=== Starting ligand ${ligand_name} (cluster ${cluster_id}) at $(date) ==="
 mkdir -p "results/${cluster_id}"
 
 # ---------------------------------------------------------------
-# Ensure python deps available (rdkit + meeko for ligand prep).
-# Pinned rdkit==2023.9.6 and meeko==0.5.0.
+# Ensure python deps available (rdkit + meeko + pandas for ligand prep).
 # The gnina/gnina:v1.3.1 image ships Python 3.8.10.
 # ---------------------------------------------------------------
-python3 -c "import rdkit, meeko" 2>/dev/null || {
-    echo "Installing rdkit + meeko ..."
-    pip install --user --quiet "rdkit==2023.9.6" "meeko==0.5.0"
+python3 -c "import rdkit, meeko, pandas" 2>/dev/null || {
+    echo "Installing rdkit + meeko + pandas..."
+    pip install --user --quiet "rdkit==2023.9.6" "meeko==0.5.0" "pandas==2.0.3"
 }
-python3 -c "import rdkit, meeko" || {
+python3 -c "import rdkit, meeko, pandas" || {
     echo "FATAL: required python deps unavailable after install attempt"
     exit 1
 }
@@ -51,13 +50,12 @@ python3 -c "import rdkit, meeko" || {
 # ~/.local/bin, which is not on PATH by default.
 export PATH="${HOME}/.local/bin:${PATH}"
 
-# Log the versions actually in use for this job (whether from the base
-# image or the pinned install above), so results can be traced back to
-# a known dependency combination regardless of which path was taken.
+# Log the versions actually in use for this job
 python3 -c "
 import rdkit, meeko
 print(f'rdkit={rdkit.__version__}')
 print(f'meeko={meeko.__version__}')
+print(f'pandas={pandas.__version__}')
 " > "results/${cluster_id}/dep_versions.txt"
 cat "results/${cluster_id}/dep_versions.txt"
 
