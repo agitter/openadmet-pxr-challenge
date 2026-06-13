@@ -52,7 +52,7 @@ export PATH="${HOME}/.local/bin:${PATH}"
 
 # Log the versions actually in use for this job
 python3 -c "
-import rdkit, meeko
+import rdkit, meeko, pandas
 print(f'rdkit={rdkit.__version__}')
 print(f'meeko={meeko.__version__}')
 print(f'pandas={pandas.__version__}')
