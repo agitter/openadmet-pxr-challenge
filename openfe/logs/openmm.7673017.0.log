@@ -1,0 +1,46 @@
+000 (7673017.000.000) 2026-06-12 20:00:04 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_4071840_2329>
+...
+040 (7673017.000.000) 2026-06-12 20:01:12 Started transferring input files
+	Transferring to host: <128.104.103.104:9618?addrs=128.104.103.104-9618+[2607-f388-107c-501-ae1f-6bff-fe40-ce2e]-9618&alias=gitter0000.chtc.wisc.edu&noUDP&sock=slot2_1_2767612_c619_61403>
+...
+040 (7673017.000.000) 2026-06-12 20:02:40 Finished transferring input files
+...
+001 (7673017.000.000) 2026-06-12 20:02:41 Job executing on host: <128.104.103.104:9618?addrs=128.104.103.104-9618+[2607-f388-107c-501-ae1f-6bff-fe40-ce2e]-9618&alias=gitter0000.chtc.wisc.edu&noUDP&sock=startd_8702_6d3a>
+	SlotName: slot2_1@gitter0000.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_272cc33a }
+	CondorScratchDir = "/var/lib/condor/execute/slot2/dir_3999706/scratch"
+	Cpus = 1
+	Disk = 8388608
+	GPUs = 1
+	GPUs_GPU_272cc33a = [ Id = "GPU-272cc33a"; Capability = 6.1; DeviceName = "NVIDIA GeForce GTX 1080 Ti"; DeviceUuid = "272cc33a-aa36-c52e-632e-1d0ff0d0c75a"; ECCEnabled = false; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:3B:00.0"; GlobalMemoryMb = 11165; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 4096
+...
+006 (7673017.000.000) 2026-06-12 20:02:42 Image size of job updated: 196
+	0  -  MemoryUsage of job (MB)
+	0  -  ResidentSetSize of job (KB)
+...
+040 (7673017.000.000) 2026-06-12 20:02:42 Started transferring output files
+...
+040 (7673017.000.000) 2026-06-12 20:02:42 Finished transferring output files
+...
+005 (7673017.000.000) 2026-06-12 20:02:43 Job terminated.
+	(1) Normal termination (return value 127)
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	141  -  Run Bytes Sent By Job
+	2780983467  -  Run Bytes Received By Job
+	141  -  Total Bytes Sent By Job
+	2780983467  -  Total Bytes Received By Job
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       0.61        1         1 
+	   Disk (KB)            : 2715837     8388608   8388608 
+	   GPUs                 :                   1         1 "GPU-272cc33a"
+	   GpusMemory (MB)      :     103                       
+	   IoHeavy              :                             0 
+	   Memory (MB)          :       0        4096      4096 
+	   TimeExecute (s)      :       1                       
+	   TimeSlotBusy (s)     :      91                       
+...

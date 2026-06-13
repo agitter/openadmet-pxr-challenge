@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/1m13_protein.pdbqt -l ligand_3d/383.pdbqt --center_x 10.495 --center_y 76.095 --center_z -1.274 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/383/383__1m13_docked.sdf --log results/383/383__1m13.log
+Using random seed: -1858155120
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.00       -0.20       0.8297      5.946
+    2       -7.80       -0.14       0.7556      5.853
+    3       -7.36       -0.34       0.7061      5.747
+    4       -7.05       -0.14       0.6439      5.305
+    5       -6.97       -0.22       0.6389      5.746
