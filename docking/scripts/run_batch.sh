@@ -35,11 +35,11 @@ mkdir -p "results/${cluster_id}"
 
 # ---------------------------------------------------------------
 # Ensure python deps available (gemmi + rdkit + meeko for ligand prep).
-# Pinned rdkit==2025.09.5 and meeko==0.7.1, which requires gemmi explicitly.
+# Pinned rdkit==2024.3.2 and meeko==0.7.1, which requires gemmi explicitly.
 # ---------------------------------------------------------------
 python3 -c "import gemmi, rdkit, meeko" 2>/dev/null || {
     echo "Installing gemmi + rdkit + meeko ..."
-    pip install --user --quiet gemmi "rdkit==2025.09.5" "meeko==0.7.1"
+    pip install --user --quiet gemmi "rdkit==2024.3.2" "meeko==0.7.1"
 }
 python3 -c "import gemmi, rdkit, meeko" || {
     echo "FATAL: required python deps unavailable after install attempt"
