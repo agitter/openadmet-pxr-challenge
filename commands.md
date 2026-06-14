@@ -194,3 +194,56 @@ max        0.984371
 
 Clusters with full receptor coverage: 124 / 124
 ```
+
+```commandline
+$ python docking/scripts/select_rbfe_templates.py \
+    --poses-long docking/docking_analysis/docking_poses_long.csv \
+    --cluster-representatives docking/ligands/cluster_representatives.csv \
+    --outdir docking/docking_analysis
+Loaded 38440 pose rows across 124 clusters
+Loaded 124 cluster representatives
+
+Wrote docking\docking_analysis\rbfe_template_selection.csv (124 clusters)
+Fallback used for 1 cluster(s)
+ cluster_id    ligand_name selected_pdb_id  selected_pose_rank  CNNscore  minimizedAffinity
+                                                               fallback_reason
+        401 OADMET-0006201            6tfi                   1  0.830715          -8.991695 top CNNscore candidate (6dup, pose 1) had minimizedAffinity=11.89 > 0.0; used next-best passing candidate
+
+Selected-pose CNNscore distribution:
+count    124.000000
+mean       0.919672
+std        0.036762
+min        0.777570
+25%        0.904660
+50%        0.927068
+75%        0.943321
+max        0.984371
+
+Selected-pose minimizedAffinity distribution:
+count    124.000000
+mean      -8.578968
+std        1.024562
+min      -11.411755
+25%       -9.222409
+50%       -8.656789
+75%       -7.798842
+max       -6.295903
+
+Receptor usage across selections:
+selected_pdb_id
+1skx    11
+8r81     9
+8r82     8
+5a86     7
+7axf     7
+7axc     6
+7rio     6
+8svq     6
+5x0r     5
+4ny9     4
+8svo     4
+6tfi     4
+2qnv     3
+6xp9     3
+7axa     2
+```
