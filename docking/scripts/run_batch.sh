@@ -76,7 +76,15 @@ lig_pdbqt="ligand_3d/${cluster_id}.pdbqt"
 
 python3 embed_ligand.py "$ligand_smiles" "$lig_sdf"
 
-mk_prepare_ligand.py -i "$lig_sdf" -o "$lig_pdbqt" \
+# --rigid_macrocycles: without this, meeko auto-detects fused
+# medium/large rings (e.g. 7-membered rings fused to benzene, seen in
+# several test-set chemotypes) as "macrocycles", breaks one ring bond,
+# and assigns "glue" pseudo-atom types (e.g. CG0/NG0) for flexible
+# macrocycle docking. gnina (Vina/smina-based) does not recognize these
+# atom types and fails with "is not a valid AutoDock type". Keeping
+# macrocycles rigid (using the RDKit-embedded 3D conformation as-is)
+# avoids this; RBFE sampling later will handle ring flexibility anyway.
+mk_prepare_ligand.py -i "$lig_sdf" -o "$lig_pdbqt" --rigid_macrocycles \
     > "results/${cluster_id}/ligand_prep.log" 2>&1 || {
     echo "FATAL: ligand prep failed for cluster ${cluster_id}, "
          "see results/${cluster_id}/ligand_prep.log"
