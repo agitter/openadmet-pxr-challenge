@@ -157,11 +157,40 @@ Size: 4.2 MB
 ```
 
 ```commandline
-python docking/scripts/make_work_units.py
+$ python docking/scripts/make_work_units.py
 Ligands (cluster representatives): 124
 
 Wrote 124 work-unit files to docking\work_units/
 Wrote work-unit list to docking\work_units/batch_list.txt
 
 Each job docks 1 ligand against all receptors in receptors.zip (built by prep_receptors.py / zip_receptors step).
+```
+
+```commandline
+$ cd docking/
+$ python scripts/aggregate_docking_results.py --results-dir results --outdir docking_analysis
+Found 124 summary CSVs
+Total (cluster, receptor) pairs: 7688
+status
+success    7688
+Clusters represented: 124
+
+Parsed 7688 SDFs (0 expected-success SDFs missing on disk)
+Wrote docking_analysis\docking_poses_long.csv (38440 pose rows)
+Wrote docking_analysis\docking_receptor_best.csv (7688 cluster x receptor rows)
+Wrote docking_analysis\docking_cluster_summary.csv (124 clusters)
+
+=== Quick stats ===
+Clusters with results: 124 / 124 expected
+Best CNNscore distribution:
+count    124.000000
+mean       0.920118
+std        0.036002
+min        0.777570
+25%        0.904660
+50%        0.927068
+75%        0.943321
+max        0.984371
+
+Clusters with full receptor coverage: 124 / 124
 ```
