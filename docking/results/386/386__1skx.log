@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/1skx_protein.pdbqt -l ligand_3d/386.pdbqt --center_x 11.906 --center_y 76.577 --center_z -1.7 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/386/386__1skx_docked.sdf --log results/386/386__1skx.log
+Using random seed: -1763831520
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.16       -0.58       0.7217      6.737
+    2       -8.17       -0.07       0.7014      6.559
+    3       -7.89       -0.41       0.6028      6.622
+    4       -6.86       -0.35       0.5582      6.235
+    5       -7.11       -0.29       0.5372      5.960

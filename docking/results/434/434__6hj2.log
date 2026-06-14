@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/6hj2_protein.pdbqt -l ligand_3d/434.pdbqt --center_x 9.485 --center_y 76.229 --center_z -0.792 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/434/434__6hj2_docked.sdf --log results/434/434__6hj2.log
+Using random seed: 202620176
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.73        0.39       0.7277      6.062
+    2       -8.60        0.21       0.6841      6.215
+    3       -8.91        0.31       0.6305      6.497
+    4       -8.60       -0.34       0.5829      6.360
+    5       -9.16        0.06       0.5298      6.134

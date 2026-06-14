@@ -16,7 +16,18 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/8r00_protein.pdbqt -l ligand_3d/386.pdbqt --center_x 9.756 --center_y 73.465 --center_z -3.327 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/386/386__8r00_docked.sdf --log results/386/386__8r00.log
+Using random seed: 377856448
 
+0%   10   20   30   40   50   60   70   80   90   100%
+|----|----|----|----|----|----|----|----|----|----|
+***************************************************
+ | pose 0 | initial pose not within box
 
-Parse error on line 31 in file "ligand_3d/386.pdbqt": ATOM syntax incorrect: "CG0" is not a valid AutoDock type. Note that AutoDock atom types are case-sensitive.
-ATOM     16  C   UNL     1      -0.553   0.683  -1.183  1.00  0.00     0.026 CG0
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.65       -0.35       0.5117      7.153
+    2       -7.46        0.23       0.4482      7.071
+    3       -5.58        0.06       0.3384      6.777
+    4       -0.34       -0.44       0.3068      7.023
+    5        3.76        0.44       0.2576      6.486

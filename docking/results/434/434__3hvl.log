@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/3hvl_protein.pdbqt -l ligand_3d/434.pdbqt --center_x 11.855 --center_y 32.389 --center_z 23.75 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/434/434__3hvl_docked.sdf --log results/434/434__3hvl.log
+Using random seed: 396070300
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.54       -0.56       0.5085      6.188
+    2       -8.88        0.78       0.4653      6.013
+    3       -9.99       -0.56       0.4466      5.739
+    4      -10.80       -0.33       0.4199      6.017
+    5       -8.71       -0.22       0.3830      5.792

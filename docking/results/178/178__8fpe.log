@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/8fpe_protein.pdbqt -l ligand_3d/178.pdbqt --center_x 12.45 --center_y 75.153 --center_z -1.362 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/178/178__8fpe_docked.sdf --log results/178/178__8fpe.log
+Using random seed: 480448272
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.56        0.08       0.8029      6.582
+    2       -8.29       -0.27       0.7870      6.910
+    3       -7.71       -0.35       0.6729      6.950
+    4       -7.78       -0.38       0.6640      6.667
+    5       -8.02        0.73       0.6159      6.663

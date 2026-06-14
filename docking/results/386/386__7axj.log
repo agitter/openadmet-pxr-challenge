@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/7axj_protein.pdbqt -l ligand_3d/386.pdbqt --center_x 11.962 --center_y 73.647 --center_z -2.526 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/386/386__7axj_docked.sdf --log results/386/386__7axj.log
+Using random seed: -323638894
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.92       -0.53       0.4010      6.327
+    2       -7.96       -0.51       0.3592      6.314
+    3       -8.27       -0.39       0.3214      6.115
+    4       -8.25       -0.28       0.2990      6.297
+    5       -7.85       -0.41       0.2634      6.307

@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/4x1f_protein.pdbqt -l ligand_3d/495.pdbqt --center_x 11.224 --center_y 79.149 --center_z 0.334 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/495/495__4x1f_docked.sdf --log results/495/495__4x1f.log
+Using random seed: -264207400
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.55       -0.47       0.8419      6.676
+    2       -7.02       -1.16       0.7194      6.652
+    3       -7.85       -0.36       0.6912      6.366
+    4       -7.70       -0.30       0.6783      6.592
+    5       -7.54        0.65       0.6515      6.810

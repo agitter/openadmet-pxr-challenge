@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/9fzi_protein.pdbqt -l ligand_3d/386.pdbqt --center_x -30.882 --center_y 11.996 --center_z -24.127 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/386/386__9fzi_docked.sdf --log results/386/386__9fzi.log
+Using random seed: 941487076
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.19        0.38       0.5011      6.195
+    2       -8.84       -0.28       0.4196      6.100
+    3       -8.33       -0.35       0.3939      6.572
+    4       -9.26        0.10       0.3567      6.311
+    5       -9.20        0.70       0.3392      6.134

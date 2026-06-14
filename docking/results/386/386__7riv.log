@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/7riv_protein.pdbqt -l ligand_3d/386.pdbqt --center_x -15.181 --center_y -9.398 --center_z -22.003 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/386/386__7riv_docked.sdf --log results/386/386__7riv.log
+Using random seed: -43402258
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.50        0.47       0.6958      6.650
+    2       -8.75        0.05       0.5539      6.201
+    3       -8.17       -0.27       0.4978      6.230
+    4       -8.61       -0.35       0.4882      6.062
+    5       -8.30       -0.32       0.4460      6.149

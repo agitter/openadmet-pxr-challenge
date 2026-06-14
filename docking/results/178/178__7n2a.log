@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/7n2a_protein.pdbqt -l ligand_3d/178.pdbqt --center_x -15.781 --center_y -10.975 --center_z -22.582 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/178/178__7n2a_docked.sdf --log results/178/178__7n2a.log
+Using random seed: 651794568
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.57       -0.34       0.8247      6.441
+    2       -8.39       -0.31       0.7015      6.089
+    3       -8.07       -0.37       0.6589      5.917
+    4       -8.62       -0.32       0.6324      6.111
+    5       -8.56        0.00       0.5767      6.027

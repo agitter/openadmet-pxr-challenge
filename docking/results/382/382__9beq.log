@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/9beq_protein.pdbqt -l ligand_3d/382.pdbqt --center_x 11.373 --center_y 75.081 --center_z -2.229 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/382/382__9beq_docked.sdf --log results/382/382__9beq.log
+Using random seed: 897311712
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -6.81       -0.65       0.6012      6.387
+    2       -7.09       -0.57       0.5444      6.547
+    3       -6.84       -0.35       0.4913      6.905
+    4       -6.82       -0.18       0.4243      6.262
+    5       -7.59       -0.44       0.3783      6.455

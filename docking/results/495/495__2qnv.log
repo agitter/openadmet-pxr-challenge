@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/2qnv_protein.pdbqt -l ligand_3d/495.pdbqt --center_x 11.989 --center_y 15.205 --center_z 22.122 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/495/495__2qnv_docked.sdf --log results/495/495__2qnv.log
+Using random seed: 282897348
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -6.77       -0.12       0.8252      6.447
+    2       -8.31       -0.33       0.7298      6.285
+    3       -7.27       -0.28       0.6854      5.518
+    4       -6.73       -0.19       0.6747      5.852
+    5       -5.81       -0.12       0.6681      6.071

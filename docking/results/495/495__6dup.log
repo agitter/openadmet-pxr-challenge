@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/6dup_protein.pdbqt -l ligand_3d/495.pdbqt --center_x 12.191 --center_y 31.736 --center_z 24.452 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/495/495__6dup_docked.sdf --log results/495/495__6dup.log
+Using random seed: 797453534
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.98        1.69       0.8226      6.549
+    2       -9.47       -0.44       0.7339      5.915
+    3       -7.65        0.46       0.7036      6.448
+    4       -7.58       -0.62       0.7028      6.544
+    5       -8.26        0.15       0.6227      6.216

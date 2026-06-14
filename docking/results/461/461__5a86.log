@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/5a86_protein.pdbqt -l ligand_3d/461.pdbqt --center_x 28.033 --center_y 10.98 --center_z 25.838 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/461/461__5a86_docked.sdf --log results/461/461__5a86.log
+Using random seed: 1834022208
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.15       -0.38       0.7995      6.290
+    2       -7.71       -0.25       0.7142      6.077
+    3       -7.69        0.28       0.5340      6.010
+    4       -8.97       -0.04       0.4837      6.094
+    5       -6.21       -0.39       0.4121      6.168

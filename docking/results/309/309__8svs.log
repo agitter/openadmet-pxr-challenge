@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/8svs_protein.pdbqt -l ligand_3d/309.pdbqt --center_x 10.799 --center_y 31.361 --center_z 24.544 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/309/309__8svs_docked.sdf --log results/309/309__8svs.log
+Using random seed: 1943261264
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.50        0.90       0.8797      6.872
+    2       -8.32        0.02       0.8601      6.794
+    3       -8.27       -0.93       0.8282      6.681
+    4       -8.10        2.35       0.8243      6.685
+    5       -9.08       -0.52       0.7960      6.280

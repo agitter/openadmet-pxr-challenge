@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/7riu_protein.pdbqt -l ligand_3d/382.pdbqt --center_x -14.949 --center_y -10.207 --center_z -23.131 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/382/382__7riu_docked.sdf --log results/382/382__7riu.log
+Using random seed: -88035264
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.98       -0.47       0.5661      6.729
+    2       -6.86        0.29       0.5068      6.407
+    3       -7.05       -0.39       0.4661      6.358
+    4       -7.29       -0.18       0.4199      6.780
+    5       -6.94       -0.17       0.3902      6.104

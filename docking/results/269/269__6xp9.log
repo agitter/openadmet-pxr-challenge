@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/6xp9_protein.pdbqt -l ligand_3d/269.pdbqt --center_x -27.317 --center_y 9.217 --center_z -24.547 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/269/269__6xp9_docked.sdf --log results/269/269__6xp9.log
+Using random seed: 2062382512
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.73       -0.14       0.8381      6.874
+    2       -6.94       -0.32       0.7923      6.730
+    3       -7.00       -0.50       0.7321      5.938
+    4       -8.68       -0.48       0.5801      6.016
+    5       -7.88       -0.47       0.5782      6.835

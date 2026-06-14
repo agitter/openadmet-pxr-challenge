@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/6p2b_protein.pdbqt -l ligand_3d/178.pdbqt --center_x 12.399 --center_y 32.859 --center_z 23.969 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/178/178__6p2b_docked.sdf --log results/178/178__6p2b.log
+Using random seed: -1019788844
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.09       -0.28       0.6440      6.383
+    2       -7.64       -0.35       0.5337      5.956
+    3       -6.21       -0.29       0.5115      6.147
+    4       -6.81       -0.24       0.5068      6.337
+    5       -7.61        0.12       0.5020      5.999

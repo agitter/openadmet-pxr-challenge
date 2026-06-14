@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/1m13_protein.pdbqt -l ligand_3d/495.pdbqt --center_x 10.495 --center_y 76.095 --center_z -1.274 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/495/495__1m13_docked.sdf --log results/495/495__1m13.log
+Using random seed: -1856290400
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.29       -1.18       0.7147      6.461
+    2       -7.84       -0.44       0.6974      5.791
+    3       -7.79       -0.51       0.6632      6.181
+    4       -8.76       -0.35       0.6367      5.603
+    5       -8.04       -0.36       0.6365      6.404

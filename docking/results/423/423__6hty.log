@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/6hty_protein.pdbqt -l ligand_3d/423.pdbqt --center_x 52.169 --center_y 36.859 --center_z 13.476 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/423/423__6hty_docked.sdf --log results/423/423__6hty.log
+Using random seed: -205049836
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -6.46        0.46       0.5628      6.743
+    2       -6.29        0.53       0.3322      6.317
+    3       -6.40       -0.52       0.2433      6.837
+    4        5.24        0.26       0.2288      6.125
+    5       -6.25       -0.47       0.2127      6.285

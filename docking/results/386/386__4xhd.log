@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/4xhd_protein.pdbqt -l ligand_3d/386.pdbqt --center_x -10.782 --center_y 15.404 --center_z -2.228 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/386/386__4xhd_docked.sdf --log results/386/386__4xhd.log
+Using random seed: -1347050322
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.17       -0.40       0.5334      6.485
+    2       -9.40       -0.30       0.5085      6.214
+    3      -10.04       -0.51       0.4578      6.288
+    4       -8.55        0.05       0.4210      6.111
+    5      -10.05       -0.26       0.4014      6.198

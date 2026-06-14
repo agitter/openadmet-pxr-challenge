@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/4ny9_protein.pdbqt -l ligand_3d/382.pdbqt --center_x 15.681 --center_y -10.88 --center_z 2.177 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/382/382__4ny9_docked.sdf --log results/382/382__4ny9.log
+Using random seed: -1531980106
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.44        0.24       0.5772      6.105
+    2       -7.32       -0.34       0.3701      5.741
+    3       -7.62        0.06       0.3669      5.552
+    4       -7.30       -0.53       0.3661      5.692
+    5       -8.89       -0.27       0.3358      5.733

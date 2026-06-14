@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/2o9i_protein.pdbqt -l ligand_3d/309.pdbqt --center_x 11.948 --center_y 33.349 --center_z 23.51 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/309/309__2o9i_docked.sdf --log results/309/309__2o9i.log
+Using random seed: -1104132092
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.63       -0.59       0.6592      6.866
+    2       -8.59       -0.14       0.6338      7.373
+    3       -8.31       -0.59       0.6137      6.866
+    4       -7.64       -0.41       0.6024      7.510
+    5       -7.58        0.45       0.6007      6.700

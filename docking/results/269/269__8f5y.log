@@ -16,3 +16,13 @@ Recommend running with single model (--cnn fast)
 or without cnn scoring (--cnn_scoring=none).
 
 Commandline: gnina -r receptors/8f5y_protein.pdbqt -l ligand_3d/269.pdbqt --center_x -29.818 --center_y 10.958 --center_z -21.04 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/269/269__8f5y_docked.sdf --log results/269/269__8f5y.log
+Using random seed: 911697176
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.01       -0.24       0.8059      7.198
+    2       -8.15        0.14       0.7659      6.739
+    3       -7.82       -0.45       0.7089      6.923
+    4       -8.15       -0.09       0.7059      7.144
+    5       -8.01       -0.28       0.6693      6.622
