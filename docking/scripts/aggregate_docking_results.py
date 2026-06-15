@@ -82,6 +82,15 @@ def main():
     ap.add_argument("--top-n", type=int, default=3,
                     help="Number of top receptors (by CNNscore) to "
                          "record per cluster (default: 3)")
+    ap.add_argument("--id-pattern", default=None,
+                    help="If set, only include results whose cluster_id "
+                         "(as a string) matches this regex (anchored at "
+                         "the start, via str.match). Useful when "
+                         "results/ contains multiple campaigns with "
+                         "different ID schemes - e.g. '^[TA]\\d+$' to "
+                         "select only the extended T###/A#### campaign "
+                         "and exclude the original integer cluster_id "
+                         "directories. Default: no filtering (use all).")
     args = ap.parse_args()
 
     results_dir = Path(args.results_dir)
@@ -98,6 +107,15 @@ def main():
 
     status_df = pd.concat(
         (pd.read_csv(f) for f in summary_files), ignore_index=True)
+    print(f"Total (cluster, receptor) pairs (before filtering): {len(status_df)}")
+
+    if args.id_pattern:
+        mask = status_df["cluster_id"].astype(str).str.match(args.id_pattern)
+        n_dropped = (~mask).sum()
+        status_df = status_df[mask].reset_index(drop=True)
+        print(f"Filtered to cluster_id matching '{args.id_pattern}': "
+              f"{len(status_df)} pairs kept, {n_dropped} dropped")
+
     print(f"Total (cluster, receptor) pairs: {len(status_df)}")
     print(status_df["status"].value_counts().to_string())
 

@@ -247,3 +247,17 @@ selected_pdb_id
 6xp9     3
 7axa     2
 ```
+
+```commandline
+$ python docking/scripts/build_extended_ligand_list.py \
+    --test-with-anchors claude/outputs/test_with_train_anchors.csv \
+    --train data/pxr-challenge_TRAIN.csv \
+    --outdir docking
+Test compounds: 513
+Unique training anchors: 89
+
+Total ligands: 602 (513 test + 89 anchors)
+Wrote docking\all_rbfe_ligands.csv
+
+With 62 receptors: 37324 (ligand, receptor) pairs -> 602 HTCondor jobs (one ligand x all receptors each, same pattern as the original 124-job campaign)
+```
