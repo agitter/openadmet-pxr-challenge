@@ -26,6 +26,14 @@ def main():
 
     smiles, out_path = sys.argv[1], sys.argv[2]
 
+    # Strip CXSMILES extended notation if present (e.g. "... |&1:7,9|" suffix
+    # encoding enhanced stereochemistry with "either" stereocenters). RDKit's
+    # MolFromSmiles does not handle CXSMILES syntax; stripping the | extension
+    # loses the either-stereochemistry annotation but preserves the core
+    # structure and defined stereocenters, which is sufficient for 3D embedding.
+    if " |" in smiles:
+        smiles = smiles[:smiles.index(" |")]
+
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         sys.exit(f"Failed to parse SMILES: {smiles}")
