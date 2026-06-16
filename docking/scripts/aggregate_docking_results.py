@@ -216,7 +216,7 @@ def main():
     # 5. Quick report
     # -----------------------------------------------------------
     print("\n=== Quick stats ===")
-    print(f"Clusters with results: {len(cluster_summary)} / 124 expected")
+    print(f"Clusters with results: {len(cluster_summary)}")
     print(f"Best CNNscore distribution:")
     print(cluster_summary["best_CNNscore"].describe().to_string())
 
