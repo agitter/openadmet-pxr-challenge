@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/6s41_protein.pdbqt -l ligand_3d/A2412.pdbqt --center_x 29.812 --center_y 12.268 --center_z 23.982 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/A2412/A2412__6s41_docked.sdf --log results/A2412/A2412__6s41.log
+Using random seed: 1320024644
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.76        0.86       0.5866      7.430
+    2       -8.54       -0.01       0.5231      7.004
+    3       -8.11        0.27       0.4117      6.970
+    4       -9.53        0.76       0.3392      7.061
+    5       -9.49       -0.14       0.2781      7.076

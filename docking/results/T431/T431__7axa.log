@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7axa_protein.pdbqt -l ligand_3d/T431.pdbqt --center_x 11.252 --center_y 73.441 --center_z -2.356 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T431/T431__7axa_docked.sdf --log results/T431/T431__7axa.log
+Using random seed: -853174652
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.02       -0.53       0.7853      6.212
+    2        9.79        0.13       0.7376      5.498
+    3       -7.41       -0.33       0.7074      6.133
+    4       15.93        0.06       0.6521      6.060
+    5       -6.88        0.71       0.5732      5.997

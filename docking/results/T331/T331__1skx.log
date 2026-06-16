@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/1skx_protein.pdbqt -l ligand_3d/T331.pdbqt --center_x 11.906 --center_y 76.577 --center_z -1.7 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T331/T331__1skx_docked.sdf --log results/T331/T331__1skx.log
+Using random seed: -700941540
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -5.93       -0.51       0.9311      6.829
+    2       -6.62       -0.74       0.8640      6.797
+    3       -5.59        0.08       0.8114      6.332
+    4       -7.23       -0.38       0.7715      6.269
+    5       -6.84       -0.28       0.7076      5.799

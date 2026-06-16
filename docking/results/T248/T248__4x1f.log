@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/4x1f_protein.pdbqt -l ligand_3d/T248.pdbqt --center_x 11.224 --center_y 79.149 --center_z 0.334 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T248/T248__4x1f_docked.sdf --log results/T248/T248__4x1f.log
+Using random seed: 862654120
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.30        0.17       0.8363      6.992
+    2       -8.18        0.11       0.8316      6.376
+    3       -7.94       -0.17       0.8145      6.916
+    4       -8.61       -0.82       0.7782      6.027
+    5       -8.50       -0.26       0.7667      6.118

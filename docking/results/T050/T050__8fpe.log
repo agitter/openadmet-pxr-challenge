@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/8fpe_protein.pdbqt -l ligand_3d/T050.pdbqt --center_x 12.45 --center_y 75.153 --center_z -1.362 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T050/T050__8fpe_docked.sdf --log results/T050/T050__8fpe.log
+Using random seed: 489191808
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.86        1.32       0.8974      6.972
+    2       -8.61       -0.20       0.8791      6.851
+    3       -8.00       -0.59       0.7883      6.986
+    4       -8.23       -0.57       0.7732      6.857
+    5       -7.42       -0.26       0.7125      6.765

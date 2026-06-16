@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/6p2b_protein.pdbqt -l ligand_3d/A2693.pdbqt --center_x 12.399 --center_y 32.859 --center_z 23.969 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/A2693/A2693__6p2b_docked.sdf --log results/A2693/A2693__6p2b.log
+Using random seed: 753975916
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -6.54        1.30       0.8519      6.369
+    2       -8.82        0.53       0.8480      6.724
+    3       -8.58       -0.13       0.7971      6.626
+    4       -7.54       -0.22       0.7783      6.695
+    5       -6.97        0.85       0.6486      6.538

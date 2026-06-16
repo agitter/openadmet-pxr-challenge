@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/8svt_protein.pdbqt -l ligand_3d/T440.pdbqt --center_x -30.784 --center_y 12.104 --center_z -22.989 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T440/T440__8svt_docked.sdf --log results/T440/T440__8svt.log
+Using random seed: 1976366600
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.15        0.42       0.6733      6.637
+    2       -8.11        0.82       0.5488      6.321
+    3       -8.49        1.87       0.5433      6.611
+    4       -7.79        0.08       0.5102      6.153
+    5       -8.03        0.90       0.4905      6.461

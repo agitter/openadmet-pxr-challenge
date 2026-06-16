@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/4x1g_protein.pdbqt -l ligand_3d/T036.pdbqt --center_x 11.468 --center_y 79.233 --center_z 0.155 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T036/T036__4x1g_docked.sdf --log results/T036/T036__4x1g.log
+Using random seed: 1458118136
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.87        0.03       0.7363      6.846
+    2       15.17       -0.24       0.6386      6.540
+    3       -8.85       -0.68       0.5832      6.774
+    4       20.32       -0.39       0.5583      6.413
+    5       -9.05       -0.58       0.5453      6.590

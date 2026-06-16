@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7n2a_protein.pdbqt -l ligand_3d/T142.pdbqt --center_x -15.781 --center_y -10.975 --center_z -22.582 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T142/T142__7n2a_docked.sdf --log results/T142/T142__7n2a.log
+Using random seed: 420933464
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -3.96        1.51       0.5165      5.671
+    2       -8.22        0.89       0.4944      5.775
+    3       -8.25        0.30       0.4449      5.791
+    4       -7.09       -0.25       0.4127      5.846
+    5       -7.42       -0.30       0.4058      5.689

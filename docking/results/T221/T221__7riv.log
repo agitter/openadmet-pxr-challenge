@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7riv_protein.pdbqt -l ligand_3d/T221.pdbqt --center_x -15.181 --center_y -9.398 --center_z -22.003 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T221/T221__7riv_docked.sdf --log results/T221/T221__7riv.log
+Using random seed: 1329467456
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.00        2.11       0.4089      6.537
+    2       -5.52        1.95       0.3480      6.566
+    3       -3.14        1.45       0.3315      5.829
+    4       -3.47        1.93       0.3301      6.542
+    5       -4.88       -0.26       0.3069      6.501

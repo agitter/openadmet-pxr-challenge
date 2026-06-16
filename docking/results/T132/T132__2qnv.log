@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/2qnv_protein.pdbqt -l ligand_3d/T132.pdbqt --center_x 11.989 --center_y 15.205 --center_z 22.122 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T132/T132__2qnv_docked.sdf --log results/T132/T132__2qnv.log
+Using random seed: 1177384276
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -6.69        0.39       0.8203      6.400
+    2       -6.64       -0.24       0.7563      6.396
+    3       -7.19       -0.63       0.7352      6.437
+    4       -6.26        0.42       0.6621      5.950
+    5       -6.78       -0.00       0.6112      6.351

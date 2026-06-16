@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7axd_protein.pdbqt -l ligand_3d/T350.pdbqt --center_x 8.35 --center_y 74.853 --center_z -2.116 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T350/T350__7axd_docked.sdf --log results/T350/T350__7axd.log
+Using random seed: -1795514604
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.12       -0.02       0.5545      6.817
+    2       -8.05        0.29       0.5337      6.674
+    3       -7.48        0.40       0.4606      5.997
+    4       -7.50       -0.34       0.4460      6.496
+    5       -7.05        0.54       0.4275      6.228

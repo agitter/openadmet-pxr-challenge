@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/9fzj_protein.pdbqt -l ligand_3d/T294.pdbqt --center_x 10.035 --center_y 75.874 --center_z -1.092 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T294/T294__9fzj_docked.sdf --log results/T294/T294__9fzj.log
+Using random seed: 369382624
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.74       -0.17       0.8039      6.606
+    2      -10.86       -0.85       0.7645      6.491
+    3      -10.19       -0.68       0.7199      6.442
+    4      -10.46       -0.80       0.6909      6.315
+    5      -10.31       -0.98       0.6439      6.480

@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/8cct_protein.pdbqt -l ligand_3d/A2747.pdbqt --center_x 11.286 --center_y -18.595 --center_z -2.576 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/A2747/A2747__8cct_docked.sdf --log results/A2747/A2747__8cct.log
+Using random seed: -1879120140
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1      -10.43        1.56       0.8298      6.419
+    2       -8.75        0.18       0.8213      6.527
+    3       -9.51       -0.20       0.8106      6.700
+    4       -9.61        0.33       0.7484      6.290
+    5       -8.44       -0.91       0.7450      6.160

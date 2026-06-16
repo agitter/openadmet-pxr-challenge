@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/5a86_protein.pdbqt -l ligand_3d/A1936.pdbqt --center_x 28.033 --center_y 10.98 --center_z 25.838 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/A1936/A1936__5a86_docked.sdf --log results/A1936/A1936__5a86.log
+Using random seed: -1348063068
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.80       -1.09       0.8984      7.065
+    2       -8.87       -0.20       0.8777      7.061
+    3       -9.48       -0.56       0.8592      7.053
+    4       -9.10       -0.47       0.7672      6.675
+    5       -9.37       -0.38       0.7504      6.627

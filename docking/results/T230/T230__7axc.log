@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7axc_protein.pdbqt -l ligand_3d/T230.pdbqt --center_x 11.82 --center_y 73.83 --center_z -1.969 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T230/T230__7axc_docked.sdf --log results/T230/T230__7axc.log
+Using random seed: -1166698460
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.90       -1.27       0.8084      7.531
+    2       -9.32       -1.20       0.7565      7.324
+    3       -8.82       -1.29       0.7198      6.432
+    4       -8.78       -1.40       0.6983      7.362
+    5       -9.00       -1.51       0.6068      6.807

@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/6dup_protein.pdbqt -l ligand_3d/T426.pdbqt --center_x 12.191 --center_y 31.736 --center_z 24.452 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T426/T426__6dup_docked.sdf --log results/T426/T426__6dup.log
+Using random seed: 1992309708
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -6.69       -0.17       0.7942      6.552
+    2       -7.33        0.59       0.6454      6.691
+    3       -7.41        0.49       0.6271      6.214
+    4       -7.85        0.21       0.5568      6.321
+    5       -5.00        0.05       0.4681      6.134

@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/8r00_protein.pdbqt -l ligand_3d/T290.pdbqt --center_x 9.756 --center_y 73.465 --center_z -3.327 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T290/T290__8r00_docked.sdf --log results/T290/T290__8r00.log
+Using random seed: -263574300
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -6.73       -0.28       0.3851      6.352
+    2       -7.07       -0.45       0.3693      6.237
+    3       -5.98       -0.26       0.3678      6.123
+    4       -6.88        0.18       0.3612      5.349
+    5       -7.23        0.41       0.3498      6.684

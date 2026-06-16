@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/9fzj_protein.pdbqt -l ligand_3d/A3223.pdbqt --center_x 10.035 --center_y 75.874 --center_z -1.092 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/A3223/A3223__9fzj_docked.sdf --log results/A3223/A3223__9fzj.log
+Using random seed: 382894816
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.43        0.18       0.8369      5.807
+    2       -8.36       -0.04       0.7885      5.956
+    3       -8.29        0.15       0.7754      5.701
+    4       -8.27        1.01       0.7377      5.455
+    5       -8.37       -0.29       0.7238      5.632

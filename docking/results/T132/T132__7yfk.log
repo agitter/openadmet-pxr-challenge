@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7yfk_protein.pdbqt -l ligand_3d/T132.pdbqt --center_x -29.801 --center_y 11.601 --center_z -23.924 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T132/T132__7yfk_docked.sdf --log results/T132/T132__7yfk.log
+Using random seed: -1604548396
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       28.38        0.38       0.6790      6.606
+    2       -7.96       -0.04       0.5404      7.510
+    3       30.83        0.29       0.5052      6.409
+    4       -7.80        0.07       0.4933      7.791
+    5       -6.91       -0.44       0.4673      7.469

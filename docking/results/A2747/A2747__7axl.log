@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7axl_protein.pdbqt -l ligand_3d/A2747.pdbqt --center_x 11.063 --center_y 78.974 --center_z 0.333 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/A2747/A2747__7axl_docked.sdf --log results/A2747/A2747__7axl.log
+Using random seed: 2948416
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.49        0.98       0.6431      6.762
+    2       -9.39       -0.94       0.5636      6.601
+    3       -9.94       -0.08       0.5264      7.006
+    4       -9.46        0.44       0.4517      7.024
+    5       -9.43        0.72       0.4214      6.888

@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/1nrl_protein.pdbqt -l ligand_3d/T326.pdbqt --center_x 11.637 --center_y 32.299 --center_z 24.135 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T326/T326__1nrl_docked.sdf --log results/T326/T326__1nrl.log
+Using random seed: 2129612996
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.56       -0.50       0.6105      6.548
+    2       -7.23        0.15       0.5886      6.245
+    3       -7.31       -0.78       0.5171      6.557
+    4       -8.07       -0.56       0.5045      6.146
+    5       -7.17       -0.45       0.5017      6.313

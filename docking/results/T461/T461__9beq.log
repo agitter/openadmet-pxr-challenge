@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/9beq_protein.pdbqt -l ligand_3d/T461.pdbqt --center_x 11.373 --center_y 75.081 --center_z -2.229 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T461/T461__9beq_docked.sdf --log results/T461/T461__9beq.log
+Using random seed: 990499080
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -4.97        1.02       0.3908      6.720
+    2       -6.15        0.91       0.3531      6.730
+    3       -7.77       -0.21       0.3478      6.297
+    4       -6.32        0.84       0.3450      6.701
+    5       -6.60        0.66       0.3150      6.506

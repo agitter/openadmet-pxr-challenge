@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/4s0t_protein.pdbqt -l ligand_3d/T134.pdbqt --center_x -40.37 --center_y -40.259 --center_z 1.657 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T134/T134__4s0t_docked.sdf --log results/T134/T134__4s0t.log
+Using random seed: -90728888
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.10       -0.69       0.6449      6.701
+    2       -9.92        0.52       0.6447      6.560
+    3       -8.92       -0.37       0.6444      6.459
+    4       -7.99       -0.11       0.6049      6.271
+    5      -10.01       -0.01       0.5326      6.533

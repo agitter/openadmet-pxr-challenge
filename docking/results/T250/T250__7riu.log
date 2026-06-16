@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7riu_protein.pdbqt -l ligand_3d/T250.pdbqt --center_x -14.949 --center_y -10.207 --center_z -23.131 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T250/T250__7riu_docked.sdf --log results/T250/T250__7riu.log
+Using random seed: -1851921980
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.21       -0.21       0.4999      6.791
+    2       -9.61       -0.14       0.4601      6.873
+    3       -8.44       -0.16       0.4562      6.830
+    4       -9.33       -0.48       0.3780      7.066
+    5       -8.15       -0.63       0.3758      6.876

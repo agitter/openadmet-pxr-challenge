@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7axj_protein.pdbqt -l ligand_3d/A2054.pdbqt --center_x 11.962 --center_y 73.647 --center_z -2.526 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/A2054/A2054__7axj_docked.sdf --log results/A2054/A2054__7axj.log
+Using random seed: -475073392
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.60       -0.68       0.6038      6.850
+    2       -7.74       -0.51       0.5460      7.033
+    3       -6.99       -0.49       0.4524      6.562
+    4       -7.01       -0.28       0.4476      6.564
+    5       -7.01       -0.88       0.4359      6.461

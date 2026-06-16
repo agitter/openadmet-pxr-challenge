@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/2o9i_protein.pdbqt -l ligand_3d/T137.pdbqt --center_x 11.948 --center_y 33.349 --center_z 23.51 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T137/T137__2o9i_docked.sdf --log results/T137/T137__2o9i.log
+Using random seed: 1494992172
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.49       -0.41       0.6833      7.464
+    2       -8.03        0.22       0.6808      7.645
+    3       -7.32       -0.16       0.6120      7.520
+    4       -7.55       -0.00       0.6037      7.185
+    5       -7.47        0.05       0.5865      7.411

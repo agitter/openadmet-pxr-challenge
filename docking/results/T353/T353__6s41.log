@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/6s41_protein.pdbqt -l ligand_3d/T353.pdbqt --center_x 29.812 --center_y 12.268 --center_z 23.982 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T353/T353__6s41_docked.sdf --log results/T353/T353__6s41.log
+Using random seed: 406179164
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -8.49        0.52       0.3689      6.622
+    2       -8.44       -0.22       0.3644      7.284
+    3       -8.99        1.42       0.3382      6.526
+    4       -9.03       -0.10       0.3315      7.222
+    5       -8.16        0.46       0.3083      6.807

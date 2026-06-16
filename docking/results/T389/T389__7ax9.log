@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/7ax9_protein.pdbqt -l ligand_3d/T389.pdbqt --center_x 10.161 --center_y 73.42 --center_z -2.805 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T389/T389__7ax9_docked.sdf --log results/T389/T389__7ax9.log
+Using random seed: -542761832
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -9.53       -0.76       0.6891      6.106
+    2       -9.49       -0.67       0.6191      6.343
+    3       -9.65       -0.79       0.6161      6.164
+    4       -9.28       -1.22       0.6094      6.355
+    5       -8.22       -1.16       0.5791      6.081

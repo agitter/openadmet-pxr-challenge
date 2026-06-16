@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/8eqz_protein.pdbqt -l ligand_3d/T123.pdbqt --center_x 12.322 --center_y 33.261 --center_z 23.358 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T123/T123__8eqz_docked.sdf --log results/T123/T123__8eqz.log
+Using random seed: 826391630
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -1.45       -0.17       0.8499      6.010
+    2       -3.20        0.35       0.6596      5.721
+    3       -0.97       -0.26       0.6594      5.797
+    4       -7.93       -0.48       0.6098      5.960
+    5       -8.08        1.25       0.6059      5.646

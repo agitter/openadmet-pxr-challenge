@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/4ny9_protein.pdbqt -l ligand_3d/A2586.pdbqt --center_x 15.681 --center_y -10.88 --center_z 2.177 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/A2586/A2586__4ny9_docked.sdf --log results/A2586/A2586__4ny9.log
+Using random seed: 232061876
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1      -10.12        0.14       0.8568      7.072
+    2      -10.21        0.19       0.8307      7.429
+    3      -10.78        0.40       0.8288      7.312
+    4       -9.15        0.23       0.8081      7.162
+    5       -9.83        0.06       0.7735      6.919

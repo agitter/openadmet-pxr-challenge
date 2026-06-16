@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/4xhd_protein.pdbqt -l ligand_3d/A1966.pdbqt --center_x -10.782 --center_y 15.404 --center_z -2.228 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/A1966/A1966__4xhd_docked.sdf --log results/A1966/A1966__4xhd.log
+Using random seed: -1032087180
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.67        0.00       0.8890      6.271
+    2       -8.81       -0.28       0.7175      6.000
+    3       -8.56        0.25       0.7166      6.515
+    4       -7.93       -0.28       0.7145      5.916
+    5       -6.93        1.50       0.6858      5.504

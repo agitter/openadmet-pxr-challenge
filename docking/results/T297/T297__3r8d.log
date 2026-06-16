@@ -1,0 +1,28 @@
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina v1.3.1 master:5bd63bd   Built May 23 2025.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+WARNING: No GPU detected. CNN scoring will be slow.
+Recommend running with single model (--cnn fast)
+or without cnn scoring (--cnn_scoring=none).
+
+Commandline: gnina -r receptors/3r8d_protein.pdbqt -l ligand_3d/T297.pdbqt --center_x -15.923 --center_y -9.043 --center_z -23.306 --size_x 25.0 --size_y 25.0 --size_z 25.0 --exhaustiveness 8 --num_modes 5 --cnn_scoring rescore -o results/T297/T297__3r8d_docked.sdf --log results/T297/T297__3r8d.log
+Using random seed: 543522108
+
+mode |  affinity  |  intramol  |    CNN     |   CNN
+     | (kcal/mol) | (kcal/mol) | pose score | affinity
+-----+------------+------------+------------+----------
+    1       -7.96        0.15       0.7222      5.547
+    2       -7.77        0.87       0.6567      5.572
+    3       -6.38       -0.32       0.6297      5.864
+    4       -6.55       -0.27       0.6028      5.449
+    5       -6.22       -0.20       0.5769      5.796
