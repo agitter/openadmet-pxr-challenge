@@ -26,20 +26,20 @@ set -euo pipefail
 
 WORK_UNIT="$1"
 
-+# Parse the single data row using Python's csv module, which correctly
-+# handles CSV-quoted fields (e.g. SMILES containing commas, pipes, or
-+# special characters that pandas wraps in double-quotes on write).
-+# IFS=, read does NOT strip CSV quoting and embeds literal " characters
-+# into the variable values, causing downstream SMILES parse failures.
-+# shlex.quote ensures each value is safely shell-escaped before eval.
-+eval "$(python3 -c "
-+import csv, shlex
-+with open('$WORK_UNIT') as f:
-+    r = list(csv.DictReader(f))[0]
-+print('cluster_id=' + shlex.quote(r['cluster_id']))
-+print('ligand_name=' + shlex.quote(r['ligand_name']))
-+print('ligand_smiles=' + shlex.quote(r['ligand_smiles']))
-+")"
+# Parse the single data row using Python's csv module, which correctly
+# handles CSV-quoted fields (e.g. SMILES containing commas, pipes, or
+# special characters that pandas wraps in double-quotes on write).
+# IFS=, read does NOT strip CSV quoting and embeds literal " characters
+# into the variable values, causing downstream SMILES parse failures.
+# shlex.quote ensures each value is safely shell-escaped before eval.
+eval "$(python3 -c "
+import csv, shlex
+with open('$WORK_UNIT') as f:
+    r = list(csv.DictReader(f))[0]
+print('cluster_id=' + shlex.quote(r['cluster_id']))
+print('ligand_name=' + shlex.quote(r['ligand_name']))
+print('ligand_smiles=' + shlex.quote(r['ligand_smiles']))
+")"
 
 echo "=== Starting ligand ${ligand_name} (cluster ${cluster_id}) at $(date) ==="
 
