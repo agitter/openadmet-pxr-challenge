@@ -34,6 +34,11 @@ def main():
     if " |" in smiles:
         smiles = smiles[:smiles.index(" |")]
 
+    # Strip any stray leading/trailing quote characters that can appear when
+    # SMILES containing commas or special characters are read from CSV fields
+    # (e.g. a cell value stored as '"CC1CCN..."' with an embedded quote).
+    smiles = smiles.strip('"').strip("'")
+
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         sys.exit(f"Failed to parse SMILES: {smiles}")
