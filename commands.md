@@ -439,3 +439,16 @@ Wrote plot -> docking\docking_analysis_extended\docking_vs_pec50_correlation.png
 Wrote phase1_with_docking_scores.csv (253 rows)
 Wrote train_anchors_with_docking_scores.csv (89 rows)
 ```
+
+```
+$ python scripts/extract_rbfe_inputs.py \
+    --selection docking_analysis/rbfe_template_selection.csv \
+    --results-dir results \
+    --receptor-dir receptors \
+    --outdir rbfe_inputs
+Loaded 124 cluster selections
+
+124 / 124 clusters fully extracted (receptor + ligand)
+
+Wrote rbfe_inputs\extraction_summary.csv
+```
