@@ -407,9 +407,9 @@ Phase 1 compounds with docking scores: 253 / 253
     Kendall  tau = -0.080  (p=5.72e-02)
 
   CNNscore vs pEC50 (n=253):
-    Spearman rho = 0.276  (p=8.09e-06)
-    Pearson  r   = 0.202  (p=1.26e-03)
-    Kendall  tau = 0.186  (p=1.10e-05)
+    Spearman rho = 0.078  (p=2.15e-01)
+    Pearson  r   = 0.046  (p=4.68e-01)
+    Kendall  tau = 0.055  (p=1.96e-01)
 
 ============================================================
 ANALYSIS 3: Training anchors (n=89)

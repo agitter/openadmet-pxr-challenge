@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-analysis/docking_vs_pec50_correlation.py
+analysis/04_docking_vs_pec50_correlation.py
 
 Assess how much predictive signal the GNINA ensemble docking scores
 (CNNaffinity, minimizedAffinity) carry relative to measured pEC50, using
@@ -31,7 +31,7 @@ isotonic calibration.
 
 Usage:
     pip install pandas scipy matplotlib
-    python analysis/docking_vs_pec50_correlation.py \
+    python analysis/04_docking_vs_pec50_correlation.py \
         --test pxr-challenge_TEST_BLINDED.csv \
         --phase1 pxr-challenge_TEST_PHASE_1_UNBLINDED.csv \
         --train pxr-challenge_TRAIN.csv \
@@ -141,11 +141,12 @@ def main():
     pec50 = p1_scores["pEC50"].values
     cnn_aff = p1_scores["CNNaffinity"].values
     min_aff = p1_scores["minimizedAffinity"].values
+    cnn_score = p1_scores["CNNscore"].values
 
     print(f"\n  pEC50 range: {np.nanmin(pec50):.2f} - {np.nanmax(pec50):.2f}")
     correlations(cnn_aff, pec50, "CNNaffinity vs pEC50")
     correlations(min_aff, pec50, "minimizedAffinity vs pEC50")
-    correlations(cnn_aff, pec50, "CNNscore vs pEC50")  # reuse label
+    correlations(cnn_score, pec50, "CNNscore vs pEC50")
 
     # ---------------------------------------------------------------
     # Analysis 3: Training anchors
