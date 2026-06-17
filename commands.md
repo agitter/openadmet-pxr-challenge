@@ -379,3 +379,58 @@ max        0.984589
 
 Clusters with full receptor coverage: 602 / 602
 ```
+
+```commandline
+$ python analysis/docking_vs_pec50_correlation.py \
+    --test data/pxr-challenge_TEST_BLINDED.csv \
+    --phase1 data/pxr-challenge_TEST_PHASE_1_UNBLINDED.csv \
+    --train data/pxr-challenge_TRAIN.csv \
+    --receptor-best docking/docking_analysis_extended/docking_receptor_best.csv \
+    --outdir docking/docking_analysis_extended
+Loaded docking scores for 602 ligands
+
+============================================================
+ANALYSIS 2: Phase 1 unblinded test compounds (n=253)
+============================================================
+Phase 1 compounds with docking scores: 253 / 253
+
+  pEC50 range: 1.75 - 6.72
+
+  CNNaffinity vs pEC50 (n=253):
+    Spearman rho = 0.276  (p=8.09e-06)
+    Pearson  r   = 0.202  (p=1.26e-03)
+    Kendall  tau = 0.186  (p=1.10e-05)
+
+  minimizedAffinity vs pEC50 (n=253):
+    Spearman rho = -0.120  (p=5.68e-02)
+    Pearson  r   = -0.055  (p=3.87e-01)
+    Kendall  tau = -0.080  (p=5.72e-02)
+
+  CNNscore vs pEC50 (n=253):
+    Spearman rho = 0.276  (p=8.09e-06)
+    Pearson  r   = 0.202  (p=1.26e-03)
+    Kendall  tau = 0.186  (p=1.10e-05)
+
+============================================================
+ANALYSIS 3: Training anchors (n=89)
+============================================================
+Docked anchor ligand_ids: 89
+
+  pEC50 range: 1.76 - 6.86
+  pEC50 std:   0.95
+  CNNaffinity range: 4.95 - 7.93
+
+  CNNaffinity vs pEC50 (n=89):
+    Spearman rho = 0.414  (p=5.58e-05)
+    Pearson  r   = 0.380  (p=2.35e-04)
+    Kendall  tau = 0.294  (p=4.52e-05)
+
+  minimizedAffinity vs pEC50 (n=89):
+    Spearman rho = -0.240  (p=2.37e-02)
+    Pearson  r   = -0.335  (p=1.35e-03)
+    Kendall  tau = -0.166  (p=2.14e-02)
+
+Wrote plot -> docking\docking_analysis_extended\docking_vs_pec50_correlation.png
+Wrote phase1_with_docking_scores.csv (253 rows)
+Wrote train_anchors_with_docking_scores.csv (89 rows)
+```
