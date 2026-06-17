@@ -34,11 +34,11 @@ success/failure and atom counts for spot-checking.
 
 Usage:
     pip install rdkit pandas
-    python scripts/extract_rbfe_inputs.py \
-        --selection docking_analysis/rbfe_template_selection.csv \
+    python extract_rbfe_inputs.py \
+        --selection docking/docking_analysis/rbfe_template_selection.csv \
         --results-dir results \
-        --receptor-dir receptors \
-        --outdir rbfe_inputs
+        --receptor-dir docking/receptors \
+        --outdir docking/rbfe_inputs
 """
 
 import argparse
@@ -124,6 +124,12 @@ def main():
                     help="rbfe_template_selection.csv")
     ap.add_argument("--results-dir", default="results")
     ap.add_argument("--receptor-dir", default="docking/receptors")
+    ap.add_argument("--receptor-suffix", default="_protein.pdb",
+                    help="Suffix appended to pdb_id to find receptor file. "
+                         "Use '_protein.pdb' for raw stripped receptors "
+                         "(docking/receptors/) or '_prepared.pdb' for "
+                         "PDBFixer-prepared receptors "
+                         "(openfe/receptors/). Default: _protein.pdb")
     ap.add_argument("--outdir", default="docking/rbfe_inputs")
     args = ap.parse_args()
 
@@ -155,7 +161,7 @@ def main():
         error = ""
 
         # --- Receptor: straight copy ---
-        src_receptor = receptor_dir / f"{pdb_id}_protein.pdb"
+        src_receptor = receptor_dir / f"{pdb_id}{args.receptor_suffix}"
         if src_receptor.exists():
             shutil.copy(src_receptor, out_receptor)
         else:

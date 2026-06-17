@@ -440,15 +440,289 @@ Wrote phase1_with_docking_scores.csv (253 rows)
 Wrote train_anchors_with_docking_scores.csv (89 rows)
 ```
 
+```commandline
+$ python openfe/scripts/01_identify_receptors.py \
+    --selection docking/docking_analysis/rbfe_template_selection.csv \
+    --outdir openfe/receptors
+Loaded 124 cluster selections
+Unique receptors needed: 41 of 62 available
+
+Receptor usage (sorted by cluster count):
+pdb_id  n_clusters
+  1skx          11
+  8r81           9
+  8r82           8
+  7axf           7
+  5a86           7
+  7rio           6
+  7axc           6
+  8svq           6
+  5x0r           5
+  6tfi           4
+  8svo           4
+  4ny9           4
+  6xp9           3
+  2qnv           3
+  3r8d           2
+  3hvl           2
+  4xhd           2
+  8svx           2
+  8svp           2
+  8svs           2
+  7axd           2
+  7axe           2
+  7axh           2
+  6hj2           2
+  6bns           2
+  7axa           2
+  8svt           2
+  7n2a           2
+  1nrl           1
+  4x1g           1
+  4x1f           1
+  6dup           1
+  7ax9           1
+  7axj           1
+  8e3n           1
+  8eqz           1
+  8cct           1
+  8svr           1
+  8szv           1
+  9fzi           1
+  9fzj           1
+
+Wrote openfe\receptors\receptor_usage.csv
+
+Next step: run PDBFixer on each of these receptors.
+Input PDBs are at:
+  external/pxr_xtal_re-refinement/pxr_rerefined_structures/<pdb_id>/<pdb_id>.pdb
 ```
-$ python scripts/extract_rbfe_inputs.py \
-    --selection docking_analysis/rbfe_template_selection.csv \
-    --results-dir results \
-    --receptor-dir receptors \
-    --outdir rbfe_inputs
+```commandline
+$ python openfe/scripts/02_pdbfixer_prep.py \
+    --receptor-usage openfe/receptors/receptor_usage.csv \
+    --pdb-dir docking/receptors \
+    --outdir openfe/receptors
+Preparing 41 unique receptors (of 62 available) at pH 7.4
+
+  1skx: loading docking\receptors\1skx_protein.pdb
+  1skx: 0 missing residue(s), 0 residue(s) with missing atoms
+  1skx: added hydrogens at pH 7.4
+  1skx: wrote openfe\receptors\1skx_prepared.pdb
+
+  8r81: loading docking\receptors\8r81_protein.pdb
+  8r81: 0 missing residue(s), 23 residue(s) with missing atoms
+  8r81: added hydrogens at pH 7.4
+  8r81: wrote openfe\receptors\8r81_prepared.pdb
+
+  8r82: loading docking\receptors\8r82_protein.pdb
+  8r82: 0 missing residue(s), 30 residue(s) with missing atoms
+  8r82: added hydrogens at pH 7.4
+  8r82: wrote openfe\receptors\8r82_prepared.pdb
+
+  7axf: loading docking\receptors\7axf_protein.pdb
+  7axf: 0 missing residue(s), 25 residue(s) with missing atoms
+  7axf: added hydrogens at pH 7.4
+  7axf: wrote openfe\receptors\7axf_prepared.pdb
+
+  5a86: loading docking\receptors\5a86_protein.pdb
+  5a86: 0 missing residue(s), 0 residue(s) with missing atoms
+  5a86: added hydrogens at pH 7.4
+  5a86: wrote openfe\receptors\5a86_prepared.pdb
+
+  7rio: loading docking\receptors\7rio_protein.pdb
+  7rio: 0 missing residue(s), 34 residue(s) with missing atoms
+  7rio: added hydrogens at pH 7.4
+  7rio: wrote openfe\receptors\7rio_prepared.pdb
+
+  7axc: loading docking\receptors\7axc_protein.pdb
+  7axc: 0 missing residue(s), 32 residue(s) with missing atoms
+  7axc: added hydrogens at pH 7.4
+  7axc: wrote openfe\receptors\7axc_prepared.pdb
+
+  8svq: loading docking\receptors\8svq_protein.pdb
+  8svq: 0 missing residue(s), 38 residue(s) with missing atoms
+  8svq: added hydrogens at pH 7.4
+  8svq: wrote openfe\receptors\8svq_prepared.pdb
+
+  5x0r: loading docking\receptors\5x0r_protein.pdb
+  5x0r: 0 missing residue(s), 53 residue(s) with missing atoms
+  5x0r: added hydrogens at pH 7.4
+  5x0r: wrote openfe\receptors\5x0r_prepared.pdb
+
+  6tfi: loading docking\receptors\6tfi_protein.pdb
+  6tfi: 0 missing residue(s), 0 residue(s) with missing atoms
+  6tfi: added hydrogens at pH 7.4
+  6tfi: wrote openfe\receptors\6tfi_prepared.pdb
+
+  8svo: loading docking\receptors\8svo_protein.pdb
+  8svo: 0 missing residue(s), 34 residue(s) with missing atoms
+  8svo: added hydrogens at pH 7.4
+  8svo: wrote openfe\receptors\8svo_prepared.pdb
+
+  4ny9: loading docking\receptors\4ny9_protein.pdb
+  4ny9: 0 missing residue(s), 0 residue(s) with missing atoms
+  4ny9: added hydrogens at pH 7.4
+  4ny9: wrote openfe\receptors\4ny9_prepared.pdb
+
+  6xp9: loading docking\receptors\6xp9_protein.pdb
+  6xp9: 0 missing residue(s), 49 residue(s) with missing atoms
+  6xp9: added hydrogens at pH 7.4
+  6xp9: wrote openfe\receptors\6xp9_prepared.pdb
+
+  2qnv: loading docking\receptors\2qnv_protein.pdb
+  2qnv: 0 missing residue(s), 12 residue(s) with missing atoms
+  2qnv: added hydrogens at pH 7.4
+  2qnv: wrote openfe\receptors\2qnv_prepared.pdb
+
+  3r8d: loading docking\receptors\3r8d_protein.pdb
+  3r8d: 0 missing residue(s), 15 residue(s) with missing atoms
+  3r8d: added hydrogens at pH 7.4
+  3r8d: wrote openfe\receptors\3r8d_prepared.pdb
+
+  3hvl: loading docking\receptors\3hvl_protein.pdb
+  3hvl: 0 missing residue(s), 2 residue(s) with missing atoms
+  3hvl: added hydrogens at pH 7.4
+  3hvl: wrote openfe\receptors\3hvl_prepared.pdb
+
+  4xhd: loading docking\receptors\4xhd_protein.pdb
+  4xhd: 0 missing residue(s), 4 residue(s) with missing atoms
+  4xhd: added hydrogens at pH 7.4
+  4xhd: wrote openfe\receptors\4xhd_prepared.pdb
+
+  8svx: loading docking\receptors\8svx_protein.pdb
+  8svx: 0 missing residue(s), 39 residue(s) with missing atoms
+  8svx: added hydrogens at pH 7.4
+  8svx: wrote openfe\receptors\8svx_prepared.pdb
+
+  8svp: loading docking\receptors\8svp_protein.pdb
+  8svp: 0 missing residue(s), 48 residue(s) with missing atoms
+  8svp: added hydrogens at pH 7.4
+  8svp: wrote openfe\receptors\8svp_prepared.pdb
+
+  8svs: loading docking\receptors\8svs_protein.pdb
+  8svs: 0 missing residue(s), 37 residue(s) with missing atoms
+  8svs: added hydrogens at pH 7.4
+  8svs: wrote openfe\receptors\8svs_prepared.pdb
+
+  7axd: loading docking\receptors\7axd_protein.pdb
+  7axd: 0 missing residue(s), 33 residue(s) with missing atoms
+  7axd: added hydrogens at pH 7.4
+  7axd: wrote openfe\receptors\7axd_prepared.pdb
+
+  7axe: loading docking\receptors\7axe_protein.pdb
+  7axe: 0 missing residue(s), 17 residue(s) with missing atoms
+  7axe: added hydrogens at pH 7.4
+  7axe: wrote openfe\receptors\7axe_prepared.pdb
+
+  7axh: loading docking\receptors\7axh_protein.pdb
+  7axh: 0 missing residue(s), 28 residue(s) with missing atoms
+  7axh: added hydrogens at pH 7.4
+  7axh: wrote openfe\receptors\7axh_prepared.pdb
+
+  6hj2: loading docking\receptors\6hj2_protein.pdb
+  6hj2: 0 missing residue(s), 27 residue(s) with missing atoms
+  6hj2: added hydrogens at pH 7.4
+  6hj2: wrote openfe\receptors\6hj2_prepared.pdb
+
+  6bns: loading docking\receptors\6bns_protein.pdb
+  6bns: 0 missing residue(s), 68 residue(s) with missing atoms
+  6bns: added hydrogens at pH 7.4
+  6bns: wrote openfe\receptors\6bns_prepared.pdb
+
+  7axa: loading docking\receptors\7axa_protein.pdb
+  7axa: 0 missing residue(s), 18 residue(s) with missing atoms
+  7axa: added hydrogens at pH 7.4
+  7axa: wrote openfe\receptors\7axa_prepared.pdb
+
+  8svt: loading docking\receptors\8svt_protein.pdb
+  8svt: 0 missing residue(s), 34 residue(s) with missing atoms
+  8svt: added hydrogens at pH 7.4
+  8svt: wrote openfe\receptors\8svt_prepared.pdb
+
+  7n2a: loading docking\receptors\7n2a_protein.pdb
+  7n2a: 0 missing residue(s), 29 residue(s) with missing atoms
+  7n2a: added hydrogens at pH 7.4
+  7n2a: wrote openfe\receptors\7n2a_prepared.pdb
+
+  1nrl: loading docking\receptors\1nrl_protein.pdb
+  1nrl: 0 missing residue(s), 8 residue(s) with missing atoms
+  1nrl: added hydrogens at pH 7.4
+  1nrl: wrote openfe\receptors\1nrl_prepared.pdb
+
+  4x1g: loading docking\receptors\4x1g_protein.pdb
+  4x1g: 0 missing residue(s), 22 residue(s) with missing atoms
+  4x1g: added hydrogens at pH 7.4
+  4x1g: wrote openfe\receptors\4x1g_prepared.pdb
+
+  4x1f: loading docking\receptors\4x1f_protein.pdb
+  4x1f: 0 missing residue(s), 20 residue(s) with missing atoms
+  4x1f: added hydrogens at pH 7.4
+  4x1f: wrote openfe\receptors\4x1f_prepared.pdb
+
+  6dup: loading docking\receptors\6dup_protein.pdb
+  6dup: 0 missing residue(s), 0 residue(s) with missing atoms
+  6dup: added hydrogens at pH 7.4
+  6dup: wrote openfe\receptors\6dup_prepared.pdb
+
+  7ax9: loading docking\receptors\7ax9_protein.pdb
+  7ax9: 0 missing residue(s), 28 residue(s) with missing atoms
+  7ax9: added hydrogens at pH 7.4
+  7ax9: wrote openfe\receptors\7ax9_prepared.pdb
+
+  7axj: loading docking\receptors\7axj_protein.pdb
+  7axj: 0 missing residue(s), 30 residue(s) with missing atoms
+  7axj: added hydrogens at pH 7.4
+  7axj: wrote openfe\receptors\7axj_prepared.pdb
+
+  8e3n: loading docking\receptors\8e3n_protein.pdb
+  8e3n: 0 missing residue(s), 9 residue(s) with missing atoms
+  8e3n: added hydrogens at pH 7.4
+  8e3n: wrote openfe\receptors\8e3n_prepared.pdb
+
+  8eqz: loading docking\receptors\8eqz_protein.pdb
+  8eqz: 0 missing residue(s), 32 residue(s) with missing atoms
+  8eqz: added hydrogens at pH 7.4
+  8eqz: wrote openfe\receptors\8eqz_prepared.pdb
+
+  8cct: loading docking\receptors\8cct_protein.pdb
+  8cct: 0 missing residue(s), 20 residue(s) with missing atoms
+  8cct: added hydrogens at pH 7.4
+  8cct: wrote openfe\receptors\8cct_prepared.pdb
+
+  8svr: loading docking\receptors\8svr_protein.pdb
+  8svr: 0 missing residue(s), 40 residue(s) with missing atoms
+  8svr: added hydrogens at pH 7.4
+  8svr: wrote openfe\receptors\8svr_prepared.pdb
+
+  8szv: loading docking\receptors\8szv_protein.pdb
+  8szv: 0 missing residue(s), 23 residue(s) with missing atoms
+  8szv: added hydrogens at pH 7.4
+  8szv: wrote openfe\receptors\8szv_prepared.pdb
+
+  9fzi: loading docking\receptors\9fzi_protein.pdb
+  9fzi: 0 missing residue(s), 73 residue(s) with missing atoms
+  9fzi: added hydrogens at pH 7.4
+  9fzi: wrote openfe\receptors\9fzi_prepared.pdb
+
+  9fzj: loading docking\receptors\9fzj_protein.pdb
+  9fzj: 0 missing residue(s), 20 residue(s) with missing atoms
+  9fzj: added hydrogens at pH 7.4
+  9fzj: wrote openfe\receptors\9fzj_prepared.pdb
+
+41 / 41 receptors prepared successfully
+Wrote openfe\receptors\pdbfixer_summary.csv
+```
+
+```commandline
+$ python docking/scripts/extract_rbfe_inputs.py \
+    --selection docking/docking_analysis/rbfe_template_selection.csv \
+    --results-dir docking/results \
+    --receptor-dir openfe/receptors \
+    --receptor-suffix _prepared.pdb \
+    --outdir openfe/rbfe_inputs
 Loaded 124 cluster selections
 
 124 / 124 clusters fully extracted (receptor + ligand)
 
-Wrote rbfe_inputs\extraction_summary.csv
+Wrote openfe\rbfe_inputs\extraction_summary.csv
 ```
