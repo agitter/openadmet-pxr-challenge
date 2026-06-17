@@ -430,6 +430,11 @@ Docked anchor ligand_ids: 89
     Pearson  r   = -0.335  (p=1.35e-03)
     Kendall  tau = -0.166  (p=2.14e-02)
 
+  CNNscore vs pEC50 (n=89):
+    Spearman rho = 0.164  (p=1.24e-01)
+    Pearson  r   = 0.267  (p=1.15e-02)
+    Kendall  tau = 0.104  (p=1.49e-01)
+
 Wrote plot -> docking\docking_analysis_extended\docking_vs_pec50_correlation.png
 Wrote phase1_with_docking_scores.csv (253 rows)
 Wrote train_anchors_with_docking_scores.csv (89 rows)

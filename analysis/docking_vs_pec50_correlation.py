@@ -173,6 +173,7 @@ def main():
     pec50_a = anchor_df["pEC50"].values
     cnn_aff_a = anchor_df["CNNaffinity"].values
     min_aff_a = anchor_df["minimizedAffinity"].values
+    cnn_score_a = anchor_df["CNNscore"].values
 
     print(f"\n  pEC50 range: {np.nanmin(pec50_a):.2f} - {np.nanmax(pec50_a):.2f}")
     print(f"  pEC50 std:   {np.nanstd(pec50_a):.2f}")
@@ -180,6 +181,7 @@ def main():
           f"{np.nanmax(cnn_aff_a):.2f}")
     correlations(cnn_aff_a, pec50_a, "CNNaffinity vs pEC50")
     correlations(min_aff_a, pec50_a, "minimizedAffinity vs pEC50")
+    correlations(cnn_score_a, pec50_a, "CNNscore vs pEC50")
 
     # ---------------------------------------------------------------
     # Plots
