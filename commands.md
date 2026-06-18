@@ -726,3 +726,46 @@ Loaded 124 cluster selections
 
 Wrote openfe\rbfe_inputs\extraction_summary.csv
 ```
+
+```commandline
+$ python openfe/scripts/00_build_network_inputs.py \
+    --test data/pxr-challenge_TEST_BLINDED.csv \
+    --clusters claude/outputs/test_with_clusters.csv \
+    --anchors claude/outputs/test_with_train_anchors.csv \
+    --outdir openfe
+Test compounds: 513
+Cluster assignments: 513 (124 unique clusters)
+Anchor assignments: 513
+
+Joined table: 513 rows
+Unique anchor A#### IDs: 89
+Clusters with >1 unique anchor: 15
+
+Wrote openfe\test_full_with_clusters_and_anchors.csv
+```
+
+```commandline
+$ python openfe/scripts/03_extract_all_rbfe_inputs.py \
+    --selection docking/docking_analysis/rbfe_template_selection.csv \
+    --test-full openfe/test_full_with_clusters_and_anchors.csv \
+    --train data/pxr-challenge_TRAIN.csv \
+    --results-dir docking/results \
+    --receptor-dir openfe/receptors \
+    --outdir openfe/rbfe_inputs
+Clusters: 124
+Test compounds: 513
+Unique anchor A#### IDs: 89
+  Cluster 21 (1/124)...
+  Cluster 156 (20/124)...
+  Cluster 269 (40/124)...
+  Cluster 378 (60/124)...
+  Cluster 430 (80/124)...
+  Cluster 474 (100/124)...
+  Cluster 507 (120/124)...
+
+657 / 657 compounds fully extracted
+All extractions successful.
+
+Compounds per cluster: min=2, max=16, mean=5.3
+Wrote openfe\rbfe_inputs\extraction_summary_extended.csv
+```
