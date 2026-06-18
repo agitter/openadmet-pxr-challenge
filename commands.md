@@ -769,3 +769,32 @@ All extractions successful.
 Compounds per cluster: min=2, max=16, mean=5.3
 Wrote openfe\rbfe_inputs\extraction_summary_extended.csv
 ```
+
+```commandline
+$ python openfe/scripts/04_prepare_planning_inputs.py \
+    --rbfe-inputs openfe/rbfe_inputs \
+    --outdir openfe/plan_inputs \
+    --work-units openfe/plan_work_units
+Found 124 cluster directories
+  Prepared cluster 21 (1/124): 3 ligands (1 test + 1 anchor)
+  Prepared cluster 156 (20/124): 3 ligands (1 test + 1 anchor)
+  Prepared cluster 269 (40/124): 4 ligands (2 test + 1 anchor)
+  Prepared cluster 378 (60/124): 3 ligands (1 test + 1 anchor)
+  Prepared cluster 430 (80/124): 3 ligands (1 test + 1 anchor)
+  Prepared cluster 474 (100/124): 12 ligands (10 test + 1 anchor)
+  Prepared cluster 507 (120/124): 10 ligands (7 test + 2 anchor)
+
+Prepared 124 / 124 clusters
+Wrote cluster list -> openfe\plan_work_units\cluster_list.txt
+Wrote summary -> openfe\plan_inputs\planning_inputs_summary.csv
+
+Ligands per cluster:
+count    124.000000
+mean       6.298387
+std        3.724190
+min        3.000000
+25%        3.000000
+50%        5.000000
+75%       10.000000
+max       17.000000
+```

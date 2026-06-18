@@ -1,0 +1,34 @@
+# openfe/plan_settings.yaml
+#
+# Settings for openfe plan-rbfe-network, used across all 124 cluster
+# networks.
+#
+# Choices:
+#   mapper:  KartografAtomMapper - 3D-geometry-aware atom mapping, better
+#            than LOMAP for ring-system variations seen in our analog clusters
+#   network: generate_minimal_spanning_network - MST minimises total
+#            perturbation difficulty; appropriate for our cluster sizes
+#            (2-16 compounds). Radial would be simpler but less robust for
+#            clusters with multiple anchor nodes.
+#   partial_charge: nagl - fast ML-based charges, no AmberTools dependency,
+#            consistent with openfe 1.11.1 defaults and avoids the per-ligand
+#            AM1-BCC cost that would be prohibitive at 657 compounds.
+#
+# n-protocol-repeats is passed as a CLI flag (--n-protocol-repeats 1) rather
+# than a settings key.
+
+mapper:
+  method: KartografAtomMapper
+  settings:
+    atom_max_distance: 0.95
+    atom_map_hydrogens: true
+    map_hydrogens_on_hydrogens_only: false
+    map_exact_ring_matches_only: true
+
+network:
+  method: generate_minimal_spanning_network
+
+partial_charge:
+  method: nagl
+  settings:
+    nagl_model: null   # null = use the latest bundled NAGL model
