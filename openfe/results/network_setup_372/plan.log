@@ -1,0 +1,64 @@
+RBFE-NETWORK PLANNER
+______________________
+
+Parsing in Files: 
+	Got input: 
+		Small Molecules: SmallMoleculeComponent(name=OADMET-0006520) SmallMoleculeComponent(name=OCNT-2316441) SmallMoleculeComponent(name=OADMET-0006612) SmallMoleculeComponent(name=OADMET-0006520) SmallMoleculeComponent(name=OADMET-0006232)
+		ProteinComponent: ProteinComponent(name=)
+		Cofactors: []
+		Solvent: SolventComponent(name=O, Na+, Cl-)
+
+Using Options:
+	Mapper: <KartografAtomMapper-92be13375caab9a5f2ecbf75d925982f>
+	Mapping Scorer: <function default_lomap_score at 0x14b3f70b6fc0>
+	Network Generation: functools.partial(<function generate_minimal_spanning_network at 0x14b3f70c5260>)
+	Partial Charge Generation: nagl
+
+	n_protocol_repeats=1 (1 simulation repeat(s) per transformation)
+
+Planning RBFE-Campaign:
+assigning ligand partial charges -- this may be slow
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=168) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=168) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=168) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=168) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+Generating charges:   0%|                                 | 0/5 [00:00<?, ?it/s]Generating charges:  20%|█████                    | 1/5 [00:01<00:06,  1.50s/it]Generating charges: 100%|█████████████████████████| 5/5 [00:02<00:00,  1.91it/s]Generating charges: 100%|█████████████████████████| 5/5 [00:02<00:00,  1.71it/s]
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+Element change in mapping between atoms Ligand A: 17 (element 6) and Ligand B: 19 (element 8)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_protocols.py:315: UserWarning: Element change in mapping between atoms Ligand A: 17 (element 6) and Ligand B: 19 (element 8)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+  warnings.warn(wmsg)
+Element change in mapping between atoms Ligand A: 18 (element 8) and Ligand B: 18 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_protocols.py:315: UserWarning: Element change in mapping between atoms Ligand A: 18 (element 8) and Ligand B: 18 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+  warnings.warn(wmsg)
+Element change in mapping between atoms Ligand A: 17 (element 6) and Ligand B: 19 (element 8)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+Element change in mapping between atoms Ligand A: 18 (element 8) and Ligand B: 18 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+	Done
+
+Output:
+	Saving to: /var/lib/condor/execute/slot1/dir_2506400/scratch/network_setup
+		- network_setup.json
+		- ligand_network.graphml
+				- rbfe_OADMET-0006520_complex_OADMET-0006232_complex.json
+				- rbfe_OADMET-0006612_complex_OADMET-0006232_complex.json
+				- rbfe_OADMET-0006520_solvent_OADMET-0006232_solvent.json
+				- rbfe_OADMET-0006520_complex_OCNT-2316441_complex.json
+				- rbfe_OADMET-0006520_solvent_OADMET-0006520_solvent.json
+				- rbfe_OADMET-0006520_complex_OADMET-0006520_complex.json
+				- rbfe_OADMET-0006520_solvent_OCNT-2316441_solvent.json
+				- rbfe_OADMET-0006612_solvent_OADMET-0006232_solvent.json
+	Duration: 0:00:15.301769
+
