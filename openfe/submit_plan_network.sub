@@ -1,38 +1,42 @@
 # openfe/submit_plan_network.sub
 #
 # HTCondor submit file for openfe plan-rbfe-network jobs.
-# One job per cluster (124 total), CPU-only (network planning does not
-# need a GPU).
+# 124 jobs, one per cluster, CPU-only (no GPU needed for network planning).
 #
 # Run from the openfe/ directory:
+#   mkdir -p logs network_setup
 #   condor_submit submit_plan_network.sub
 #
 # Prerequisites (run locally first):
 #   python scripts/04_prepare_planning_inputs.py
-#     -> plan_inputs/<cluster_id>/ligands.sdf + receptor.pdb (124 clusters)
-#     -> plan_work_units/cluster_list.txt
+#       -> plan_inputs/<cluster_id>/ligands.sdf + receptor.pdb
+#       -> plan_work_units/cluster_list.txt
 
-universe = container
+universe   = container
 container_image = osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif
 
 executable = scripts/run_plan_network.sh
 arguments  = $(cluster_id)
 
-# Transfer per-cluster inputs + shared settings file.
-# plan_inputs/<cluster_id>/ contains ligands.sdf + receptor.pdb for this job.
-transfer_input_files = \
-    plan_inputs/$(cluster_id), \
-    plan_settings.yaml
+# Input transfer:
+#   plan_inputs/$(cluster_id)/ -> arrives as $(cluster_id)/ in scratch
+#   (HTCondor strips the parent directory path on transfer)
+#   plan_settings.yaml         -> arrives at scratch top level
+transfer_input_files = plan_inputs/$(cluster_id), plan_settings.yaml
 
-transfer_output_files = network_setup
-when_to_transfer_output = ON_EXIT
+# Output transfer:
+#   The shell script writes to ./network_setup/ in scratch.
+#   transfer_output_remaps renames it to network_setup/$(cluster_id)/
+#   on the access point; HTCondor creates the subdirectory automatically.
+#   ON_EXIT_OR_EVICT ensures partial results are recovered on eviction.
+transfer_output_files   = network_setup
+transfer_output_remaps  = "network_setup = network_setup/$(cluster_id)"
+when_to_transfer_output = ON_EXIT_OR_EVICT
 
 log    = logs/plan.$(Cluster).$(Process).log
 output = logs/plan.$(Cluster).$(Process).out
 error  = logs/plan.$(Cluster).$(Process).err
 
-# Network planning is CPU-bound (Kartograf 3D mapping + NAGL charges).
-# NAGL charge generation benefits from multiple cores.
 request_cpus   = 4
 request_memory = 8GB
 request_disk   = 4GB
