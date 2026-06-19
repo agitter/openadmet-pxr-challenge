@@ -56,7 +56,6 @@ openfe plan-rbfe-network \
     --n-protocol-repeats 1 \
     -n 4 \
     -o "${OUTDIR}" \
-    --verbose \
     2>&1 | tee "${OUTDIR}/plan.log"
 
 echo "=== Finished cluster ${CLUSTER_ID} at $(date) ==="
