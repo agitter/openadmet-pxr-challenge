@@ -6,18 +6,16 @@
 #
 # Arguments:
 #   $1 = cluster_id (e.g. "21")
-#
-# HTCondor transfers plan_inputs/<cluster_id>/ as a flat directory
-# named <cluster_id>/ in the scratch dir (parent path stripped).
-# plan_settings.yaml lands at the top level alongside it.
-#
-# Writes output to ./network_setup/ in scratch; transfer_output_remaps
-# in the submit file redirects this to network_setup/<cluster_id>/ on
-# the access point.
-#
-# Runs inside: osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif
 
-set -euo pipefail
+# These two must run BEFORE set -euo pipefail:
+#   1. mkdir -p ensures the output dir exists for transfer even on failure
+#   2. source activates the conda/mamba env; the activation script
+#      references MAMBA_SKIP_ACTIVATE which may be unset, which would
+#      cause set -u to abort the script if sourced after set -euo pipefail
+mkdir -p network_setup
+source /usr/local/bin/_activate_current_env.sh
+
+set -eo pipefail
 
 CLUSTER_ID="$1"
 
@@ -27,25 +25,13 @@ echo "Working directory: $(pwd)"
 echo "Scratch contents:"
 ls -la
 
-source /usr/local/bin/_activate_current_env.sh
-
 echo "openfe: $(openfe --version)"
 
-# Input paths - HTCondor strips the parent dir on transfer so
-# plan_inputs/<cluster_id>/ arrives as <cluster_id>/ here.
 LIGANDS="${CLUSTER_ID}/ligands.sdf"
 RECEPTOR="${CLUSTER_ID}/receptor.pdb"
 SETTINGS="plan_settings.yaml"
-
-# Output dir in scratch - remapped to network_setup/<cluster_id>/
-# on the access point via transfer_output_remaps.
 OUTDIR="network_setup"
 
-# Pre-create output dir so transfer never fails with "no such file"
-# even if openfe itself errors out.
-mkdir -p "${OUTDIR}"
-
-# Verify inputs exist
 for f in "${LIGANDS}" "${RECEPTOR}" "${SETTINGS}"; do
     if [[ ! -f "${f}" ]]; then
         echo "FATAL: required input not found: ${f}"
