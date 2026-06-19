@@ -30,7 +30,7 @@ transfer_input_files = plan_inputs/$(cluster_id), plan_settings.yaml
 #   on the access point; HTCondor creates the subdirectory automatically.
 #   ON_EXIT_OR_EVICT ensures partial results are recovered on eviction.
 transfer_output_files   = network_setup
-transfer_output_remaps  = "network_setup = network_setup/$(cluster_id)"
+transfer_output_remaps  = "network_setup = results/network_setup_$(cluster_id)"
 when_to_transfer_output = ON_EXIT_OR_EVICT
 
 log    = logs/plan.$(Cluster).$(Process).log
