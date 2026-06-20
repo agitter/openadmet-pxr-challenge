@@ -874,3 +874,22 @@ Cluster 139: 7 records
 
 $ rm -rf openfe/results
 ```
+
+```commandline
+$ ls openfe/results/ | wc -l
+124
+$ python scripts/inventory_transforms.py
+
+Total transformation JSONs: 1066
+Expected ~496 (rough estimate: avg 4 edges x 2 legs x 124 clusters)
+JSONs per cluster: min=2, max=30, mean=8.6
+
+$ find openfe/results -name "*.json" | grep -E "_complex_[^/]+_complex" | \
+    python -c "
+import sys
+self_edges = [l.strip() for l in sys.stdin if l.strip().split('rbfe_')[1].split('_complex')[0] == l.strip().split('_complex_')[1].replace('_complex.json','')]
+print(f'Self-edges found: {len(self_edges)}')
+for e in self_edges[:5]: print(' ', e)
+"
+Self-edges found: 0
+```

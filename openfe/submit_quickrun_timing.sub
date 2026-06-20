@@ -1,0 +1,49 @@
+# openfe/submit_quickrun_timing.sub
+#
+# Timing test: run 20 independent openfe quickrun jobs on the same
+# transformation to measure per-leg wall-clock time across different
+# GPU types available in CHTC.
+#
+# Uses cluster 118 (smallest network: 1 edge = 2 JSONs), complex leg.
+#
+# After completion, check timing_test/timing_<N>/ directories and
+# compare runtimes vs GPU type (from .out logs) to determine
+# GPUJobLength for the production campaign.
+#
+# Run from the openfe/ directory:
+#   mkdir -p logs timing_test
+#   condor_submit submit_quickrun_timing.sub
+
+universe = container
+container_image = osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif
+
+executable = scripts/run_quickrun_timing.sh
+arguments  = rbfe_OADMET-0006495_complex_OCNT-2310728_complex.json
+
+transfer_input_files = \
+    results/network_setup_118/transformations/rbfe_OADMET-0006495_complex_OCNT-2310728_complex.json, \
+    results/network_setup_118/network_setup.json
+
+# Each of the 20 jobs gets its own output directory named by process ID
+# to avoid collisions and to allow easy per-GPU comparison.
+transfer_output_files   = quickrun_output, timing.txt
+transfer_output_remaps  = "quickrun_output = timing_test/$(Process)/quickrun_output; timing.txt = timing_test/$(Process)/timing.txt"
+when_to_transfer_output = ON_EXIT_OR_EVICT
+
+log    = logs/timing.$(Cluster).$(Process).log
+output = logs/timing.$(Cluster).$(Process).out
+error  = logs/timing.$(Cluster).$(Process).err
+
+request_cpus   = 1
+request_memory = 16GB
+request_disk   = 16GB
+request_gpus   = 1
+
+gpus_minimum_capability = 7.5
+gpus_minimum_memory = 10000
+
++WantGPULab = true
++GPUJobLength = "short"
++is_resumable = true
+
+queue 20
