@@ -7,7 +7,9 @@
 # and sampling settings before launching the full 1066-job campaign.
 #
 # Arguments:
-#   $1 = transformation JSON filename (e.g. "rbfe_OADMET-0006495_complex_OCNT-2310728_complex.json")
+#   $1 = transformation JSON filename (e.g. "rbfe_OCNT-2310728_complex_OADMET-0006495_complex.json")
+#        Note: openfe orders ligands in the filename based on MST edge direction,
+#        so the anchor compound typically appears first.
 #
 # Files expected in scratch (from transfer_input_files):
 #   $(transformation)      the transformation JSON
@@ -18,6 +20,9 @@
 #   timing.txt             wall-clock timing summary
 
 mkdir -p quickrun_output
+# Create timing.txt early so it always exists for transfer, even on eviction.
+# It will be overwritten with real content on successful completion.
+touch timing.txt
 source /usr/local/bin/_activate_current_env.sh
 
 set -eo pipefail

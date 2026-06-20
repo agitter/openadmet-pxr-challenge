@@ -1,6 +1,6 @@
 # openfe/submit_quickrun_timing.sub
 #
-# Timing test: run 20 independent openfe quickrun jobs on the same
+# Timing test: run 10 independent openfe quickrun jobs on the same
 # transformation to measure per-leg wall-clock time across different
 # GPU types available in CHTC.
 #
@@ -18,13 +18,13 @@ universe = container
 container_image = osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif
 
 executable = scripts/run_quickrun_timing.sh
-arguments  = rbfe_OADMET-0006495_complex_OCNT-2310728_complex.json
+arguments  = rbfe_OCNT-2310728_complex_OADMET-0006495_complex.json
 
 transfer_input_files = \
-    results/network_setup_118/transformations/rbfe_OADMET-0006495_complex_OCNT-2310728_complex.json, \
+    results/network_setup_118/transformations/rbfe_OCNT-2310728_complex_OADMET-0006495_complex.json, \
     results/network_setup_118/network_setup.json
 
-# Each of the 20 jobs gets its own output directory named by process ID
+# Each of the 10 jobs gets its own output directory named by process ID
 # to avoid collisions and to allow easy per-GPU comparison.
 transfer_output_files   = quickrun_output, timing.txt
 transfer_output_remaps  = "quickrun_output = timing_test/$(Process)/quickrun_output; timing.txt = timing_test/$(Process)/timing.txt"
@@ -46,4 +46,4 @@ gpus_minimum_memory = 10000M
 +GPUJobLength = "short"
 +is_resumable = true
 
-queue 20
+queue 10
