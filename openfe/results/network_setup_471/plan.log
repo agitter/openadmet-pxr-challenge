@@ -1,45 +1,0 @@
-RBFE-NETWORK PLANNER
-______________________
-
-Parsing in Files: 
-	Got input: 
-		Small Molecules: SmallMoleculeComponent(name=OADMET-0006148) SmallMoleculeComponent(name=OCNT-2318059) SmallMoleculeComponent(name=OADMET-0006482) SmallMoleculeComponent(name=OADMET-0006148) SmallMoleculeComponent(name=OADMET-0006128)
-		ProteinComponent: ProteinComponent(name=)
-		Cofactors: []
-		Solvent: SolventComponent(name=O, Na+, Cl-)
-
-Using Options:
-	Mapper: <KartografAtomMapper-92be13375caab9a5f2ecbf75d925982f>
-	Mapping Scorer: <function default_lomap_score at 0x14e678442d40>
-	Network Generation: functools.partial(<function generate_minimal_spanning_network at 0x14e678443ec0>)
-	Partial Charge Generation: nagl
-
-	n_protocol_repeats=1 (1 simulation repeat(s) per transformation)
-
-Planning RBFE-Campaign:
-assigning ligand partial charges -- this may be slow
-/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=169) is multi-threaded, use of fork() may lead to deadlocks in the child.
-  self.pid = os.fork()
-/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=169) is multi-threaded, use of fork() may lead to deadlocks in the child.
-  self.pid = os.fork()
-/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=169) is multi-threaded, use of fork() may lead to deadlocks in the child.
-  self.pid = os.fork()
-/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=169) is multi-threaded, use of fork() may lead to deadlocks in the child.
-  self.pid = os.fork()
-Generating charges:   0%|                                 | 0/5 [00:00<?, ?it/s]Generating charges:  20%|█████                    | 1/5 [00:01<00:06,  1.60s/it]Generating charges: 100%|█████████████████████████| 5/5 [00:02<00:00,  2.01it/s]Generating charges: 100%|█████████████████████████| 5/5 [00:02<00:00,  1.78it/s]
-	Done
-
-Output:
-	Saving to: /var/lib/condor/execute/slot1/dir_384433/scratch/network_setup
-		- network_setup.json
-		- ligand_network.graphml
-				- rbfe_OADMET-0006148_solvent_OADMET-0006148_solvent.json
-				- rbfe_OADMET-0006482_solvent_OADMET-0006148_solvent.json
-				- rbfe_OADMET-0006482_solvent_OADMET-0006128_solvent.json
-				- rbfe_OADMET-0006148_solvent_OCNT-2318059_solvent.json
-				- rbfe_OADMET-0006482_complex_OADMET-0006148_complex.json
-				- rbfe_OADMET-0006482_complex_OADMET-0006128_complex.json
-				- rbfe_OADMET-0006148_complex_OADMET-0006148_complex.json
-				- rbfe_OADMET-0006148_complex_OCNT-2318059_complex.json
-	Duration: 0:00:13.668985
-

@@ -798,3 +798,79 @@ min        3.000000
 75%       10.000000
 max       17.000000
 ```
+
+```commandline
+$ python scripts/inventory_transforms.py
+PROBLEM: cluster 139: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 167: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 232: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 30: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 311: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 374: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 416: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 417: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 421: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 423: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 450: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 455: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 468: 0 JSONs, network_setup.json=False
+PROBLEM: cluster 476: 0 JSONs, network_setup.json=False
+
+Total transformation JSONs: 1186
+Expected ~496 (rough estimate: avg 4 edges x 2 legs x 124 clusters)
+JSONs per cluster: min=0, max=32, mean=9.6
+```
+
+Fix corrupted results
+```commandline
+$ find openfe/rbfe_inputs -name "*_ligand.sdf" | grep -vE "/[TA][0-9]" | xargs rm
+$ find openfe/rbfe_inputs -name "*_ligand.sdf" | grep -vE "/[TA][0-9]" | wc -l
+0
+$ ls openfe/rbfe_inputs/139/*_ligand.sdf | wc -l
+7
+$ python openfe/scripts/04_prepare_planning_inputs.py \
+    --rbfe-inputs openfe/rbfe_inputs \
+    --outdir openfe/plan_inputs \
+    --work-units openfe/plan_work_units
+Found 124 cluster directories
+  Prepared cluster 21 (1/124): 2 ligands (1 test + 1 anchor)
+  Prepared cluster 156 (20/124): 2 ligands (1 test + 1 anchor)
+  Prepared cluster 269 (40/124): 3 ligands (2 test + 1 anchor)
+  Prepared cluster 378 (60/124): 2 ligands (1 test + 1 anchor)
+  Prepared cluster 430 (80/124): 2 ligands (1 test + 1 anchor)
+  Prepared cluster 474 (100/124): 11 ligands (10 test + 1 anchor)
+  Prepared cluster 507 (120/124): 9 ligands (7 test + 2 anchor)
+
+Prepared 124 / 124 clusters
+Wrote cluster list -> openfe\plan_work_units\cluster_list.txt
+Wrote summary -> openfe\plan_inputs\planning_inputs_summary.csv
+
+Ligands per cluster:
+count    124.000000
+mean       5.298387
+std        3.724190
+min        2.000000
+25%        2.000000
+50%        4.000000
+75%        9.000000
+max       16.000000
+
+$ python -c "
+from rdkit import Chem, RDLogger
+RDLogger.DisableLog('rdApp.*')
+mols = list(Chem.SDMolSupplier('openfe/plan_inputs/139/ligands.sdf', removeHs=False))
+print(f'Cluster 139: {len(mols)} records')
+for m in mols:
+    print(f'  {m.GetProp(\"_Name\") if m and m.HasProp(\"_Name\") else \"NONE\"}')
+"
+Cluster 139: 7 records
+  OCNT-2313188
+  OADMET-0006609
+  OADMET-0006506
+  OADMET-0006472
+  OADMET-0006433
+  OADMET-0006213
+  OADMET-0006209
+
+$ rm -rf openfe/results
+```

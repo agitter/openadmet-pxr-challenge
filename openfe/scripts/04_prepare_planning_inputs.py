@@ -63,15 +63,26 @@ def main():
     for cluster_dir in cluster_dirs:
         cluster_id = cluster_dir.name
 
-        # Find all ligand SDF files in this cluster directory
-        ligand_sdfs = sorted(cluster_dir.glob("*_ligand.sdf"))
+        # Find all ligand SDF files in this cluster directory.
+        # Only include files with T### or A#### prefixes (from
+        # 03_extract_all_rbfe_inputs.py). Exclude bare integer-named
+        # files (e.g. 139_ligand.sdf) from the earlier
+        # docking/scripts/extract_rbfe_inputs.py run on cluster
+        # representatives, which may have been copied into this directory.
+        ligand_sdfs = sorted(
+            f for f in cluster_dir.glob("*_ligand.sdf")
+            if f.stem.split("_ligand")[0][:1] in ("T", "A")
+        )
         if not ligand_sdfs:
             print(f"  WARNING: no ligand SDFs found in {cluster_dir}")
             continue
 
-        # Find the receptor PDB (all should be the same in a cluster;
-        # take the first one - they're copies of the same prepared PDB)
-        receptor_pdbs = sorted(cluster_dir.glob("*_receptor.pdb"))
+        # Find the receptor PDB - take any T### or A#### prefixed one
+        # (all are copies of the same prepared PDB within a cluster)
+        receptor_pdbs = sorted(
+            f for f in cluster_dir.glob("*_receptor.pdb")
+            if f.stem.split("_receptor")[0][:1] in ("T", "A")
+        )
         if not receptor_pdbs:
             print(f"  WARNING: no receptor PDB found in {cluster_dir}")
             continue

@@ -1,44 +1,0 @@
-RBFE-NETWORK PLANNER
-______________________
-
-Parsing in Files: 
-	Got input: 
-		Small Molecules: SmallMoleculeComponent(name=OADMET-0006484) SmallMoleculeComponent(name=OCNT-2317528) SmallMoleculeComponent(name=OADMET-0006484)
-		ProteinComponent: ProteinComponent(name=)
-		Cofactors: []
-		Solvent: SolventComponent(name=O, Na+, Cl-)
-
-Using Options:
-	Mapper: <KartografAtomMapper-92be13375caab9a5f2ecbf75d925982f>
-	Mapping Scorer: <function default_lomap_score at 0x14a62f326e80>
-	Network Generation: functools.partial(<function generate_minimal_spanning_network at 0x14a62f335120>)
-	Partial Charge Generation: nagl
-
-	n_protocol_repeats=1 (1 simulation repeat(s) per transformation)
-
-Planning RBFE-Campaign:
-assigning ligand partial charges -- this may be slow
-/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=103) is multi-threaded, use of fork() may lead to deadlocks in the child.
-  self.pid = os.fork()
-/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=103) is multi-threaded, use of fork() may lead to deadlocks in the child.
-  self.pid = os.fork()
-/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=103) is multi-threaded, use of fork() may lead to deadlocks in the child.
-  self.pid = os.fork()
-/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=103) is multi-threaded, use of fork() may lead to deadlocks in the child.
-  self.pid = os.fork()
-Generating charges:   0%|                                 | 0/3 [00:00<?, ?it/s]Generating charges:  33%|████████▎                | 1/3 [00:02<00:04,  2.02s/it]Generating charges:  67%|████████████████▋        | 2/3 [00:02<00:01,  1.13s/it]Generating charges: 100%|█████████████████████████| 3/3 [00:02<00:00,  1.15it/s]
-no mapping could be found, after applying filters!
-no mapping could be found!
-no mapping could be found, after applying filters!
-	Done
-
-Output:
-	Saving to: /var/lib/condor/execute/slot1/dir_3685223/scratch/network_setup
-		- network_setup.json
-		- ligand_network.graphml
-				- rbfe_OADMET-0006484_solvent_OADMET-0006484_solvent.json
-				- rbfe_OADMET-0006484_complex_OADMET-0006484_complex.json
-				- rbfe_OADMET-0006484_solvent_OCNT-2317528_solvent.json
-				- rbfe_OADMET-0006484_complex_OCNT-2317528_complex.json
-	Duration: 0:00:15.767783
-
