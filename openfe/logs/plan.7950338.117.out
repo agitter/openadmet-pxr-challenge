@@ -1,0 +1,110 @@
+=== Planning network for cluster 505 at Fri Jun 19 21:28:07 CDT 2026 ===
+Host: txie-dsigpu4000
+Working directory: /var/lib/condor/execute/slot3/dir_1482871/scratch
+Scratch contents:
+total 2715884
+drwx------ 10 agitter agitter       4096 Jun 19 21:28 .
+drwxr-xr-x  5 nobody  nogroup       4096 Jun 19 21:26 ..
+drwxr-xr-x  2 agitter agitter       4096 Jun 19 21:27 .condor_creds
+srwxr-xr-x  1 agitter agitter          0 Jun 19 21:28 .docker_sock
+-rw-r--r--  1 agitter agitter       6453 Jun 19 21:26 .job.ad
+-rw-r--r--  1 agitter agitter      12328 Jun 19 21:26 .machine.ad
+drwxr-xr-x  2 agitter agitter       4096 Jun 19 21:26 505
+-rw-r--r--  1 agitter agitter          0 Jun 19 21:28 _condor_stderr
+-rw-r--r--  1 agitter agitter        182 Jun 19 21:28 _condor_stdout
+drwx------  3 agitter agitter       4096 Jun 19 21:28 home
+drwxr-xr-x  2 agitter agitter       4096 Jun 19 21:28 network_setup
+-rw-r--r--  1 agitter agitter 2780983296 Jun 19 21:28 openfe_1.11.1.sif
+-rw-r--r--  1 agitter agitter       1222 Jun 19 21:26 plan_settings.yaml
+-rwxr-xr-x  1 agitter agitter       1700 Jun 19 21:26 run_plan_network.sh
+drwxr-x---  5 agitter agitter       4096 Jun 19 21:28 scratch
+drwx------  2 agitter agitter       4096 Jun 19 21:28 tmp
+drwx------  3 agitter agitter       4096 Jun 19 21:28 var
+drwxrwxrwt  2 agitter agitter       4096 Jun 19 21:28 var_tmp
+openfe: openfe, version 1.11.1
+Ligands in SDF: 9
+RBFE-NETWORK PLANNER
+______________________
+
+Parsing in Files: 
+	Got input: 
+		Small Molecules: SmallMoleculeComponent(name=OCNT-2312754) SmallMoleculeComponent(name=OADMET-0006514) SmallMoleculeComponent(name=OADMET-0006501) SmallMoleculeComponent(name=OADMET-0006404) SmallMoleculeComponent(name=OADMET-0006400) SmallMoleculeComponent(name=OADMET-0006371) SmallMoleculeComponent(name=OADMET-0006191) SmallMoleculeComponent(name=OADMET-0006096) SmallMoleculeComponent(name=OADMET-0006094)
+		ProteinComponent: ProteinComponent(name=)
+		Cofactors: []
+		Solvent: SolventComponent(name=O, Na+, Cl-)
+
+Using Options:
+	Mapper: <KartografAtomMapper-92be13375caab9a5f2ecbf75d925982f>
+	Mapping Scorer: <function default_lomap_score at 0x147c8695ede0>
+	Network Generation: functools.partial(<function generate_minimal_spanning_network at 0x147c86974900>)
+	Partial Charge Generation: nagl
+
+	n_protocol_repeats=1 (1 simulation repeat(s) per transformation)
+
+Planning RBFE-Campaign:
+assigning ligand partial charges -- this may be slow
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=113) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=113) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=113) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=113) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+Generating charges:   0%|                                 | 0/9 [00:00<?, ?it/s]Generating charges:  11%|██▊                      | 1/9 [00:01<00:11,  1.47s/it]Generating charges:  56%|█████████████▉           | 5/9 [00:02<00:01,  2.22it/s]Generating charges: 100%|█████████████████████████| 9/9 [00:03<00:00,  3.13it/s]Generating charges: 100%|█████████████████████████| 9/9 [00:03<00:00,  2.64it/s]
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+Element change in mapping between atoms Ligand A: 0 (element 6) and Ligand B: 2 (element 8)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_protocols.py:315: UserWarning: Element change in mapping between atoms Ligand A: 0 (element 6) and Ligand B: 2 (element 8)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+  warnings.warn(wmsg)
+Element change in mapping between atoms Ligand A: 4 (element 8) and Ligand B: 4 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_protocols.py:315: UserWarning: Element change in mapping between atoms Ligand A: 4 (element 8) and Ligand B: 4 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+  warnings.warn(wmsg)
+Element change in mapping between atoms Ligand A: 0 (element 6) and Ligand B: 2 (element 8)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+Element change in mapping between atoms Ligand A: 4 (element 8) and Ligand B: 4 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+Element change in mapping between atoms Ligand A: 31 (element 1) and Ligand B: 9 (element 8)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_protocols.py:315: UserWarning: Element change in mapping between atoms Ligand A: 31 (element 1) and Ligand B: 9 (element 8)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+  warnings.warn(wmsg)
+Element change in mapping between atoms Ligand A: 31 (element 1) and Ligand B: 9 (element 8)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+	Done
+
+Output:
+	Saving to: /var/lib/condor/execute/slot3/dir_1482871/scratch/network_setup
+		- network_setup.json
+		- ligand_network.graphml
+				- rbfe_OADMET-0006514_solvent_OADMET-0006191_solvent.json
+				- rbfe_OADMET-0006404_solvent_OADMET-0006400_solvent.json
+				- rbfe_OADMET-0006371_solvent_OADMET-0006094_solvent.json
+				- rbfe_OADMET-0006371_complex_OADMET-0006094_complex.json
+				- rbfe_OADMET-0006501_solvent_OADMET-0006096_solvent.json
+				- rbfe_OADMET-0006514_solvent_OADMET-0006371_solvent.json
+				- rbfe_OADMET-0006514_solvent_OADMET-0006096_solvent.json
+				- rbfe_OCNT-2312754_complex_OADMET-0006400_complex.json
+				- rbfe_OADMET-0006514_complex_OADMET-0006371_complex.json
+				- rbfe_OADMET-0006404_complex_OADMET-0006400_complex.json
+				- rbfe_OADMET-0006514_complex_OADMET-0006191_complex.json
+				- rbfe_OADMET-0006514_complex_OADMET-0006096_complex.json
+				- rbfe_OADMET-0006501_complex_OADMET-0006096_complex.json
+				- rbfe_OADMET-0006501_complex_OADMET-0006400_complex.json
+				- rbfe_OCNT-2312754_solvent_OADMET-0006400_solvent.json
+				- rbfe_OADMET-0006501_solvent_OADMET-0006400_solvent.json
+	Duration: 0:00:15.121360
+
+=== Finished cluster 505 at Fri Jun 19 21:28:26 CDT 2026 ===
+Output files in network_setup/:
+total 948
+drwxr-xr-x  3 agitter agitter   4096 Jun 19 21:28 .
+drwx------ 12 agitter agitter   4096 Jun 19 21:28 ..
+-rw-r--r--  1 agitter agitter  86186 Jun 19 21:28 ligand_network.graphml
+-rw-r--r--  1 agitter agitter 857916 Jun 19 21:28 network_setup.json
+-rw-r--r--  1 agitter agitter   5887 Jun 19 21:28 plan.log
+drwxr-xr-x  2 agitter agitter   4096 Jun 19 21:28 transformations

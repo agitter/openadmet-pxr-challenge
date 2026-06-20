@@ -1,0 +1,60 @@
+RBFE-NETWORK PLANNER
+______________________
+
+Parsing in Files: 
+	Got input: 
+		Small Molecules: SmallMoleculeComponent(name=OCNT-2310554) SmallMoleculeComponent(name=OADMET-0006582) SmallMoleculeComponent(name=OADMET-0006328) SmallMoleculeComponent(name=OADMET-0006305) SmallMoleculeComponent(name=OADMET-0006298) SmallMoleculeComponent(name=OADMET-0006260) SmallMoleculeComponent(name=OADMET-0006249) SmallMoleculeComponent(name=OADMET-0006158)
+		ProteinComponent: ProteinComponent(name=)
+		Cofactors: []
+		Solvent: SolventComponent(name=O, Na+, Cl-)
+
+Using Options:
+	Mapper: <KartografAtomMapper-92be13375caab9a5f2ecbf75d925982f>
+	Mapping Scorer: <function default_lomap_score at 0x14820ac7f060>
+	Network Generation: functools.partial(<function generate_minimal_spanning_network at 0x14820ac95300>)
+	Partial Charge Generation: nagl
+
+	n_protocol_repeats=1 (1 simulation repeat(s) per transformation)
+
+Planning RBFE-Campaign:
+assigning ligand partial charges -- this may be slow
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=115) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=115) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=115) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=115) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+Generating charges:   0%|                                 | 0/8 [00:00<?, ?it/s]Generating charges:  12%|███▏                     | 1/8 [00:01<00:11,  1.61s/it]Generating charges:  62%|███████████████▋         | 5/8 [00:02<00:01,  2.07it/s]Generating charges: 100%|█████████████████████████| 8/8 [00:02<00:00,  2.85it/s]
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+	Done
+
+Output:
+	Saving to: /var/lib/condor/execute/slot3/dir_1482152/scratch/network_setup
+		- network_setup.json
+		- ligand_network.graphml
+				- rbfe_OCNT-2310554_solvent_OADMET-0006158_solvent.json
+				- rbfe_OADMET-0006328_solvent_OADMET-0006298_solvent.json
+				- rbfe_OCNT-2310554_solvent_OADMET-0006298_solvent.json
+				- rbfe_OADMET-0006328_complex_OADMET-0006298_complex.json
+				- rbfe_OCNT-2310554_complex_OADMET-0006260_complex.json
+				- rbfe_OADMET-0006298_solvent_OADMET-0006249_solvent.json
+				- rbfe_OADMET-0006305_complex_OCNT-2310554_complex.json
+				- rbfe_OADMET-0006582_solvent_OADMET-0006260_solvent.json
+				- rbfe_OCNT-2310554_solvent_OADMET-0006260_solvent.json
+				- rbfe_OADMET-0006582_complex_OADMET-0006260_complex.json
+				- rbfe_OADMET-0006305_solvent_OCNT-2310554_solvent.json
+				- rbfe_OCNT-2310554_complex_OADMET-0006298_complex.json
+				- rbfe_OCNT-2310554_complex_OADMET-0006158_complex.json
+				- rbfe_OADMET-0006298_complex_OADMET-0006249_complex.json
+	Duration: 0:00:14.089531
+

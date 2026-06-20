@@ -1,0 +1,79 @@
+=== Planning network for cluster 309 at Fri Jun 19 21:27:06 CDT 2026 ===
+Host: txie-dsigpu4000
+Working directory: /var/lib/condor/execute/slot3/dir_1481856/scratch
+Scratch contents:
+total 2715884
+drwx------ 10 agitter agitter       4096 Jun 19 21:27 .
+drwxr-xr-x  5 nobody  nogroup       4096 Jun 19 21:26 ..
+drwxr-xr-x  2 agitter agitter       4096 Jun 19 21:26 .condor_creds
+srwxr-xr-x  1 agitter agitter          0 Jun 19 21:27 .docker_sock
+-rw-r--r--  1 agitter agitter       6446 Jun 19 21:26 .job.ad
+-rw-r--r--  1 agitter agitter      12324 Jun 19 21:26 .machine.ad
+drwxr-xr-x  2 agitter agitter       4096 Jun 19 21:26 309
+-rw-r--r--  1 agitter agitter          0 Jun 19 21:27 _condor_stderr
+-rw-r--r--  1 agitter agitter        182 Jun 19 21:27 _condor_stdout
+drwx------  3 agitter agitter       4096 Jun 19 21:27 home
+drwxr-xr-x  2 agitter agitter       4096 Jun 19 21:27 network_setup
+-rw-r--r--  1 agitter agitter 2780983296 Jun 19 21:26 openfe_1.11.1.sif
+-rw-r--r--  1 agitter agitter       1222 Jun 19 21:26 plan_settings.yaml
+-rwxr-xr-x  1 agitter agitter       1700 Jun 19 21:26 run_plan_network.sh
+drwxr-x---  5 agitter agitter       4096 Jun 19 21:27 scratch
+drwx------  2 agitter agitter       4096 Jun 19 21:27 tmp
+drwx------  3 agitter agitter       4096 Jun 19 21:27 var
+drwxrwxrwt  2 agitter agitter       4096 Jun 19 21:27 var_tmp
+openfe: openfe, version 1.11.1
+Ligands in SDF: 4
+RBFE-NETWORK PLANNER
+______________________
+
+Parsing in Files: 
+	Got input: 
+		Small Molecules: SmallMoleculeComponent(name=OCNT-2315653) SmallMoleculeComponent(name=OADMET-0006383) SmallMoleculeComponent(name=OADMET-0006325) SmallMoleculeComponent(name=OADMET-0006297)
+		ProteinComponent: ProteinComponent(name=)
+		Cofactors: []
+		Solvent: SolventComponent(name=O, Na+, Cl-)
+
+Using Options:
+	Mapper: <KartografAtomMapper-92be13375caab9a5f2ecbf75d925982f>
+	Mapping Scorer: <function default_lomap_score at 0x152da0572de0>
+	Network Generation: functools.partial(<function generate_minimal_spanning_network at 0x152da0580900>)
+	Partial Charge Generation: nagl
+
+	n_protocol_repeats=1 (1 simulation repeat(s) per transformation)
+
+Planning RBFE-Campaign:
+assigning ligand partial charges -- this may be slow
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=114) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=114) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=114) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=114) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+Generating charges:   0%|                                 | 0/4 [00:00<?, ?it/s]Generating charges:  25%|██████▎                  | 1/4 [00:01<00:04,  1.62s/it]Generating charges: 100%|█████████████████████████| 4/4 [00:01<00:00,  2.95it/s]Generating charges: 100%|█████████████████████████| 4/4 [00:01<00:00,  2.30it/s]
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+	Done
+
+Output:
+	Saving to: /var/lib/condor/execute/slot3/dir_1481856/scratch/network_setup
+		- network_setup.json
+		- ligand_network.graphml
+				- rbfe_OADMET-0006383_complex_OCNT-2315653_complex.json
+				- rbfe_OADMET-0006383_solvent_OCNT-2315653_solvent.json
+				- rbfe_OADMET-0006325_complex_OADMET-0006297_complex.json
+				- rbfe_OADMET-0006383_complex_OADMET-0006297_complex.json
+				- rbfe_OADMET-0006325_solvent_OADMET-0006297_solvent.json
+				- rbfe_OADMET-0006383_solvent_OADMET-0006297_solvent.json
+	Duration: 0:00:11.483373
+
+=== Finished cluster 309 at Fri Jun 19 21:27:22 CDT 2026 ===
+Output files in network_setup/:
+total 840
+drwxr-xr-x  3 agitter agitter   4096 Jun 19 21:27 .
+drwx------ 12 agitter agitter   4096 Jun 19 21:27 ..
+-rw-r--r--  1 agitter agitter  39874 Jun 19 21:27 ligand_network.graphml
+-rw-r--r--  1 agitter agitter 799603 Jun 19 21:27 network_setup.json
+-rw-r--r--  1 agitter agitter   2660 Jun 19 21:27 plan.log
+drwxr-xr-x  2 agitter agitter   4096 Jun 19 21:27 transformations

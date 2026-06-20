@@ -1,0 +1,78 @@
+RBFE-NETWORK PLANNER
+______________________
+
+Parsing in Files: 
+	Got input: 
+		Small Molecules: SmallMoleculeComponent(name=OCNT-2318237) SmallMoleculeComponent(name=OCNT-2317632) SmallMoleculeComponent(name=OADMET-0006585) SmallMoleculeComponent(name=OADMET-0006523) SmallMoleculeComponent(name=OADMET-0006511) SmallMoleculeComponent(name=OADMET-0006507) SmallMoleculeComponent(name=OADMET-0006468) SmallMoleculeComponent(name=OADMET-0006360) SmallMoleculeComponent(name=OADMET-0006219)
+		ProteinComponent: ProteinComponent(name=)
+		Cofactors: []
+		Solvent: SolventComponent(name=O, Na+, Cl-)
+
+Using Options:
+	Mapper: <KartografAtomMapper-92be13375caab9a5f2ecbf75d925982f>
+	Mapping Scorer: <function default_lomap_score at 0x14a2d0ba6f20>
+	Network Generation: functools.partial(<function generate_minimal_spanning_network at 0x14a2d0bb11c0>)
+	Partial Charge Generation: nagl
+
+	n_protocol_repeats=1 (1 simulation repeat(s) per transformation)
+
+Planning RBFE-Campaign:
+assigning ligand partial charges -- this may be slow
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=113) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=113) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=113) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/opt/conda/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=113) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+Generating charges:   0%|                                 | 0/9 [00:00<?, ?it/s]Generating charges:  11%|██▊                      | 1/9 [00:01<00:10,  1.34s/it]Generating charges:  44%|███████████              | 4/9 [00:01<00:01,  3.52it/s]Generating charges:  67%|████████████████▋        | 6/9 [00:02<00:01,  2.34it/s]Generating charges:  89%|██████████████████████▏  | 8/9 [00:02<00:00,  3.37it/s]Generating charges: 100%|█████████████████████████| 9/9 [00:03<00:00,  2.37it/s]
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+no mapping could be found, after applying filters!
+Element change in mapping between atoms Ligand A: 31 (element 1) and Ligand B: 0 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_protocols.py:315: UserWarning: Element change in mapping between atoms Ligand A: 31 (element 1) and Ligand B: 0 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+  warnings.warn(wmsg)
+Element change in mapping between atoms Ligand A: 31 (element 1) and Ligand B: 0 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+Element change in mapping between atoms Ligand A: 12 (element 17) and Ligand B: 4 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_protocols.py:315: UserWarning: Element change in mapping between atoms Ligand A: 12 (element 17) and Ligand B: 4 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+  warnings.warn(wmsg)
+Element change in mapping between atoms Ligand A: 12 (element 17) and Ligand B: 4 (element 6)
+No mass scaling is attempted in the hybrid topology, the average mass of the two atoms will be used in the simulation
+	Done
+
+Output:
+	Saving to: /var/lib/condor/execute/slot3/dir_1482032/scratch/network_setup
+		- network_setup.json
+		- ligand_network.graphml
+				- rbfe_OADMET-0006523_solvent_OADMET-0006360_solvent.json
+				- rbfe_OCNT-2318237_solvent_OADMET-0006511_solvent.json
+				- rbfe_OADMET-0006523_complex_OADMET-0006360_complex.json
+				- rbfe_OCNT-2318237_complex_OADMET-0006511_complex.json
+				- rbfe_OADMET-0006511_complex_OADMET-0006468_complex.json
+				- rbfe_OADMET-0006511_complex_OADMET-0006507_complex.json
+				- rbfe_OADMET-0006511_complex_OADMET-0006360_complex.json
+				- rbfe_OADMET-0006585_complex_OADMET-0006219_complex.json
+				- rbfe_OADMET-0006507_solvent_OADMET-0006219_solvent.json
+				- rbfe_OCNT-2317632_complex_OADMET-0006585_complex.json
+				- rbfe_OADMET-0006585_solvent_OADMET-0006219_solvent.json
+				- rbfe_OADMET-0006511_solvent_OADMET-0006507_solvent.json
+				- rbfe_OADMET-0006511_solvent_OADMET-0006468_solvent.json
+				- rbfe_OCNT-2317632_solvent_OADMET-0006585_solvent.json
+				- rbfe_OADMET-0006511_solvent_OADMET-0006360_solvent.json
+				- rbfe_OADMET-0006507_complex_OADMET-0006219_complex.json
+	Duration: 0:00:20.461173
+
