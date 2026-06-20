@@ -14,7 +14,8 @@
 #   mkdir -p logs timing_test
 #   condor_submit submit_quickrun_timing.sub
 
-universe = container
+# No explicit universe = container; container_image implies container universe.
+# Matching openmm_test.sub which confirmed GPU/CUDA works with this pattern.
 container_image = osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif
 
 executable = scripts/run_quickrun_timing.sh
@@ -24,8 +25,6 @@ transfer_input_files = \
     results/network_setup_118/transformations/rbfe_OCNT-2310728_complex_OADMET-0006495_complex.json, \
     results/network_setup_118/network_setup.json
 
-# Each of the 10 jobs gets its own output directory named by process ID
-# to avoid collisions and to allow easy per-GPU comparison.
 transfer_output_files   = quickrun_output, timing.txt
 transfer_output_remaps  = "quickrun_output = timing_test/$(Process)/quickrun_output; timing.txt = timing_test/$(Process)/timing.txt"
 when_to_transfer_output = ON_EXIT_OR_EVICT
@@ -39,11 +38,7 @@ request_memory = 16GB
 request_disk   = 16GB
 request_gpus   = 1
 
-gpus_minimum_capability = 7.5
-gpus_minimum_memory = 10000M
-
-+WantGPULab = true
-+GPUJobLength = "short"
-+is_resumable = true
+# Minimal GPU constraints matching openmm_test.sub to diagnose CUDA issue.
+# +WantGPULab, +GPUJobLength, +is_resumable, gpus_minimum_* omitted for now.
 
 queue 10

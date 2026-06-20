@@ -40,14 +40,19 @@ nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader ||
 echo "openfe: $(openfe --version)"
 echo "Python: $(python --version)"
 
-# Report OpenMM platform
+# Report OpenMM platforms and verify CUDA is available.
+# Fail fast if CUDA not found - running RBFE on CPU is incorrect and
+# will produce NaN errors during equilibration.
 python -c "
 import openmm
 print('OpenMM version:', openmm.__version__)
 from openmm import Platform
-for i in range(Platform.getNumPlatforms()):
-    p = Platform.getPlatform(i)
-    print(f'  Platform {i}: {p.getName()}')
+platforms = [Platform.getPlatform(i).getName() for i in range(Platform.getNumPlatforms())]
+print('Available platforms:', platforms)
+if 'CUDA' not in platforms:
+    raise RuntimeError('CUDA platform not available - job must run on a GPU. '
+                       'Available platforms: ' + str(platforms))
+print('CUDA platform confirmed available.')
 "
 
 openfe quickrun \
