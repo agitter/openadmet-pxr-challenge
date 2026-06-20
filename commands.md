@@ -893,3 +893,85 @@ for e in self_edges[:5]: print(' ', e)
 "
 Self-edges found: 0
 ```
+
+```commandline
+$ python openfe/scripts/analyze_quickrun_timing.py \
+    --log-dir openfe/logs \
+    --timing-dir openfe/timing_test \
+    --clusters 7957251 7966096 \
+    --outdir openfe
+
+Cluster 7957251: 10 jobs
+  7957251.0       SUCCESS  NVIDIA GeForce RTX 2080 Ti          vetsigian0001.chtc.wisc.edu    wall=10614s   proj=2.9h
+  7957251.1       SUCCESS  NVIDIA GeForce RTX 2080 Ti          vetsigian0001.chtc.wisc.edu    wall=11490s   proj=3.2h
+  7957251.2       SUCCESS  NVIDIA L40S                         jcaicedogpu0003.chtc.wisc.edu  wall=10736s   proj=3.0h
+  7957251.3       SUCCESS  NVIDIA GeForce RTX 2080 Ti          dmorgan2000.chtc.wisc.edu      wall=11974s   proj=3.3h
+  7957251.4       SUCCESS  NVIDIA GeForce RTX 2080 Ti          dmorgan2000.chtc.wisc.edu      wall=10943s   proj=3.0h
+  7957251.5       SUCCESS  NVIDIA GeForce RTX 2080 Ti          gpulab2001.chtc.wisc.edu       wall=12820s   proj=3.6h
+  7957251.6       FAILED   NVIDIA H200                         dbrundage                      wall=476s     proj=n/a    NaN error (ran on CPU without CUDA)
+  7957251.7       SUCCESS  NVIDIA GeForce RTX 2080 Ti          gpulab2001.chtc.wisc.edu       wall=10818s   proj=3.0h
+  7957251.8       FAILED   NVIDIA GeForce RTX 2080 Ti          gpulab2001.chtc.wisc.edu       wall=755s     proj=n/a    NaN error (ran on CPU without CUDA)
+  7957251.9       SUCCESS  NVIDIA GeForce RTX 2080 Ti          gpulab2001.chtc.wisc.edu       wall=10899s   proj=3.0h
+
+Cluster 7966096: 10 jobs
+  7966096.0       SUCCESS  NVIDIA L40S                         zliu                           wall=8705s    proj=2.4h
+  7966096.1       SUCCESS  NVIDIA GeForce GTX 1080 Ti          gitter0000.chtc.wisc.edu       wall=17427s   proj=4.8h
+  7966096.2       SUCCESS  NVIDIA GeForce RTX 2080 Ti          gpulab2001.chtc.wisc.edu       wall=10559s   proj=2.9h
+  7966096.3       SUCCESS  NVIDIA GeForce GTX 1080 Ti          gitter0000.chtc.wisc.edu       wall=17738s   proj=4.9h
+  7966096.4       SUCCESS  NVIDIA GeForce RTX 2080 Ti          gpulab2001.chtc.wisc.edu       wall=11222s   proj=3.1h
+  7966096.5       SUCCESS  NVIDIA GeForce GTX 1080 Ti          gitter0000.chtc.wisc.edu       wall=16358s   proj=4.5h
+  7966096.6       SUCCESS  NVIDIA GeForce GTX 1080 Ti          gitter0000.chtc.wisc.edu       wall=16257s   proj=4.5h
+  7966096.7       SUCCESS  NVIDIA GeForce RTX 2080 Ti          vetsigian0001.chtc.wisc.edu    wall=10652s   proj=3.0h
+  7966096.8       SUCCESS  NVIDIA GeForce RTX 2080 Ti          vetsigian0001.chtc.wisc.edu    wall=10718s   proj=3.0h
+  7966096.9       SUCCESS  NVIDIA A100-SXM4-80GB MIG 3g.40gb   gpu2011.chtc.wisc.edu          wall=19672s   proj=5.5h
+
+======================================================================
+STATUS SUMMARY
+======================================================================
+status
+SUCCESS    18
+FAILED      2
+
+======================================================================
+CUDA AVAILABILITY BY SERVER
+======================================================================
+                       server                          gpu_name  gpu_capability  cuda_worked  total
+     gitter0000.chtc.wisc.edu        NVIDIA GeForce GTX 1080 Ti             6.1            4      4
+    dmorgan2000.chtc.wisc.edu        NVIDIA GeForce RTX 2080 Ti             7.5            2      2
+  vetsigian0001.chtc.wisc.edu        NVIDIA GeForce RTX 2080 Ti             7.5            4      4
+     gpulab2001.chtc.wisc.edu        NVIDIA GeForce RTX 2080 Ti             7.5            5      6
+        gpu2011.chtc.wisc.edu NVIDIA A100-SXM4-80GB MIG 3g.40gb             8.0            1      1
+jcaicedogpu0003.chtc.wisc.edu                       NVIDIA L40S             8.9            1      1
+                         zliu                       NVIDIA L40S             8.9            1      1
+                    dbrundage                       NVIDIA H200             9.0            0      1
+
+======================================================================
+TIMING BY GPU TYPE (successful jobs only)
+======================================================================
+                         gpu_name  gpu_capability  n_jobs  mean_projected_h  min_projected_h  max_projected_h  mean_s_per_iter
+       NVIDIA GeForce GTX 1080 Ti             6.1       4          4.706944         4.515833         4.927222         6.676422
+       NVIDIA GeForce RTX 2080 Ti             7.5      11          3.098712         2.933056         3.561111         4.365199
+NVIDIA A100-SXM4-80GB MIG 3g.40gb             8.0       1          5.464444         5.464444         5.464444         8.033535
+                      NVIDIA L40S             8.9       2          2.700139         2.418056         2.982222         3.799926
+
+Overall mean projected leg time: 3.5h
+Overall min: 2.4h
+Overall max: 5.5h
+
+======================================================================
+PRODUCTION CAMPAIGN ESTIMATE (1066 total legs)
+======================================================================
+   10 GPUs: 15.7 days
+   20 GPUs: 7.9 days
+   30 GPUs: 5.2 days
+   50 GPUs: 3.1 days
+
+======================================================================
+FAILED JOBS
+======================================================================
+   job_id                   server                   gpu_name  gpu_capability                      failure_reason
+7957251.6                dbrundage                NVIDIA H200             9.0 NaN error (ran on CPU without CUDA)
+7957251.8 gpulab2001.chtc.wisc.edu NVIDIA GeForce RTX 2080 Ti             7.5 NaN error (ran on CPU without CUDA)
+
+Wrote full table -> openfe\timing_analysis.csv
+```
