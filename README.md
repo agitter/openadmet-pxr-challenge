@@ -5,7 +5,7 @@
 - `/external`: Refined PXR structures as a [submodule](https://github.com/OpenADMET/pxr_xtal_re-refinement)
 - `/openfe`: Files for running [OpenFE](https://github.com/OpenFreeEnergy/openfe)
 
-Most code written or drafted by Claude Sonnet 4.6 and GPT-5.5 Instant.
+Most code written or drafted by Claude Sonnet 4.6, Claude Opus 4.6, and GPT-5.5 Instant.
 
 ## Docking notes
 Initially only cluster representatives were run with GNINA.
