@@ -981,9 +981,20 @@ $ python openfe/scripts/05_setup_production.py
 Found 124 cluster network directories
 
 Total transformation jobs: 1066
-Skipped: 0
 Wrote openfe/production/transform_list.txt
 
-Job directories created under openfe/production/
-Each contains: <transform>.json, network_setup.json, quickrun_output/
+Sample job directory (openfe/production/110/rbfe_OADMET-0006503_complex_OCNT-2317296_complex):
+  network_setup.json
+  quickrun_output
+  quickrun_output/.placeholder
+  rbfe_OADMET-0006503_complex_OCNT-2317296_complex.json
+  result.json
+  run_quickrun.sh
+```
+
+```commandline
+$ wc -l openfe/production/transform_list.txt
+1066 openfe/production/transform_list.txt
+$ ls openfe/production/118/rbfe_OCNT-2310728_complex_OADMET-0006495_complex/
+network_setup.json  quickrun_output  rbfe_OCNT-2310728_complex_OADMET-0006495_complex.json  result.json  run_quickrun.sh
 ```

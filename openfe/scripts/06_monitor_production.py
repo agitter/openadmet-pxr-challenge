@@ -56,9 +56,10 @@ def check_job(job_dir):
 
     if result_file.exists() and result_file.stat().st_size > 100:
         status = "COMPLETED"
-        # Try to get wall-clock from condor.out
-        out_file = job_dir / "condor.out"
-        if out_file.exists():
+        # Find .out file - may be condor.out or quickrun.<cluster>.<proc>.out
+        out_files = list(job_dir.glob("**/*.out"))
+        out_file = out_files[0] if out_files else None
+        if out_file and out_file.exists():
             text = out_file.read_text(errors="replace")
             for line in text.splitlines():
                 if "Wall-clock:" in line:
