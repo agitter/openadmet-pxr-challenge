@@ -7,29 +7,37 @@ infrastructure (GPU Lab + backfill + campus pools + OSPool). Expected
 runtime: 5-8 days at 20-30 concurrent GPUs. Each leg takes 2.5-5.5
 hours depending on GPU type.
 
+**All `condor_*` commands must run on the CHTC access point (ap2001).**
+Python scripts can run on the AP or locally.
+
 ## Quick Reference
 
 ```bash
-# Check progress (run from repo root)
+# Check progress (from repo root)
 python openfe/scripts/06_monitor_production.py --production-dir openfe/production
 
-# Check HTCondor queue
+# Check HTCondor queue (on AP)
 condor_q                    # summary
 condor_q -held              # held jobs
 condor_q -run               # running jobs
-condor_q -idle              # idle/waiting jobs
 ```
 
+---
+
 ## Phase 1: Setup and Launch
+
+All steps from the **repo root** unless noted.
 
 ### 1.1 Create job directories
 
 ```bash
-python openfe/scripts/05_setup_production.py \
-    --network-results openfe/results \
-    --script openfe/scripts/run_quickrun.sh \
-    --outdir openfe/production
+python openfe/scripts/05_setup_production.py
 ```
+
+This reads `openfe/results/network_setup_*/transformations/*.json` and creates
+one directory per transformation under `openfe/production/`, each containing
+the transformation JSON, network_setup.json, run_quickrun.sh, an empty
+quickrun_output/, and an empty result.json.
 
 ### 1.2 Verify setup
 
@@ -37,20 +45,23 @@ python openfe/scripts/05_setup_production.py \
 # Should show 1066
 wc -l openfe/production/transform_list.txt
 
-# Inspect one job directory
+# Inspect a sample job directory — should contain 5 items
 ls openfe/production/118/rbfe_OCNT-2310728_complex_OADMET-0006495_complex/
 # Expect: run_quickrun.sh  rbfe_...json  network_setup.json  quickrun_output/  result.json
 ```
 
-### 1.3 Submit
+### 1.3 Submit (on AP)
 
 ```bash
 cd openfe
+mkdir -p logs
 condor_submit submit_quickrun_production.sub
 ```
 
 Note the HTCondor cluster ID printed (e.g., `1066 job(s) submitted to cluster 8012345`).
-You'll need this for `condor_rm` if you need to remove jobs later.
+You will need this for `condor_rm` if you need to remove jobs later.
+
+---
 
 ## Phase 2: Monitoring
 
@@ -59,7 +70,7 @@ You'll need this for `condor_rm` if you need to remove jobs later.
 | Period | Action |
 |---|---|
 | First 30 minutes | Check that jobs are starting: `condor_q -run` |
-| First 2 hours | Check first completions and any early failures: `condor_q -held` |
+| First 2 hours | Check for early failures: `condor_q -held` |
 | Every 4-8 hours | Run the monitor script for progress and storage |
 | Once per day | Review held jobs, decide on resubmission |
 
@@ -68,7 +79,7 @@ The campaign runs unattended between checks. HTCondor automatically:
 - Reschedules evicted jobs (unlimited, with checkpoint transfer)
 - Releases held jobs after 10 minutes (up to 20 total starts)
 
-### 2.1 Run the monitor
+### 2.1 Run the monitor (from repo root)
 
 ```bash
 python openfe/scripts/06_monitor_production.py --production-dir openfe/production
@@ -81,30 +92,35 @@ This prints:
 - Timing statistics for completed jobs
 - Remaining time estimates at different GPU counts
 - Per-cluster completion status
-- A retry list (`production/transform_list_retry.txt`) if any jobs are incomplete
+
+If any jobs are incomplete, it writes `openfe/production/transform_list_retry.txt`
+with resubmission instructions.
 
 ### 2.2 Interpret the status
 
-| Status | Meaning | Action |
+| Status | Meaning | Action needed? |
 |---|---|---|
-| `COMPLETED` | Job finished, result.json valid, checkpoints cleaned | None |
-| `COMPLETED_NEEDS_CLEANUP` | Job finished but large files remain | Run with `--cleanup` |
-| `IN_PROGRESS_OR_FAILED` | Has checkpoint files, no valid result | Check if still running (see below) |
-| `STARTED` | Directory exists but minimal activity | May be queued or very early |
+| `COMPLETED` | result.json valid, checkpoints cleaned | No |
+| `COMPLETED_NEEDS_CLEANUP` | result.json valid, large files remain | Run with `--cleanup` |
+| `IN_PROGRESS_OR_FAILED` | Has checkpoint files, no valid result | See 2.3 below |
+| `STARTED` | Directory exists, minimal activity | May be queued or early in run |
 | `NOT_STARTED` | Empty job directory | Job hasn't run yet |
 
-### 2.3 Distinguish running from failed
+### 2.3 Distinguish running jobs from failed jobs
 
-`IN_PROGRESS_OR_FAILED` could mean the job is actively running or has
-permanently failed. To tell the difference:
+`IN_PROGRESS_OR_FAILED` means the job directory has checkpoint files but
+no valid result. It could be actively running or permanently failed.
 
 ```bash
-# Check if the job is still in the HTCondor queue
-condor_q    # shows running/idle/held counts
+# On the AP: check if jobs are still in the HTCondor queue
+condor_q
 
-# If condor_q shows 0 jobs and monitor shows IN_PROGRESS_OR_FAILED,
-# those jobs have permanently failed (exhausted retries, removed from queue).
+# If condor_q shows running/idle jobs → wait, check again in 4-8 hours
+# If condor_q shows 0 jobs and monitor shows IN_PROGRESS_OR_FAILED →
+#   those jobs have permanently failed. Go to Phase 3.
 ```
+
+---
 
 ## Phase 3: Handling Failures
 
@@ -113,47 +129,48 @@ condor_q    # shows running/idle/held counts
 ```
 Monitor shows incomplete jobs
 │
-├─ condor_q shows jobs still running/idle?
-│  └─ YES → Wait. Jobs are still in progress. Check again in 4-8 hours.
+├─ condor_q shows jobs running or idle?
+│  └─ YES → Wait. Check again in 4-8 hours.
 │
 ├─ condor_q shows held jobs?
-│  ├─ Few held jobs (< 20)?
-│  │  └─ Check hold reason: condor_q -held
-│  │     ├─ Transfer failure → Will auto-release (periodic_release). Wait.
-│  │     ├─ Exceeded max retries → Go to "Resubmit failed jobs" below.
-│  │     └─ Other reason → Investigate condor.err in the job's initialdir.
 │  │
-│  └─ Many held jobs (> 20)?
-│     └─ Likely a systemic issue (bad container, all servers down).
-│        Check one job's condor.err, fix the issue, then resubmit all.
+│  ├─ A few held (< 20)?
+│  │  └─ Check why: condor_q -held
+│  │     ├─ Transfer failure → Will auto-release in 10 min. Wait.
+│  │     ├─ Max retries exhausted → Go to 3.1 (Resubmit).
+│  │     └─ Other → Check the job's condor.err file (in its initialdir).
+│  │
+│  └─ Many held (> 20)?
+│     └─ Systemic issue. Check one job's condor.err.
+│        Fix the root cause, then go to 3.1 (Resubmit all failed).
 │
-└─ condor_q shows 0 jobs but monitor shows incomplete?
-   └─ Jobs were removed or exhausted all retries.
-      Go to "Resubmit failed jobs" below.
+└─ condor_q shows 0 jobs, but monitor shows incomplete?
+   └─ Jobs exhausted all retries or were removed.
+      Go to 3.1 (Resubmit).
 ```
 
 ### 3.1 Resubmit failed jobs
 
-The monitor automatically writes `production/transform_list_retry.txt`
-with all incomplete jobs. To resubmit:
+The monitor automatically writes `openfe/production/transform_list_retry.txt`
+listing all incomplete jobs. To resubmit:
 
 ```bash
-# Remove any remaining held jobs from the old submission
+# On AP: remove any remaining held jobs from the old submission
 condor_rm <old_cluster_id>
 
-# Resubmit just the incomplete jobs
+# Resubmit just the incomplete jobs (from openfe/ directory)
 cd openfe
 condor_submit submit_quickrun_production.sub \
     -append "queue cluster_id,transform_name from production/transform_list_retry.txt"
 ```
 
-Checkpoint files are still in each job's initialdir, so `--resume`
-picks up from the last checkpoint. The resubmission gets a fresh retry
+Checkpoint files are still in each job's initialdir. The `--resume` flag
+picks up from the last checkpoint. The new submission gets a fresh retry
 counter (10 more attempts).
 
 ### 3.2 Resubmit with server exclusions
 
-If specific servers consistently fail (e.g., CUDA container issues):
+If specific servers consistently fail (e.g., CUDA not exposed to container):
 
 ```bash
 cd openfe
@@ -171,9 +188,9 @@ condor_submit submit_quickrun_production.sub \
     -append "queue cluster_id,transform_name from production/transform_list_retry.txt"
 ```
 
-### 3.3 Resubmit with modified settings
+### 3.3 Resubmit with modified resource requests
 
-If jobs fail due to resource limits (out of memory, disk, time):
+If jobs fail due to out of memory, insufficient disk, or timeout:
 
 ```bash
 cd openfe
@@ -182,16 +199,19 @@ condor_submit submit_quickrun_production.sub \
     -append "queue cluster_id,transform_name from production/transform_list_retry.txt"
 ```
 
-Or if you decide to replan with shorter sampling (see Phase 5 below).
-
 ### 3.4 Truly un-runnable transformations
 
-Some edges may fail permanently regardless of retries (bad atom
-mappings, extreme perturbations). Since the network is a tree (MST),
-losing an edge disconnects a compound from the anchor. These compounds
-will fall back to docking-based predictions (CNNaffinity) in the final
-analysis. Accept and move on — a partial RBFE submission is better
-than no submission.
+Some edges may fail permanently regardless of retries (bad atom mappings,
+extreme perturbations, charge-change issues). Since the network is a
+minimum spanning tree, every edge is a bridge — losing one disconnects
+at least one compound from the anchor.
+
+For the competition, compounds unreachable via RBFE fall back to
+docking-based predictions (CNNaffinity from the extended docking campaign).
+A partial RBFE submission with docking fallbacks is better than no
+submission.
+
+---
 
 ## Phase 4: Storage Management
 
@@ -202,84 +222,100 @@ python openfe/scripts/06_monitor_production.py \
     --production-dir openfe/production --cleanup
 ```
 
-Safe to run at any time. Only affects completed jobs.
+Safe to run at any time. Only deletes large checkpoint files from jobs
+that already have a valid result.json.
 
 ### 4.2 Clean up permanently failed jobs
 
-**Only run after confirming jobs are truly done retrying:**
+**Only run after you are sure these jobs will not be retried:**
 
 ```bash
-# First confirm no matching jobs in queue
+# First confirm no matching jobs remain in the queue
 condor_q
 
-# Then clean up
+# Then clean up checkpoint files from failed jobs
 python openfe/scripts/06_monitor_production.py \
     --production-dir openfe/production --cleanup-failed
 ```
 
-**WARNING:** This deletes checkpoint files. Failed jobs cannot be
-resumed after cleanup. Only use after you've given up on those jobs
-or resubmitted them and they completed on the retry.
+**WARNING:** This deletes checkpoint files permanently. Failed jobs
+cannot be resumed after cleanup. Only use after either:
+- You have resubmitted and the retries completed successfully, OR
+- You have decided to accept the loss and use docking fallbacks
 
 ### Storage budget
 
-| Item | Size |
-|---|---|
-| Job directories (setup) | ~1.6 GB |
-| Active checkpoints (during run) | ~4.5 GB peak |
-| Completed results (all 1066) | ~3.2 GB |
-| AP quota remaining | 74 GB |
-| **Comfortable margin** | **~65 GB** |
+| Item | Size | When |
+|---|---|---|
+| Job directories (setup) | ~1.6 GB | After step 1.1 |
+| Active checkpoints | ~4.5 GB peak | During run (30 concurrent jobs) |
+| Completed results | ~3.2 GB total | Accumulates as jobs finish |
+| **Total peak** | **~9.3 GB** | |
+| **AP quota remaining** | **~65 GB** | Comfortable margin |
+
+---
 
 ## Phase 5: If Running Out of Time
 
-If after 2-3 days, throughput is too low to finish all 1066 jobs
-in time:
+If after 2-3 days the monitor's time estimates show you won't finish
+in time, consider these options in order of preference:
 
-### Option A: Replan with shorter sampling (recommended first)
+### Option A: Replan with shorter sampling (recommended)
 
-Reduces per-leg time from ~3.5h to ~2h by cutting production length.
+Reduces per-leg time from ~3.5h to ~2h by halving production length.
 
-1. Update `plan_settings.yaml` with shorter simulation settings
-2. Re-run `condor_submit submit_plan_network.sub` (2h on CHTC CPU)
-3. Re-run `05_setup_production.py` (seconds)
-4. Resubmit incomplete jobs with new transformation JSONs
+1. Update `openfe/plan_settings.yaml` with shorter simulation settings
+2. Re-run the network planning jobs on CHTC CPU (~2 hours)
+3. Delete `openfe/production/` directories for incomplete jobs only:
+   ```bash
+   # The retry list has the incomplete job names
+   # Delete their directories so setup can recreate them with new JSONs
+   while IFS=, read -r cid tname; do
+       rm -rf "openfe/production/$cid/$tname"
+   done < openfe/production/transform_list_retry.txt
+   ```
+4. Re-run `python openfe/scripts/05_setup_production.py` to create
+   new directories with the updated transformation JSONs
+5. Resubmit incomplete jobs
 
-**Important:** completed jobs keep their existing results. Only
-incomplete jobs need to be rerun with the new settings.
+Completed jobs keep their existing results. Only incomplete jobs
+are affected.
 
 ### Option B: Prioritize high-value clusters
 
-Focus GPU time on clusters with the most test compounds. The monitor
-shows per-cluster completion. Clusters with 1-2 compounds (singletons)
-contribute fewer predictions per GPU-hour than large clusters.
+Focus GPU time on clusters with the most test compounds. Singleton
+clusters (1 test compound + 1 anchor) contribute 1 prediction per
+2 GPU-legs. Large clusters (10+ compounds) contribute 10+ predictions.
 
 ```bash
-# See which large clusters are incomplete
 python openfe/scripts/06_monitor_production.py --production-dir openfe/production
-# Look at "Clusters fully completed" section
+# Check "Clusters fully completed" and per-cluster status
 ```
 
 ### Option C: Accept partial results
 
-Any cluster with ALL edges completed contributes predictions. Clusters
-with some edges missing can still contribute partial predictions
-(compounds reachable from an anchor via completed edges). Completely
-failed clusters fall back to docking-based predictions.
+- Clusters with all edges completed: full RBFE predictions
+- Clusters with some edges completed: partial predictions (compounds
+  still connected to an anchor via completed edges)
+- Clusters with no completed edges: fallback to docking predictions
+
+---
 
 ## Phase 6: After All Jobs Complete
 
 ```bash
-# Final status check
+# Final status check (from repo root)
 python openfe/scripts/06_monitor_production.py --production-dir openfe/production
 
-# Final cleanup
+# Clean up any remaining large checkpoint files
 python openfe/scripts/06_monitor_production.py \
     --production-dir openfe/production --cleanup
 
-# Verify storage
+# Verify total storage
 du -sh openfe/production/
 ```
 
-Then proceed to results gathering, pEC50 propagation, and submission
-preparation (separate workflow).
+Then proceed to results gathering, pEC50 propagation from anchor
+compounds, isotonic calibration against Phase 1 unblinded data, and
+final submission preparation. That workflow will be documented
+separately.

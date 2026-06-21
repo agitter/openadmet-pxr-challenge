@@ -975,3 +975,15 @@ FAILED JOBS
 
 Wrote full table -> openfe\timing_analysis.csv
 ```
+
+```commandline
+$ python openfe/scripts/05_setup_production.py
+Found 124 cluster network directories
+
+Total transformation jobs: 1066
+Skipped: 0
+Wrote openfe/production/transform_list.txt
+
+Job directories created under openfe/production/
+Each contains: <transform>.json, network_setup.json, quickrun_output/
+```
