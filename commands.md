@@ -1562,3 +1562,9 @@ with open('openfe/production/transform_list_retry.txt', 'w') as f:
 "
 398 jobs need rerunning
 ```
+
+```commandline
+while IFS=, read -r cid tname; do
+    cp openfe/scripts/run_quickrun.sh "openfe/production/$cid/$tname/run_quickrun.sh"
+done < openfe/production/transform_list_retry.txt
+```

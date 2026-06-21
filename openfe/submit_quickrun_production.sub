@@ -45,4 +45,5 @@ max_retries = 10
 periodic_release = (NumJobStarts < 20) && (JobStatus == 5) && \
     ((CurrentTime - EnteredCurrentStatus) > 600)
 
-queue cluster_id,transform_name from production/transform_list.txt
+#queue cluster_id,transform_name from production/transform_list.txt
+queue cluster_id,transform_name from production/transform_list_retry.txt
