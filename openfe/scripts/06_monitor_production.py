@@ -54,9 +54,35 @@ def check_job(job_dir):
     host = None
     size_mb = get_dir_size_mb(job_dir) if job_dir.exists() else 0
 
-    if result_file.exists() and result_file.stat().st_size > 100:
-        status = "COMPLETED"
-        # Find .out file - may be condor.out or quickrun.<cluster>.<proc>.out
+    # Check quickrun_output/result.json for a valid non-null estimate.
+    # The top-level result.json may be empty if the shell script's cp
+    # failed (e.g. due to the -o file conflict bug). The definitive
+    # completion signal is a non-null estimate in the inner result.
+    inner_result = job_dir / "quickrun_output" / "result.json"
+
+    if inner_result.exists() and inner_result.stat().st_size > 100:
+        try:
+            import json as _json
+            d = _json.loads(inner_result.read_text())
+            if d.get("estimate") is not None:
+                status = "COMPLETED"
+            else:
+                status = "NULL_ESTIMATE"
+        except Exception:
+            status = "INVALID_JSON"
+    elif result_file.exists() and result_file.stat().st_size > 100:
+        # Fallback: check top-level result.json
+        try:
+            import json as _json
+            d = _json.loads(result_file.read_text())
+            if d.get("estimate") is not None:
+                status = "COMPLETED"
+            else:
+                status = "NULL_ESTIMATE"
+        except Exception:
+            status = "INVALID_JSON"
+    if status == "COMPLETED":
+        # Find .out file for wall-clock time and host
         out_files = list(job_dir.glob("**/*.out"))
         out_file = out_files[0] if out_files else None
         if out_file and out_file.exists():
@@ -69,6 +95,21 @@ def check_job(job_dir):
                         pass
                 if "Host:" in line and host is None:
                     host = line.split("Host:")[1].strip()
+
+        # Fallback: TimeExecute from HTCondor .log
+        if wall_clock_s is None:
+            log_files = list(job_dir.glob("**/*.log"))
+            log_file = log_files[0] if log_files else None
+            if log_file and log_file.exists():
+                import re
+                log_text = log_file.read_text(errors="replace")
+                m = re.search(r'TimeExecute \(s\)\s*:\s*(\d+)', log_text)
+                if m:
+                    wall_clock_s = int(m.group(1))
+                if host is None:
+                    m = re.search(r'SlotName: \S+@([\w.]+)', log_text)
+                    if m:
+                        host = m.group(1)
 
         # Check if large files still need cleanup
         has_large_files = False

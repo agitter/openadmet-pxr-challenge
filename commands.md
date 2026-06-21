@@ -998,3 +998,567 @@ $ wc -l openfe/production/transform_list.txt
 $ ls openfe/production/118/rbfe_OCNT-2310728_complex_OADMET-0006495_complex/
 network_setup.json  quickrun_output  rbfe_OCNT-2310728_complex_OADMET-0006495_complex.json  result.json  run_quickrun.sh
 ```
+
+```commandline
+$ python openfe/scripts/06_monitor_production.py --production-dir openfe/production
+============================================================
+PRODUCTION CAMPAIGN STATUS
+============================================================
+Total transformations: 1066
+
+status
+COMPLETED                668
+IN_PROGRESS_OR_FAILED    398
+
+Progress: 668 / 1066 (62.7%)
+
+By leg type:
+  complex: 235 / 533
+  solvent: 433 / 533
+
+Total storage used: 74931 MB (73.2 GB)
+
+Completed job timing (n=668):
+  Mean: 1.6h
+  Min:  0.6h
+  Max:  6.7h
+
+Remaining: 398 jobs
+  At 10 GPUs: 2.7 days
+  At 20 GPUs: 1.4 days
+  At 30 GPUs: 0.9 days
+  At 50 GPUs: 0.5 days
+
+Clusters fully completed: 19 / 124
+
+Wrote retry list: openfe/production/transform_list_retry.txt (398 jobs)
+To resubmit failed/incomplete jobs:
+  cd openfe
+  # First remove any held jobs from the current submission:
+  condor_rm <cluster_id>
+  # Then resubmit just the incomplete jobs:
+  condor_submit submit_quickrun_production.sub \
+    -append "queue cluster_id,transform_name from production/transform_list_retry.txt"
+
+  # Or with server exclusions if specific servers are broken:
+  condor_submit submit_quickrun_production.sub \
+    -append 'requirements = (Machine != "bad-server.chtc.wisc.edu")' \
+    -append "queue cluster_id,transform_name from production/transform_list_retry.txt"
+
+Wrote openfe/production_status.csv
+```
+
+```commandline
+$ python openfe/scripts/rescue_results.py --production-dir openfe/production
+RESCUED: 110/rbfe_OADMET-0006503_complex_OCNT-2317296_complex
+RESCUED: 110/rbfe_OADMET-0006503_solvent_OCNT-2317296_solvent
+RESCUED: 136/rbfe_OCNT-2317556_complex_OADMET-0006476_complex
+RESCUED: 138/rbfe_OCNT-2309230_complex_OADMET-0006474_complex
+RESCUED: 156/rbfe_OADMET-0006455_complex_OCNT-2312239_complex
+RESCUED: 167/rbfe_OADMET-0006443_complex_OCNT-2310646_complex
+RESCUED: 167/rbfe_OADMET-0006443_solvent_OCNT-2310646_solvent
+RESCUED: 169/rbfe_OADMET-0006469_complex_OCNT-2315366_complex
+RESCUED: 169/rbfe_OADMET-0006580_complex_OCNT-2315366_complex
+RESCUED: 169/rbfe_OCNT-2315366_complex_OADMET-0006441_complex
+RESCUED: 169/rbfe_OCNT-2315366_solvent_OADMET-0006441_solvent
+RESCUED: 171/rbfe_OCNT-2312559_complex_OADMET-0006439_complex
+RESCUED: 178/rbfe_OCNT-2317556_complex_OADMET-0006432_complex
+RESCUED: 188/rbfe_OADMET-0006421_complex_OADMET-0006417_complex
+RESCUED: 188/rbfe_OADMET-0006486_solvent_OADMET-0006422_solvent
+RESCUED: 188/rbfe_OCNT-2311393_complex_OADMET-0006422_complex
+RESCUED: 191/rbfe_OADMET-0006521_complex_OADMET-0006419_complex
+RESCUED: 191/rbfe_OADMET-0006521_complex_OCNT-1965882_complex
+RESCUED: 196/rbfe_OADMET-0006414_complex_OCNT-2308748_complex
+RESCUED: 21/rbfe_OCNT-2309356_solvent_OADMET-0006596_solvent
+RESCUED: 228/rbfe_OADMET-0006379_complex_OCNT-2308873_complex
+RESCUED: 228/rbfe_OADMET-0006379_solvent_OCNT-2308873_solvent
+RESCUED: 229/rbfe_OADMET-0006378_complex_OCNT-2317222_complex
+RESCUED: 232/rbfe_OADMET-0006374_solvent_OADMET-0006395_solvent
+RESCUED: 232/rbfe_OADMET-0006600_complex_OADMET-0006374_complex
+RESCUED: 232/rbfe_OADMET-0006600_solvent_OADMET-0006374_solvent
+RESCUED: 237/rbfe_OADMET-0006369_complex_OCNT-2309356_complex
+RESCUED: 237/rbfe_OCNT-2309356_complex_OADMET-0006604_complex
+RESCUED: 238/rbfe_OADMET-0006368_complex_OADMET-0004676_complex
+RESCUED: 238/rbfe_OADMET-0006368_complex_OADMET-0006140_complex
+RESCUED: 238/rbfe_OADMET-0006368_solvent_OADMET-0004676_solvent
+RESCUED: 238/rbfe_OADMET-0006430_complex_OADMET-0004676_complex
+RESCUED: 238/rbfe_OADMET-0006617_complex_OCNT-2314792_complex
+RESCUED: 238/rbfe_OCNT-2309868_complex_OCNT-2314792_complex
+RESCUED: 238/rbfe_OCNT-2309868_solvent_OCNT-2314792_solvent
+RESCUED: 238/rbfe_OCNT-2314792_complex_OADMET-0006117_complex
+RESCUED: 238/rbfe_OCNT-2314792_complex_OADMET-0006285_complex
+RESCUED: 238/rbfe_OCNT-2314792_complex_OADMET-0006294_complex
+RESCUED: 238/rbfe_OCNT-2314792_complex_OADMET-0006430_complex
+RESCUED: 238/rbfe_OCNT-2314792_complex_OADMET-0006445_complex
+RESCUED: 238/rbfe_OCNT-2314792_solvent_OADMET-0006285_solvent
+RESCUED: 238/rbfe_OCNT-2314792_solvent_OADMET-0006430_solvent
+RESCUED: 238/rbfe_OCNT-2314792_solvent_OADMET-0006445_solvent
+RESCUED: 255/rbfe_OADMET-0006351_complex_OCNT-2315472_complex
+RESCUED: 256/rbfe_OADMET-0006564_complex_OADMET-0006555_complex
+RESCUED: 256/rbfe_OADMET-0006564_solvent_OADMET-0006350_solvent
+RESCUED: 256/rbfe_OCNT-2317222_solvent_OADMET-0006494_solvent
+RESCUED: 258/rbfe_OCNT-2318616_complex_OADMET-0006348_complex
+RESCUED: 259/rbfe_OADMET-0006381_solvent_OADMET-0006347_solvent
+RESCUED: 259/rbfe_OADMET-0006456_complex_OADMET-0006177_complex
+RESCUED: 259/rbfe_OADMET-0006456_complex_OADMET-0006347_complex
+RESCUED: 259/rbfe_OADMET-0006456_complex_OADMET-0006438_complex
+RESCUED: 259/rbfe_OADMET-0006457_complex_OADMET-0006456_complex
+RESCUED: 259/rbfe_OADMET-0006529_solvent_OADMET-0006347_solvent
+RESCUED: 259/rbfe_OCNT-2308531_complex_OADMET-0006438_complex
+RESCUED: 265/rbfe_OCNT-2313188_complex_OADMET-0006341_complex
+RESCUED: 269/rbfe_OCNT-2315653_solvent_OADMET-0006346_solvent
+RESCUED: 273/rbfe_OADMET-0006338_complex_OADMET-0006512_complex
+RESCUED: 273/rbfe_OADMET-0006479_complex_OADMET-0006315_complex
+RESCUED: 273/rbfe_OADMET-0006479_solvent_OADMET-0006315_solvent
+RESCUED: 273/rbfe_OADMET-0006512_complex_OADMET-0006479_complex
+RESCUED: 277/rbfe_OADMET-0006322_complex_OADMET-0006126_complex
+RESCUED: 277/rbfe_OADMET-0006329_complex_OADMET-0006316_complex
+RESCUED: 277/rbfe_OADMET-0006519_complex_OCNT-2318155_complex
+RESCUED: 277/rbfe_OADMET-0006560_complex_OADMET-0006509_complex
+RESCUED: 277/rbfe_OADMET-0006560_solvent_OADMET-0006509_solvent
+RESCUED: 277/rbfe_OCNT-2318155_complex_OADMET-0006127_complex
+RESCUED: 277/rbfe_OCNT-2318155_complex_OADMET-0006214_complex
+RESCUED: 277/rbfe_OCNT-2318155_complex_OADMET-0006322_complex
+RESCUED: 277/rbfe_OCNT-2318155_complex_OADMET-0006329_complex
+RESCUED: 277/rbfe_OCNT-2318155_complex_OADMET-0006509_complex
+RESCUED: 277/rbfe_OCNT-2318155_complex_OCNT-2318048_complex
+RESCUED: 277/rbfe_OCNT-2318155_solvent_OADMET-0006127_solvent
+RESCUED: 277/rbfe_OCNT-2318155_solvent_OADMET-0006214_solvent
+RESCUED: 28/rbfe_OADMET-0006589_complex_OCNT-2309025_complex
+RESCUED: 289/rbfe_OADMET-0006380_complex_OADMET-0006162_complex
+RESCUED: 289/rbfe_OADMET-0006380_solvent_OADMET-0006211_solvent
+RESCUED: 289/rbfe_OADMET-0006407_complex_OADMET-0006211_complex
+RESCUED: 289/rbfe_OADMET-0006407_complex_OADMET-0006332_complex
+RESCUED: 289/rbfe_OADMET-0006446_solvent_OADMET-0006380_solvent
+RESCUED: 289/rbfe_OADMET-0006450_complex_OADMET-0006380_complex
+RESCUED: 289/rbfe_OADMET-0006450_solvent_OADMET-0006380_solvent
+RESCUED: 30/rbfe_OCNT-2310554_complex_OADMET-0006587_complex
+RESCUED: 309/rbfe_OADMET-0006383_complex_OCNT-2315653_complex
+RESCUED: 310/rbfe_OADMET-0006296_complex_OADMET-0006119_complex
+RESCUED: 310/rbfe_OADMET-0006304_complex_OADMET-0006234_complex
+RESCUED: 310/rbfe_OADMET-0006304_complex_OADMET-0006386_complex
+RESCUED: 310/rbfe_OADMET-0006409_complex_OADMET-0006304_complex
+RESCUED: 310/rbfe_OCNT-2308748_complex_OADMET-0006119_complex
+RESCUED: 311/rbfe_OADMET-0006109_complex_OADMET-0006107_complex
+RESCUED: 311/rbfe_OADMET-0006397_complex_OADMET-0006107_complex
+RESCUED: 311/rbfe_OADMET-0006397_complex_OADMET-0006295_complex
+RESCUED: 311/rbfe_OADMET-0006397_complex_OADMET-0006314_complex
+RESCUED: 311/rbfe_OADMET-0006397_solvent_OADMET-0006295_solvent
+RESCUED: 311/rbfe_OADMET-0006423_complex_OADMET-0006109_complex
+RESCUED: 311/rbfe_OADMET-0006423_solvent_OADMET-0006109_solvent
+RESCUED: 311/rbfe_OADMET-0006516_complex_OADMET-0006314_complex
+RESCUED: 311/rbfe_OADMET-0006575_complex_OADMET-0006178_complex
+RESCUED: 311/rbfe_OADMET-0006575_complex_OADMET-0006423_complex
+RESCUED: 311/rbfe_OCNT-2315209_complex_OADMET-0006178_complex
+RESCUED: 317/rbfe_OADMET-0006353_complex_OADMET-0006526_complex
+RESCUED: 317/rbfe_OCNT-2312865_complex_OADMET-0006353_complex
+RESCUED: 323/rbfe_OADMET-0006283_solvent_OCNT-2317888_solvent
+RESCUED: 331/rbfe_OADMET-0006292_complex_OADMET-0006275_complex
+RESCUED: 331/rbfe_OADMET-0006292_complex_OADMET-0006288_complex
+RESCUED: 331/rbfe_OADMET-0006318_complex_OADMET-0006288_complex
+RESCUED: 331/rbfe_OADMET-0006385_complex_OADMET-0006292_complex
+RESCUED: 331/rbfe_OADMET-0006385_complex_OADMET-0006306_complex
+RESCUED: 331/rbfe_OADMET-0006401_complex_OADMET-0006208_complex
+RESCUED: 331/rbfe_OADMET-0006525_complex_OADMET-0006292_complex
+RESCUED: 331/rbfe_OADMET-0006525_complex_OADMET-0006401_complex
+RESCUED: 331/rbfe_OADMET-0006525_solvent_OADMET-0006292_solvent
+RESCUED: 331/rbfe_OADMET-0006547_complex_OADMET-0006525_complex
+RESCUED: 331/rbfe_OCNT-2309093_complex_OADMET-0006292_complex
+RESCUED: 331/rbfe_OCNT-2309093_solvent_OADMET-0006292_solvent
+RESCUED: 331/rbfe_OCNT-2312122_complex_OADMET-0006525_complex
+RESCUED: 331/rbfe_OCNT-2318111_complex_OADMET-0006275_complex
+RESCUED: 350/rbfe_OCNT-2311573_complex_OADMET-0006255_complex
+RESCUED: 350/rbfe_OCNT-2311573_solvent_OADMET-0006255_solvent
+RESCUED: 352/rbfe_OCNT-2309025_complex_OADMET-0006252_complex
+RESCUED: 362/rbfe_OCNT-2317538_complex_OADMET-0006242_complex
+RESCUED: 362/rbfe_OCNT-2317538_complex_OADMET-0006357_complex
+RESCUED: 363/rbfe_OADMET-0006354_complex_OADMET-0006241_complex
+RESCUED: 363/rbfe_OADMET-0006354_complex_OADMET-0006426_complex
+RESCUED: 363/rbfe_OADMET-0006354_complex_OADMET-0006528_complex
+RESCUED: 363/rbfe_OADMET-0006354_complex_OCNT-2318074_complex
+RESCUED: 363/rbfe_OADMET-0006354_solvent_OADMET-0006528_solvent
+RESCUED: 372/rbfe_OADMET-0006520_complex_OCNT-2316441_complex
+RESCUED: 372/rbfe_OADMET-0006520_solvent_OADMET-0006232_solvent
+RESCUED: 372/rbfe_OADMET-0006520_solvent_OCNT-2316441_solvent
+RESCUED: 373/rbfe_OADMET-0006481_complex_OADMET-0006231_complex
+RESCUED: 373/rbfe_OADMET-0006489_complex_OADMET-0006481_complex
+RESCUED: 373/rbfe_OADMET-0006491_complex_OADMET-0006493_complex
+RESCUED: 373/rbfe_OADMET-0006493_complex_OADMET-0006231_complex
+RESCUED: 373/rbfe_OADMET-0006493_complex_OADMET-0006235_complex
+RESCUED: 373/rbfe_OADMET-0006493_complex_OADMET-0006428_complex
+RESCUED: 373/rbfe_OADMET-0006493_complex_OADMET-0006485_complex
+RESCUED: 373/rbfe_OADMET-0006493_complex_OCNT-2311117_complex
+RESCUED: 373/rbfe_OADMET-0006493_solvent_OADMET-0006231_solvent
+RESCUED: 373/rbfe_OADMET-0006493_solvent_OCNT-2311117_solvent
+RESCUED: 373/rbfe_OADMET-0006497_complex_OADMET-0006493_complex
+RESCUED: 374/rbfe_OCNT-2317222_complex_OADMET-0006230_complex
+RESCUED: 378/rbfe_OADMET-0006226_complex_OCNT-2309591_complex
+RESCUED: 378/rbfe_OADMET-0006226_solvent_OCNT-2309591_solvent
+RESCUED: 382/rbfe_OADMET-0006220_complex_OCNT-2317556_complex
+RESCUED: 383/rbfe_OADMET-0006507_complex_OADMET-0006219_complex
+RESCUED: 383/rbfe_OADMET-0006511_complex_OADMET-0006360_complex
+RESCUED: 383/rbfe_OADMET-0006511_complex_OADMET-0006468_complex
+RESCUED: 383/rbfe_OADMET-0006511_complex_OADMET-0006507_complex
+RESCUED: 383/rbfe_OADMET-0006511_solvent_OADMET-0006507_solvent
+RESCUED: 383/rbfe_OADMET-0006523_complex_OADMET-0006360_complex
+RESCUED: 383/rbfe_OADMET-0006523_solvent_OADMET-0006360_solvent
+RESCUED: 383/rbfe_OADMET-0006585_complex_OADMET-0006219_complex
+RESCUED: 383/rbfe_OCNT-2317632_complex_OADMET-0006585_complex
+RESCUED: 383/rbfe_OCNT-2318237_complex_OADMET-0006511_complex
+RESCUED: 383/rbfe_OCNT-2318237_solvent_OADMET-0006511_solvent
+RESCUED: 384/rbfe_OADMET-0006431_complex_OADMET-0006396_complex
+RESCUED: 384/rbfe_OADMET-0006431_complex_OCNT-2316194_complex
+RESCUED: 384/rbfe_OADMET-0006431_solvent_OADMET-0006375_solvent
+RESCUED: 384/rbfe_OADMET-0006431_solvent_OADMET-0006460_solvent
+RESCUED: 384/rbfe_OADMET-0006431_solvent_OCNT-2316194_solvent
+RESCUED: 384/rbfe_OADMET-0006452_complex_OADMET-0006272_complex
+RESCUED: 385/rbfe_OADMET-0006193_complex_OADMET-0006175_complex
+RESCUED: 385/rbfe_OADMET-0006193_solvent_OADMET-0006175_solvent
+RESCUED: 385/rbfe_OADMET-0006352_complex_OADMET-0006193_complex
+RESCUED: 385/rbfe_OADMET-0006352_solvent_OADMET-0006193_solvent
+RESCUED: 385/rbfe_OADMET-0006390_complex_OADMET-0006193_complex
+RESCUED: 385/rbfe_OADMET-0006390_solvent_OADMET-0006193_solvent
+RESCUED: 385/rbfe_OADMET-0006436_complex_OADMET-0006193_complex
+RESCUED: 385/rbfe_OADMET-0006436_solvent_OADMET-0006193_solvent
+RESCUED: 385/rbfe_OADMET-0006478_solvent_OADMET-0006193_solvent
+RESCUED: 385/rbfe_OADMET-0006505_solvent_OADMET-0006193_solvent
+RESCUED: 385/rbfe_OCNT-1965945_complex_OADMET-0006193_complex
+RESCUED: 385/rbfe_OCNT-2309319_complex_OADMET-0006193_complex
+RESCUED: 385/rbfe_OCNT-2309319_solvent_OADMET-0006193_solvent
+RESCUED: 386/rbfe_OADMET-0006216_complex_OCNT-1965882_complex
+RESCUED: 387/rbfe_OADMET-0006276_complex_OADMET-0006215_complex
+RESCUED: 387/rbfe_OADMET-0006276_solvent_OADMET-0006215_solvent
+RESCUED: 387/rbfe_OADMET-0006300_complex_OADMET-0006276_complex
+RESCUED: 387/rbfe_OADMET-0006342_complex_OADMET-0006276_complex
+RESCUED: 387/rbfe_OADMET-0006541_complex_OADMET-0006276_complex
+RESCUED: 387/rbfe_OCNT-2317682_complex_OADMET-0006342_complex
+RESCUED: 395/rbfe_OADMET-0006207_complex_OCNT-2315209_complex
+RESCUED: 397/rbfe_OADMET-0006236_solvent_OADMET-0006174_solvent
+RESCUED: 397/rbfe_OADMET-0006236_solvent_OADMET-0006205_solvent
+RESCUED: 401/rbfe_OADMET-0006344_complex_OADMET-0006233_complex
+RESCUED: 401/rbfe_OADMET-0006344_complex_OADMET-0006287_complex
+RESCUED: 401/rbfe_OADMET-0006363_complex_OADMET-0006262_complex
+RESCUED: 401/rbfe_OADMET-0006363_solvent_OADMET-0006262_solvent
+RESCUED: 401/rbfe_OADMET-0006539_complex_OADMET-0006262_complex
+RESCUED: 401/rbfe_OADMET-0006539_complex_OADMET-0006287_complex
+RESCUED: 401/rbfe_OADMET-0006539_complex_OADMET-0006599_complex
+RESCUED: 401/rbfe_OADMET-0006539_complex_OCNT-2315472_complex
+RESCUED: 401/rbfe_OADMET-0006539_solvent_OADMET-0006287_solvent
+RESCUED: 401/rbfe_OADMET-0006539_solvent_OADMET-0006599_solvent
+RESCUED: 401/rbfe_OCNT-2315472_complex_OADMET-0006201_complex
+RESCUED: 401/rbfe_OCNT-2318184_complex_OADMET-0006363_complex
+RESCUED: 402/rbfe_OADMET-0006449_complex_OADMET-0006453_complex
+RESCUED: 402/rbfe_OADMET-0006449_solvent_OADMET-0006453_solvent
+RESCUED: 402/rbfe_OCNT-2308475_solvent_OADMET-0006453_solvent
+RESCUED: 408/rbfe_OADMET-0006459_complex_OADMET-0006358_complex
+RESCUED: 408/rbfe_OADMET-0006590_complex_OADMET-0006358_complex
+RESCUED: 408/rbfe_OADMET-0006594_complex_OADMET-0006358_complex
+RESCUED: 408/rbfe_OCNT-2315950_complex_OADMET-0006194_complex
+RESCUED: 408/rbfe_OCNT-2315950_complex_OADMET-0006358_complex
+RESCUED: 408/rbfe_OCNT-2315950_solvent_OADMET-0006194_solvent
+RESCUED: 413/rbfe_OADMET-0006406_complex_OADMET-0006195_complex
+RESCUED: 413/rbfe_OADMET-0006535_complex_OADMET-0006537_complex
+RESCUED: 414/rbfe_OADMET-0006239_complex_OADMET-0006188_complex
+RESCUED: 414/rbfe_OADMET-0006239_solvent_OADMET-0006188_solvent
+RESCUED: 414/rbfe_OADMET-0006319_complex_OADMET-0006323_complex
+RESCUED: 414/rbfe_OADMET-0006323_complex_OADMET-0006239_complex
+RESCUED: 414/rbfe_OADMET-0006327_complex_OADMET-0006188_complex
+RESCUED: 414/rbfe_OADMET-0006510_complex_OADMET-0006323_complex
+RESCUED: 414/rbfe_OADMET-0006510_solvent_OADMET-0006323_solvent
+RESCUED: 414/rbfe_OADMET-0006553_complex_OADMET-0006323_complex
+RESCUED: 414/rbfe_OCNT-2310167_complex_OADMET-0006510_complex
+RESCUED: 416/rbfe_OCNT-2317632_complex_OADMET-0006186_complex
+RESCUED: 417/rbfe_OADMET-0006273_complex_OCNT-2315609_complex
+RESCUED: 417/rbfe_OCNT-2315609_complex_OADMET-0006185_complex
+RESCUED: 421/rbfe_OADMET-0006345_complex_OADMET-0006181_complex
+RESCUED: 421/rbfe_OADMET-0006345_complex_OCNT-2316432_complex
+RESCUED: 422/rbfe_OCNT-2315609_complex_OADMET-0006280_complex
+RESCUED: 423/rbfe_OCNT-2315483_complex_OADMET-0006179_complex
+RESCUED: 43/rbfe_OCNT-2312002_complex_OADMET-0006574_complex
+RESCUED: 430/rbfe_OCNT-2317682_complex_OADMET-0006172_complex
+RESCUED: 434/rbfe_OADMET-0006168_complex_OCNT-2317556_complex
+RESCUED: 435/rbfe_OADMET-0006282_complex_OADMET-0006243_complex
+RESCUED: 435/rbfe_OADMET-0006607_complex_OADMET-0006602_complex
+RESCUED: 435/rbfe_OCNT-2311806_complex_OADMET-0006602_complex
+RESCUED: 436/rbfe_OADMET-0006310_complex_OADMET-0006166_complex
+RESCUED: 436/rbfe_OADMET-0006349_complex_OADMET-0006171_complex
+RESCUED: 436/rbfe_OADMET-0006349_complex_OADMET-0006310_complex
+RESCUED: 436/rbfe_OADMET-0006349_complex_OADMET-0006558_complex
+RESCUED: 436/rbfe_OADMET-0006349_complex_OCNT-2312865_complex
+RESCUED: 436/rbfe_OADMET-0006349_solvent_OADMET-0006171_solvent
+RESCUED: 436/rbfe_OADMET-0006562_complex_OADMET-0006166_complex
+RESCUED: 439/rbfe_OADMET-0006187_complex_OADMET-0006163_complex
+RESCUED: 439/rbfe_OADMET-0006187_complex_OADMET-0006169_complex
+RESCUED: 439/rbfe_OADMET-0006229_complex_OADMET-0006187_complex
+RESCUED: 439/rbfe_OADMET-0006229_solvent_OADMET-0006187_solvent
+RESCUED: 439/rbfe_OADMET-0006248_complex_OADMET-0006197_complex
+RESCUED: 439/rbfe_OADMET-0006278_complex_OADMET-0006187_complex
+RESCUED: 439/rbfe_OADMET-0006312_complex_OADMET-0006248_complex
+RESCUED: 439/rbfe_OADMET-0006551_complex_OADMET-0006187_complex
+RESCUED: 439/rbfe_OADMET-0006577_complex_OADMET-0006169_complex
+RESCUED: 439/rbfe_OADMET-0006577_complex_OADMET-0006197_complex
+RESCUED: 439/rbfe_OCNT-2316154_complex_OADMET-0006163_complex
+RESCUED: 444/rbfe_OADMET-0006184_solvent_OADMET-0006605_solvent
+RESCUED: 448/rbfe_OADMET-0006377_complex_OADMET-0006247_complex
+RESCUED: 448/rbfe_OADMET-0006391_complex_OADMET-0006377_complex
+RESCUED: 448/rbfe_OADMET-0006391_solvent_OADMET-0006377_solvent
+RESCUED: 448/rbfe_OADMET-0006502_solvent_OADMET-0006267_solvent
+RESCUED: 450/rbfe_OADMET-0006440_complex_OADMET-0006532_complex
+RESCUED: 450/rbfe_OADMET-0006440_solvent_OADMET-0006532_solvent
+RESCUED: 450/rbfe_OCNT-2309628_solvent_OADMET-0006532_solvent
+RESCUED: 454/rbfe_OADMET-0006463_complex_OADMET-0006610_complex
+RESCUED: 455/rbfe_OADMET-0006425_solvent_OADMET-0006364_solvent
+RESCUED: 455/rbfe_OADMET-0006425_solvent_OADMET-0006543_solvent
+RESCUED: 455/rbfe_OADMET-0006508_solvent_OADMET-0006425_solvent
+RESCUED: 455/rbfe_OADMET-0006614_solvent_OADMET-0006359_solvent
+RESCUED: 456/rbfe_OADMET-0006447_complex_OADMET-0006212_complex
+RESCUED: 456/rbfe_OADMET-0006447_solvent_OADMET-0006212_solvent
+RESCUED: 457/rbfe_OADMET-0006142_complex_OCNT-2316690_complex
+RESCUED: 458/rbfe_OADMET-0006141_complex_OCNT-2318568_complex
+RESCUED: 461/rbfe_OADMET-0006608_complex_OADMET-0006138_complex
+RESCUED: 461/rbfe_OADMET-0006608_complex_OCNT-2315710_complex
+RESCUED: 461/rbfe_OADMET-0006608_complex_OCNT-2316356_complex
+RESCUED: 461/rbfe_OADMET-0006608_solvent_OCNT-2315710_solvent
+RESCUED: 465/rbfe_OADMET-0006134_complex_OCNT-2311864_complex
+RESCUED: 465/rbfe_OADMET-0006134_solvent_OCNT-2311864_solvent
+RESCUED: 468/rbfe_OCNT-2315366_complex_OADMET-0006149_complex
+RESCUED: 468/rbfe_OCNT-2315366_solvent_OADMET-0006149_solvent
+RESCUED: 471/rbfe_OADMET-0006482_complex_OADMET-0006128_complex
+RESCUED: 471/rbfe_OADMET-0006482_complex_OADMET-0006148_complex
+RESCUED: 474/rbfe_OADMET-0006540_complex_OADMET-0006125_complex
+RESCUED: 474/rbfe_OADMET-0006606_solvent_OADMET-0006125_solvent
+RESCUED: 477/rbfe_OADMET-0006269_complex_OADMET-0006122_complex
+RESCUED: 477/rbfe_OADMET-0006269_solvent_OADMET-0006122_solvent
+RESCUED: 479/rbfe_OCNT-2312754_complex_OADMET-0006120_complex
+RESCUED: 479/rbfe_OCNT-2312754_solvent_OADMET-0006120_solvent
+RESCUED: 483/rbfe_OADMET-0006522_complex_OADMET-0006116_complex
+RESCUED: 483/rbfe_OADMET-0006522_complex_OCNT-2315472_complex
+RESCUED: 484/rbfe_OCNT-2317888_complex_OADMET-0006151_complex
+RESCUED: 484/rbfe_OCNT-2317888_solvent_OADMET-0006151_solvent
+RESCUED: 484/rbfe_OCNT-2317888_solvent_OADMET-0006340_solvent
+RESCUED: 486/rbfe_OADMET-0006246_complex_OADMET-0006113_complex
+RESCUED: 486/rbfe_OADMET-0006246_complex_OADMET-0006176_complex
+RESCUED: 486/rbfe_OCNT-2312208_complex_OADMET-0006113_complex
+RESCUED: 486/rbfe_OCNT-2312208_complex_OCNT-2316634_complex
+RESCUED: 486/rbfe_OCNT-2314578_complex_OCNT-2312208_complex
+RESCUED: 487/rbfe_OADMET-0006112_complex_OCNT-2316557_complex
+RESCUED: 488/rbfe_OADMET-0006302_complex_OADMET-0006111_complex
+RESCUED: 488/rbfe_OADMET-0006334_complex_OADMET-0006427_complex
+RESCUED: 488/rbfe_OADMET-0006477_complex_OADMET-0006196_complex
+RESCUED: 488/rbfe_OADMET-0006477_solvent_OADMET-0006196_solvent
+RESCUED: 488/rbfe_OCNT-2309591_complex_OADMET-0006196_complex
+RESCUED: 489/rbfe_OADMET-0006238_complex_OADMET-0006110_complex
+RESCUED: 489/rbfe_OADMET-0006238_complex_OADMET-0006114_complex
+RESCUED: 489/rbfe_OADMET-0006238_complex_OADMET-0006153_complex
+RESCUED: 489/rbfe_OADMET-0006238_complex_OADMET-0006190_complex
+RESCUED: 489/rbfe_OADMET-0006238_complex_OADMET-0006343_complex
+RESCUED: 489/rbfe_OADMET-0006238_solvent_OADMET-0006153_solvent
+RESCUED: 489/rbfe_OADMET-0006382_complex_OADMET-0006238_complex
+RESCUED: 489/rbfe_OADMET-0006392_complex_OADMET-0006114_complex
+RESCUED: 489/rbfe_OADMET-0006405_complex_OADMET-0006238_complex
+RESCUED: 489/rbfe_OADMET-0006405_solvent_OADMET-0006238_solvent
+RESCUED: 489/rbfe_OADMET-0006448_complex_OADMET-0006238_complex
+RESCUED: 489/rbfe_OCNT-2316438_complex_OADMET-0006238_complex
+RESCUED: 491/rbfe_OADMET-0006266_solvent_OADMET-0006228_solvent
+RESCUED: 491/rbfe_OADMET-0006290_solvent_OADMET-0006244_solvent
+RESCUED: 491/rbfe_OADMET-0006603_complex_OCNT-2317298_complex
+RESCUED: 491/rbfe_OADMET-0006603_solvent_OCNT-2317298_solvent
+RESCUED: 491/rbfe_OCNT-2317298_solvent_OADMET-0006266_solvent
+RESCUED: 493/rbfe_OADMET-0006164_complex_OADMET-0006106_complex
+RESCUED: 493/rbfe_OADMET-0006164_complex_OCNT-2313639_complex
+RESCUED: 493/rbfe_OADMET-0006164_solvent_OADMET-0006106_solvent
+RESCUED: 493/rbfe_OADMET-0006164_solvent_OCNT-2313639_solvent
+RESCUED: 493/rbfe_OADMET-0006291_complex_OADMET-0006164_complex
+RESCUED: 493/rbfe_OCNT-2310167_complex_OADMET-0006164_complex
+RESCUED: 495/rbfe_OADMET-0006286_complex_OADMET-0006281_complex
+RESCUED: 495/rbfe_OADMET-0006498_complex_OADMET-0006281_complex
+RESCUED: 496/rbfe_OADMET-0006435_complex_OADMET-0006121_complex
+RESCUED: 496/rbfe_OADMET-0006435_complex_OADMET-0006139_complex
+RESCUED: 496/rbfe_OADMET-0006435_complex_OADMET-0006227_complex
+RESCUED: 496/rbfe_OADMET-0006435_complex_OADMET-0006237_complex
+RESCUED: 496/rbfe_OADMET-0006435_complex_OADMET-0006410_complex
+RESCUED: 496/rbfe_OADMET-0006435_complex_OADMET-0006490_complex
+RESCUED: 496/rbfe_OADMET-0006435_solvent_OADMET-0006121_solvent
+RESCUED: 496/rbfe_OADMET-0006435_solvent_OADMET-0006139_solvent
+RESCUED: 496/rbfe_OADMET-0006435_solvent_OADMET-0006227_solvent
+RESCUED: 496/rbfe_OCNT-2311662_complex_OADMET-0006103_complex
+RESCUED: 499/rbfe_OADMET-0006206_complex_OADMET-0006100_complex
+RESCUED: 499/rbfe_OADMET-0006274_complex_OADMET-0006100_complex
+RESCUED: 499/rbfe_OADMET-0006274_complex_OADMET-0006210_complex
+RESCUED: 499/rbfe_OADMET-0006274_complex_OADMET-0006259_complex
+RESCUED: 499/rbfe_OADMET-0006313_complex_OADMET-0006274_complex
+RESCUED: 499/rbfe_OADMET-0006399_complex_OADMET-0006274_complex
+RESCUED: 499/rbfe_OADMET-0006461_complex_OADMET-0006259_complex
+RESCUED: 499/rbfe_OADMET-0006461_complex_OADMET-0006271_complex
+RESCUED: 499/rbfe_OADMET-0006579_complex_OADMET-0006274_complex
+RESCUED: 499/rbfe_OCNT-2309935_complex_OADMET-0006274_complex
+RESCUED: 499/rbfe_OCNT-2309995_complex_OADMET-0006274_complex
+RESCUED: 499/rbfe_OCNT-2311638_complex_OADMET-0006399_complex
+RESCUED: 499/rbfe_OCNT-2316176_complex_OADMET-0006206_complex
+RESCUED: 501/rbfe_OADMET-0006265_complex_OADMET-0006098_complex
+RESCUED: 501/rbfe_OADMET-0006394_complex_OADMET-0006263_complex
+RESCUED: 501/rbfe_OADMET-0006500_complex_OADMET-0006394_complex
+RESCUED: 501/rbfe_OADMET-0006513_solvent_OADMET-0006263_solvent
+RESCUED: 501/rbfe_OADMET-0006613_complex_OADMET-0006263_complex
+RESCUED: 501/rbfe_OADMET-0006613_complex_OADMET-0006320_complex
+RESCUED: 504/rbfe_OADMET-0006133_complex_OADMET-0006095_complex
+RESCUED: 504/rbfe_OADMET-0006595_complex_OADMET-0006133_complex
+RESCUED: 505/rbfe_OADMET-0006404_complex_OADMET-0006400_complex
+RESCUED: 505/rbfe_OADMET-0006501_complex_OADMET-0006400_complex
+RESCUED: 505/rbfe_OCNT-2312754_complex_OADMET-0006400_complex
+RESCUED: 506/rbfe_OADMET-0006097_complex_OADMET-0006093_complex
+RESCUED: 506/rbfe_OADMET-0006097_solvent_OADMET-0006093_solvent
+RESCUED: 506/rbfe_OADMET-0006101_complex_OADMET-0006093_complex
+RESCUED: 506/rbfe_OADMET-0006362_complex_OADMET-0006118_complex
+RESCUED: 506/rbfe_OADMET-0006362_solvent_OADMET-0006118_solvent
+RESCUED: 506/rbfe_OADMET-0006373_complex_OADMET-0006101_complex
+RESCUED: 506/rbfe_OADMET-0006373_complex_OADMET-0006362_complex
+RESCUED: 506/rbfe_OADMET-0006373_solvent_OADMET-0006362_solvent
+RESCUED: 506/rbfe_OADMET-0006466_complex_OADMET-0006097_complex
+RESCUED: 506/rbfe_OADMET-0006492_complex_OADMET-0006101_complex
+RESCUED: 506/rbfe_OCNT-2318616_complex_OADMET-0006101_complex
+RESCUED: 506/rbfe_OCNT-2318616_complex_OADMET-0006470_complex
+RESCUED: 507/rbfe_OADMET-0006451_complex_OCNT-2316441_complex
+RESCUED: 507/rbfe_OADMET-0006530_complex_OADMET-0006331_complex
+RESCUED: 507/rbfe_OCNT-2308554_complex_OADMET-0006092_complex
+RESCUED: 507/rbfe_OCNT-2308554_complex_OADMET-0006105_complex
+RESCUED: 507/rbfe_OCNT-2308554_complex_OADMET-0006182_complex
+RESCUED: 507/rbfe_OCNT-2308554_complex_OADMET-0006284_complex
+RESCUED: 507/rbfe_OCNT-2308554_complex_OADMET-0006331_complex
+RESCUED: 507/rbfe_OCNT-2308554_solvent_OADMET-0006284_solvent
+RESCUED: 507/rbfe_OCNT-2316441_complex_OADMET-0006331_complex
+RESCUED: 508/rbfe_OADMET-0006568_complex_OADMET-0006597_complex
+RESCUED: 508/rbfe_OADMET-0006615_complex_OADMET-0006597_complex
+RESCUED: 509/rbfe_OADMET-0006454_complex_OADMET-0006090_complex
+RESCUED: 509/rbfe_OADMET-0006588_complex_OADMET-0006090_complex
+RESCUED: 509/rbfe_OADMET-0006611_complex_OADMET-0006240_complex
+RESCUED: 509/rbfe_OADMET-0006611_complex_OADMET-0006279_complex
+RESCUED: 509/rbfe_OADMET-0006611_complex_OADMET-0006330_complex
+RESCUED: 509/rbfe_OADMET-0006611_complex_OADMET-0006586_complex
+RESCUED: 509/rbfe_OCNT-2318311_complex_OADMET-0006584_complex
+RESCUED: 509/rbfe_OCNT-2318311_complex_OADMET-0006588_complex
+RESCUED: 509/rbfe_OCNT-2318311_complex_OADMET-0006611_complex
+RESCUED: 511/rbfe_OADMET-0006268_complex_OADMET-0004675_complex
+RESCUED: 511/rbfe_OADMET-0006593_complex_OADMET-0006268_complex
+RESCUED: 511/rbfe_OCNT-2309356_complex_OADMET-0006268_complex
+RESCUED: 512/rbfe_OCNT-2311864_complex_OADMET-0004674_complex
+RESCUED: 512/rbfe_OCNT-2311864_solvent_OADMET-0004674_solvent
+RESCUED: 61/rbfe_OADMET-0006554_complex_OCNT-2317682_complex
+RESCUED: 67/rbfe_OADMET-0006548_complex_OCNT-2312239_complex
+RESCUED: 80/rbfe_OCNT-2315472_complex_OADMET-0006534_complex
+RESCUED: 80/rbfe_OCNT-2315472_solvent_OADMET-0006534_solvent
+RESCUED: 81/rbfe_OADMET-0006533_complex_OCNT-2312754_complex
+
+Checked 398 incomplete jobs
+Rescued: 398
+Truly failed (no inner result.json): 0
+```
+
+```commandline
+$ python openfe/scripts/06_monitor_production.py --production-dir openfe/production
+============================================================
+PRODUCTION CAMPAIGN STATUS
+============================================================
+Total transformations: 1066
+
+status
+COMPLETED                  883
+COMPLETED_NEEDS_CLEANUP    183
+
+Progress: 1066 / 1066 (100.0%)
+
+By leg type:
+  complex: 533 / 533
+  solvent: 533 / 533
+
+Total storage used: 74952 MB (73.2 GB)
+
+Completed job timing (n=668):
+  Mean: 1.6h
+  Min:  0.6h
+  Max:  6.7h
+
+Clusters fully completed: 124 / 124
+
+Wrote openfe/production_status.csv
+```
+
+```commandline
+$ python openfe/scripts/06_monitor_production.py \
+>     --production-dir openfe/production --cleanup --cleanup-failed
+============================================================
+PRODUCTION CAMPAIGN STATUS
+============================================================
+Total transformations: 1066
+
+status
+COMPLETED                  883
+COMPLETED_NEEDS_CLEANUP    183
+
+Progress: 1066 / 1066 (100.0%)
+
+By leg type:
+  complex: 533 / 533
+  solvent: 533 / 533
+
+Total storage used: 74952 MB (73.2 GB)
+
+Completed job timing (n=668):
+  Mean: 1.6h
+  Min:  0.6h
+  Max:  6.7h
+
+Clusters fully completed: 124 / 124
+
+Cleaning up 183 completed jobs with remaining large files...
+Freed 69389 MB
+
+No failed jobs to clean up.
+
+Wrote openfe/production_status.csv
+```
+
+```commandline
+$ python openfe/scripts/06_monitor_production.py --production-dir openfe/production
+============================================================
+PRODUCTION CAMPAIGN STATUS
+============================================================
+Total transformations: 1066
+
+status
+COMPLETED    1066
+
+Progress: 1066 / 1066 (100.0%)
+
+By leg type:
+  complex: 533 / 533
+  solvent: 533 / 533
+
+Total storage used: 5562 MB (5.4 GB)
+
+Completed job timing (n=668):
+  Mean: 1.6h
+  Min:  0.6h
+  Max:  6.7h
+
+Clusters fully completed: 124 / 124
+
+Wrote openfe/production_status.csv
+```
+
+```commandline
+python -c "
+import json, pathlib
+prod = pathlib.Path('openfe/production')
+needs_rerun = []
+for result_file in sorted(prod.glob('*/*/quickrun_output/result.json')):
+    d = json.loads(result_file.read_text())
+    if d.get('estimate') is None:
+        parts = result_file.parts
+        needs_rerun.append(f'{parts[-4]},{parts[-3]}')
+print(f'{len(needs_rerun)} jobs need rerunning')
+with open('openfe/production/transform_list_retry.txt', 'w') as f:
+    f.write('\n'.join(needs_rerun) + '\n')
+"
+398 jobs need rerunning
+```
