@@ -1,48 +1,27 @@
 # openfe/submit_quickrun_production.sub
 #
-# Production openfe quickrun campaign: 1066 RBFE transformation legs
-# across 124 clusters. Each job runs one complex or solvent leg.
-#
-# Uses all available GPU pools (CHTC GPU Lab, backfill, campus, OSPool)
-# with minimal constraints to maximize throughput.
-#
-# Checkpoint/resume: jobs always use --resume. On eviction or failure,
-# quickrun_output/ is transferred back to the job's initialdir on AP.
-# On restart, it's transferred back in, and openfe resumes from the
-# last checkpoint. This makes jobs resilient to eviction on OSPool
-# and backfill slots.
-#
-# Storage: on successful completion, the shell script deletes large
-# trajectory/checkpoint files (~150 MB) and keeps only result.json
-# (~3 MB). Total storage for all 1066 results: ~3.2 GB on AP.
-#
-# Prerequisites:
-#   python openfe/scripts/05_setup_production.py
-#     -> production/<cluster_id>/<transform_name>/ directories
-#     -> production/transform_list.txt
+# Production openfe quickrun campaign: no checkpointing.
+# Jobs complete in ~1.6h mean, 7h max — well within 12h "short" limit.
+# Fresh start on every retry. Simpler and avoids checkpoint file bugs.
 #
 # Run from the openfe/ directory:
 #   condor_submit submit_quickrun_production.sub
+#   # Or for retries only:
+#   condor_submit submit_quickrun_production.sub \
+#     -append "queue cluster_id,transform_name from production/transform_list_retry.txt"
 
 container_image = osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif
 
 executable = scripts/run_quickrun.sh
 arguments  = $(transform_name).json
 
-# Each job's working directory on the AP. Contains the transformation
-# JSON, network_setup.json, and quickrun_output/ (empty on first run,
-# checkpoint files on resume). All transfer paths are relative to this.
 initialdir = production/$(cluster_id)/$(transform_name)
 
-# Input: transformation JSON + network JSON + checkpoint directory.
-# On first run quickrun_output/ is empty; on resume it has checkpoints.
-transfer_input_files = $(transform_name).json, network_setup.json, quickrun_output
-
-# Output: quickrun_output/ (checkpoints during run, cleaned after
-# success) and result.json (the ΔG estimate, touched empty at start
-# so it always exists for transfer even on failure).
-transfer_output_files = quickrun_output, result.json
-when_to_transfer_output = ON_EXIT_OR_EVICT
+# No quickrun_output/ transferred - scratch stays on execute node.
+# result.json is touched empty at script start so it always exists.
+transfer_input_files   = run_quickrun.sh, $(transform_name).json, network_setup.json
+transfer_output_files  = result.json
+when_to_transfer_output = ON_EXIT
 
 log    = logs/quickrun.$(Cluster).$(Process).log
 output = logs/quickrun.$(Cluster).$(Process).out
@@ -53,26 +32,17 @@ request_memory = 16GB
 request_disk   = 16GB
 request_gpus   = 1
 
-# Minimal GPU constraint: only memory floor to exclude tiny MIG slices.
-# No capability constraint — GTX 1080 Ti (6.1) works and contributes
-# throughput. No server exclusions — transient failures handled by retry.
 gpus_minimum_memory = 10000M
 
-# Access all GPU pools for maximum throughput
 +WantGPULab = true
-+GPUJobLength = "medium"
++GPUJobLength = "short"
 +is_resumable = true
 want_campus_pools = true
 want_ospool = true
 
-# Retry strategy: expect ~10-30% of job starts to fail from CUDA
-# issues, evictions, or transient errors. Automatic retries find a
-# working server without manual intervention.
 max_retries = 10
 
-# Automatically release held jobs after 10 minutes to try again on
-# a different server. Stop after 15 total starts to avoid infinite loops.
-periodic_release = (NumJobStarts < 15) && (JobStatus == 5) && \
+periodic_release = (NumJobStarts < 20) && (JobStatus == 5) && \
     ((CurrentTime - EnteredCurrentStatus) > 600)
 
-queue cluster_id, transform_name from production/transform_list.txt
+queue cluster_id,transform_name from production/transform_list.txt

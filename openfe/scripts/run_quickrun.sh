@@ -3,29 +3,24 @@
 # openfe/scripts/run_quickrun.sh
 #
 # HTCondor executable for production openfe quickrun jobs.
-# Runs a single RBFE transformation leg (complex or solvent).
+# No checkpointing - jobs are short enough (~1.6h mean, 7h max) to
+# complete in a single GPU slot within the 12h "short" time limit.
+# Simpler than checkpoint/resume and avoids the -o file conflict bug.
 #
 # Arguments:
-#   $1 = transformation JSON filename (e.g. "rbfe_OCNT-2310728_complex_OADMET-0006495_complex.json")
+#   $1 = transformation JSON filename
 #
-# Files expected in scratch (transferred from initialdir):
-#   $1                     the transformation JSON
-#   network_setup.json     the alchemical network JSON
-#   quickrun_output/       empty on first run, contains checkpoints on resume
+# Files transferred from initialdir:
+#   $1                  the transformation JSON
+#   network_setup.json  the alchemical network JSON
 #
-# Outputs (transferred back to initialdir):
-#   quickrun_output/       checkpoint files during run, cleaned after success
-#   result.json            the ΔG estimate (copied out of quickrun_output/ on success)
-#   COMPLETED              marker file indicating successful completion
-#   FAILED                 marker file with error info if job fails permanently
+# Output transferred back to initialdir:
+#   result.json         the dG estimate (~3 MB on success, 0 bytes on failure)
 
-# Pre-failure-safe setup: create output files/dirs before anything can fail,
-# so HTCondor transfer never errors on missing paths.
-mkdir -p quickrun_output
+# Create result.json early so HTCondor transfer never fails on a missing file
 touch result.json
 
-# Activate conda/mamba environment (must be before set -eo pipefail
-# because the activation script references unset variables)
+# Activate conda/mamba environment before set -eo pipefail
 source /usr/local/bin/_activate_current_env.sh
 
 set -eo pipefail
@@ -37,62 +32,33 @@ echo "Transformation: ${TRANSFORMATION}"
 echo "Start: $(date)"
 START=$(date +%s)
 
-# GPU info (nvidia-smi may not be available in all containers)
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader 2>/dev/null || echo "nvidia-smi not available"
-
 echo "openfe: $(openfe --version)"
 
-# CUDA fast-fail check: exit immediately if CUDA not available rather
-# than running for hours on CPU and producing NaN errors.
+# CUDA fast-fail: exit immediately if CUDA not available.
+# Non-zero exit triggers HTCondor retry on a different server.
 python -c "
 import openmm
 from openmm import Platform
 platforms = [Platform.getPlatform(i).getName() for i in range(Platform.getNumPlatforms())]
 print('Available platforms:', platforms)
 if 'CUDA' not in platforms:
-    raise RuntimeError('CUDA platform not available - job must run on a GPU. '
-                       'Available platforms: ' + str(platforms))
-print('CUDA platform confirmed available.')
+    raise RuntimeError('CUDA not available: ' + str(platforms))
+print('CUDA confirmed available.')
 "
 
-# Check if this is a resume (quickrun_cache exists from prior run)
-if [ -d "quickrun_output/quickrun_cache" ]; then
-    echo "Found existing quickrun_cache - this is a RESUME run"
-else
-    echo "No quickrun_cache found - this is a FRESH run"
-fi
-
-# Run the transformation with --resume (safe even on fresh runs)
+# Run without --resume: fresh start every time, no checkpoint files.
+# Work directory is a local scratch dir that stays on the execute node.
+mkdir -p quickrun_scratch
 openfe quickrun \
     "${TRANSFORMATION}" \
-    -d quickrun_output \
-    -o quickrun_output/result.json \
-    --resume
+    -d quickrun_scratch \
+    -o result.json
 
 END=$(date +%s)
 ELAPSED=$((END - START))
-
 echo ""
-echo "=== Completed successfully ==="
-echo "Wall-clock: ${ELAPSED} seconds ($(( ELAPSED / 3600 ))h $(( (ELAPSED % 3600) / 60 ))m)"
+echo "=== Completed ==="
+echo "Wall-clock: ${ELAPSED}s ($(( ELAPSED / 3600 ))h $(( (ELAPSED % 3600) / 60 ))m)"
+echo "result.json size: $(wc -c < result.json) bytes"
 echo "End: $(date)"
-
-# Copy result.json to top level (alongside quickrun_output/ for transfer)
-cp quickrun_output/result.json result.json
-
-# Clean up large simulation files to save AP storage.
-# Keep only result.json and the quickrun_cache (small, needed if
-# HTCondor somehow restarts this job after completion).
-# The large files are in shared_*SimulationUnit*/ directories.
-echo "Cleaning up large checkpoint/trajectory files..."
-du -sh quickrun_output/ 2>/dev/null || true
-find quickrun_output -type d -name "shared_*SimulationUnit*" -exec rm -rf {} + 2>/dev/null || true
-find quickrun_output -name "*.nc" -delete 2>/dev/null || true
-du -sh quickrun_output/ 2>/dev/null || true
-
-# Write completion marker
-echo "transformation: ${TRANSFORMATION}" > COMPLETED
-echo "wall_clock_seconds: ${ELAPSED}" >> COMPLETED
-echo "host: $(hostname)" >> COMPLETED
-echo "gpu: $(nvidia-smi --query-gpu=name --format=csv,noheader 2>/dev/null || echo unknown)" >> COMPLETED
-echo "end_time: $(date)" >> COMPLETED
