@@ -17,9 +17,6 @@
 # Output transferred back to initialdir:
 #   result.json         the dG estimate (~3 MB on success, 0 bytes on failure)
 
-# Create result.json early so HTCondor transfer never fails on a missing file
-touch result.json
-
 # Activate conda/mamba environment before set -eo pipefail
 source /usr/local/bin/_activate_current_env.sh
 
@@ -50,6 +47,7 @@ print('CUDA confirmed available.')
 # Run without --resume: fresh start every time, no checkpoint files.
 # Work directory is a local scratch dir that stays on the execute node.
 mkdir -p quickrun_scratch
+
 openfe quickrun \
     "${TRANSFORMATION}" \
     -d quickrun_scratch \

@@ -1568,3 +1568,11 @@ while IFS=, read -r cid tname; do
     cp openfe/scripts/run_quickrun.sh "openfe/production/$cid/$tname/run_quickrun.sh"
 done < openfe/production/transform_list_retry.txt
 ```
+
+```commandline
+while IFS=, read -r cid tname; do
+    cp openfe/scripts/run_quickrun.sh "openfe/production/$cid/$tname/run_quickrun.sh"
+    rm -rf "openfe/production/$cid/$tname/quickrun_output"
+    rm -f "openfe/production/$cid/$tname/result.json"
+done < openfe/production/transform_list_retry.txt
+```
