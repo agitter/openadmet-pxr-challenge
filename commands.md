@@ -1787,3 +1787,82 @@ Traceback (most recent call last):
                                   ~~~~~~~~~~~~~~~~~~~~~~~^^^
 IndexError: list index out of range
 ```
+
+Before the final two jobs finished:
+```commandline
+$ python openfe/scripts/08_final_report.py --production-dir openfe/production --outdir openfe
+======================================================================
+FINAL CAMPAIGN REPORT
+======================================================================
+Total legs: 1066
+
+STATUS:
+status
+COMPLETED    818
+FAILED       248
+
+FAILURE TYPES:
+fail_type
+SimulationNaNError    189
+IndexError             54
+OpenMMException         5
+
+BY LEG TYPE:
+  complex: 315/533 completed
+  solvent: 503/533 completed
+
+TIMING (completed, n=818):
+  mean=1.7h  median=1.0h  min=0.6h  max=11.2h
+
+BY GPU TYPE:
+                         gpu_name  n_legs  n_completed   mean_h
+                      NVIDIA L40S     279          206 1.161841
+                       NVIDIA L40     168          121 1.094544
+       NVIDIA GeForce RTX 2080 Ti     123           96 1.451506
+            NVIDIA H100 80GB HBM3     102           86 1.383151
+                      NVIDIA H200      76           55 1.321049
+                 NVIDIA RTX A5000      54           45 1.518539
+                  Quadro RTX 6000      51           43 1.460969
+            NVIDIA A100-SXM4-40GB      48           33 1.333773
+                       NVIDIA A40      46           37 1.578871
+            NVIDIA A100-SXM4-80GB      41           32 1.867080
+       NVIDIA GeForce GTX 1080 Ti      25           14 2.095922
+            NVIDIA A100 80GB PCIe      17           16 1.922386
+NVIDIA A100-SXM4-80GB MIG 3g.40gb      13           12 2.022030
+             Tesla P100-PCIE-16GB       9            9 2.729630
+             Tesla V100-PCIE-16GB       8            7 1.935764
+                  NVIDIA H100 NVL       3            3 2.212222
+             Tesla V100-PCIE-32GB       3            3 2.835926
+
+BY SERVER (top 15 by leg count):
+                             server  n_legs  n_completed  n_failed
+     zliu-chtcgpu5000.chtc.wisc.edu      46           35        11
+    blengerichgpu4000.chtc.wisc.edu      43           34         9
+           gpulab2001.chtc.wisc.edu      40           26        14
+              gpu4002.chtc.wisc.edu      38           25        13
+              gpu4000.chtc.wisc.edu      31           26         5
+dbrundage-chtcgpu5000.chtc.wisc.edu      30           21         9
+      jcaicedogpu0004.chtc.wisc.edu      29           24         5
+       amuraligpu4000.chtc.wisc.edu      27           16        11
+        vetsigian0001.chtc.wisc.edu      26           18         8
+           gitter0000.chtc.wisc.edu      25           14        11
+           gpulab2003.chtc.wisc.edu      25           20         5
+      jcaicedogpu0000.chtc.wisc.edu      25           19         6
+      jcaicedogpu0003.chtc.wisc.edu      25           19         6
+              gpu4006.chtc.wisc.edu      24           18         6
+         ahlquist0000.chtc.wisc.edu      23           23         0
+
+======================================================================
+EDGE-LEVEL SUMMARY
+======================================================================
+Total edges: 533
+Both legs done (usable ddG): 315
+Incomplete edges: 218
+
+ddG distribution (kcal/mol):
+  mean=0.12  median=0.18  min=-15.06  max=13.09
+  |ddG|>5: 47  |ddG|>10: 5
+
+Wrote per-leg report:  openfe/final_leg_report.csv
+Wrote per-edge report: openfe/final_edge_report.csv
+```
