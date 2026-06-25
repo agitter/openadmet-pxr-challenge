@@ -1576,3 +1576,214 @@ while IFS=, read -r cid tname; do
     rm -f "openfe/production/$cid/$tname/result.json"
 done < openfe/production/transform_list_retry.txt
 ```
+
+```commandline
+$ python -c "
+> import json
+> d = json.load(open('openfe/production/110/rbfe_OADMET-0006503_complex_OCNT-2317296_complex/result.json'))
+> for k, v in d.get('unit_results', {}).items():
+>     name = v.get('name', '')
+>     if 'Simulation' in name:
+>         # Print the exception and traceback
+>         exc = v.get('exception')
+>         tb = v.get('traceback')
+>         if exc:
+>             print('EXCEPTION:', exc)
+>         if tb:
+>             print('TRACEBACK:')
+>             print(tb[:2000] if isinstance(tb, str) else tb)
+>         # Also check outputs
+>         outputs = v.get('outputs', {})
+>         if 'exception' in outputs:
+>             print('OUTPUT EXCEPTION:', outputs['exception'])
+>         break
+> "
+EXCEPTION: ['SimulationNaNError', ['Propagating replica 1 at state 1 resulted in a NaN!\nThe state of the system and integrator before the error were saved in quickrun_s
+cratch/shared_HybridTopologyMultiStateSimulationUnit-62a6829beb7249328e117bd02f52fba1_attempt_1/nan-error-logs']]
+TRACEBACK:
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/site-packages/openmmtools/multistate/multistatesampler.py", line 1323, in _propagate_replica
+    mcmc_move.apply(thermodynamic_state, sampler_state, context_cache=self.sampler_context_cache)
+  File "/opt/conda/lib/python3.12/site-packages/openmmtools/mcmc.py", line 1151, in apply
+    super().apply(thermodynamic_state, sampler_state,
+  File "/opt/conda/lib/python3.12/site-packages/openmmtools/mcmc.py", line 755, in apply
+    raise IntegratorMoveError(err_msg, self, context)
+openmmtools.mcmc.IntegratorMoveError: Potential energy is NaN after 20 attempts of integration with move LangevinDynamicsMove
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/site-packages/gufe/protocols/protocolunit.py", line 367, in execute
+    outputs = self._execute(context, **inputs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_units.py", line 1434, in _execute
+    outputs = self.run(
+              ^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_units.py", line 1370, in run
+    self._run_simulation(
+  File "/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_units.py", line 1238, in _run_simulation
+    sampler.equilibrate(int(equil_steps / mc_steps))
+  File "/opt/conda/lib/python3.12/site-packages/openmmtools/multistate/multistatesampler.py", line 693, in equilibrate
+    self._propagate_replicas()
+  File "/opt/conda/lib/python3.12/site-packages/openmmtools/utils/utils.py", line 95, in _wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/openmmtools/multistate/multistatesampler.py", line 1296, in _propagate_replicas
+    propagated_states, replica_ids = mpiplus.distribute(self._propagate_replica, range(self.n_r
+```
+
+```commandline
+$ python -c "
+> import json, pathlib
+> prod = pathlib.Path('openfe/production')
+>
+> nan_fail = 0
+> other_fail = 0
+> no_result = 0
+> incomplete_examples = []
+>
+> for job_dir in sorted(prod.glob('*/*/')):
+>     if not job_dir.is_dir(): continue
+>     def valid(rf):
+>         if rf.exists() and rf.stat().st_size > 100:
+>             try:
+>                 d = json.loads(rf.read_text())
+>                 return d.get('estimate') and d['estimate'].get('magnitude') is not None
+>             except: return False
+>         return False
+>     if valid(job_dir/'result.json') or valid(job_dir/'quickrun_output'/'result.json'):
+>         continue
+>     # Incomplete - categorize
+>     found_nan = False
+>     for rf in [job_dir/'result.json', job_dir/'quickrun_output'/'result.json']:
+>         if rf.exists() and rf.stat().st_size > 1000:
+>             try:
+>                 d = json.loads(rf.read_text())
+>                 s = json.dumps(d)
+>                 if 'SimulationNaNError' in s or 'NaN' in s:
+>                     found_nan = True
+>                     break
+>             except: pass
+>     if found_nan:
+>         nan_fail += 1
+>     else:
+>         # Check if there's any substantial result
+>         has_result = any((job_dir/p).exists() and (job_dir/p).stat().st_size > 1000
+>                          for p in ['result.json', 'quickrun_output/result.json'])
+>         if has_result:
+>             other_fail += 1
+>         else:
+>             no_result += 1
+>             if len(incomplete_examples) < 5:
+>                 incomplete_examples.append(str(job_dir))
+>
+> print(f'NaN failures (edge-specific, wont fix): {nan_fail}')
+> print(f'Other failures with result.json:        {other_fail}')
+> print(f'No substantial result (didnt finish):   {no_result}')
+> print()
+> print('Examples of no-result jobs:')
+> for e in incomplete_examples:
+>     print(f'  {e}')
+> "
+NaN failures (edge-specific, wont fix): 189
+Other failures with result.json:        59
+No substantial result (didnt finish):   0
+
+Examples of no-result jobs:
+```
+
+```commandline
+$ python -c "
+> import json, pathlib
+> prod = pathlib.Path('openfe/production')
+>
+> categories = {}
+> examples = {}
+>
+> for job_dir in sorted(prod.glob('*/*/')):
+>     if not job_dir.is_dir(): continue
+>     def valid(rf):
+>         if rf.exists() and rf.stat().st_size > 100:
+>             try:
+>                 d = json.loads(rf.read_text())
+>                 return d.get('estimate') and d['estimate'].get('magnitude') is not None
+>             except: return False
+>         return False
+>     if valid(job_dir/'result.json') or valid(job_dir/'quickrun_output'/'result.json'):
+>         continue
+>     # Get the failure reason from result.json
+>     for rf in [job_dir/'result.json', job_dir/'quickrun_output'/'result.json']:
+>         if rf.exists() and rf.stat().st_size > 1000:
+>             try:
+>                 d = json.loads(rf.read_text())
+>                 s = json.dumps(d)
+>                 if 'SimulationNaNError' in s:
+>                     cat = 'NaN'
+>                 else:
+>                     # Extract the exception type
+>                     cat = 'unknown'
+>                     for k, v in d.get('unit_results', {}).items():
+>                         exc = v.get('exception')
+>                         if exc and isinstance(exc, list) and len(exc) > 0:
+>                             cat = exc[0]
+>                             break
+>                 categories[cat] = categories.get(cat, 0) + 1
+>                 if cat not in examples:
+>                     examples[cat] = str(job_dir)
+>                 break
+>             except: pass
+>
+> print('Failure categories:')
+> for cat, count in sorted(categories.items(), key=lambda x: -x[1]):
+>     print(f'  {count:4d}  {cat}')
+>     print(f'        e.g. {examples[cat]}')
+> "
+Failure categories:
+   189  NaN
+        e.g. openfe/production/110/rbfe_OADMET-0006503_complex_OCNT-2317296_complex
+    54  IndexError
+        e.g. openfe/production/167/rbfe_OADMET-0006443_complex_OCNT-2310646_complex
+     5  OpenMMException
+        e.g. openfe/production/408/rbfe_OADMET-0006590_complex_OADMET-0006358_complex
+```
+
+```commandline
+$ python3 -c "
+> import json
+> d = json.load(open('openfe/production/167/rbfe_OADMET-0006443_complex_OCNT-2310646_complex/result.json'))
+> for k, v in d.get('unit_results', {}).items():
+>     exc = v.get('exception')
+>     tb = v.get('traceback')
+>     if exc:
+>         print('EXCEPTION:', exc[0] if isinstance(exc, list) else exc)
+>         if isinstance(exc, list) and len(exc) > 1:
+>             print('MESSAGE:', exc[1])
+>         if tb:
+>             print('TRACEBACK:')
+>             print(tb[-2000:] if isinstance(tb, str) else tb)
+>         break
+> "
+EXCEPTION: IndexError
+MESSAGE: ['list index out of range']
+TRACEBACK:
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/site-packages/gufe/protocols/protocolunit.py", line 367, in execute
+    outputs = self._execute(context, **inputs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_units.py", line 831, in _execute
+    outputs = self.run(scratch_basepath=ctx.scratch, shared_basepath=ctx.shared)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_units.py", line 777, in run
+    hybrid_factory, hybrid_system = self._get_alchemical_system(
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/hybridtop_units.py", line 626, in _get_alchemical_system
+    hybrid_factory = _rfe_utils.relative.HybridTopologyFactory(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/_rfe_utils/relative.py", line 231, in __init__
+    self._hybrid_topology = self._create_mdtraj_topology()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/openfe/protocols/openmm_rfe/_rfe_utils/relative.py", line 2453, in _create_mdtraj_topology
+    first_mapped_old_atom_index = mapped_old_atom_indices[0]
+                                  ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+```
