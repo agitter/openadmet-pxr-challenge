@@ -25,6 +25,7 @@ Outputs:
 
 Usage:
     python openfe/scripts/09_connectivity_analysis.py \
+        --edge-results openfe/all_edge_results.csv \
         --edge-report openfe/final_edge_report.csv \
         --test-full openfe/test_full_with_clusters_and_anchors.csv \
         --outdir openfe
@@ -73,14 +74,28 @@ def connected_component(graph, start):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--edge-report", default="openfe/final_edge_report.csv")
+    ap.add_argument("--edge-results", default="openfe/all_edge_results.csv",
+                    help="Combined edge table from 11_gather_all_results.py "
+                         "(has 'tier' column). Falls back to --edge-report "
+                         "if not present.")
+    ap.add_argument("--edge-report", default="openfe/final_edge_report.csv",
+                    help="Kartograf-only edge report (used if --edge-results "
+                         "does not exist)")
     ap.add_argument("--test-full",
                     default="openfe/test_full_with_clusters_and_anchors.csv")
     ap.add_argument("--outdir", default="openfe")
     args = ap.parse_args()
 
     outdir = Path(args.outdir)
-    edge_df = pd.read_csv(args.edge_report)
+    # Prefer the combined results (with tier provenance) if available
+    if Path(args.edge_results).exists():
+        edge_df = pd.read_csv(args.edge_results)
+        print(f"Using combined edge results: {args.edge_results}")
+    else:
+        edge_df = pd.read_csv(args.edge_report)
+        print(f"Using Kartograf-only edge report: {args.edge_report}")
+        edge_df["tier"] = edge_df["both_done"].map(
+            {True: "tier1_kartograf", False: "incomplete"})
     test_full = pd.read_csv(args.test_full)
 
     # Map: cluster_id -> set of anchor ligand_ids (the OCNT names),
@@ -98,8 +113,10 @@ def main():
     salvage_value = defaultdict(int)  # (cluster, edge) -> compounds reconnected
 
     for cluster_id, grp in edge_df.groupby("cluster_id"):
-        # Working edges: both legs done
+        # Working edges: both legs done. Track tier per edge so we can
+        # tell whether a compound's connection relies on LOMAP salvage.
         working = []
+        working_tier = {}  # (a,b) frozenset -> tier
         failed = []
         for _, row in grp.iterrows():
             a, b = parse_edge_ligands(row["edge"])
@@ -107,10 +124,18 @@ def main():
                 continue
             if row["both_done"]:
                 working.append((a, b))
+                tier = row["tier"] if "tier" in row else "tier1_kartograf"
+                working_tier[frozenset((a, b))] = tier
             else:
                 failed.append((a, b, row["edge"]))
 
         graph = build_graph(working)
+        # Graph using only tier-1 (Kartograf) edges, to check if a
+        # compound is reachable without relying on salvage
+        tier1_edges = [(a, b) for (a, b) in working
+                       if working_tier.get(frozenset((a, b)))
+                       == "tier1_kartograf"]
+        graph_tier1 = build_graph(tier1_edges)
 
         # Anchors in this cluster = nodes starting with OCNT
         all_nodes = set()
@@ -123,18 +148,34 @@ def main():
         anchors = {n for n in all_nodes if n.startswith("OCNT")}
         test_compounds = {n for n in all_nodes if n.startswith("OADMET")}
 
-        # Which test compounds are connected to an anchor via working edges?
+        # Reachability via all working edges
         anchor_reachable = set()
         for anchor in anchors:
             if anchor in graph:
                 anchor_reachable |= connected_component(graph, anchor)
 
+        # Reachability via tier-1 (Kartograf) edges only
+        anchor_reachable_t1 = set()
+        for anchor in anchors:
+            if anchor in graph_tier1:
+                anchor_reachable_t1 |= connected_component(graph_tier1, anchor)
+
         for tc in test_compounds:
             connected = tc in anchor_reachable
+            connected_t1 = tc in anchor_reachable_t1
+            # Tier of the connection: if reachable via Kartograf alone,
+            # tier1; if only reachable using a salvage edge, tier2.
+            if connected_t1:
+                conn_tier = "tier1_kartograf"
+            elif connected:
+                conn_tier = "tier2_lomap"
+            else:
+                conn_tier = "disconnected"
             conn_rows.append({
                 "cluster_id": cluster_id,
                 "compound": tc,
                 "connected_to_anchor": connected,
+                "connection_tier": conn_tier,
             })
 
         # Salvage value: for each failed edge, how many disconnected
@@ -163,8 +204,19 @@ def main():
     print(f"Test compounds in RBFE networks: {n_total}")
     print(f"Connected to anchor (RBFE-predictable): {n_connected} "
           f"({100*n_connected/n_total:.1f}%)")
-    print(f"Disconnected (need salvage or docking): {n_total - n_connected} "
+    print(f"Disconnected (need docking fallback): {n_total - n_connected} "
           f"({100*(n_total-n_connected)/n_total:.1f}%)")
+
+    # Tier breakdown of connected compounds
+    if "connection_tier" in conn_df.columns:
+        print(f"\nConnected compounds by tier:")
+        tier_counts = conn_df[conn_df["connected_to_anchor"]][
+            "connection_tier"].value_counts()
+        for tier, count in tier_counts.items():
+            label = {"tier1_kartograf": "Kartograf-only path (high conf)",
+                     "tier2_lomap": "requires LOMAP salvage edge (lower conf)"
+                     }.get(tier, tier)
+            print(f"  {tier}: {count} ({label})")
 
     # Salvage priority
     salvage_rows = [

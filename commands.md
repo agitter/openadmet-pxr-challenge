@@ -1905,3 +1905,221 @@ Wrote openfe/salvage_priority_edges.csv
 
 Wrote openfe/connectivity_report.csv
 ```
+
+```commandline
+time singularity exec /staging/a/agitter/containers/openfe_1.11.1.sif \
+    bash -c "source /usr/local/bin/_activate_current_env.sh && \
+    python openfe/scripts/10_salvage_plan.py \
+        --edge-report openfe/final_edge_report.csv \
+        --production-dir openfe/production \
+        --rbfe-inputs openfe/rbfe_inputs \
+        --script openfe/scripts/run_quickrun.sh \
+        --batch-start 0 --batch-size 50"
+=== Salvage planning batch complete ===
+Batch range: 0 to 49
+Edges salvaged this batch (both legs): 22
+No LOMAP mapping found:                 16
+Low coverage (skipped):                12
+Errors:                                 0
+Transformation legs written this batch: 44
+
+Next batch: --batch-start 50
+Queue list: openfe/production/salvage_transform_list.txt
+
+time singularity exec /staging/a/agitter/containers/openfe_1.11.1.sif \
+    bash -c "source /usr/local/bin/_activate_current_env.sh && \
+    python openfe/scripts/10_salvage_plan.py \
+        --edge-report openfe/final_edge_report.csv \
+        --production-dir openfe/production \
+        --rbfe-inputs openfe/rbfe_inputs \
+        --script openfe/scripts/run_quickrun.sh \
+        --batch-start 50 --batch-size 50"
+=== Salvage planning batch complete ===
+Batch range: 50 to 99
+Edges salvaged this batch (both legs): 25
+No LOMAP mapping found:                 14
+Low coverage (skipped):                11
+Errors:                                 0
+Transformation legs written this batch: 50
+
+Next batch: --batch-start 100
+Queue list: openfe/production/salvage_transform_list.txt
+
+time singularity exec /staging/a/agitter/containers/openfe_1.11.1.sif \
+    bash -c "source /usr/local/bin/_activate_current_env.sh && \
+    python openfe/scripts/10_salvage_plan.py \
+        --edge-report openfe/final_edge_report.csv \
+        --production-dir openfe/production \
+        --rbfe-inputs openfe/rbfe_inputs \
+        --script openfe/scripts/run_quickrun.sh \
+        --batch-start 100 --batch-size 50"
+=== Salvage planning batch complete ===
+Batch range: 100 to 149
+Edges salvaged this batch (both legs): 18
+No LOMAP mapping found:                 15
+Low coverage (skipped):                17
+Errors:                                 0
+Transformation legs written this batch: 36
+
+Next batch: --batch-start 150
+Queue list: openfe/production/salvage_transform_list.txt
+
+time singularity exec /staging/a/agitter/containers/openfe_1.11.1.sif \
+    bash -c "source /usr/local/bin/_activate_current_env.sh && \
+    python openfe/scripts/10_salvage_plan.py \
+        --edge-report openfe/final_edge_report.csv \
+        --production-dir openfe/production \
+        --rbfe-inputs openfe/rbfe_inputs \
+        --script openfe/scripts/run_quickrun.sh \
+        --batch-start 150 --batch-size 50"
+=== Salvage planning batch complete ===
+Batch range: 150 to 199
+Edges salvaged this batch (both legs): 23
+No LOMAP mapping found:                 20
+Low coverage (skipped):                7
+Errors:                                 0
+Transformation legs written this batch: 46
+
+Next batch: --batch-start 200
+Queue list: openfe/production/salvage_transform_list.txt
+
+time singularity exec /staging/a/agitter/containers/openfe_1.11.1.sif \
+    bash -c "source /usr/local/bin/_activate_current_env.sh && \
+    python openfe/scripts/10_salvage_plan.py \
+        --edge-report openfe/final_edge_report.csv \
+        --production-dir openfe/production \
+        --rbfe-inputs openfe/rbfe_inputs \
+        --script openfe/scripts/run_quickrun.sh \
+        --batch-start 200 --batch-size 50"
+
+=== Salvage planning batch complete ===
+Batch range: 200 to 217
+Edges salvaged this batch (both legs): 6
+No LOMAP mapping found:                 10
+Low coverage (skipped):                2
+Errors:                                 0
+Transformation legs written this batch: 12
+
+All 218 failed edges processed.
+Queue list: openfe/production/salvage_transform_list.txt
+```
+
+After all jobs completed, rerun report.
+```commandline
+python openfe/scripts/08_final_report.py \
+    --production-dir openfe/production \
+    --outdir openfe
+    
+======================================================================
+FINAL CAMPAIGN REPORT
+======================================================================
+Total legs: 1066
+
+STATUS:
+status
+COMPLETED    819
+FAILED       247
+
+FAILURE TYPES:
+fail_type
+SimulationNaNError    188
+IndexError             54
+OpenMMException         5
+
+BY LEG TYPE:
+  complex: 316/533 completed
+  solvent: 503/533 completed
+
+TIMING (completed, n=819):
+  mean=1.8h  median=1.0h  min=0.6h  max=21.3h
+
+BY GPU TYPE:
+                         gpu_name  n_legs  n_completed   mean_h
+                      NVIDIA L40S     279          206 1.161841
+                       NVIDIA L40     168          122 1.221204
+       NVIDIA GeForce RTX 2080 Ti     123           96 1.451506
+            NVIDIA H100 80GB HBM3     102           86 1.383151
+                      NVIDIA H200      76           55 1.321049
+                 NVIDIA RTX A5000      54           45 1.518539
+                  Quadro RTX 6000      51           43 1.460969
+            NVIDIA A100-SXM4-40GB      48           33 1.364838
+                       NVIDIA A40      46           37 1.578871
+            NVIDIA A100-SXM4-80GB      41           32 1.867080
+       NVIDIA GeForce GTX 1080 Ti      25           14 2.095922
+            NVIDIA A100 80GB PCIe      17           16 1.922386
+NVIDIA A100-SXM4-80GB MIG 3g.40gb      13           12 2.022030
+             Tesla P100-PCIE-16GB       9            9 2.729630
+             Tesla V100-PCIE-16GB       8            7 1.935764
+                  NVIDIA H100 NVL       3            3 2.212222
+             Tesla V100-PCIE-32GB       3            3 2.835926
+
+BY SERVER (top 15 by leg count):
+                             server  n_legs  n_completed  n_failed
+     zliu-chtcgpu5000.chtc.wisc.edu      46           35        11
+    blengerichgpu4000.chtc.wisc.edu      43           34         9
+           gpulab2001.chtc.wisc.edu      40           26        14
+              gpu4002.chtc.wisc.edu      38           25        13
+              gpu4000.chtc.wisc.edu      31           26         5
+dbrundage-chtcgpu5000.chtc.wisc.edu      30           21         9
+      jcaicedogpu0004.chtc.wisc.edu      29           24         5
+       amuraligpu4000.chtc.wisc.edu      27           16        11
+        vetsigian0001.chtc.wisc.edu      26           18         8
+           gitter0000.chtc.wisc.edu      25           14        11
+           gpulab2003.chtc.wisc.edu      25           20         5
+      jcaicedogpu0000.chtc.wisc.edu      25           19         6
+      jcaicedogpu0003.chtc.wisc.edu      25           19         6
+              gpu4006.chtc.wisc.edu      24           18         6
+         ahlquist0000.chtc.wisc.edu      23           23         0
+
+======================================================================
+EDGE-LEVEL SUMMARY
+======================================================================
+Total edges: 533
+Both legs done (usable ddG): 316
+Incomplete edges: 217
+
+ddG distribution (kcal/mol):
+  mean=0.15  median=0.20  min=-15.06  max=13.09
+  |ddG|>5: 48  |ddG|>10: 5
+
+Wrote per-leg report:  openfe/final_leg_report.csv
+Wrote per-edge report: openfe/final_edge_report.csv
+```
+
+```commandline
+python3 -c "
+import pandas as pd
+edge_df = pd.read_csv('openfe/final_edge_report.csv')
+# The new completion is the edge with both_done=True that was
+# previously missing its complex leg (solvent was already done)
+# Check salvage_skipped_edges.csv to see if it appears there
+completed = edge_df[edge_df['both_done']]
+skipped = pd.read_csv('openfe/production/salvage_skipped_edges.csv')
+skipped_edges = set(skipped['edge'])
+in_skipped = completed[completed['edge'].isin(skipped_edges)]
+print('Completed edges also in skipped list:')
+print(in_skipped[['cluster_id','edge','complex_fail','solvent_fail']])
+
+# Also check salvage transform list
+salvage = []
+with open('openfe/production/salvage_transform_list.txt') as f:
+    for line in f:
+        line = line.strip()
+        if line: salvage.append(line.split(',', 1)[1])
+import re
+def edge_from_transform(t):
+    e = re.sub(r'_(complex|solvent)$', '', t)
+    return re.sub(r'_(complex|solvent)_', '_', e)
+salvage_edges = set(edge_from_transform(t) for t in salvage)
+in_salvage = completed[completed['edge'].isin(salvage_edges)]
+print('Completed edges also in salvage list:')
+print(in_salvage[['cluster_id','edge']])
+"
+Completed edges also in skipped list:
+     cluster_id                                edge complex_fail solvent_fail
+167         373  rbfe_OADMET-0006493_OADMET-0006428          NaN          NaN
+Completed edges also in salvage list:
+Empty DataFrame
+Columns: [cluster_id, edge]
+Index: []
+```
