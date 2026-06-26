@@ -26,16 +26,21 @@ pEC50 analysis can treat salvaged edges as a separate confidence tier.
 
 Must run INSIDE the openfe container (needs openfe Python API).
 
-Usage (inside container, on AP):
+Usage (inside container, on AP) - process in batches of 50:
+    # Batch 1 (edges 0-49, truncates output files):
     python openfe/scripts/10_salvage_plan.py \
         --edge-report openfe/final_edge_report.csv \
         --production-dir openfe/production \
         --rbfe-inputs openfe/rbfe_inputs \
-        --script openfe/scripts/run_quickrun.sh
+        --script openfe/scripts/run_quickrun.sh \
+        --batch-start 0 --batch-size 50
+
+    # Batch 2 (edges 50-99, appends), then --batch-start 100, 150, 200...
+    # The script prints the next --batch-start to use.
 
 All edges with both_done=False are salvaged (every incomplete edge).
-After the salvage run completes, re-run connectivity analysis on the
-combined Kartograf + LOMAP results to see total compound coverage.
+After all batches, re-run connectivity analysis on the combined
+Kartograf + LOMAP results to see total compound coverage.
 """
 
 import argparse
@@ -53,8 +58,22 @@ def main():
     ap.add_argument("--production-dir", default="openfe/production")
     ap.add_argument("--rbfe-inputs", default="openfe/rbfe_inputs")
     ap.add_argument("--script", default="openfe/scripts/run_quickrun.sh")
+    ap.add_argument("--min-mapped-frac", type=float, default=0.25,
+                    help="Skip edges where the mapping covers less than "
+                         "this fraction of the smaller ligand's heavy "
+                         "atoms (default 0.25). Low-coverage mappings give "
+                         "unreliable ddG and often NaN.")
+    ap.add_argument("--min-mapped-atoms", type=int, default=4,
+                    help="Also require at least this many mapped atoms "
+                         "(default 4).")
     ap.add_argument("--outlist", default="openfe/production/salvage_transform_list.txt",
                     help="Output queue list for the salvage production run")
+    ap.add_argument("--batch-start", type=int, default=0,
+                    help="Index of first failed edge to process (0-based). "
+                         "For batching: 0, 50, 100, ... (default 0)")
+    ap.add_argument("--batch-size", type=int, default=50,
+                    help="Max edges to process this invocation (default 50). "
+                         "Keeps each AP run short.")
     args = ap.parse_args()
 
     import shutil
@@ -73,8 +92,14 @@ def main():
     script_src = Path(args.script)
 
     salvage = pd.read_csv(args.edge_report)
-    salvage = salvage[~salvage["both_done"]].copy()
-    print(f"Salvaging {len(salvage)} failed edges (all incomplete edges)")
+    salvage = salvage[~salvage["both_done"]].copy().reset_index(drop=True)
+    total_failed = len(salvage)
+
+    # Slice to the requested batch
+    batch = salvage.iloc[args.batch_start:args.batch_start + args.batch_size]
+    print(f"Total failed edges: {total_failed}")
+    print(f"Processing batch: edges {args.batch_start} to "
+          f"{args.batch_start + len(batch) - 1} ({len(batch)} edges)")
 
     def find_ligand_file(cluster_id, mol_name):
         cluster_dir = rbfe_inputs / str(cluster_id)
@@ -95,9 +120,10 @@ def main():
     solvent = SolventComponent()
 
     transform_entries = []
-    n_ok = n_no_mapping = n_error = 0
+    n_ok = n_no_mapping = n_error = n_low_coverage = 0
+    skipped_edges = []
 
-    for _, row in salvage.iterrows():
+    for _, row in batch.iterrows():
         cluster_id = row["cluster_id"]
         edge = row["edge"]
         body = edge[len("rbfe_"):] if edge.startswith("rbfe_") else edge
@@ -129,6 +155,26 @@ def main():
                 continue
             mapping = mappings[0]
             n_mapped = len(mapping.componentA_to_componentB)
+
+            # Quality check: reject low-coverage mappings that would give
+            # unreliable ddG / likely NaN. Use the smaller ligand's heavy
+            # atom count as the denominator.
+            nheavy_A = molA.to_rdkit().GetNumHeavyAtoms()
+            nheavy_B = molB.to_rdkit().GetNumHeavyAtoms()
+            smaller = min(nheavy_A, nheavy_B)
+            frac = n_mapped / smaller if smaller > 0 else 0.0
+
+            if n_mapped < args.min_mapped_atoms or frac < args.min_mapped_frac:
+                print(f"  SKIP {cluster_id}/{edge}: low coverage "
+                      f"({n_mapped} atoms = {frac:.0%} of smaller ligand, "
+                      f"below thresholds) - unsalvageable, will use docking")
+                n_low_coverage += 1
+                skipped_edges.append({
+                    "cluster_id": cluster_id, "edge": edge,
+                    "n_mapped": n_mapped, "frac": round(frac, 3),
+                    "reason": "low_coverage",
+                })
+                continue
 
             sysA_c = ChemicalSystem(
                 {"ligand": molA, "protein": protein, "solvent": solvent})
@@ -180,15 +226,42 @@ def main():
             print(f"  ERROR {cluster_id}/{edge}: {type(e).__name__}: {e}")
             n_error += 1
 
-    with open(args.outlist, "w") as f:
-        f.write("\n".join(transform_entries) + "\n")
+    # Append to the queue list so batches accumulate (first batch with
+    # batch-start=0 truncates to start fresh; later batches append).
+    mode = "w" if args.batch_start == 0 else "a"
+    with open(args.outlist, mode) as f:
+        if transform_entries:
+            f.write("\n".join(transform_entries) + "\n")
 
-    print(f"\n=== Salvage planning complete ===")
-    print(f"Edges salvaged (both legs):  {n_ok}")
-    print(f"No LOMAP mapping found:      {n_no_mapping}")
-    print(f"Errors:                      {n_error}")
-    print(f"Transformation legs written: {len(transform_entries)}")
-    print(f"Wrote queue list: {args.outlist}")
+    # Append unsalvageable edges similarly
+    if skipped_edges:
+        import csv
+        skip_path = Path(args.outlist).parent / "salvage_skipped_edges.csv"
+        write_header = (args.batch_start == 0) or (not skip_path.exists())
+        with open(skip_path, "a" if args.batch_start > 0 else "w",
+                  newline="") as f:
+            w = csv.DictWriter(f, fieldnames=["cluster_id", "edge",
+                                              "n_mapped", "frac", "reason"])
+            if write_header:
+                w.writeheader()
+            w.writerows(skipped_edges)
+        print(f"Appended {len(skipped_edges)} unsalvageable edges to "
+              f"{skip_path}")
+
+    print(f"\n=== Salvage planning batch complete ===")
+    print(f"Batch range: {args.batch_start} to "
+          f"{args.batch_start + len(batch) - 1}")
+    print(f"Edges salvaged this batch (both legs): {n_ok}")
+    print(f"No LOMAP mapping found:                 {n_no_mapping}")
+    print(f"Low coverage (skipped):                {n_low_coverage}")
+    print(f"Errors:                                 {n_error}")
+    print(f"Transformation legs written this batch: {len(transform_entries)}")
+    next_start = args.batch_start + args.batch_size
+    if next_start < total_failed:
+        print(f"\nNext batch: --batch-start {next_start}")
+    else:
+        print(f"\nAll {total_failed} failed edges processed.")
+    print(f"Queue list: {args.outlist}")
 
 
 if __name__ == "__main__":
