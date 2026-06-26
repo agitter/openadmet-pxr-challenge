@@ -1866,3 +1866,42 @@ ddG distribution (kcal/mol):
 Wrote per-leg report:  openfe/final_leg_report.csv
 Wrote per-edge report: openfe/final_edge_report.csv
 ```
+
+```commandline
+$ python openfe/scripts/09_connectivity_analysis.py \
+>     --edge-report openfe/final_edge_report.csv \
+>     --test-full openfe/test_full_with_clusters_and_anchors.csv \
+>     --outdir openfe
+============================================================
+CONNECTIVITY ANALYSIS
+============================================================
+Test compounds in RBFE networks: 513
+Connected to anchor (RBFE-predictable): 292 (56.9%)
+Disconnected (need salvage or docking): 221 (43.1%)
+
+SALVAGE PRIORITY:
+Failed edges that would reconnect >=1 compound: 99
+Total reconnectable compounds (if all salvaged): 116
+
+Top 15 highest-value edges to salvage:
+ cluster_id                               edge  compounds_reconnected
+        402 rbfe_OADMET-0006449_OADMET-0006453                      9
+        496 rbfe_OADMET-0006435_OADMET-0006121                      6
+        468   rbfe_OCNT-2315366_OADMET-0006149                      3
+        373   rbfe_OADMET-0006493_OCNT-2311117                      2
+        477 rbfe_OADMET-0006269_OADMET-0006122                      2
+        110   rbfe_OADMET-0006503_OCNT-2317296                      1
+         80   rbfe_OCNT-2315472_OADMET-0006534                      1
+         67   rbfe_OADMET-0006548_OCNT-2312239                      1
+        167   rbfe_OADMET-0006443_OCNT-2310646                      1
+        169   rbfe_OADMET-0006469_OCNT-2315366                      1
+        169   rbfe_OADMET-0006580_OCNT-2315366                      1
+        169   rbfe_OCNT-2315366_OADMET-0006441                      1
+        178   rbfe_OCNT-2317556_OADMET-0006432                      1
+        191   rbfe_OADMET-0006521_OCNT-1965882                      1
+        136   rbfe_OCNT-2317556_OADMET-0006476                      1
+
+Wrote openfe/salvage_priority_edges.csv
+
+Wrote openfe/connectivity_report.csv
+```

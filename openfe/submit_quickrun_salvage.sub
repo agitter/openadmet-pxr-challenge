@@ -1,0 +1,54 @@
+# openfe/submit_quickrun_salvage.sub
+#
+# Salvage production run: re-runs FAILED Kartograf edges using new
+# LOMAP transformation JSONs (element_change=False).
+#
+# Each job's initialdir is the salvage/ subdirectory inside the original
+# job directory, so original Kartograf results are never touched.
+#
+# Layout per job:
+#   production/<cluster_id>/<transform_name>/salvage/
+#     <transform_name>.json   (LOMAP transformation, transferred in)
+#     run_quickrun.sh         (executable, transferred in)
+#     result.json             (LOMAP result, transferred out on success)
+#
+# Run from the openfe/ directory:
+#   condor_submit submit_quickrun_salvage.sub
+
+container_image = osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif
+
+executable = scripts/run_quickrun.sh
+arguments  = $(transform_name).json
+
+# initialdir is the salvage/ subdir inside the original job directory
+initialdir = production/$(cluster_id)/$(transform_name)/salvage
+
+# network_setup.json is NOT needed: the salvage transformation JSON is
+# self-contained (built via the Python API with the full ChemicalSystem).
+transfer_input_files   = run_quickrun.sh, $(transform_name).json
+transfer_output_files  = result.json
+when_to_transfer_output = ON_EXIT
+
+log    = logs/quickrun.$(Cluster).$(Process).log
+output = logs/quickrun.$(Cluster).$(Process).out
+error  = logs/quickrun.$(Cluster).$(Process).err
+
+request_cpus   = 1
+request_memory = 16GB
+request_disk   = 16GB
+request_gpus   = 1
+
+gpus_minimum_memory = 10000M
+
++WantGPULab = true
++GPUJobLength = "short"
++is_resumable = true
+want_campus_pools = true
+want_ospool = true
+
+max_retries = 10
+
+periodic_release = (NumJobStarts < 20) && (JobStatus == 5) && \
+    ((CurrentTime - EnteredCurrentStatus) > 600)
+
+queue cluster_id,transform_name from production/salvage_transform_list.txt
