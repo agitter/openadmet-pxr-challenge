@@ -2514,3 +2514,23 @@ Name: ddg_error, dtype: float64
   ddG_error <= 2.5: 228 edges (72%)
   ddG_error <= 3: 279 edges (88%)
 ```
+
+```commandline
+python openfe/scripts/16_threshold_sweep.py \
+    --edge-convergence openfe/edge_convergence.csv \
+    --test-full openfe/test_full_with_clusters_and_anchors.csv \
+    --train data/pxr-challenge_TRAIN.csv \
+    --phase1 data/pxr-challenge_TEST_PHASE_1_UNBLINDED.csv \
+    --outdir openfe
+thresh= none  connected=292  phase1_n=152  rho=0.168  r=0.149  MAE=2.478
+thresh=  3.0  connected=234  phase1_n=122  rho=0.178  r=0.183  MAE=2.445
+thresh=  2.5  connected=161  phase1_n= 90  rho=0.169  r=0.207  MAE=2.271
+thresh=  2.0  connected= 75  phase1_n= 45  rho=0.224  r=0.207  MAE=2.371
+thresh=  1.5  connected= 32  phase1_n= 16  rho=0.235  r=0.474  MAE=2.020
+thresh=  1.0  connected=  6  phase1_n=  3  rho=nan  r=nan  MAE=nan
+
+Wrote openfe\threshold_sweep.csv
+
+Suggested threshold (best Spearman with >=80% coverage):
+  threshold=3.0  connected=234  rho=0.178  MAE=2.445
+```
