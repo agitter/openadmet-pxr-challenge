@@ -1,0 +1,572 @@
+INFO:openfe.utils.system_probe.log:SYSTEM CONFIG DETAILS:
+INFO:openfe.utils.system_probe.log.hostname:hostname: 'gpulab2001'
+INFO:openfe.utils.system_probe.log.gpu:CUDA-based GPU not found
+INFO:openfe.utils.system_probe.log:Memory used: 27.6G (7.3%)
+INFO:openfe.utils.system_probe.log:quickrun_scratch/scratch_HybridTopologySetupUnit-de45186be16f4547bbe58bb1c1b57618_attempt_0: 0% full (4.9T free)
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologySetupUnit:Starting system setup unit
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologySetupUnit:Parameterizing systems
+INFO:openmmforcefields.generators.template_generators:Requested to generate parameters for residue <Residue 264 (UNK) of chain 1>
+INFO:openmmforcefields.generators.template_generators:Generating a residue template for [H][c]1[n][c]([C]#[N])[n][c]([N]2[C]([H])([H])[C]([H])([H])[C]([H])([H])[C@@]2([C]([H])([H])[H])[C]([H])([H])[c]2[c]([H])[c]([H])[c]([H])[c]([Br])[c]2[H])[c]1[H] using openff-2.2.1
+INFO:openmmforcefields.generators.template_generators:Requested to generate parameters for residue <Residue 11067 (UNK) of chain 4>
+INFO:openmmforcefields.generators.template_generators:Generating a residue template for [H][c]1[n][c]([C](=[O])[N]([H])[H])[n][c]([N]2[C]([H])([H])[C]([H])([H])[C]([H])([H])[C@@]2([C]([H])([H])[H])[C]([H])([H])[c]2[c]([H])[c]([H])[c]([F])[c]([Cl])[c]2[H])[c]1[H] using openff-2.2.1
+INFO:openfe.protocols.openmm_rfe._rfe_utils.relative:Creating hybrid system
+INFO:openfe.protocols.openmm_rfe._rfe_utils.relative:Setting force field terms
+INFO:openfe.protocols.openmm_rfe._rfe_utils.relative:Adding forces
+INFO:openfe.protocols.openmm_rfe._rfe_utils.relative:No CMAPTorsionForce found. Skipping adding force.
+INFO:openfe.protocols.openmm_rfe._rfe_utils.relative:Hybrid system created
+WARNING:py.warnings:/opt/conda/lib/python3.12/site-packages/mdtraj/core/topology.py:97: UserWarning: atom_indices are not monotonically increasing
+  warnings.warn("atom_indices are not monotonically increasing")
+
+INFO:openfe.utils.system_probe.log:SYSTEM CONFIG DETAILS:
+INFO:openfe.utils.system_probe.log.hostname:hostname: 'gpulab2001'
+INFO:openfe.utils.system_probe.log.gpu:CUDA-based GPU not found
+INFO:openfe.utils.system_probe.log:Memory used: 29.8G (7.9%)
+INFO:openfe.utils.system_probe.log:quickrun_scratch/scratch_HybridTopologyMultiStateSimulationUnit-a40e227e65bb4fd7b0a320be17ac627f_attempt_0: 0% full (4.9T free)
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologyMultiStateSimulationUnit:Starting simulation unit
+WARNING:openmmtools.multistate.multistatesampler:An online_analysis_interval that is not a multiple of the checkpoint_interval can lead to redundant information in the real time yaml file after recovering from checkpoints.
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologyMultiStateSimulationUnit:minimizing systems
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologyMultiStateSimulationUnit:equilibrating systems
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 1/400
+WARNING:py.warnings:/opt/conda/lib/python3.12/site-packages/openmmtools/mcmc.py:723: UserWarning: Particle coordinate is NaN.  For more information, see https://github.com/openmm/openmm/wiki/Frequently-Asked-Questions#nan
+  warnings.warn(str(e))
+
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 10.846s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 1:12:07.607540, at Fri Jun 26 14:35:53 2026 (consuming total wall clock time 1:12:18.453674).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 2/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.893s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:52:12.231535, at Fri Jun 26 14:16:02 2026 (consuming total wall clock time 0:52:27.971392).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 3/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.888s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:45:29.759414, at Fri Jun 26 14:09:25 2026 (consuming total wall clock time 0:45:50.387319).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 4/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.968s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:42:14.020235, at Fri Jun 26 14:06:14 2026 (consuming total wall clock time 0:42:39.616399).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 5/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.908s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:40:09.861953, at Fri Jun 26 14:04:15 2026 (consuming total wall clock time 0:40:40.366535).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 6/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.866s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:38:42.704124, at Fri Jun 26 14:02:52 2026 (consuming total wall clock time 0:39:18.075253).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 7/400
+WARNING:py.warnings:/opt/conda/lib/python3.12/site-packages/openmmtools/mcmc.py:723: UserWarning: Particle coordinate is NaN.  For more information, see https://github.com/openmm/openmm/wiki/Frequently-Asked-Questions#nan
+  warnings.warn(str(e))
+
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 2 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 3 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 4 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 9.369s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:41:51.847251, at Fri Jun 26 14:06:11 2026 (consuming total wall clock time 0:42:36.587533).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 8/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.421s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:40:57.890753, at Fri Jun 26 14:05:22 2026 (consuming total wall clock time 0:41:48.051789).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 9/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.853s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:39:50.045942, at Fri Jun 26 14:04:19 2026 (consuming total wall clock time 0:40:45.059787).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 10/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.019s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:39:01.278668, at Fri Jun 26 14:03:35 2026 (consuming total wall clock time 0:40:01.311455).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 11/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.983s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:38:19.192723, at Fri Jun 26 14:02:58 2026 (consuming total wall clock time 0:39:24.208456).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 12/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.908s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:37:40.879801, at Fri Jun 26 14:02:25 2026 (consuming total wall clock time 0:38:50.803919).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 13/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.974s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:37:09.681745, at Fri Jun 26 14:01:59 2026 (consuming total wall clock time 0:38:24.580615).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 14/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.877s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:36:39.543236, at Fri Jun 26 14:01:33 2026 (consuming total wall clock time 0:37:59.319416).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 15/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.015s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:36:16.303401, at Fri Jun 26 14:01:15 2026 (consuming total wall clock time 0:37:41.094443).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 16/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.003s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:35:55.054790, at Fri Jun 26 14:00:59 2026 (consuming total wall clock time 0:37:24.848740).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 17/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.980s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:35:35.209430, at Fri Jun 26 14:00:44 2026 (consuming total wall clock time 0:37:09.983739).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 18/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.996s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:35:17.352622, at Fri Jun 26 14:00:31 2026 (consuming total wall clock time 0:36:57.123164).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 19/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.970s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:35:00.325091, at Fri Jun 26 14:00:19 2026 (consuming total wall clock time 0:36:45.065712).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 20/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.967s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:34:44.440398, at Fri Jun 26 14:00:08 2026 (consuming total wall clock time 0:36:34.147787).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 21/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.919s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:34:28.731251, at Fri Jun 26 13:59:58 2026 (consuming total wall clock time 0:36:23.357520).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 22/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.039s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:34:16.070924, at Fri Jun 26 13:59:50 2026 (consuming total wall clock time 0:36:15.736427).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 23/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.069s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:34:04.567525, at Fri Jun 26 13:59:43 2026 (consuming total wall clock time 0:36:09.302414).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 24/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.048s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:53.276913, at Fri Jun 26 13:59:37 2026 (consuming total wall clock time 0:36:03.060546).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 25/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 2 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 3 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 6.178s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:59.434487, at Fri Jun 26 13:59:50 2026 (consuming total wall clock time 0:36:15.396786).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 26/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.003s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:47.733020, at Fri Jun 26 13:59:43 2026 (consuming total wall clock time 0:36:08.698417).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 27/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.025s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:36.836303, at Fri Jun 26 13:59:37 2026 (consuming total wall clock time 0:36:02.827135).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 28/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.999s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:26.009360, at Fri Jun 26 13:59:31 2026 (consuming total wall clock time 0:35:56.999312).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 29/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.982s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:15.374711, at Fri Jun 26 13:59:26 2026 (consuming total wall clock time 0:35:51.347397).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 30/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.904s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:16.484401, at Fri Jun 26 13:59:33 2026 (consuming total wall clock time 0:35:58.361514).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 31/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.083s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:07.367556, at Fri Jun 26 13:59:29 2026 (consuming total wall clock time 0:35:54.327974).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 32/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.053s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:58.156541, at Fri Jun 26 13:59:24 2026 (consuming total wall clock time 0:35:50.170153).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 33/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 7.081s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:11.750648, at Fri Jun 26 13:59:45 2026 (consuming total wall clock time 0:36:10.845393).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 34/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.997s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:01.701605, at Fri Jun 26 13:59:40 2026 (consuming total wall clock time 0:36:05.794103).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 35/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.004s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:52.007580, at Fri Jun 26 13:59:35 2026 (consuming total wall clock time 0:36:01.104197).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 36/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.102s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:43.565021, at Fri Jun 26 13:59:32 2026 (consuming total wall clock time 0:35:57.763759).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 37/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.995s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:34.259292, at Fri Jun 26 13:59:28 2026 (consuming total wall clock time 0:35:53.453765).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 38/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.997s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:25.196408, at Fri Jun 26 13:59:24 2026 (consuming total wall clock time 0:35:49.388296).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 39/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.999s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:16.363412, at Fri Jun 26 13:59:20 2026 (consuming total wall clock time 0:35:45.555027).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 40/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.057s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:08.251654, at Fri Jun 26 13:59:17 2026 (consuming total wall clock time 0:35:42.501838).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 41/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.995s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:59.735014, at Fri Jun 26 13:59:13 2026 (consuming total wall clock time 0:35:38.980517).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 42/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.009s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:51.503786, at Fri Jun 26 13:59:10 2026 (consuming total wall clock time 0:35:35.758420).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 43/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 6.226s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:53.528929, at Fri Jun 26 13:59:18 2026 (consuming total wall clock time 0:35:44.010005).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 44/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.478s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:49.131176, at Fri Jun 26 13:59:19 2026 (consuming total wall clock time 0:35:45.091209).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 45/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.051s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:41.309014, at Fri Jun 26 13:59:16 2026 (consuming total wall clock time 0:35:42.320016).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 46/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.024s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:33.398095, at Fri Jun 26 13:59:14 2026 (consuming total wall clock time 0:35:39.432876).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 47/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 6.172s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:34.240752, at Fri Jun 26 13:59:21 2026 (consuming total wall clock time 0:35:46.448444).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 48/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.038s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:26.473337, at Fri Jun 26 13:59:18 2026 (consuming total wall clock time 0:35:43.719701).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 49/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.999s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:18.536688, at Fri Jun 26 13:59:15 2026 (consuming total wall clock time 0:35:40.782551).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 50/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.889s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:16.948728, at Fri Jun 26 13:59:19 2026 (consuming total wall clock time 0:35:45.084261).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 51/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 2 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 3 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 4 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 5 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 6 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 7 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 8 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 9 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 10 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 11 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 12 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 13 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 14 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 15 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 16 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 17 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 18 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+ERROR:openmmtools.mcmc:Potential energy is NaN after 19 attempts of integration with move LangevinDynamicsMove Trying to reinitialize Context as a last-resort restart attempt...
+ERROR:openmmtools.mcmc:Potential energy is NaN after 20 attempts of integration with move LangevinDynamicsMove
+CRITICAL:openmmtools.multistate.multistatesampler:Propagating replica 3 at state 4 resulted in a NaN!
+The state of the system and integrator before the error were saved in quickrun_scratch/shared_HybridTopologyMultiStateSimulationUnit-a40e227e65bb4fd7b0a320be17ac627f_attempt_0/nan-error-logs
+INFO:openfe.utils.system_probe.log:SYSTEM CONFIG DETAILS:
+INFO:openfe.utils.system_probe.log.hostname:hostname: 'gpulab2001'
+INFO:openfe.utils.system_probe.log.gpu:CUDA-based GPU not found
+INFO:openfe.utils.system_probe.log:Memory used: 24.0G (6.4%)
+INFO:openfe.utils.system_probe.log:quickrun_scratch/scratch_HybridTopologyMultiStateSimulationUnit-a40e227e65bb4fd7b0a320be17ac627f_attempt_1: 0% full (4.9T free)
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologyMultiStateSimulationUnit:Starting simulation unit
+WARNING:openmmtools.multistate.multistatesampler:An online_analysis_interval that is not a multiple of the checkpoint_interval can lead to redundant information in the real time yaml file after recovering from checkpoints.
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologyMultiStateSimulationUnit:minimizing systems
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologyMultiStateSimulationUnit:equilibrating systems
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 1/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 7.276s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:48:23.099276, at Fri Jun 26 14:21:06 2026 (consuming total wall clock time 0:48:30.375214).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 2/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.841s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:40:11.317229, at Fri Jun 26 14:12:59 2026 (consuming total wall clock time 0:40:23.434401).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 3/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.885s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:37:29.979208, at Fri Jun 26 14:10:22 2026 (consuming total wall clock time 0:37:46.981570).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 4/400
+WARNING:py.warnings:/opt/conda/lib/python3.12/site-packages/openmmtools/mcmc.py:723: UserWarning: Particle coordinate is NaN.  For more information, see https://github.com/openmm/openmm/wiki/Frequently-Asked-Questions#nan
+  warnings.warn(str(e))
+
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.629s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:37:20.482765, at Fri Jun 26 14:10:18 2026 (consuming total wall clock time 0:37:43.113904).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 5/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.828s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:36:09.267281, at Fri Jun 26 14:09:12 2026 (consuming total wall clock time 0:36:36.726360).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 6/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.847s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:35:21.463561, at Fri Jun 26 14:08:29 2026 (consuming total wall clock time 0:35:53.770113).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 7/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.592s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:35:27.769597, at Fri Jun 26 14:08:41 2026 (consuming total wall clock time 0:36:05.668801).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 8/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.920s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:34:58.162894, at Fri Jun 26 14:08:16 2026 (consuming total wall clock time 0:35:40.982544).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 9/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.887s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:34:32.596105, at Fri Jun 26 14:07:56 2026 (consuming total wall clock time 0:35:20.302921).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 10/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.919s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:34:12.397000, at Fri Jun 26 14:07:40 2026 (consuming total wall clock time 0:35:05.022564).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 11/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.734s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:34:23.817506, at Fri Jun 26 14:07:57 2026 (consuming total wall clock time 0:35:22.177384).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 12/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.827s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:34:03.049819, at Fri Jun 26 14:07:41 2026 (consuming total wall clock time 0:35:06.236927).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 13/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.855s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:45.567562, at Fri Jun 26 14:07:29 2026 (consuming total wall clock time 0:34:53.609883).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 14/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.856s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:29.907371, at Fri Jun 26 14:07:18 2026 (consuming total wall clock time 0:34:42.805565).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 15/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.850s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:15.551898, at Fri Jun 26 14:07:09 2026 (consuming total wall clock time 0:34:33.300673).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 16/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.854s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:33:02.460165, at Fri Jun 26 14:07:00 2026 (consuming total wall clock time 0:34:25.062672).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 17/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.857s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:50.413346, at Fri Jun 26 14:06:53 2026 (consuming total wall clock time 0:34:17.872946).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 18/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.870s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:39.450979, at Fri Jun 26 14:06:47 2026 (consuming total wall clock time 0:34:11.781130).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 19/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.872s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:29.162839, at Fri Jun 26 14:06:42 2026 (consuming total wall clock time 0:34:06.365186).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 20/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.824s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:18.502168, at Fri Jun 26 14:06:36 2026 (consuming total wall clock time 0:34:00.528598).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 21/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.881s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:09.425395, at Fri Jun 26 14:06:32 2026 (consuming total wall clock time 0:33:56.332871).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 22/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.865s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:32:00.453725, at Fri Jun 26 14:06:27 2026 (consuming total wall clock time 0:33:52.226164).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 23/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.861s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:51.774142, at Fri Jun 26 14:06:24 2026 (consuming total wall clock time 0:33:48.407578).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 24/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.879s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:43.701732, at Fri Jun 26 14:06:20 2026 (consuming total wall clock time 0:33:45.214609).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 25/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.870s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:35.755942, at Fri Jun 26 14:06:17 2026 (consuming total wall clock time 0:33:42.139671).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 26/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.892s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:28.359413, at Fri Jun 26 14:06:15 2026 (consuming total wall clock time 0:33:39.635736).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 27/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.874s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:20.897051, at Fri Jun 26 14:06:12 2026 (consuming total wall clock time 0:33:37.047776).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 28/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.916s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:14.186803, at Fri Jun 26 14:06:10 2026 (consuming total wall clock time 0:33:35.254627).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 29/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.887s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:07.231391, at Fri Jun 26 14:06:08 2026 (consuming total wall clock time 0:33:33.187484).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 30/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.921s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:00.817505, at Fri Jun 26 14:06:07 2026 (consuming total wall clock time 0:33:31.694600).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 31/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.884s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:54.067506, at Fri Jun 26 14:06:05 2026 (consuming total wall clock time 0:33:29.829275).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 32/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.904s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:47.662549, at Fri Jun 26 14:06:04 2026 (consuming total wall clock time 0:33:28.328858).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 33/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.908s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:41.395093, at Fri Jun 26 14:06:02 2026 (consuming total wall clock time 0:33:26.970128).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 34/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.868s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:34.775754, at Fri Jun 26 14:06:00 2026 (consuming total wall clock time 0:33:25.219403).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 35/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.924s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:28.838244, at Fri Jun 26 14:05:59 2026 (consuming total wall clock time 0:33:24.206295).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 36/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 2 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 3 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 9.084s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:31:05.017436, at Fri Jun 26 14:06:45 2026 (consuming total wall clock time 0:34:09.469709).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 37/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.881s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:57.511146, at Fri Jun 26 14:06:42 2026 (consuming total wall clock time 0:34:06.844238).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 38/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.904s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:50.363709, at Fri Jun 26 14:06:40 2026 (consuming total wall clock time 0:34:04.600783).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 39/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 6.448s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:57.624418, at Fri Jun 26 14:06:54 2026 (consuming total wall clock time 0:34:18.309604).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 40/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.708s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:57.537366, at Fri Jun 26 14:06:59 2026 (consuming total wall clock time 0:34:23.930407).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 41/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.873s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:49.870198, at Fri Jun 26 14:06:56 2026 (consuming total wall clock time 0:34:21.136711).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 42/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.905s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:42.605105, at Fri Jun 26 14:06:54 2026 (consuming total wall clock time 0:34:18.776653).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 43/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.885s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:35.288983, at Fri Jun 26 14:06:52 2026 (consuming total wall clock time 0:34:16.346199).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 44/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.850s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:27.799825, at Fri Jun 26 14:06:49 2026 (consuming total wall clock time 0:34:13.707669).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 45/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.923s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:21.000401, at Fri Jun 26 14:06:47 2026 (consuming total wall clock time 0:34:11.831438).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 46/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.886s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:13.999333, at Fri Jun 26 14:06:45 2026 (consuming total wall clock time 0:34:09.716761).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 47/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.901s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:07.204534, at Fri Jun 26 14:06:43 2026 (consuming total wall clock time 0:34:07.823835).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 48/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.908s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:30:00.532172, at Fri Jun 26 14:06:41 2026 (consuming total wall clock time 0:34:06.059287).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 49/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.897s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:29:53.854026, at Fri Jun 26 14:06:39 2026 (consuming total wall clock time 0:34:04.278092).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 50/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.896s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:29:47.243277, at Fri Jun 26 14:06:38 2026 (consuming total wall clock time 0:34:02.563745).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 51/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.910s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:29:40.797103, at Fri Jun 26 14:06:36 2026 (consuming total wall clock time 0:34:01.028199).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 52/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.899s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:29:34.339356, at Fri Jun 26 14:06:35 2026 (consuming total wall clock time 0:33:59.470524).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 53/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.910s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:29:28.007815, at Fri Jun 26 14:06:33 2026 (consuming total wall clock time 0:33:58.049354).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 54/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.929s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:29:21.848801, at Fri Jun 26 14:06:32 2026 (consuming total wall clock time 0:33:56.819423).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 55/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.901s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:29:15.560174, at Fri Jun 26 14:06:31 2026 (consuming total wall clock time 0:33:55.432086).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 56/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.914s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:29:09.397435, at Fri Jun 26 14:06:29 2026 (consuming total wall clock time 0:33:54.183065).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 57/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.890s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:29:03.135931, at Fri Jun 26 14:06:28 2026 (consuming total wall clock time 0:33:52.811581).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 58/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.909s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:57.036830, at Fri Jun 26 14:06:27 2026 (consuming total wall clock time 0:33:51.622023).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 59/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.918s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:51.026173, at Fri Jun 26 14:06:26 2026 (consuming total wall clock time 0:33:50.529236).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 60/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.037s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:45.729564, at Fri Jun 26 14:06:25 2026 (consuming total wall clock time 0:33:50.270076).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 61/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.613s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:43.642989, at Fri Jun 26 14:06:29 2026 (consuming total wall clock time 0:33:53.797037).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 62/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.949s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:37.823187, at Fri Jun 26 14:06:28 2026 (consuming total wall clock time 0:33:52.926849).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 63/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.167s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:33.197339, at Fri Jun 26 14:06:29 2026 (consuming total wall clock time 0:33:53.468652).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 64/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 2 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 3 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 4 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 5 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 9.139s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:49.407377, at Fri Jun 26 14:06:54 2026 (consuming total wall clock time 0:34:18.818306).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 65/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 6.797s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:52.763345, at Fri Jun 26 14:07:04 2026 (consuming total wall clock time 0:34:28.971159).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 66/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.965s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:46.543789, at Fri Jun 26 14:07:03 2026 (consuming total wall clock time 0:34:27.717113).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 67/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.951s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:40.288454, at Fri Jun 26 14:07:02 2026 (consuming total wall clock time 0:34:26.412557).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 68/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.959s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:34.110431, at Fri Jun 26 14:07:00 2026 (consuming total wall clock time 0:34:25.193290).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 69/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.905s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:27.711002, at Fri Jun 26 14:06:59 2026 (consuming total wall clock time 0:34:23.699096).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 70/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.907s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:21.364351, at Fri Jun 26 14:06:57 2026 (consuming total wall clock time 0:34:22.259820).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 71/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.989s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:15.437659, at Fri Jun 26 14:06:57 2026 (consuming total wall clock time 0:34:21.322381).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 72/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.008s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:09.623402, at Fri Jun 26 14:06:56 2026 (consuming total wall clock time 0:34:20.516344).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 73/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 5.015s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:03.864451, at Fri Jun 26 14:06:55 2026 (consuming total wall clock time 0:34:19.773028).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 74/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 2 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 3 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 4 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 5 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 6 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 7 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 8 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 9 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 10 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 11 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+INFO:openmmtools.multistate.multistatesampler:Iteration took 17.445s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:52.884131, at Fri Jun 26 14:08:01 2026 (consuming total wall clock time 0:35:26.238198).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 75/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.885s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:45.702532, at Fri Jun 26 14:07:59 2026 (consuming total wall clock time 0:35:23.941578).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 76/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.948s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:38.850114, at Fri Jun 26 14:07:57 2026 (consuming total wall clock time 0:35:22.037177).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 77/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.933s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:31.985366, at Fri Jun 26 14:07:55 2026 (consuming total wall clock time 0:35:20.105716).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 78/400
+INFO:openmmtools.multistate.multistatesampler:Iteration took 4.865s.
+INFO:openmmtools.multistate.multistatesampler:Estimated completion (of equilibration only) in 0:28:24.888041, at Fri Jun 26 14:07:53 2026 (consuming total wall clock time 0:35:17.873343).
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 79/400
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 2 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 3 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 4 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 5 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 6 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 7 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 8 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 9 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 10 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 11 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 12 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 13 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 14 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 15 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 16 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 17 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 18 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+ERROR:openmmtools.mcmc:Potential energy is NaN after 19 attempts of integration with move LangevinDynamicsMove Trying to reinitialize Context as a last-resort restart attempt...
+ERROR:openmmtools.mcmc:Potential energy is NaN after 20 attempts of integration with move LangevinDynamicsMove
+CRITICAL:openmmtools.multistate.multistatesampler:Propagating replica 6 at state 5 resulted in a NaN!
+The state of the system and integrator before the error were saved in quickrun_scratch/shared_HybridTopologyMultiStateSimulationUnit-a40e227e65bb4fd7b0a320be17ac627f_attempt_1/nan-error-logs
+INFO:openfe.utils.system_probe.log:SYSTEM CONFIG DETAILS:
+INFO:openfe.utils.system_probe.log.hostname:hostname: 'gpulab2001'
+INFO:openfe.utils.system_probe.log.gpu:CUDA-based GPU not found
+INFO:openfe.utils.system_probe.log:Memory used: 24.1G (6.4%)
+INFO:openfe.utils.system_probe.log:quickrun_scratch/scratch_HybridTopologyMultiStateSimulationUnit-a40e227e65bb4fd7b0a320be17ac627f_attempt_2: 0% full (4.9T free)
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologyMultiStateSimulationUnit:Starting simulation unit
+WARNING:openmmtools.multistate.multistatesampler:An online_analysis_interval that is not a multiple of the checkpoint_interval can lead to redundant information in the real time yaml file after recovering from checkpoints.
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologyMultiStateSimulationUnit:minimizing systems
+INFO:gufekey.openfe.protocols.openmm_rfe.hybridtop_units.HybridTopologyMultiStateSimulationUnit:equilibrating systems
+INFO:openmmtools.multistate.multistatesampler:Equilibration iteration 1/400
+WARNING:py.warnings:/opt/conda/lib/python3.12/site-packages/openmmtools/mcmc.py:723: UserWarning: Particle coordinate is NaN.  For more information, see https://github.com/openmm/openmm/wiki/Frequently-Asked-Questions#nan
+  warnings.warn(str(e))
+
+WARNING:openmmtools.mcmc:Potential energy is NaN after 0 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 1 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 2 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 3 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 4 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 5 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 6 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 7 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 8 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 9 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 10 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 11 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 12 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 13 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 14 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 15 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 16 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 17 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+WARNING:openmmtools.mcmc:Potential energy is NaN after 18 attempts of integration with move LangevinDynamicsMove Attempting a restart...
+ERROR:openmmtools.mcmc:Potential energy is NaN after 19 attempts of integration with move LangevinDynamicsMove Trying to reinitialize Context as a last-resort restart attempt...
+ERROR:openmmtools.mcmc:Potential energy is NaN after 20 attempts of integration with move LangevinDynamicsMove
+CRITICAL:openmmtools.multistate.multistatesampler:Propagating replica 2 at state 2 resulted in a NaN!
+The state of the system and integrator before the error were saved in quickrun_scratch/shared_HybridTopologyMultiStateSimulationUnit-a40e227e65bb4fd7b0a320be17ac627f_attempt_2/nan-error-logs
+Error: The protocol unit 'HybridTopology Simulation: OCNT-2311573 to OADMET-0006255 repeat 0 generation 0' failed with the error message:
+SimulationNaNError: Propagating replica 2 at state 2 resulted in a NaN!
+The state of the system and integrator before the error were saved in quickrun_scratch/shared_HybridTopologyMultiStateSimulationUnit-a40e227e65bb4fd7b0a320be17ac627f_attempt_2/nan-error-logs
+
+Details provided in output.

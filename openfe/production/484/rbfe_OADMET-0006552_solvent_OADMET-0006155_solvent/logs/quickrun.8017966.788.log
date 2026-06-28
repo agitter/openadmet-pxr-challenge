@@ -1,0 +1,135 @@
+000 (8017966.788.000) 2026-06-20 22:07:54 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_4071840_2329>
+...
+040 (8017966.788.000) 2026-06-21 04:35:48 Started transferring input files
+	Transferring to host: <10.226.104.221:46101?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector5#4303932%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector7#4299354&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-46101&alias=gpu021.rci.montana.edu&noUDP>
+...
+040 (8017966.788.000) 2026-06-21 04:36:58 Finished transferring input files
+...
+021 (8017966.788.000) 2026-06-21 04:37:00 Message from starter on slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu:
+	PREPARE_JOB (prepare-hook) succeeded (reported status 000): Using Singularity image openfe_1.11.1.sif
+...
+001 (8017966.788.000) 2026-06-21 04:37:00 Job executing on host: <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+	SlotName: slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu
+	AvailableGPUs = { GPUs_GPU_dff97527 }
+	CondorScratchDir = "/tmp/jobs/4093136/glide_E7ub2W/execute/dir_1280523/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_dff97527 = [ Id = "GPU-dff97527"; ClockMhz = 1980.0; Capability = 9.0; CoresPerCU = 128; DeviceName = "NVIDIA H100 80GB HBM3"; DeviceUuid = "dff97527-806a-5b67-f1b3-81f9bd945eba"; ECCEnabled = true; ComputeUnits = 132; NvidiaDriver = "595.71.05"; DriverVersion = 13.2; DevicePciBusId = "0000:CB:00.0"; GlobalMemoryMb = 81081; MaxSupportedVersion = 13020 ]
+	Memory = 16384
+...
+006 (8017966.788.000) 2026-06-21 04:37:10 Image size of job updated: 4
+	6  -  MemoryUsage of job (MB)
+	5644  -  ResidentSetSize of job (KB)
+...
+022 (8017966.788.000) 2026-06-21 04:48:35 Job disconnected, attempting to reconnect
+    Socket between submit and execute hosts closed unexpectedly
+    Trying to reconnect to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+...
+023 (8017966.788.000) 2026-06-21 04:50:27 Job reconnected to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu
+    startd address: <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+    starter address: <10.226.104.221:46101?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector5#4303932%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector7#4299354&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-46101&alias=gpu021.rci.montana.edu&noUDP>
+...
+006 (8017966.788.000) 2026-06-21 05:02:12 Image size of job updated: 57759040
+	2641  -  MemoryUsage of job (MB)
+	2703580  -  ResidentSetSize of job (KB)
+...
+006 (8017966.788.000) 2026-06-21 05:14:13 Image size of job updated: 57773380
+	2655  -  MemoryUsage of job (MB)
+	2717924  -  ResidentSetSize of job (KB)
+...
+006 (8017966.788.000) 2026-06-21 05:20:02 Image size of job updated: 57774044
+	2655  -  MemoryUsage of job (MB)
+	2717924  -  ResidentSetSize of job (KB)
+...
+022 (8017966.788.000) 2026-06-21 05:20:08 Job disconnected, attempting to reconnect
+    Socket between submit and execute hosts closed unexpectedly
+    Trying to reconnect to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+...
+023 (8017966.788.000) 2026-06-21 05:20:08 Job reconnected to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu
+    startd address: <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+    starter address: <10.226.104.221:46101?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector5#4303932%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector7#4299354&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-46101&alias=gpu021.rci.montana.edu&noUDP>
+...
+022 (8017966.788.000) 2026-06-21 05:20:13 Job disconnected, attempting to reconnect
+    Socket between submit and execute hosts closed unexpectedly
+    Trying to reconnect to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+...
+023 (8017966.788.000) 2026-06-21 05:20:13 Job reconnected to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu
+    startd address: <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+    starter address: <10.226.104.221:46101?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector5#4303932%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector7#4299354&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-46101&alias=gpu021.rci.montana.edu&noUDP>
+...
+022 (8017966.788.000) 2026-06-21 05:20:19 Job disconnected, attempting to reconnect
+    Socket between submit and execute hosts closed unexpectedly
+    Trying to reconnect to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+...
+023 (8017966.788.000) 2026-06-21 05:20:19 Job reconnected to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu
+    startd address: <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+    starter address: <10.226.104.221:46101?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector5#4303932%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector7#4299354&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-46101&alias=gpu021.rci.montana.edu&noUDP>
+...
+022 (8017966.788.000) 2026-06-21 05:20:24 Job disconnected, attempting to reconnect
+    Socket between submit and execute hosts closed unexpectedly
+    Trying to reconnect to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+...
+023 (8017966.788.000) 2026-06-21 05:20:25 Job reconnected to slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu
+    startd address: <10.226.104.221:41879?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#4257207%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4255162&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-41879&alias=gpu021.rci.montana.edu&noUDP>
+    starter address: <10.226.104.221:46101?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-768a]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector5#4303932%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-e-b69d]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector7#4299354&PrivNet=gpu021.rci.montana.edu&addrs=10.226.104.221-46101&alias=gpu021.rci.montana.edu&noUDP>
+...
+021 (8017966.788.000) 2026-06-21 05:20:30 Error from starter on slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu:
+	Failed to receive GoAhead message from 128.105.68.112.
+...
+004 (8017966.788.000) 2026-06-21 05:20:30 Job was evicted. Code 1007 Subcode 0
+	(0) CPU times
+		Usr 0 00:41:29, Sys 0 00:01:09  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	2781891169  -  Run Bytes Received By Job
+	Reason: Error from slot1_1@glidein_32138_434170212@gpu021.rci.montana.edu: Failed to receive GoAhead message from 128.105.68.112.
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       0.99        1         1 
+	   Disk (KB)            : 2727242    16777216  16777216 
+	   GPUs                 :       0.81        1         1 "GPU-dff97527"
+	   GpusMemory (MB)      :    8001                       
+	   Memory (MB)          :    2655       16384     16384 
+	   TimeExecute (s)      :    2583                       
+	   TimeSlotBusy (s)     :    2683                       
+...
+040 (8017966.788.000) 2026-06-21 05:21:17 Started transferring input files
+	Transferring to host: <128.105.68.96:9618?addrs=128.105.68.96-9618+[2607-f388-2200-100-1270-fdff-fe74-8a8]-9618&alias=gpu2004.chtc.wisc.edu&noUDP&sock=slot2_1_2416131_9ce4_77496>
+...
+040 (8017966.788.000) 2026-06-21 05:21:35 Finished transferring input files
+...
+001 (8017966.788.000) 2026-06-21 05:21:35 Job executing on host: <128.105.68.96:9618?addrs=128.105.68.96-9618+[2607-f388-2200-100-1270-fdff-fe74-8a8]-9618&alias=gpu2004.chtc.wisc.edu&noUDP&sock=startd_12358_237a>
+	SlotName: slot2_1@gpu2004.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_9889ee48 }
+	CondorScratchDir = "/var/lib/condor/execute/slot2/dir_58270/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_9889ee48 = [ Id = "GPU-9889ee48"; Capability = 8.0; DeviceName = "NVIDIA A100-SXM4-80GB"; DeviceUuid = "9889ee48-b566-be7b-fc68-9e80acce7a76"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:01:00.0"; GlobalMemoryMb = 81154; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+040 (8017966.788.000) 2026-06-21 06:13:47 Started transferring output files
+...
+040 (8017966.788.000) 2026-06-21 06:13:47 Finished transferring output files
+...
+005 (8017966.788.000) 2026-06-21 06:13:48 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:52:19, Sys 0 01:08:37  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 01:33:48, Sys 0 01:09:46  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	2639436  -  Run Bytes Sent By Job
+	2781891169  -  Run Bytes Received By Job
+	2639436  -  Total Bytes Sent By Job
+	5563782338  -  Total Bytes Received By Job
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       0.99        1         1 
+	   Disk (KB)            : 2729182    16777216  16777216 
+	   GPUs                 :       0.86        1         1 "GPU-9889ee48"
+	   GpusMemory (MB)      :    6780                       
+	   IoHeavy              :                             0 
+	   Memory (MB)          :    2686       16384     16384 
+	   TimeExecute (s)      :    3132                       
+	   TimeSlotBusy (s)     :    3150                       
+...

@@ -1,0 +1,74 @@
+000 (8180963.172.000) 2026-06-24 12:19:47 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_4071840_2329>
+...
+040 (8180963.172.000) 2026-06-24 17:00:17 Started transferring input files
+	Transferring to host: <128.105.69.246:9618?addrs=128.105.69.246-9618+[2607-f388-2200-100-3eec-efff-fe1e-deb4]-9618&alias=mcdanielgpu4001.chtc.wisc.edu&noUDP&sock=backfill1_1_190142_fd6d_95276>
+...
+040 (8180963.172.000) 2026-06-24 17:14:43 Finished transferring input files
+...
+001 (8180963.172.000) 2026-06-24 17:14:43 Job executing on host: <128.105.69.246:9618?addrs=128.105.69.246-9618+[2607-f388-2200-100-3eec-efff-fe1e-deb4]-9618&alias=mcdanielgpu4001.chtc.wisc.edu&noUDP&sock=startd_10897_039c>
+	SlotName: backfill1_1@mcdanielgpu4001.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_ebc70bbe }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_4137154/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_ebc70bbe = [ Id = "GPU-ebc70bbe"; Capability = 8.0; DeviceName = "NVIDIA A100-SXM4-40GB"; DeviceUuid = "ebc70bbe-26fa-01af-ba2f-340326dc273e"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:CA:00.0"; GlobalMemoryMb = 40442; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+006 (8180963.172.000) 2026-06-24 17:14:52 Image size of job updated: 374144
+	366  -  MemoryUsage of job (MB)
+	374144  -  ResidentSetSize of job (KB)
+...
+006 (8180963.172.000) 2026-06-24 17:19:53 Image size of job updated: 1665032
+	1621  -  MemoryUsage of job (MB)
+	1659200  -  ResidentSetSize of job (KB)
+...
+006 (8180963.172.000) 2026-06-24 17:24:53 Image size of job updated: 1665032
+	1621  -  MemoryUsage of job (MB)
+	1659440  -  ResidentSetSize of job (KB)
+...
+006 (8180963.172.000) 2026-06-24 17:54:56 Image size of job updated: 1665032
+	1624  -  MemoryUsage of job (MB)
+	1662876  -  ResidentSetSize of job (KB)
+...
+006 (8180963.172.000) 2026-06-24 19:00:04 Image size of job updated: 1665032
+	1625  -  MemoryUsage of job (MB)
+	1663256  -  ResidentSetSize of job (KB)
+...
+006 (8180963.172.000) 2026-06-24 19:30:07 Image size of job updated: 1665032
+	1625  -  MemoryUsage of job (MB)
+	1663652  -  ResidentSetSize of job (KB)
+...
+006 (8180963.172.000) 2026-06-24 19:55:09 Image size of job updated: 1665032
+	1625  -  MemoryUsage of job (MB)
+	1663996  -  ResidentSetSize of job (KB)
+...
+006 (8180963.172.000) 2026-06-24 20:05:10 Image size of job updated: 1665032
+	1626  -  MemoryUsage of job (MB)
+	1664824  -  ResidentSetSize of job (KB)
+...
+040 (8180963.172.000) 2026-06-24 20:39:02 Started transferring output files
+...
+040 (8180963.172.000) 2026-06-24 20:39:02 Finished transferring output files
+...
+005 (8180963.172.000) 2026-06-24 20:39:03 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 03:25:58, Sys 0 00:47:15  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 03:25:58, Sys 0 00:47:15  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	4392867  -  Run Bytes Sent By Job
+	2714768244  -  Run Bytes Received By Job
+	4392867  -  Total Bytes Sent By Job
+	2714768244  -  Total Bytes Received By Job
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       0.99        1         1 
+	   Disk (KB)            : 2789011    16777216  16777216 
+	   GPUs                 :       0.84        1         1 "GPU-ebc70bbe"
+	   GpusMemory (MB)      :    6897                       
+	   IoHeavy              :                             0 
+	   Memory (MB)          :    1626       16384     16384 
+	   TimeExecute (s)      :   12259                       
+	   TimeSlotBusy (s)     :   13125                       
+...

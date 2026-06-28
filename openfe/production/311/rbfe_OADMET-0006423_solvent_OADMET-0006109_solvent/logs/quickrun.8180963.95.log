@@ -1,0 +1,106 @@
+000 (8180963.095.000) 2026-06-24 12:19:47 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_4071840_2329>
+...
+040 (8180963.095.000) 2026-06-24 15:07:24 Started transferring input files
+	Transferring to host: <128.105.68.125:9618?addrs=128.105.68.125-9618+[2607-f388-2200-100-ba3f-d2ff-fe19-86da]-9618&alias=txie-dsigpu4000.chtc.wisc.edu&noUDP&sock=backfill1_2_2594836_73a7_101560>
+...
+040 (8180963.095.000) 2026-06-24 15:16:15 Finished transferring input files
+...
+040 (8180963.095.000) 2026-06-24 15:16:16 Started transferring output files
+...
+040 (8180963.095.000) 2026-06-24 15:16:16 Finished transferring output files
+...
+021 (8180963.095.000) 2026-06-24 15:16:16 Error from starter on backfill1_2@txie-dsigpu4000.chtc.wisc.edu:
+	Failed to transfer files: FILETRANSFER:1:non-zero exit (11) from /usr/libexec/condor/stash_plugin. |Error: Pelican Client Error: Attempt #3: from osdf1.chic.nrp.internet2.edu:8443: Contact.ConnectionSetup Error: Error code 3006: failed connection setup: Get "https://osdf1.chic.nrp.internet2.edu:8443(...Path...)": dial tcp: lookup osdf1.chic.nrp.internet2.edu on [2607:f388::53:1]:53: no such host (0s elapsed, 8m49.5s since start); Attempt #2: from osdf-uw-cache.svc.osg-htc.org:8443: Transfer.SlowTransfer Error: Error code 6002: cancelled transfer, too slow; detected speed=395.5 KB/s, total transferred=64.1 MB, total transfer time=2m10.5s, cache hit (2m10.5s elapsed, 8m49.5s since start); Attempt #1: from osg-hawk-cache.cc.lehigh.edu:8443: Transfer.SlowTransfer Error: Error code 6002: cancelled transfer, too slow; detected speed=632.5 KB/s, total transferred=402.3 MB, total transfer time=6m39.001s, cache hit (6m39s since start) (Version: 7.25.0) ( URL file = osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif )|
+	Code 12 Subcode 2816
+...
+004 (8180963.095.000) 2026-06-24 15:16:16 Job was evicted. Code 13 Subcode 2816
+	(0) CPU times
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	Reason: Transfer input files failure at execution point backfill1_2@txie-dsigpu4000.chtc.wisc.edu using protocol osdf. Details: Pelican Client Error: Attempt #3: from osdf1.chic.nrp.internet2.edu:8443: Contact.ConnectionSetup Error: Error code 3006: failed connection setup: Get "https://osdf1.chic.nrp.internet2.edu:8443(...Path...)": dial tcp: lookup osdf1.chic.nrp.internet2.edu on [2607:f388::53:1]:53: no such host (0s elapsed, 8m49.5s since start); Attempt #2: from osdf-uw-cache.svc.osg-htc.org:8443: Transfer.SlowTransfer Error: Error code 6002: cancelled transfer, too slow; detected speed=395.5 KB/s, total transferred=64.1 MB, total transfer time=2m10.5s, cache hit (2m10.5s elapsed, 8m49.5s since start); Attempt #1: from osg-hawk-cache.cc.lehigh.edu:8443: Transfer.SlowTransfer Error: Error code 6002: cancelled transfer, too slow; detected speed=632.5 KB/s, total transferred=402.3 MB, total transfer time=6m39.001s, cache hit (6m39s since start) (Version: 7.25.0) ( URL file = osdf:///chtc/staging/a/agitter/containers/openfe_1.11.1.sif )|
+	Partitionable Resources :    Usage  Request Allocated Assigned
+	   Cpus                 :     0.01        1         1 
+	   Disk (KB)            :  1729    16777216  16777216 
+	   GPUs                 :     0           1         1 "GPU-5d6e65db"
+	   GpusMemory (MB)      :   495                       
+	   IoHeavy              :                           0 
+	   Memory (MB)          :             16384     16384 
+...
+040 (8180963.095.000) 2026-06-24 15:29:27 Started transferring input files
+	Transferring to host: <128.105.76.52:9618?addrs=128.105.76.52-9618+[2607-f388-2200-100-b65c-b5ff-fe81-e53e]-9618&alias=dbrundage-chtcgpu5000.chtc.wisc.edu&noUDP&sock=backfill1_2_11313_c825_23659>
+...
+040 (8180963.095.000) 2026-06-24 15:30:24 Finished transferring input files
+...
+001 (8180963.095.000) 2026-06-24 15:30:24 Job executing on host: <128.105.76.52:9618?addrs=128.105.76.52-9618+[2607-f388-2200-100-b65c-b5ff-fe81-e53e]-9618&alias=dbrundage-chtcgpu5000.chtc.wisc.edu&noUDP&sock=startd_10956_7bb2>
+	SlotName: backfill1_2@dbrundage-chtcgpu5000.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_51d5c720 }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_2285046/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_51d5c720 = [ Id = "GPU-51d5c720"; Capability = 9.0; DeviceName = "NVIDIA H200"; DeviceUuid = "51d5c720-5fa1-f041-4e6a-f687563a7cc3"; ECCEnabled = true; NvidiaDriver = "590.48.01"; DriverVersion = 13.1; DevicePciBusId = "0000:4C:00.0"; GlobalMemoryMb = 143158; MaxSupportedVersion = 13010 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+006 (8180963.095.000) 2026-06-24 15:30:33 Image size of job updated: 480496
+	470  -  MemoryUsage of job (MB)
+	480496  -  ResidentSetSize of job (KB)
+...
+006 (8180963.095.000) 2026-06-24 15:35:33 Image size of job updated: 989236
+	965  -  MemoryUsage of job (MB)
+	988088  -  ResidentSetSize of job (KB)
+...
+006 (8180963.095.000) 2026-06-24 15:40:34 Image size of job updated: 996072
+	973  -  MemoryUsage of job (MB)
+	996072  -  ResidentSetSize of job (KB)
+...
+006 (8180963.095.000) 2026-06-24 15:45:34 Image size of job updated: 1006740
+	984  -  MemoryUsage of job (MB)
+	1006740  -  ResidentSetSize of job (KB)
+...
+006 (8180963.095.000) 2026-06-24 15:50:35 Image size of job updated: 1025048
+	1002  -  MemoryUsage of job (MB)
+	1025048  -  ResidentSetSize of job (KB)
+...
+006 (8180963.095.000) 2026-06-24 15:55:35 Image size of job updated: 1034052
+	1010  -  MemoryUsage of job (MB)
+	1034052  -  ResidentSetSize of job (KB)
+...
+006 (8180963.095.000) 2026-06-24 16:00:35 Image size of job updated: 1041700
+	1018  -  MemoryUsage of job (MB)
+	1041700  -  ResidentSetSize of job (KB)
+...
+006 (8180963.095.000) 2026-06-24 16:05:36 Image size of job updated: 1047844
+	1024  -  MemoryUsage of job (MB)
+	1047844  -  ResidentSetSize of job (KB)
+...
+006 (8180963.095.000) 2026-06-24 16:10:36 Image size of job updated: 1048920
+	1024  -  MemoryUsage of job (MB)
+	1047844  -  ResidentSetSize of job (KB)
+...
+040 (8180963.095.000) 2026-06-24 16:11:40 Started transferring output files
+...
+040 (8180963.095.000) 2026-06-24 16:11:40 Finished transferring output files
+...
+005 (8180963.095.000) 2026-06-24 16:11:40 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:42:24, Sys 0 00:52:27  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:42:24, Sys 0 00:52:27  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	1607000  -  Run Bytes Sent By Job
+	2782713611  -  Run Bytes Received By Job
+	1607000  -  Total Bytes Sent By Job
+	2782713611  -  Total Bytes Received By Job
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       2.15        1         1 
+	   Disk (KB)            : 2730960    16777216  16777216 
+	   GPUs                 :       0.86        1         1 "GPU-51d5c720"
+	   GpusMemory (MB)      :    8129                       
+	   IoHeavy              :                             0 
+	   Memory (MB)          :    1024       16384     16384 
+	   TimeExecute (s)      :    2476                       
+	   TimeSlotBusy (s)     :    2533                       
+...

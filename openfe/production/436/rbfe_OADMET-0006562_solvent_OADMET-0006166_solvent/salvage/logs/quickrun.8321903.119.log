@@ -1,0 +1,220 @@
+000 (8321903.119.000) 2026-06-26 09:00:08 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_4071840_2329>
+...
+040 (8321903.119.000) 2026-06-26 12:03:09 Started transferring input files
+	Transferring to host: <128.105.68.119:9618?addrs=128.105.68.119-9618+[2607-f388-2200-100-7ec2-55ff-fe99-a294]-9618&alias=dsigpu4000.chtc.wisc.edu&noUDP&sock=backfill1_2_4027648_1fc0_615>
+...
+040 (8321903.119.000) 2026-06-26 12:03:27 Finished transferring input files
+...
+001 (8321903.119.000) 2026-06-26 12:03:27 Job executing on host: <128.105.68.119:9618?addrs=128.105.68.119-9618+[2607-f388-2200-100-7ec2-55ff-fe99-a294]-9618&alias=dsigpu4000.chtc.wisc.edu&noUDP&sock=startd_10704_a1d4>
+	SlotName: backfill1_2@dsigpu4000.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_46e1e739 }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_2076646/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_46e1e739 = [ Id = "GPU-46e1e739"; Capability = 8.9; DeviceName = "NVIDIA L40"; DeviceUuid = "46e1e739-0051-f168-ed1e-5d0307d2adb0"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:D5:00.0"; GlobalMemoryMb = 45468; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+006 (8321903.119.000) 2026-06-26 12:03:36 Image size of job updated: 452616
+	443  -  MemoryUsage of job (MB)
+	452616  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 12:06:11 Image size of job updated: 952104
+	443  -  MemoryUsage of job (MB)
+	452676  -  ResidentSetSize of job (KB)
+...
+004 (8321903.119.000) 2026-06-26 12:06:11 Job was evicted. Code 1011 Subcode 0
+	(0) CPU times
+		Usr 0 00:02:40, Sys 0 00:00:49  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	2781013588  -  Run Bytes Received By Job
+	Reason: PREEMPT expression evaluated to True
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       1.49        1         1 
+	   Disk (KB)            : 2718883    16777216  16777216 
+	   GPUs                 :       0           1         1 "GPU-46e1e739"
+	   IoHeavy              :                             0 
+	   Memory (MB)          :     443       16384     16384 
+	   TimeExecute (s)      :     164                       
+	   TimeSlotBusy (s)     :     182                       
+...
+040 (8321903.119.000) 2026-06-26 12:14:59 Started transferring input files
+	Transferring to host: <128.105.76.46:9618?addrs=128.105.76.46-9618+[2607-f388-2200-100-e29d-73ff-fe7b-5316]-9618&alias=bhaskargpu4000.chtc.wisc.edu&noUDP&sock=backfill1_6_18480_94e9_218>
+...
+040 (8321903.119.000) 2026-06-26 12:15:08 Finished transferring input files
+...
+001 (8321903.119.000) 2026-06-26 12:15:08 Job executing on host: <128.105.76.46:9618?addrs=128.105.76.46-9618+[2607-f388-2200-100-e29d-73ff-fe7b-5316]-9618&alias=bhaskargpu4000.chtc.wisc.edu&noUDP&sock=startd_17896_bef6>
+	SlotName: backfill1_6@bhaskargpu4000.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_33aa2a42 }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_307464/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_33aa2a42 = [ Id = "GPU-33aa2a42"; Capability = 9.0; DeviceName = "NVIDIA H200"; DeviceUuid = "33aa2a42-bd2a-6304-6f7b-77e4ff98ad33"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:4C:00.0"; GlobalMemoryMb = 143166; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+004 (8321903.119.000) 2026-06-26 12:16:20 Job was evicted. Code 1011 Subcode 0
+	(0) CPU times
+		Usr 0 00:01:03, Sys 0 00:00:15  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	2781013588  -  Run Bytes Received By Job
+	Reason: PREEMPT expression evaluated to True
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       1.01        1         1 
+	   Disk (KB)            : 2719244    16777216  16777216 
+	   GPUs                 :       0           1         1 "GPU-33aa2a42"
+	   IoHeavy              :                             0 
+	   Memory (MB)          :     464       16384     16384 
+	   TimeExecute (s)      :      72                       
+	   TimeSlotBusy (s)     :      81                       
+...
+040 (8321903.119.000) 2026-06-26 12:21:07 Started transferring input files
+	Transferring to host: <128.105.76.46:9618?addrs=128.105.76.46-9618+[2607-f388-2200-100-e29d-73ff-fe7b-5316]-9618&alias=bhaskargpu4000.chtc.wisc.edu&noUDP&sock=backfill1_5_18480_94e9_235>
+...
+040 (8321903.119.000) 2026-06-26 12:21:21 Finished transferring input files
+...
+001 (8321903.119.000) 2026-06-26 12:21:21 Job executing on host: <128.105.76.46:9618?addrs=128.105.76.46-9618+[2607-f388-2200-100-e29d-73ff-fe7b-5316]-9618&alias=bhaskargpu4000.chtc.wisc.edu&noUDP&sock=startd_17896_bef6>
+	SlotName: backfill1_5@bhaskargpu4000.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_107714f3 }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_320966/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_107714f3 = [ Id = "GPU-107714f3"; Capability = 9.0; DeviceName = "NVIDIA H200"; DeviceUuid = "107714f3-79aa-2351-be93-4fbeb9819812"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:5D:00.0"; GlobalMemoryMb = 143166; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+004 (8321903.119.000) 2026-06-26 12:22:02 Job was evicted. Code 1011 Subcode 0
+	(0) CPU times
+		Usr 0 00:00:38, Sys 0 00:00:01  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	2781013588  -  Run Bytes Received By Job
+	Reason: PREEMPT expression evaluated to True
+	Partitionable Resources :    Usage  Request Allocated Assigned
+	   Cpus                 :        0        1         1 
+	   Disk (KB)            :  2716176 16777216  16777216 
+	   GPUs                 :        0        1         1 "GPU-107714f3"
+	   IoHeavy              :                           0 
+	   Memory (MB)          :      464    16384     16384 
+	   TimeExecute (s)      :       41                    
+	   TimeSlotBusy (s)     :       56                    
+...
+040 (8321903.119.000) 2026-06-26 12:27:02 Started transferring input files
+	Transferring to host: <128.105.68.125:9618?addrs=128.105.68.125-9618+[2607-f388-2200-100-ba3f-d2ff-fe19-86da]-9618&alias=txie-dsigpu4000.chtc.wisc.edu&noUDP&sock=backfill1_3_2594836_73a7_106519>
+...
+040 (8321903.119.000) 2026-06-26 12:27:03 Finished transferring input files
+...
+022 (8321903.119.000) 2026-06-26 12:27:03 Job disconnected, attempting to reconnect
+    Socket between submit and execute hosts closed unexpectedly
+    Trying to reconnect to backfill1_3@txie-dsigpu4000.chtc.wisc.edu <128.105.68.125:9618?addrs=128.105.68.125-9618+[2607-f388-2200-100-ba3f-d2ff-fe19-86da]-9618&alias=txie-dsigpu4000.chtc.wisc.edu&noUDP&sock=startd_3080359_a3a2>
+...
+024 (8321903.119.000) 2026-06-26 12:27:04 Job reconnection failed
+    Job not found at execution machine
+    Can not reconnect to backfill1_3@txie-dsigpu4000.chtc.wisc.edu, rescheduling job
+...
+004 (8321903.119.000) 2026-06-26 12:27:04 Job was evicted. Code 1008 Subcode 0
+	(0) CPU times
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	Reason: Job not found at execution machine
+	Partitionable Resources :    Usage  Request Allocated Assigned
+	   Cpus                 :     0.08        1         1 
+	   Disk (KB)            : 34424    16777216  16777216 
+	   GPUs                 :     0           1         1 "GPU-2568b54b"
+	   IoHeavy              :                           0 
+	   Memory (MB)          :   464       16384     16384 
+	   TimeExecute (s)      :    41                       
+	   TimeSlotBusy (s)     :    56                       
+...
+040 (8321903.119.000) 2026-06-26 12:27:11 Started transferring input files
+	Transferring to host: <10.1.1.134:34765?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector9#5050033%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector3#5039888&PrivNet=gpu04&addrs=10.1.1.134-34765&alias=gpu04&noUDP>
+...
+040 (8321903.119.000) 2026-06-26 12:27:32 Finished transferring input files
+...
+021 (8321903.119.000) 2026-06-26 12:27:33 Message from starter on slot1_1@glidein_284964_492951428@gpu04:
+	PREPARE_JOB (prepare-hook) succeeded (reported status 000): Using Singularity image openfe_1.11.1.sif
+...
+001 (8321903.119.000) 2026-06-26 12:27:33 Job executing on host: <10.1.1.134:44281?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector4#4929237%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector4#4919477&PrivNet=gpu04&addrs=10.1.1.134-44281&alias=gpu04&noUDP>
+	SlotName: slot1_1@glidein_284964_492951428@gpu04
+	AvailableGPUs = { GPUs_GPU_f2f616f0 }
+	CondorScratchDir = "/tmp/glide_IpgBpc/execute/dir_944340/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_f2f616f0 = [ Id = "GPU-f2f616f0"; ClockMhz = 1740.0; Capability = 8.6; CoresPerCU = 128; DeviceName = "NVIDIA A40"; DeviceUuid = "f2f616f0-ccba-c9ae-e061-d24d67b79f97"; ECCEnabled = true; ComputeUnits = 84; NvidiaDriver = "595.71.05"; DriverVersion = 13.2; DevicePciBusId = "0000:01:00.0"; GlobalMemoryMb = 45739; MaxSupportedVersion = 13020 ]
+	Memory = 16384
+...
+006 (8321903.119.000) 2026-06-26 12:27:42 Image size of job updated: 10061416
+	517  -  MemoryUsage of job (MB)
+	529312  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 12:32:43 Image size of job updated: 31602168
+	2311  -  MemoryUsage of job (MB)
+	2365456  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 12:37:43 Image size of job updated: 31603080
+	2362  -  MemoryUsage of job (MB)
+	2418148  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 12:42:44 Image size of job updated: 31607612
+	2370  -  MemoryUsage of job (MB)
+	2426852  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 12:47:44 Image size of job updated: 31610520
+	2375  -  MemoryUsage of job (MB)
+	2431460  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 12:52:45 Image size of job updated: 31615912
+	2380  -  MemoryUsage of job (MB)
+	2437092  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 12:57:46 Image size of job updated: 31619476
+	2383  -  MemoryUsage of job (MB)
+	2440164  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 13:02:46 Image size of job updated: 31625020
+	2388  -  MemoryUsage of job (MB)
+	2445284  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 13:07:47 Image size of job updated: 31631108
+	2395  -  MemoryUsage of job (MB)
+	2451940  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 13:12:47 Image size of job updated: 31634540
+	2398  -  MemoryUsage of job (MB)
+	2455012  -  ResidentSetSize of job (KB)
+...
+006 (8321903.119.000) 2026-06-26 13:17:48 Image size of job updated: 31637184
+	2398  -  MemoryUsage of job (MB)
+	2455012  -  ResidentSetSize of job (KB)
+...
+040 (8321903.119.000) 2026-06-26 13:18:23 Started transferring output files
+...
+040 (8321903.119.000) 2026-06-26 13:18:23 Finished transferring output files
+...
+005 (8321903.119.000) 2026-06-26 13:18:24 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:50:05, Sys 0 00:06:32  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:54:26, Sys 0 00:07:37  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	1569926  -  Run Bytes Sent By Job
+	2781013588  -  Run Bytes Received By Job
+	1569926  -  Total Bytes Sent By Job
+	11124054352  -  Total Bytes Received By Job
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       1.00        1         1 
+	   Disk (KB)            : 2728654    16777216  16777216 
+	   GPUs                 :       0.55        1         1 "GPU-f2f616f0"
+	   GpusMemory (MB)      :    4178                       
+	   Memory (MB)          :    2398       16384     16384 
+	   TimeExecute (s)      :    3050                       
+	   TimeSlotBusy (s)     :    3074                       
+...

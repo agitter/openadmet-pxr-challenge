@@ -1,0 +1,412 @@
+000 (8321903.160.000) 2026-06-26 09:00:08 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_4071840_2329>
+...
+040 (8321903.160.000) 2026-06-26 12:56:35 Started transferring input files
+	Transferring to host: <128.104.100.118:9618?addrs=128.104.100.118-9618+[2607-f388-107c-501-26d-aeff-fe1f-6b20]-9618&alias=jcaicedogpu0004.chtc.wisc.edu&noUDP&sock=backfill1_1_3535649_51f9_23>
+...
+040 (8321903.160.000) 2026-06-26 12:56:47 Finished transferring input files
+...
+001 (8321903.160.000) 2026-06-26 12:56:47 Job executing on host: <128.104.100.118:9618?addrs=128.104.100.118-9618+[2607-f388-107c-501-26d-aeff-fe1f-6b20]-9618&alias=jcaicedogpu0004.chtc.wisc.edu&noUDP&sock=startd_10858_436a>
+	SlotName: backfill1_1@jcaicedogpu0004.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_247deb3d }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_3538660/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_247deb3d = [ Id = "GPU-247deb3d"; Capability = 8.9; DeviceName = "NVIDIA L40S"; DeviceUuid = "247deb3d-27f7-30d7-bfa9-8c3f623116c2"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:E1:00.0"; GlobalMemoryMb = 45468; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+006 (8321903.160.000) 2026-06-26 12:56:56 Image size of job updated: 458360
+	448  -  MemoryUsage of job (MB)
+	458360  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 13:01:56 Image size of job updated: 4567484
+	4461  -  MemoryUsage of job (MB)
+	4567484  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 13:06:56 Image size of job updated: 4998768
+	4882  -  MemoryUsage of job (MB)
+	4998768  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 13:11:57 Image size of job updated: 5571124
+	5056  -  MemoryUsage of job (MB)
+	5176556  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 13:16:57 Image size of job updated: 6100704
+	5958  -  MemoryUsage of job (MB)
+	6100704  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 13:21:58 Image size of job updated: 6304332
+	5958  -  MemoryUsage of job (MB)
+	6100704  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 13:26:58 Image size of job updated: 6916148
+	5958  -  MemoryUsage of job (MB)
+	6100704  -  ResidentSetSize of job (KB)
+...
+040 (8321903.160.000) 2026-06-26 13:26:58 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 13:26:58 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 13:26:59 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 00:47:03, Sys 0 00:02:57  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	112922  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 13:28:13 Started transferring input files
+	Transferring to host: <128.105.68.166:9618?addrs=128.105.68.166-9618+[2607-f388-2200-100-b62e-99ff-feb7-2e2d]-9618&alias=gpulab2001.chtc.wisc.edu&noUDP&sock=slot2_3_11113_dd1d_67480>
+...
+040 (8321903.160.000) 2026-06-26 13:28:32 Finished transferring input files
+...
+001 (8321903.160.000) 2026-06-26 13:28:32 Job executing on host: <128.105.68.166:9618?addrs=128.105.68.166-9618+[2607-f388-2200-100-b62e-99ff-feb7-2e2d]-9618&alias=gpulab2001.chtc.wisc.edu&noUDP&sock=startd_10083_ad84>
+	SlotName: slot2_3@gpulab2001.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_d298c6e0 }
+	CondorScratchDir = "/var/lib/condor/execute/slot2/dir_4075733/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_d298c6e0 = [ Id = "GPU-d298c6e0"; Capability = 7.5; DeviceName = "NVIDIA GeForce RTX 2080 Ti"; DeviceUuid = "d298c6e0-f149-30ca-b7d6-2d5f7637ee2c"; ECCEnabled = false; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:B1:00.0"; GlobalMemoryMb = 10823; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+040 (8321903.160.000) 2026-06-26 14:30:59 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 14:30:59 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 14:30:59 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 01:31:34, Sys 0 00:02:28  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	112902  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 14:33:42 Started transferring input files
+	Transferring to host: <128.105.68.75:9618?addrs=128.105.68.75-9618+[2607-f388-2200-100-2ec-efff-fe0c-548c]-9618&alias=oconnorgpu2000.chtc.wisc.edu&noUDP&sock=backfill1_3_1210438_d27f_245>
+...
+040 (8321903.160.000) 2026-06-26 14:33:59 Finished transferring input files
+...
+001 (8321903.160.000) 2026-06-26 14:33:59 Job executing on host: <128.105.68.75:9618?addrs=128.105.68.75-9618+[2607-f388-2200-100-2ec-efff-fe0c-548c]-9618&alias=oconnorgpu2000.chtc.wisc.edu&noUDP&sock=startd_11626_0c26>
+	SlotName: backfill1_3@oconnorgpu2000.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_5565fc46 }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_1329285/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_5565fc46 = [ Id = "GPU-5565fc46"; Capability = 8.0; DeviceName = "NVIDIA A100-SXM4-40GB"; DeviceUuid = "5565fc46-c038-6921-5204-0c79f79e39f2"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:41:00.0"; GlobalMemoryMb = 40442; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+040 (8321903.160.000) 2026-06-26 15:22:51 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 15:22:51 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 15:22:52 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 01:01:59, Sys 0 00:02:51  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	112927  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 15:25:33 Started transferring input files
+	Transferring to host: <172.17.0.4:39437?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector10#4700993%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector10#4697071&PrivNet=Colgate-CCARE-EP.f47887817dfe&addrs=172.17.0.4-39437&alias=Colgate-CCARE-EP.f47887817dfe&noUDP&sock=slot1_1_4284_3727_2062>
+...
+040 (8321903.160.000) 2026-06-26 15:26:17 Finished transferring input files
+...
+021 (8321903.160.000) 2026-06-26 15:26:17 Message from starter on slot1_1@Colgate-CCARE-EP.f47887817dfe:
+	PREPARE_JOB (prepare-hook) succeeded (reported status 000): Using Singularity image openfe_1.11.1.sif
+...
+001 (8321903.160.000) 2026-06-26 15:26:17 Job executing on host: <172.17.0.4:39437?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector10#4700993%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector10#4697071&PrivNet=Colgate-CCARE-EP.f47887817dfe&addrs=172.17.0.4-39437&alias=Colgate-CCARE-EP.f47887817dfe&noUDP&sock=startd_4277_3ea6>
+	SlotName: slot1_1@Colgate-CCARE-EP.f47887817dfe
+	AvailableGPUs = { GPUs_GPU_9c6a1e3d }
+	CondorScratchDir = "/pilot/osgvo-pilot-TLEoF9/execute/dir_1129202"
+	Cpus = 1
+	Disk = 16778443
+	GPUs = 1
+	GPUs_GPU_9c6a1e3d = [ Id = "GPU-9c6a1e3d"; Capability = 9.0; DeviceName = "NVIDIA H100 80GB HBM3"; DeviceUuid = "9c6a1e3d-5859-7b09-3f22-a52472f8acce"; ECCEnabled = true; NvidiaDriver = "560.35.03"; DriverVersion = 12.6; DevicePciBusId = "0000:4E:00.0"; GlobalMemoryMb = 81110; MaxSupportedVersion = 12060 ]
+	Memory = 16384
+...
+006 (8321903.160.000) 2026-06-26 15:36:26 Image size of job updated: 36635608
+	7325  -  MemoryUsage of job (MB)
+	7500000  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 15:41:27 Image size of job updated: 44724000
+	7325  -  MemoryUsage of job (MB)
+	7500000  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 15:46:27 Image size of job updated: 47917904
+	7325  -  MemoryUsage of job (MB)
+	7500000  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 15:56:29 Image size of job updated: 48668300
+	7339  -  MemoryUsage of job (MB)
+	7514916  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 16:11:31 Image size of job updated: 49361500
+	8067  -  MemoryUsage of job (MB)
+	8259996  -  ResidentSetSize of job (KB)
+...
+040 (8321903.160.000) 2026-06-26 16:11:44 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 16:11:44 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 16:11:44 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 00:51:44, Sys 0 00:01:10  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	112247  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 16:17:01 Started transferring input files
+	Transferring to host: <128.104.100.53:9618?addrs=128.104.100.53-9618+[2607-f388-107c-501-7ec2-55ff-fe99-a2b0]-9618&alias=jcaicedogpu0001.chtc.wisc.edu&noUDP&sock=backfill1_8_12775_e4a1_24449>
+...
+040 (8321903.160.000) 2026-06-26 16:17:14 Finished transferring input files
+...
+001 (8321903.160.000) 2026-06-26 16:17:14 Job executing on host: <128.104.100.53:9618?addrs=128.104.100.53-9618+[2607-f388-107c-501-7ec2-55ff-fe99-a2b0]-9618&alias=jcaicedogpu0001.chtc.wisc.edu&noUDP&sock=startd_11292_f384>
+	SlotName: backfill1_8@jcaicedogpu0001.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_22787dff }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_2072830/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_22787dff = [ Id = "GPU-22787dff"; Capability = 8.9; DeviceName = "NVIDIA L40"; DeviceUuid = "22787dff-a2f4-227a-bc3c-c6178e7bb020"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:52:00.0"; GlobalMemoryMb = 45468; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+040 (8321903.160.000) 2026-06-26 16:58:18 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 16:58:18 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 16:58:18 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 00:48:45, Sys 0 00:01:11  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	112948  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 16:58:27 Started transferring input files
+	Transferring to host: <198.86.180.16:35881?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector10#5087232%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector6#5085297&PrivNet=compute-gpu-03&addrs=198.86.180.16-35881&alias=compute-gpu-03&noUDP>
+...
+040 (8321903.160.000) 2026-06-26 16:58:39 Finished transferring input files
+...
+021 (8321903.160.000) 2026-06-26 16:58:39 Message from starter on slot1_1@glidein_3863075_40888528@compute-gpu-03:
+	PREPARE_JOB (prepare-hook) succeeded (reported status 000): Using Singularity image openfe_1.11.1.sif
+...
+001 (8321903.160.000) 2026-06-26 16:58:39 Job executing on host: <198.86.180.16:36659?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector10#5086341%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector10#5082266&PrivNet=compute-gpu-03&addrs=198.86.180.16-36659&alias=compute-gpu-03&noUDP>
+	SlotName: slot1_1@glidein_3863075_40888528@compute-gpu-03
+	AvailableGPUs = { GPUs_GPU_2b8fbeff }
+	CondorScratchDir = "/scratch/glide_dnaznv/execute/dir_3901334/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_2b8fbeff = [ Id = "GPU-2b8fbeff"; ClockMhz = 1980.0; Capability = 9.0; CoresPerCU = 128; DeviceName = "NVIDIA H200"; DeviceUuid = "2b8fbeff-fbee-ff64-2d60-a52c5a36431a"; ECCEnabled = true; ComputeUnits = 132; NvidiaDriver = "580.126.20"; DriverVersion = 13.0; DevicePciBusId = "0000:9A:00.0"; GlobalMemoryMb = 143156; MaxSupportedVersion = 13000 ]
+	Memory = 16384
+...
+006 (8321903.160.000) 2026-06-26 17:03:49 Image size of job updated: 60926068
+	9766  -  MemoryUsage of job (MB)
+	10000000  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 17:08:49 Image size of job updated: 66027304
+	9766  -  MemoryUsage of job (MB)
+	10000000  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 17:13:50 Image size of job updated: 74719192
+	9766  -  MemoryUsage of job (MB)
+	10000000  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 17:23:51 Image size of job updated: 75385288
+	9766  -  MemoryUsage of job (MB)
+	10000000  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 17:28:51 Image size of job updated: 75518604
+	9766  -  MemoryUsage of job (MB)
+	10000000  -  ResidentSetSize of job (KB)
+...
+006 (8321903.160.000) 2026-06-26 17:36:46 Image size of job updated: 76107620
+	9766  -  MemoryUsage of job (MB)
+	10000000  -  ResidentSetSize of job (KB)
+...
+040 (8321903.160.000) 2026-06-26 17:36:46 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 17:36:46 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 17:36:47 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 00:40:08, Sys 0 00:00:45  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	111384  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 18:31:40 Started transferring input files
+	Transferring to host: <128.104.100.17:9618?addrs=128.104.100.17-9618+[2607-f388-107c-501-527c-6fff-fe66-e9bc]-9618&alias=jcaicedogpu0002.chtc.wisc.edu&noUDP&sock=backfill1_5_3195584_c394_773>
+...
+040 (8321903.160.000) 2026-06-26 18:31:57 Finished transferring input files
+...
+001 (8321903.160.000) 2026-06-26 18:31:57 Job executing on host: <128.104.100.17:9618?addrs=128.104.100.17-9618+[2607-f388-107c-501-527c-6fff-fe66-e9bc]-9618&alias=jcaicedogpu0002.chtc.wisc.edu&noUDP&sock=startd_11788_2a7e>
+	SlotName: backfill1_5@jcaicedogpu0002.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_08a5b939 }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_168518/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_08a5b939 = [ Id = "GPU-08a5b939"; Capability = 8.9; DeviceName = "NVIDIA L40S"; DeviceUuid = "08a5b939-655e-40a7-6b01-cda6523b41b0"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:63:00.0"; GlobalMemoryMb = 45468; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+040 (8321903.160.000) 2026-06-26 19:05:08 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 19:05:08 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 19:05:09 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 00:46:07, Sys 0 00:01:27  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	112939  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 19:09:52 Started transferring input files
+	Transferring to host: <198.86.180.16:45133?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector2#5112119%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector2#5110920&PrivNet=compute-gpu-03&addrs=198.86.180.16-45133&alias=compute-gpu-03&noUDP>
+...
+040 (8321903.160.000) 2026-06-26 19:11:21 Finished transferring input files
+...
+021 (8321903.160.000) 2026-06-26 19:11:22 Message from starter on slot1_1@glidein_4093184_112348800@compute-gpu-03:
+	PREPARE_JOB (prepare-hook) succeeded (reported status 000): Using Singularity image openfe_1.11.1.sif
+...
+001 (8321903.160.000) 2026-06-26 19:11:22 Job executing on host: <198.86.180.16:40367?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector5#5100083%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector3#5094935&PrivNet=compute-gpu-03&addrs=198.86.180.16-40367&alias=compute-gpu-03&noUDP>
+	SlotName: slot1_1@glidein_4093184_112348800@compute-gpu-03
+	AvailableGPUs = { GPUs_GPU_68e0b786 }
+	CondorScratchDir = "/scratch/glide_MoUpJu/execute/dir_99653/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_68e0b786 = [ Id = "GPU-68e0b786"; ClockMhz = 1980.0; Capability = 9.0; CoresPerCU = 128; DeviceName = "NVIDIA H200"; DeviceUuid = "68e0b786-70ea-b64d-1e06-f3dffbcbce36"; ECCEnabled = true; ComputeUnits = 132; NvidiaDriver = "580.126.20"; DriverVersion = 13.0; DevicePciBusId = "0000:BA:00.0"; GlobalMemoryMb = 143156; MaxSupportedVersion = 13000 ]
+	Memory = 16384
+...
+040 (8321903.160.000) 2026-06-26 20:08:00 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 20:08:00 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 20:08:01 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 00:57:38, Sys 0 00:01:04  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	111389  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 20:08:35 Started transferring input files
+	Transferring to host: <128.105.68.166:9618?addrs=128.105.68.166-9618+[2607-f388-2200-100-b62e-99ff-feb7-2e2d]-9618&alias=gpulab2001.chtc.wisc.edu&noUDP&sock=slot2_5_11113_dd1d_68215>
+...
+040 (8321903.160.000) 2026-06-26 20:08:59 Finished transferring input files
+...
+001 (8321903.160.000) 2026-06-26 20:08:59 Job executing on host: <128.105.68.166:9618?addrs=128.105.68.166-9618+[2607-f388-2200-100-b62e-99ff-feb7-2e2d]-9618&alias=gpulab2001.chtc.wisc.edu&noUDP&sock=startd_10083_ad84>
+	SlotName: slot2_5@gpulab2001.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_de7b89bb }
+	CondorScratchDir = "/var/lib/condor/execute/slot2/dir_879617/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_de7b89bb = [ Id = "GPU-de7b89bb"; Capability = 7.5; DeviceName = "NVIDIA GeForce RTX 2080 Ti"; DeviceUuid = "de7b89bb-11e2-d8b1-1b92-c9ab2f9f87e3"; ECCEnabled = false; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:DA:00.0"; GlobalMemoryMb = 10823; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+040 (8321903.160.000) 2026-06-26 21:12:22 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 21:12:22 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 21:12:22 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 01:15:16, Sys 0 00:02:05  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	112906  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 21:13:23 Started transferring input files
+	Transferring to host: <10.1.1.134:38325?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector6#5140579%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector4#5125918&PrivNet=gpu04&addrs=10.1.1.134-38325&alias=gpu04&noUDP>
+...
+040 (8321903.160.000) 2026-06-26 21:13:41 Finished transferring input files
+...
+021 (8321903.160.000) 2026-06-26 21:13:41 Message from starter on slot1_3@glidein_284964_492951428@gpu04:
+	PREPARE_JOB (prepare-hook) succeeded (reported status 000): Using Singularity image openfe_1.11.1.sif
+...
+001 (8321903.160.000) 2026-06-26 21:13:41 Job executing on host: <10.1.1.134:44281?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector4#4929237%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector4#4919477&PrivNet=gpu04&addrs=10.1.1.134-44281&alias=gpu04&noUDP>
+	SlotName: slot1_3@glidein_284964_492951428@gpu04
+	AvailableGPUs = { GPUs_GPU_c3149e52 }
+	CondorScratchDir = "/tmp/glide_IpgBpc/execute/dir_1559553/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_c3149e52 = [ Id = "GPU-c3149e52"; ClockMhz = 1740.0; Capability = 8.6; CoresPerCU = 128; DeviceName = "NVIDIA A40"; DeviceUuid = "c3149e52-8f5e-dbf4-4a81-91e1e4adeef6"; ECCEnabled = true; ComputeUnits = 84; NvidiaDriver = "595.71.05"; DriverVersion = 13.2; DevicePciBusId = "0000:81:00.0"; GlobalMemoryMb = 45739; MaxSupportedVersion = 13020 ]
+	Memory = 16384
+...
+040 (8321903.160.000) 2026-06-26 22:09:28 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 22:09:28 Finished transferring output files
+...
+004 (8321903.160.000) 2026-06-26 22:09:29 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 00:58:44, Sys 0 00:00:36  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	112484  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'NumJobCompletions > JobMaxRetries || ExitCode =?= 0' evaluated to FALSE
+...
+040 (8321903.160.000) 2026-06-26 22:09:43 Started transferring input files
+	Transferring to host: <128.104.103.104:9618?addrs=128.104.103.104-9618+[2607-f388-107c-501-ae1f-6bff-fe40-ce2e]-9618&alias=gitter0000.chtc.wisc.edu&noUDP&sock=backfill1_3_129117_5b5c_2781>
+...
+040 (8321903.160.000) 2026-06-26 22:10:10 Finished transferring input files
+...
+001 (8321903.160.000) 2026-06-26 22:10:10 Job executing on host: <128.104.103.104:9618?addrs=128.104.103.104-9618+[2607-f388-107c-501-ae1f-6bff-fe40-ce2e]-9618&alias=gitter0000.chtc.wisc.edu&noUDP&sock=startd_8665_0c39>
+	SlotName: backfill1_3@gitter0000.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_af91605c }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_2016317/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_af91605c = [ Id = "GPU-af91605c"; Capability = 6.1; DeviceName = "NVIDIA GeForce GTX 1080 Ti"; DeviceUuid = "af91605c-1ae8-2336-ce6b-a06264e7ec50"; ECCEnabled = false; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:5E:00.0"; GlobalMemoryMb = 11165; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+040 (8321903.160.000) 2026-06-26 23:20:42 Started transferring output files
+...
+040 (8321903.160.000) 2026-06-26 23:20:42 Finished transferring output files
+...
+005 (8321903.160.000) 2026-06-26 23:20:43 Job terminated.
+	(1) Normal termination (return value 1)
+		Usr 0 01:13:53, Sys 0 00:02:49  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 10:52:51, Sys 0 00:19:23  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	112921  -  Run Bytes Sent By Job
+	2784167564  -  Run Bytes Received By Job
+	1237969  -  Total Bytes Sent By Job
+	30625843204  -  Total Bytes Received By Job
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       1.00        1         1 
+	   Disk (KB)            : 3245485    16777216  16777216 
+	   GPUs                 :       0.14        1         1 "GPU-af91605c"
+	   GpusMemory (MB)      :    4005                       
+	   IoHeavy              :                             0 
+	   Memory (MB)          :    9766       16384     16384 
+	   TimeExecute (s)      :    4232                       
+	   TimeSlotBusy (s)     :    4259                       
+...

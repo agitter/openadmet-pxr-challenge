@@ -1,0 +1,100 @@
+000 (8180963.127.000) 2026-06-24 12:19:47 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_4071840_2329>
+...
+040 (8180963.127.000) 2026-06-24 15:59:44 Started transferring input files
+	Transferring to host: <10.196.31.21:36237?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector1#4729134%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-d-2091]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector5#4725901&PrivNet=epyc11&addrs=10.196.31.21-36237&alias=epyc11&noUDP>
+...
+040 (8180963.127.000) 2026-06-24 16:00:25 Finished transferring input files
+...
+021 (8180963.127.000) 2026-06-24 16:00:25 Message from starter on slot1_1@glidein_10906_724293855@epyc11:
+	PREPARE_JOB (prepare-hook) succeeded (reported status 000): Using Singularity image openfe_1.11.1.sif
+...
+001 (8180963.127.000) 2026-06-24 16:00:25 Job executing on host: <10.196.31.21:36959?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector3#4728360%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-d-2091]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector3#4716776&PrivNet=epyc11&addrs=10.196.31.21-36959&alias=epyc11&noUDP>
+	SlotName: slot1_1@glidein_10906_724293855@epyc11
+	AvailableGPUs = { GPUs_GPU_17845fb9 }
+	CondorScratchDir = "/mnt/internal/osg01/glide_pouHCE/execute/dir_129656/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_17845fb9 = [ Id = "GPU-17845fb9"; ClockMhz = 1410.0; Capability = 8.0; CoresPerCU = 64; DeviceName = "NVIDIA A100 80GB PCIe"; DeviceUuid = "17845fb9-d9ad-5752-c3c3-5010088dc3d4"; ECCEnabled = true; ComputeUnits = 108; NvidiaDriver = "595.71.05"; DriverVersion = 13.2; DevicePciBusId = "0000:01:00.0"; GlobalMemoryMb = 81153; MaxSupportedVersion = 13020 ]
+	Memory = 16384
+...
+006 (8180963.127.000) 2026-06-24 16:00:34 Image size of job updated: 4405252
+	165  -  MemoryUsage of job (MB)
+	168668  -  ResidentSetSize of job (KB)
+...
+006 (8180963.127.000) 2026-06-24 16:05:34 Image size of job updated: 48445788
+	3242  -  MemoryUsage of job (MB)
+	3318904  -  ResidentSetSize of job (KB)
+...
+006 (8180963.127.000) 2026-06-24 16:10:35 Image size of job updated: 48544092
+	3242  -  MemoryUsage of job (MB)
+	3318904  -  ResidentSetSize of job (KB)
+...
+006 (8180963.127.000) 2026-06-24 16:15:35 Image size of job updated: 48576860
+	3242  -  MemoryUsage of job (MB)
+	3318904  -  ResidentSetSize of job (KB)
+...
+006 (8180963.127.000) 2026-06-24 16:45:39 Image size of job updated: 48585036
+	3251  -  MemoryUsage of job (MB)
+	3328160  -  ResidentSetSize of job (KB)
+...
+006 (8180963.127.000) 2026-06-24 16:55:40 Image size of job updated: 48585036
+	3254  -  MemoryUsage of job (MB)
+	3331232  -  ResidentSetSize of job (KB)
+...
+004 (8180963.127.000) 2026-06-24 17:42:47 Job was evicted. Code 1013 Subcode 0
+	(0) CPU times
+		Usr 0 01:44:24, Sys 0 00:34:06  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	2782562585  -  Run Bytes Received By Job
+	Reason: Startd was shutdown
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       1.35        1         1 
+	   Disk (KB)            : 2750477    16777216  16777216 
+	   GPUs                 :       0.81        1         1 "GPU-17845fb9"
+	   GpusMemory (MB)      :    7369                       
+	   Memory (MB)          :    3254       16384     16384 
+	   TimeExecute (s)      :    6139                       
+	   TimeSlotBusy (s)     :    6183                       
+...
+040 (8180963.127.000) 2026-06-24 17:43:47 Started transferring input files
+	Transferring to host: <128.104.100.52:9618?addrs=128.104.100.52-9618+[2607-f388-107c-501-7ec2-55ff-fe99-a48c]-9618&alias=jcaicedogpu0000.chtc.wisc.edu&noUDP&sock=backfill1_7_12267_f60c_18572>
+...
+040 (8180963.127.000) 2026-06-24 17:44:28 Finished transferring input files
+...
+001 (8180963.127.000) 2026-06-24 17:44:29 Job executing on host: <128.104.100.52:9618?addrs=128.104.100.52-9618+[2607-f388-107c-501-7ec2-55ff-fe99-a48c]-9618&alias=jcaicedogpu0000.chtc.wisc.edu&noUDP&sock=startd_10725_0952>
+	SlotName: backfill1_7@jcaicedogpu0000.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_0a287bea }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_2253387/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_0a287bea = [ Id = "GPU-0a287bea"; Capability = 8.9; DeviceName = "NVIDIA L40"; DeviceUuid = "0a287bea-445d-5580-6326-29b4c887c311"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:56:00.0"; GlobalMemoryMb = 45468; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+040 (8180963.127.000) 2026-06-24 20:14:36 Started transferring output files
+...
+040 (8180963.127.000) 2026-06-24 20:14:36 Finished transferring output files
+...
+005 (8180963.127.000) 2026-06-24 20:14:36 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 02:32:20, Sys 0 00:25:59  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 04:16:44, Sys 0 01:00:05  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	4764750  -  Run Bytes Sent By Job
+	2782562585  -  Run Bytes Received By Job
+	4764750  -  Total Bytes Sent By Job
+	5565125170  -  Total Bytes Received By Job
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       1.00        1         1 
+	   Disk (KB)            : 2801437    16777216  16777216 
+	   GPUs                 :       0.86        1         1 "GPU-0a287bea"
+	   GpusMemory (MB)      :    7329                       
+	   IoHeavy              :                             0 
+	   Memory (MB)          :    3418       16384     16384 
+	   TimeExecute (s)      :    9007                       
+	   TimeSlotBusy (s)     :    9049                       
+...

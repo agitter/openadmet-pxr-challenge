@@ -1,0 +1,83 @@
+000 (8321903.003.000) 2026-06-26 09:00:08 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_4071840_2329>
+...
+040 (8321903.003.000) 2026-06-26 09:01:05 Started transferring input files
+	Transferring to host: <10.1.1.134:43781?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector5#5017982%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector1#5014884&PrivNet=gpu04&addrs=10.1.1.134-43781&alias=gpu04&noUDP>
+...
+040 (8321903.003.000) 2026-06-26 09:01:39 Finished transferring input files
+...
+021 (8321903.003.000) 2026-06-26 09:01:39 Message from starter on slot1_3@glidein_284964_492951428@gpu04:
+	PREPARE_JOB (prepare-hook) succeeded (reported status 000): Using Singularity image openfe_1.11.1.sif
+...
+001 (8321903.003.000) 2026-06-26 09:01:39 Job executing on host: <10.1.1.134:44281?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector4#4929237%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-5-5b18]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector4#4919477&PrivNet=gpu04&addrs=10.1.1.134-44281&alias=gpu04&noUDP>
+	SlotName: slot1_3@glidein_284964_492951428@gpu04
+	AvailableGPUs = { GPUs_GPU_c3149e52 }
+	CondorScratchDir = "/tmp/glide_IpgBpc/execute/dir_723495/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_c3149e52 = [ Id = "GPU-c3149e52"; ClockMhz = 1740.0; Capability = 8.6; CoresPerCU = 128; DeviceName = "NVIDIA A40"; DeviceUuid = "c3149e52-8f5e-dbf4-4a81-91e1e4adeef6"; ECCEnabled = true; ComputeUnits = 84; NvidiaDriver = "595.71.05"; DriverVersion = 13.2; DevicePciBusId = "0000:81:00.0"; GlobalMemoryMb = 45739; MaxSupportedVersion = 13020 ]
+	Memory = 16384
+...
+006 (8321903.003.000) 2026-06-26 09:01:48 Image size of job updated: 2
+	6  -  MemoryUsage of job (MB)
+	5360  -  ResidentSetSize of job (KB)
+...
+006 (8321903.003.000) 2026-06-26 09:06:48 Image size of job updated: 32263888
+	2314  -  MemoryUsage of job (MB)
+	2368580  -  ResidentSetSize of job (KB)
+...
+006 (8321903.003.000) 2026-06-26 09:11:49 Image size of job updated: 32264828
+	2318  -  MemoryUsage of job (MB)
+	2372640  -  ResidentSetSize of job (KB)
+...
+006 (8321903.003.000) 2026-06-26 09:16:49 Image size of job updated: 32269296
+	2369  -  MemoryUsage of job (MB)
+	2424864  -  ResidentSetSize of job (KB)
+...
+006 (8321903.003.000) 2026-06-26 09:21:50 Image size of job updated: 32271984
+	2386  -  MemoryUsage of job (MB)
+	2442272  -  ResidentSetSize of job (KB)
+...
+006 (8321903.003.000) 2026-06-26 09:26:51 Image size of job updated: 32277616
+	2391  -  MemoryUsage of job (MB)
+	2447392  -  ResidentSetSize of job (KB)
+...
+006 (8321903.003.000) 2026-06-26 09:31:51 Image size of job updated: 32282896
+	2396  -  MemoryUsage of job (MB)
+	2452512  -  ResidentSetSize of job (KB)
+...
+006 (8321903.003.000) 2026-06-26 09:36:52 Image size of job updated: 32286724
+	2399  -  MemoryUsage of job (MB)
+	2456096  -  ResidentSetSize of job (KB)
+...
+006 (8321903.003.000) 2026-06-26 09:41:52 Image size of job updated: 32292544
+	2404  -  MemoryUsage of job (MB)
+	2461216  -  ResidentSetSize of job (KB)
+...
+006 (8321903.003.000) 2026-06-26 09:46:53 Image size of job updated: 32297560
+	2409  -  MemoryUsage of job (MB)
+	2466336  -  ResidentSetSize of job (KB)
+...
+040 (8321903.003.000) 2026-06-26 09:52:47 Started transferring output files
+...
+040 (8321903.003.000) 2026-06-26 09:52:47 Finished transferring output files
+...
+005 (8321903.003.000) 2026-06-26 09:52:49 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:50:22, Sys 0 00:07:17  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:50:22, Sys 0 00:07:17  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	128094  -  Run Bytes Sent By Job
+	2781015597  -  Run Bytes Received By Job
+	128094  -  Total Bytes Sent By Job
+	2781015597  -  Total Bytes Received By Job
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       1.00        1         1 
+	   Disk (KB)            : 2727197    16777216  16777216 
+	   GPUs                 :       0.81        1         1 "GPU-c3149e52"
+	   GpusMemory (MB)      :    4178                       
+	   Memory (MB)          :    2409       16384     16384 
+	   TimeExecute (s)      :    3068                       
+	   TimeSlotBusy (s)     :    3105                       
+...

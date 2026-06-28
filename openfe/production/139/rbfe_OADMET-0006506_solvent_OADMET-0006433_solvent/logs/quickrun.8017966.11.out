@@ -1,0 +1,53 @@
+=== openfe quickrun production ===
+Host: gitter0000
+Transformation: rbfe_OADMET-0006506_solvent_OADMET-0006433_solvent.json
+Start: Sat Jun 20 22:12:09 CDT 2026
+nvidia-smi not available
+openfe: openfe, version 1.11.1
+Available platforms: ['Reference', 'CPU', 'CUDA', 'OpenCL']
+CUDA platform confirmed available.
+No quickrun_cache found - this is a FRESH run
+
+Current directory: /var/lib/condor/execute/slot2/dir_3493991/scratch/
+Using existing working directory: quickrun_output/
+Loading transformation from: rbfe_OADMET-0006506_solvent_OADMET-0006433_solvent.json
+When simulation is complete, results will be written to: quickrun_output/result.json
+
+If this simulation is interrupted or fails, you may attempt to resume execution using:
+openfe quickrun rbfe_OADMET-0006506_solvent_OADMET-0006433_solvent.json -o quickrun_output/result.json -d quickrun_output --resume
+
+openfe quickrun was run with --resume, but no cached results found at quickrun_output/quickrun_cache/dag-cache-2033e31e23aaf3293eed9ecef6d86c44.json. Starting new execution.
+Planning simulations for this edge...
+
+Starting the simulations for this edge...
+
+Please cite the following:
+
+        Friedrichs MS, Eastman P, Vaidyanathan V, Houston M, LeGrand S, Beberg AL, Ensign DL, Bruns CM, and Pande VS. Accelerating molecular dynamic simulations on graphics processing unit. J. Comput. Chem. 30:864, 2009. DOI: 10.1002/jcc.21209
+        Eastman P and Pande VS. OpenMM: A hardware-independent framework for molecular simulations. Comput. Sci. Eng. 12:34, 2010. DOI: 10.1109/MCSE.2010.27
+        Eastman P and Pande VS. Efficient nonbonded interactions for molecular dynamics on a graphics processing unit. J. Comput. Chem. 31:1268, 2010. DOI: 10.1002/jcc.21413
+        Eastman P and Pande VS. Constant constraint matrix approximation: A robust, parallelizable constraint method for molecular simulations. J. Chem. Theor. Comput. 6:434, 2010. DOI: 10.1021/ct900463w
+        Chodera JD and Shirts MR. Replica exchange and expanded ensemble simulations as Gibbs multistate: Simple improvements for enhanced mixing. J. Chem. Phys., 135:194110, 2011. DOI:10.1063/1.3660669
+        
+Please cite the following:
+
+        Friedrichs MS, Eastman P, Vaidyanathan V, Houston M, LeGrand S, Beberg AL, Ensign DL, Bruns CM, and Pande VS. Accelerating molecular dynamic simulations on graphics processing unit. J. Comput. Chem. 30:864, 2009. DOI: 10.1002/jcc.21209
+        Eastman P and Pande VS. OpenMM: A hardware-independent framework for molecular simulations. Comput. Sci. Eng. 12:34, 2010. DOI: 10.1109/MCSE.2010.27
+        Eastman P and Pande VS. Efficient nonbonded interactions for molecular dynamics on a graphics processing unit. J. Comput. Chem. 31:1268, 2010. DOI: 10.1002/jcc.21413
+        Eastman P and Pande VS. Constant constraint matrix approximation: A robust, parallelizable constraint method for molecular simulations. J. Chem. Theor. Comput. 6:434, 2010. DOI: 10.1021/ct900463w
+        Chodera JD and Shirts MR. Replica exchange and expanded ensemble simulations as Gibbs multistate: Simple improvements for enhanced mixing. J. Chem. Phys., 135:194110, 2011. DOI:10.1063/1.3660669
+        
+Done with all simulations! Analyzing the results....
+Here is the result:
+	dG = 14.39895858038812 kilocalorie_per_mole ± 0.0 kilocalorie_per_mole
+
+
+	Duration: 1:11:44.859620
+
+
+=== Completed successfully ===
+Wall-clock: 4311 seconds (1h 11m)
+End: Sat Jun 20 23:24:00 CDT 2026
+Cleaning up large checkpoint/trajectory files...
+12M	quickrun_output/
+1.2M	quickrun_output/

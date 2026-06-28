@@ -1,0 +1,119 @@
+000 (8180963.073.000) 2026-06-24 12:19:47 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_4071840_2329>
+...
+040 (8180963.073.000) 2026-06-24 14:06:07 Started transferring input files
+	Transferring to host: <128.104.100.117:9618?addrs=128.104.100.117-9618+[2607-f388-107c-501-8ae9-a4ff-fe02-e150]-9618&alias=jcaicedogpu0003.chtc.wisc.edu&noUDP&sock=backfill1_6_1586877_26eb_111154>
+...
+040 (8180963.073.000) 2026-06-24 14:06:40 Finished transferring input files
+...
+001 (8180963.073.000) 2026-06-24 14:06:40 Job executing on host: <128.104.100.117:9618?addrs=128.104.100.117-9618+[2607-f388-107c-501-8ae9-a4ff-fe02-e150]-9618&alias=jcaicedogpu0003.chtc.wisc.edu&noUDP&sock=startd_10874_3cee>
+	SlotName: backfill1_6@jcaicedogpu0003.chtc.wisc.edu
+	AvailableGPUs = { GPUs_GPU_f577c034 }
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_2550708/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_f577c034 = [ Id = "GPU-f577c034"; Capability = 8.9; DeviceName = "NVIDIA L40S"; DeviceUuid = "f577c034-8bd1-f1b7-ffec-c5a5f820bb55"; ECCEnabled = true; NvidiaDriver = "570.195.03"; DriverVersion = 12.8; DevicePciBusId = "0000:41:00.0"; GlobalMemoryMb = 45468; MaxSupportedVersion = 12080 ]
+	IoHeavy = 0
+	Memory = 16384
+...
+006 (8180963.073.000) 2026-06-24 14:06:49 Image size of job updated: 448364
+	438  -  MemoryUsage of job (MB)
+	448364  -  ResidentSetSize of job (KB)
+...
+006 (8180963.073.000) 2026-06-24 14:08:28 Image size of job updated: 952564
+	438  -  MemoryUsage of job (MB)
+	448372  -  ResidentSetSize of job (KB)
+...
+004 (8180963.073.000) 2026-06-24 14:08:28 Job was evicted. Code 1011 Subcode 0
+	(0) CPU times
+		Usr 0 00:01:41, Sys 0 00:01:15  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	2782749793  -  Run Bytes Received By Job
+	Reason: PREEMPT expression evaluated to True
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       1.87        1         1 
+	   Disk (KB)            : 2720552    16777216  16777216 
+	   GPUs                 :       0           1         1 "GPU-f577c034"
+	   IoHeavy              :                             0 
+	   Memory (MB)          :     438       16384     16384 
+	   TimeExecute (s)      :     108                       
+	   TimeSlotBusy (s)     :     141                       
+...
+040 (8180963.073.000) 2026-06-24 14:35:59 Started transferring input files
+	Transferring to host: <10.226.104.219:45589?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector8#4721768%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-d-2091]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector8#4717230&PrivNet=gpu019.rci.montana.edu&addrs=10.226.104.219-45589&alias=gpu019.rci.montana.edu&noUDP>
+...
+040 (8180963.073.000) 2026-06-24 14:43:58 Finished transferring input files
+...
+021 (8180963.073.000) 2026-06-24 14:43:59 Message from starter on slot1_1@glidein_27138_310978629@gpu019.rci.montana.edu:
+	PREPARE_JOB (prepare-hook) succeeded (reported status 000): Using Singularity image openfe_1.11.1.sif
+...
+001 (8180963.073.000) 2026-06-24 14:43:59 Job executing on host: <10.226.104.219:38671?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-9d-7ccb-bc08-2489-7689]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector5#4711732%2067.58.49.91:9618%3faddrs%3d67.58.49.91-9618+[fdf0-17b3-c3ec-1f79-10-0-d-2091]-9618%26alias%3dccb-2.ospool.osg-htc.org%26noUDP%26sock%3dcollector9#4711655&PrivNet=gpu019.rci.montana.edu&addrs=10.226.104.219-38671&alias=gpu019.rci.montana.edu&noUDP>
+	SlotName: slot1_1@glidein_27138_310978629@gpu019.rci.montana.edu
+	AvailableGPUs = { GPUs_GPU_c024a1e2 }
+	CondorScratchDir = "/tmp/jobs/4124952/glide_whoL6k/execute/dir_450318/scratch"
+	Cpus = 1
+	Disk = 16777216
+	GPUs = 1
+	GPUs_GPU_c024a1e2 = [ Id = "GPU-c024a1e2"; ClockMhz = 1980.0; Capability = 9.0; CoresPerCU = 128; DeviceName = "NVIDIA H100 80GB HBM3"; DeviceUuid = "c024a1e2-3221-96c5-6819-7810c2eb5df0"; ECCEnabled = true; ComputeUnits = 132; NvidiaDriver = "595.71.05"; DriverVersion = 13.2; DevicePciBusId = "0000:4E:00.0"; GlobalMemoryMb = 81081; MaxSupportedVersion = 13020 ]
+	Memory = 16384
+...
+006 (8180963.073.000) 2026-06-24 14:44:08 Image size of job updated: 4014440
+	440  -  MemoryUsage of job (MB)
+	450000  -  ResidentSetSize of job (KB)
+...
+006 (8180963.073.000) 2026-06-24 14:49:09 Image size of job updated: 56001808
+	2661  -  MemoryUsage of job (MB)
+	2724640  -  ResidentSetSize of job (KB)
+...
+006 (8180963.073.000) 2026-06-24 14:54:09 Image size of job updated: 56009096
+	2668  -  MemoryUsage of job (MB)
+	2731428  -  ResidentSetSize of job (KB)
+...
+006 (8180963.073.000) 2026-06-24 14:59:10 Image size of job updated: 56013736
+	2674  -  MemoryUsage of job (MB)
+	2737808  -  ResidentSetSize of job (KB)
+...
+006 (8180963.073.000) 2026-06-24 15:04:10 Image size of job updated: 56020152
+	2681  -  MemoryUsage of job (MB)
+	2744564  -  ResidentSetSize of job (KB)
+...
+006 (8180963.073.000) 2026-06-24 15:09:11 Image size of job updated: 56025636
+	2686  -  MemoryUsage of job (MB)
+	2750068  -  ResidentSetSize of job (KB)
+...
+006 (8180963.073.000) 2026-06-24 15:14:11 Image size of job updated: 56031180
+	2692  -  MemoryUsage of job (MB)
+	2755652  -  ResidentSetSize of job (KB)
+...
+006 (8180963.073.000) 2026-06-24 15:19:12 Image size of job updated: 56036724
+	2697  -  MemoryUsage of job (MB)
+	2761232  -  ResidentSetSize of job (KB)
+...
+006 (8180963.073.000) 2026-06-24 15:24:12 Image size of job updated: 56040288
+	2697  -  MemoryUsage of job (MB)
+	2761232  -  ResidentSetSize of job (KB)
+...
+040 (8180963.073.000) 2026-06-24 15:24:58 Started transferring output files
+...
+040 (8180963.073.000) 2026-06-24 15:24:59 Finished transferring output files
+...
+005 (8180963.073.000) 2026-06-24 15:24:59 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:40:04, Sys 0 00:06:22  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:41:45, Sys 0 00:07:37  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	148279  -  Run Bytes Sent By Job
+	2782749793  -  Run Bytes Received By Job
+	148279  -  Total Bytes Sent By Job
+	5565499586  -  Total Bytes Received By Job
+	Partitionable Resources :      Usage  Request Allocated Assigned
+	   Cpus                 :       1.00        1         1 
+	   Disk (KB)            : 2728999    16777216  16777216 
+	   GPUs                 :       0.71        1         1 "GPU-c024a1e2"
+	   GpusMemory (MB)      :    8001                       
+	   Memory (MB)          :    2697       16384     16384 
+	   TimeExecute (s)      :    2459                       
+	   TimeSlotBusy (s)     :    2941                       
+...
