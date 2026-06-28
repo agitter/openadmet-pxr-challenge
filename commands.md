@@ -2284,3 +2284,233 @@ Phase 2 compounds with SHORTER path: 4
 
 Wrote openfe\phase1_anchor_analysis.csv
 ```
+
+```commandline
+python -c "
+import pandas as pd
+df = pd.read_csv('openfe/rbfe_predictions.csv')
+
+# Are extreme predictions associated with long paths?
+df['implausible'] = (df['pred_pEC50_raw'] < 3) | (df['pred_pEC50_raw'] > 8)
+print('Implausible predictions (pEC50 <3 or >8):', df['implausible'].sum())
+print()
+print('Mean hops by plausibility:')
+print(df.groupby('implausible')['n_hops'].mean())
+print()
+print('Implausible predictions by hop count:')
+print(df[df['implausible']].groupby('n_hops').size())
+print()
+print('Most extreme predictions:')
+print(df.nlargest(5, 'pred_pEC50_raw')[['Molecule Name','n_hops','path_ddg_kcal_mol','pred_pEC50_raw']].to_string())
+print(df.nsmallest(5, 'pred_pEC50_raw')[['Molecule Name','n_hops','path_ddg_kcal_mol','pred_pEC50_raw']].to_string())
+"
+Implausible predictions (pEC50 <3 or >8): 107
+
+Mean hops by plausibility:
+implausible
+False    2.232432
+True     2.121495
+Name: n_hops, dtype: float64
+
+Implausible predictions by hop count:
+n_hops
+1    37
+2    35
+3    25
+4     7
+5     2
+7     1
+dtype: int64
+
+Most extreme predictions:
+      Molecule Name  n_hops  path_ddg_kcal_mol  pred_pEC50_raw
+186  OADMET-0006364       2         -10.974579       14.137059
+225  OADMET-0006567       2          -9.850989       13.908192
+113  OADMET-0006437       2         -13.551576       13.786630
+121  OADMET-0006467       3          -9.889858       13.141692
+45   OADMET-0006572       2          -8.321001       12.956336
+      Molecule Name  n_hops  path_ddg_kcal_mol  pred_pEC50_raw
+261  OADMET-0006265       5          15.663722       -5.015351
+15   OADMET-0006465       1          15.058628       -4.721669
+12   OADMET-0006213       2          13.314520       -3.557810
+14   OADMET-0006209       2          11.364886       -2.128250
+115  OADMET-0006216       1           4.879386       -1.797787
+```
+
+```commandline
+python -c "
+import pandas as pd
+edges = pd.read_csv('openfe/all_edge_results.csv')
+done = edges[edges['both_done']].copy()
+done['absddg'] = done['ddg'].abs()
+print('Edge ddG magnitude distribution:')
+print(done['absddg'].describe())
+print()
+for thresh in [3, 4, 5, 7, 10]:
+    n = (done['absddg'] > thresh).sum()
+    print(f'  |ddG| > {thresh}: {n} edges ({100*n/len(done):.1f}%)')
+print()
+print('Edges with |ddG| > 7 (likely unconverged):')
+print(done[done['absddg'] > 7][['cluster_id','edge','ddg']].to_string())
+"
+Edge ddG magnitude distribution:
+count    316.000000
+mean       2.954561
+std        2.427341
+min        0.003118
+25%        1.089600
+50%        2.447856
+75%        4.111434
+max       15.058628
+Name: absddg, dtype: float64
+
+  |ddG| > 3: 128 edges (40.5%)
+  |ddG| > 4: 83 edges (26.3%)
+  |ddG| > 5: 48 edges (15.2%)
+  |ddG| > 7: 24 edges (7.6%)
+  |ddG| > 10: 5 edges (1.6%)
+
+Edges with |ddG| > 7 (likely unconverged):
+     cluster_id                                edge        ddg
+2           129    rbfe_OADMET-0006484_OCNT-2317528   9.437926
+10          139    rbfe_OADMET-0006609_OCNT-2313188  -9.498883
+11          146    rbfe_OADMET-0006465_OCNT-2311117 -15.058628
+18          171    rbfe_OCNT-2312559_OADMET-0006439  -9.130079
+70          259  rbfe_OADMET-0006456_OADMET-0006438 -11.137321
+75          259  rbfe_OADMET-0006572_OADMET-0006456  13.088166
+107         289    rbfe_OCNT-2317314_OADMET-0006211   7.002374
+167         373  rbfe_OADMET-0006493_OADMET-0006428   7.909100
+173         382    rbfe_OADMET-0006220_OCNT-2317556   7.783868
+198         385  rbfe_OADMET-0006437_OADMET-0006193   8.589392
+212         397  rbfe_OADMET-0006356_OADMET-0006236  -8.536167
+243         413  rbfe_OADMET-0006406_OADMET-0006195  -8.469179
+265         422    rbfe_OCNT-2315609_OADMET-0006132  10.037928
+331         454  rbfe_OADMET-0006463_OADMET-0006257 -11.443584
+335         455  rbfe_OADMET-0006425_OADMET-0006145   9.880575
+336         455  rbfe_OADMET-0006425_OADMET-0006359   7.284439
+361         469    rbfe_OADMET-0006130_OCNT-2317682   7.291536
+362         471    rbfe_OADMET-0006128_OCNT-2318059  -7.318114
+389         483    rbfe_OCNT-2315472_OADMET-0006264  -7.456350
+396         484    rbfe_OCNT-2317888_OADMET-0006151   7.106434
+467         501  rbfe_OADMET-0006394_OADMET-0006263  -7.072471
+486         505  rbfe_OADMET-0006514_OADMET-0006371  -8.549157
+509         508  rbfe_OADMET-0006568_OADMET-0006458   7.159654
+511         508  rbfe_OADMET-0006568_OADMET-0006597   7.538975
+```
+
+```commandline
+python -c "
+import pandas as pd
+edges = pd.read_csv('openfe/all_edge_results.csv')
+# How many of the >7 edges are bridges whose removal disconnects compounds?
+big = edges[(edges['both_done']) & (edges['ddg'].abs() > 7)]
+print(f'Edges with |ddG|>7: {len(big)}')
+print(f'Clusters affected: {big[\"cluster_id\"].nunique()}')
+# Which involve an anchor (OCNT) directly - those disconnect the whole downstream
+anchor_edges = big[big['edge'].str.contains('OCNT')]
+print(f'Of these, edges touching an anchor (OCNT): {len(anchor_edges)}')
+"
+Edges with |ddG|>7: 24
+Clusters affected: 21
+Of these, edges touching an anchor (OCNT): 11
+```
+
+```commandline
+$ python openfe/scripts/probe_structure.py
+=== protocol_result.data entry ===
+type: <class 'list'>
+list len: 1
+first item keys: ['name', '_key', 'source_key', 'inputs', 'outputs', 'stderr', 'stdout', 'start_time', 'end_time', '__qualname__', '__module__', ':version:']
+
+=== all unit_results ===
+  HybridTopology Setup: OADMET-0006465 to OCNT-2311117 repeat 0 generation 0
+    output keys: ['repeat_id', 'generation', 'openmm_version', 'openfe_version', 'gufe_version', 'system', 'positions', 'pdb_structure', 'selection_indices']
+  HybridTopology Simulation: OADMET-0006465 to OCNT-2311117 repeat 0 generation 0
+    output keys: ['repeat_id', 'generation', 'nc', 'checkpoint']
+  HybridTopology Analysis: OADMET-0006465 to OCNT-2311117 repeat 0 generation 0
+    output keys: ['repeat_id', 'generation', 'pdb_structure', 'trajectory', 'checkpoint', 'selection_indices', 'unit_estimate', 'unit_estimate_error', 'unit_mbar_overlap', 'forward_and_reverse_energies', 'production_iterations', 'equilibration_iterations', 'replica_exchange_statistics', 'structural_analysis']
+```
+
+```commandline
+python openfe/scripts/15_convergence_analysis.py \
+    --production-dir openfe/production \
+    --edge-results openfe/all_edge_results.csv \
+    --outdir openfe
+============================================================
+CONVERGENCE ANALYSIS (all completed legs)
+============================================================
+Legs with diagnostics: 632
+
+MBAR dG_error (kcal/mol):
+count    632.000000
+mean       1.376806
+std        0.690448
+min        0.001655
+25%        0.862827
+50%        1.311100
+75%        1.807510
+max        4.347258
+
+Min adjacent lambda overlap:
+count    6.320000e+02
+mean     1.092170e-02
+std      5.393369e-02
+min      6.049729e-08
+25%      1.578979e-03
+50%      3.237675e-03
+75%      9.430890e-03
+max      9.338529e-01
+
+============================================================
+CONVERGENCE vs |ddG|
+============================================================
+
+|ddG| > 3 (n=128): mean MBAR err=1.807
+|ddG| <= 3 (n=188): mean MBAR err=1.506
+  |ddG|>3 mean min-overlap=0.0043  |ddG|<=3 mean min-overlap=0.0142
+
+|ddG| > 5 (n=48): mean MBAR err=1.973
+|ddG| <= 5 (n=268): mean MBAR err=1.566
+  |ddG|>5 mean min-overlap=0.0024  |ddG|<=5 mean min-overlap=0.0115
+
+|ddG| > 7 (n=24): mean MBAR err=2.187
+|ddG| <= 7 (n=292): mean MBAR err=1.582
+  |ddG|>7 mean min-overlap=0.0021  |ddG|<=7 mean min-overlap=0.0108
+
+Wrote openfe\leg_convergence.csv and openfe\edge_convergence.csv
+```
+
+```commandline
+$ python -c "
+import pandas as pd, numpy as np
+e = pd.read_csv('openfe/edge_convergence.csv')
+ecols = [c for c in e.columns if c.endswith('_dG_error')]
+print('error columns:', ecols)
+e['ddg_error'] = np.sqrt(e[ecols[0]].fillna(0)**2 + e[ecols[1]].fillna(0)**2) if len(ecols)>=2 else e[ecols[0]]
+print()
+print('Propagated ddG_error (kcal/mol):')
+print(e['ddg_error'].describe())
+print()
+for t in [1, 1.5, 2, 2.5, 3]:
+    n = (e['ddg_error'] <= t).sum()
+    print(f'  ddG_error <= {t}: {n} edges ({100*n/len(e):.0f}%)')
+"
+error columns: ['complex_dG_error', 'solvent_dG_error']
+
+Propagated ddG_error (kcal/mol):
+count    316.000000
+mean       1.993880
+std        0.877496
+min        0.003205
+25%        1.354060
+50%        1.998680
+75%        2.576041
+max        5.042679
+Name: ddg_error, dtype: float64
+
+  ddG_error <= 1: 43 edges (14%)
+  ddG_error <= 1.5: 94 edges (30%)
+  ddG_error <= 2: 158 edges (50%)
+  ddG_error <= 2.5: 228 edges (72%)
+  ddG_error <= 3: 279 edges (88%)
+```
