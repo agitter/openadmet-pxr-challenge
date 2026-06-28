@@ -2231,3 +2231,56 @@ Coverage by set:
   Set 2: 140/260 RBFE-connected (53.8%)
          120/260 need docking fallback (46.2%)
 ```
+
+```commandline
+python openfe/scripts/12_propagate_pec50.py \
+    --edge-results openfe/all_edge_results.csv \
+    --test-full openfe/test_full_with_clusters_and_anchors.csv \
+    --train data/pxr-challenge_TRAIN.csv \
+    --outdir openfe
+Anchor pEC50 mappings: 89
+Clusters with at least one anchor: 71
+RBFE-connected test compounds: 292
+
+Raw pEC50 prediction distribution:
+  mean=5.18  median=5.06  min=-5.02  max=14.14
+
+Path length distribution (hops from anchor):
+n_hops
+1    101
+2     96
+3     59
+4     21
+5     10
+6      2
+7      1
+8      1
+9      1
+
+ddG path magnitude:
+  mean |ddG_path|=3.50  max |ddG_path|=15.66
+
+Wrote openfe\rbfe_predictions.csv
+```
+
+```commandline
+python openfe/scripts/13_phase1_anchor_analysis.py \
+    --edge-results openfe/all_edge_results.csv \
+    --test-full openfe/test_full_with_clusters_and_anchors.csv \
+    --train data/pxr-challenge_TRAIN.csv \
+    --phase1 data/pxr-challenge_TEST_PHASE_1_UNBLINDED.csv \
+    --outdir openfe
+============================================================
+PHASE 1 AS ADDITIONAL ANCHORS - IMPACT ON PHASE 2
+============================================================
+Phase 2 compounds in RBFE networks: 147
+
+Connected with TRAINING anchors only: 140
+Connected with TRAINING + PHASE 1 anchors: 140
+
+Newly connected Phase 2 compounds: 0
+Phase 2 compounds with NEW connection: 0
+Phase 2 compounds with SHORTER path: 4
+
+Wrote openfe\phase1_anchor_analysis.csv
+```
