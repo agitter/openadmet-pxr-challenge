@@ -2123,3 +2123,111 @@ Empty DataFrame
 Columns: [cluster_id, edge]
 Index: []
 ```
+
+```commandline
+python openfe/scripts/11_gather_all_results.py \
+    --production-dir openfe/production \
+    --outdir openfe
+============================================================
+COMBINED RESULTS (Kartograf + LOMAP salvage)
+============================================================
+Total edges: 533
+Both legs done: 316
+Incomplete: 217
+
+By tier:
+tier
+tier1_kartograf    316
+incomplete         217
+
+ddG distribution (all usable edges):
+  mean=0.15  median=0.20  min=-15.06  max=13.09
+
+Edges recovered by LOMAP salvage: 0
+Original Kartograf edges: 316
+
+Wrote openfe/all_edge_results.csv
+```
+
+```commandline
+python openfe/scripts/09_connectivity_analysis.py \
+    --edge-results openfe/all_edge_results.csv \
+    --test-full openfe/test_full_with_clusters_and_anchors.csv \
+    --outdir openfe
+Using combined edge results: openfe/all_edge_results.csv
+============================================================
+CONNECTIVITY ANALYSIS
+============================================================
+Test compounds in RBFE networks: 513
+Connected to anchor (RBFE-predictable): 292 (56.9%)
+Disconnected (need docking fallback): 221 (43.1%)
+
+Connected compounds by tier:
+  tier1_kartograf: 292 (Kartograf-only path (high conf))
+
+SALVAGE PRIORITY:
+Failed edges that would reconnect >=1 compound: 99
+Total reconnectable compounds (if all salvaged): 117
+
+Top 15 highest-value edges to salvage:
+ cluster_id                               edge  compounds_reconnected
+        402 rbfe_OADMET-0006449_OADMET-0006453                      9
+        496 rbfe_OADMET-0006435_OADMET-0006121                      6
+        468   rbfe_OCNT-2315366_OADMET-0006149                      3
+        373   rbfe_OADMET-0006493_OCNT-2311117                      3
+        477 rbfe_OADMET-0006269_OADMET-0006122                      2
+        110   rbfe_OADMET-0006503_OCNT-2317296                      1
+         80   rbfe_OCNT-2315472_OADMET-0006534                      1
+         67   rbfe_OADMET-0006548_OCNT-2312239                      1
+        167   rbfe_OADMET-0006443_OCNT-2310646                      1
+        169   rbfe_OADMET-0006469_OCNT-2315366                      1
+        169   rbfe_OADMET-0006580_OCNT-2315366                      1
+        169   rbfe_OCNT-2315366_OADMET-0006441                      1
+        178   rbfe_OCNT-2317556_OADMET-0006432                      1
+        191   rbfe_OADMET-0006521_OCNT-1965882                      1
+        136   rbfe_OCNT-2317556_OADMET-0006476                      1
+
+Wrote openfe/salvage_priority_edges.csv
+
+Wrote openfe/connectivity_report.csv
+```
+
+```commandline
+python3 -c "
+import pandas as pd
+
+test = pd.read_csv('openfe/test_full_with_clusters_and_anchors.csv')
+phase1 = pd.read_csv('data/pxr-challenge_TEST_PHASE_1_UNBLINDED.csv')
+conn = pd.read_csv('openfe/connectivity_report.csv')
+
+# Identify Set 1 compounds (unblinded in Phase 1)
+set1_names = set(phase1['Molecule Name'])
+test['set'] = test['Molecule Name'].apply(lambda x: 1 if x in set1_names else 2)
+
+print(f'Total test compounds: {len(test)}')
+print(f'Analog Set 1 (unblinded, calibration): {(test[\"set\"]==1).sum()}')
+print(f'Analog Set 2 (blind, submission target): {(test[\"set\"]==2).sum()}')
+
+# Merge with connectivity
+conn_merged = conn.merge(test[['Molecule Name', 'set']], 
+                         left_on='compound', right_on='Molecule Name', how='left')
+
+print()
+print('Coverage by set:')
+for s in [1, 2]:
+    sub = conn_merged[conn_merged['set'] == s]
+    connected = sub['connected_to_anchor'].sum()
+    total = len(sub)
+    print(f'  Set {s}: {connected}/{total} RBFE-connected ({100*connected/total:.1f}%)')
+    print(f'         {total-connected}/{total} need docking fallback ({100*(total-connected)/total:.1f}%)')
+"
+Total test compounds: 513
+Analog Set 1 (unblinded, calibration): 253
+Analog Set 2 (blind, submission target): 260
+
+Coverage by set:
+  Set 1: 152/253 RBFE-connected (60.1%)
+         101/253 need docking fallback (39.9%)
+  Set 2: 140/260 RBFE-connected (53.8%)
+         120/260 need docking fallback (46.2%)
+```

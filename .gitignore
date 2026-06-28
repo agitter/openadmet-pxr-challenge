@@ -220,7 +220,26 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Project files
-openfe/timing_test/
-openfe/production/*/*/quickrun_output/
+# ============================================================
+# OpenFE RBFE campaign - keep results + logs, exclude large files
+# ============================================================
+
+# quickrun_output/: KEEP result.json, exclude large trajectory/checkpoint files
+openfe/production/*/*/quickrun_output/*.nc
+openfe/production/*/*/quickrun_output/*.chk
+openfe/production/*/*/quickrun_output/shared_*
+openfe/production/*/*/quickrun_output/quickrun_cache/
+openfe/production/*/*/quickrun_output/.placeholder
+
+# Salvage run: keep result.json + provenance.json + logs, exclude scratch
+openfe/production/*/*/salvage/quickrun_scratch/
+openfe/production/*/*/salvage/quickrun_output/
+openfe/production/*/*/salvage/run_quickrun.sh
+
+# Redundant per-job copies (originals in openfe/scripts/ and openfe/results/)
 openfe/production/*/*/run_quickrun.sh
 openfe/production/*/*/network_setup.json
+
+# Test/scratch artifacts
+openfe/timing_test/
+openfe/salvage_test/
