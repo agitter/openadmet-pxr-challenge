@@ -2534,3 +2534,104 @@ Wrote openfe\threshold_sweep.csv
 Suggested threshold (best Spearman with >=80% coverage):
   threshold=3.0  connected=234  rho=0.178  MAE=2.445
 ```
+
+```commandline
+$ python openfe/scripts/17_compare_methods.py \
+    --phase1-docking docking/docking_analysis_extended/phase1_with_docking_scores.csv \
+    --rbfe-pred openfe/rbfe_predictions.csv \
+    --test-full openfe/test_full_with_clusters_and_anchors.csv \
+    --train data/pxr-challenge_TRAIN.csv \
+    --phase1 data/pxr-challenge_TEST_PHASE_1_UNBLINDED.csv \
+    --outdir openfe
+================================================================
+METHOD vs EXPERIMENTAL pEC50
+================================================================
+      subset         predictor   n   pearson  spearman  mae_vs_pEC50
+      phase1       CNNaffinity 253  0.201702  0.276460           NaN
+      phase1          CNNscore 253  0.045837  0.078285           NaN
+      phase1 minimizedAffinity 253 -0.054565 -0.119920           NaN
+      phase1    pred_pEC50_raw 152  0.146508  0.169341       2.42316
+       train       CNNaffinity   0       NaN       NaN           NaN
+       train          CNNscore   0       NaN       NaN           NaN
+       train minimizedAffinity   0       NaN       NaN           NaN
+       train    pred_pEC50_raw   0       NaN       NaN           NaN
+phase1+train       CNNaffinity 253  0.201702  0.276460           NaN
+phase1+train          CNNscore 253  0.045837  0.078285           NaN
+phase1+train minimizedAffinity 253 -0.054565 -0.119920           NaN
+phase1+train    pred_pEC50_raw 152  0.146508  0.169341       2.42316
+
+Wrote openfe\method_comparison.png
+Wrote openfe\method_comparison_metrics.csv
+Wrote openfe\method_comparison_master.csv
+```
+
+```commandline
+$ python openfe/scripts/18_audit_data_coverage.py
+================================================================
+1. LOADING SOURCES
+================================================================
+  [ok] test_full: 513 rows, cols=['Molecule Name', 'SMILES', 'ligand_id', 'cluster_id', 'best_train_idx', 'best_train_pEC50', 'anchor_ligand_id']
+  [ok] rbfe_predictions: 292 rows, cols=['Molecule Name', 'cluster_id', 'anchor_ocnt', 'anchor_pEC50', 'path_ddg_kcal_mol', 'n_hops', 'path', 'pred_pEC50_raw']
+  [ok] train: 4139 rows, cols=['Molecule Name', 'SMILES', 'OCNT Batch', 'pEC50', 'Emax_estimate (log2FC vs. baseline)', 'Emax.vs.pos.ctrl_estimate (dimensionless)', 'pEC50_std.error (-log10(molarity))', 'Emax_std.error (log2FC vs. baseline)', 'Emax.vs.pos.ctrl_std.error (dimensionless)', 'pEC50_ci.lower (-log10(molarity))', 'pEC50_ci.upper (-log10(molarity))', 'Emax_ci.lower (log2FC vs. baseline)', 'Emax_ci.upper (log2FC vs. baseline)', 'Emax.vs.pos.ctrl_ci.lower (dimensionless)', 'Emax.vs.pos.ctrl_ci.upper (dimensionless)', 'Split', 'OCNT_ID', 'source']
+  [ok] phase1_unblinded: 253 rows, cols=['Molecule Name', 'SMILES', 'OCNT Batch', 'pEC50', 'pEC50_std.error (-log10(molarity))', 'pEC50_ci.lower (-log10(molarity))', 'pEC50_ci.upper (-log10(molarity))', 'Emax_estimate (log2FC vs. baseline)', 'Emax_std.error (log2FC vs. baseline)', 'Emax_ci.lower (log2FC vs. baseline)', 'Emax_ci.upper (log2FC vs. baseline)', 'Emax.vs.pos.ctrl_estimate (dimensionless)', 'Emax.vs.pos.ctrl_std.error (dimensionless)', 'Emax.vs.pos.ctrl_ci.lower (dimensionless)', 'Emax.vs.pos.ctrl_ci.upper (dimensionless)', 'Split', 'phase']
+  [ok] test_blinded: 513 rows, cols=['Molecule Name', 'SMILES']
+  [ok] docking_receptor_best: 37324 rows, cols=['cluster_id', 'ligand_name', 'pdb_id', 'pose_rank', 'minimizedAffinity', 'CNNscore', 'CNNaffinity']
+  [ok] phase1_with_docking: 253 rows, cols=['Molecule Name', 'ligand_id', 'pEC50', 'pEC50_std.error (-log10(molarity))', 'CNNscore', 'CNNaffinity', 'minimizedAffinity', 'pdb_id']
+  [ok] docking_cluster_summary: 602 rows, cols=['cluster_id', 'ligand_name', 'best_pdb_id', 'best_pose_rank', 'best_CNNscore', 'best_CNNaffinity', 'best_minimizedAffinity', 'mean_CNNscore_across_receptors', 'std_CNNscore_across_receptors', 'top3_receptors', 'top3_CNNscores', 'n_receptors_success', 'n_receptors_total']
+
+================================================================
+2. COMPOUND SET SIZES
+================================================================
+  All test compounds (test_full):  513
+  Set 1 (Phase 1, unblinded):      253
+  Set 2 (Phase 2, blind):          260
+  Training compounds:              4139
+  TEST_BLINDED.csv rows:           513
+  TEST_BLINDED matches test_full:  513
+
+================================================================
+3. DOCKING NAMING KEYS
+================================================================
+  receptor_best unique ligand_name: 602
+  sample: ['OADMET-0006274', 'OADMET-0006427', 'OADMET-0006266', 'OADMET-0006300']
+  ligand_name ∩ Set1:  253
+  ligand_name ∩ Set2:  260
+  ligand_name ∩ train: 0
+  name types: OADMET=513  OCNT=89  other=0
+
+================================================================
+4. DOCKING COVERAGE (best CNNaffinity per compound)
+================================================================
+  Compounds with >=1 docking score: 602
+    Set1 covered: 253/253
+    Set2 covered: 260/260
+    train covered: 0/4139
+
+================================================================
+5. RBFE COVERAGE
+================================================================
+  RBFE predictions: 292
+    Set1: 152/253
+    Set2: 140/260
+    (sanity) RBFE names that are training compounds: 0 (should be 0)
+
+================================================================
+6. PREDICTION COVERAGE MATRIX (the key table)
+================================================================
+
+  Set1 (Phase1) (n=253):
+    both docking+RBFE: 152
+    docking only:      101
+    RBFE only:         0
+    NEITHER:           0
+
+  Set2 (Phase2) (n=260):
+    both docking+RBFE: 140
+    docking only:      120
+    RBFE only:         0
+    NEITHER:           0
+
+================================================================
+AUDIT COMPLETE
+================================================================
+```
