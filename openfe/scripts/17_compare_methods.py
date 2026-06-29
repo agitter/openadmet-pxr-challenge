@@ -85,9 +85,15 @@ def main():
 
     # ---- Assemble a master per-compound table ----
     # Experimental pEC50 source: train + phase1 (both known). Phase 2 unknown.
+    # Key by BOTH Molecule Name (OADMET) and OCNT_ID, because docking files
+    # key anchors by OCNT_ID while test/train files use OADMET Molecule Name.
     exp = {}
+    train_ocnt_names = set()
     for _, r in train.iterrows():
         exp[r["Molecule Name"]] = r["pEC50"]
+        if "OCNT_ID" in train.columns and pd.notna(r.get("OCNT_ID")):
+            exp[r["OCNT_ID"]] = r["pEC50"]
+            train_ocnt_names.add(r["OCNT_ID"])
     for _, r in phase1.iterrows():
         exp[r["Molecule Name"]] = r["pEC50"]
 
@@ -95,16 +101,21 @@ def main():
     train_names = set(train["Molecule Name"])
 
     def category(name):
-        if name in train_names:
+        if name in train_names or name in train_ocnt_names:
             return "train"
         if name in phase1_names:
             return "phase1"
         return "phase2"
 
-    # Docking per-compound (Phase 1 file has scores; also pull test compounds
-    # from receptor_best if available)
-    dock = p1_dock[["Molecule Name", "CNNaffinity", "CNNscore",
-                    "minimizedAffinity"]].copy()
+    # Docking per-compound: use the FULL receptor_best file (all 513 test
+    # compounds + 89 anchors), collapsing to best CNNaffinity per ligand.
+    # The phase1-only file would miss Set2 and anchors.
+    best = pd.read_csv(args.receptor_best)
+    dock = (best.sort_values("CNNaffinity", ascending=False)
+                .groupby("ligand_name", as_index=False)
+                .first()[["ligand_name", "CNNaffinity", "CNNscore",
+                          "minimizedAffinity"]])
+    dock = dock.rename(columns={"ligand_name": "Molecule Name"})
 
     # RBFE predictions
     rbfe_small = rbfe[["Molecule Name", "pred_pEC50_raw", "n_hops"]].copy()
@@ -120,14 +131,18 @@ def main():
     master.to_csv(outdir / "method_comparison_master.csv", index=False)
 
     # ---- Metrics: each predictor vs experimental pEC50, by subset ----
+    # "train" subset is meaningless (only 89 anchors were docked, and RBFE
+    # has no training predictions). Report anchors (docked training compounds)
+    # separately so the denominator is correct.
+    anchor_names = set(master[(master["category"] == "train") &
+                              master["CNNaffinity"].notna()]["Molecule Name"])
     metric_rows = []
     predictors = ["CNNaffinity", "CNNscore", "minimizedAffinity",
                   "pred_pEC50_raw"]
     for subset_name, subset in [
         ("phase1", master[master["category"] == "phase1"]),
-        ("train", master[master["category"] == "train"]),
-        ("phase1+train",
-         master[master["category"].isin(["phase1", "train"])]),
+        ("anchors_docked",
+         master[master["Molecule Name"].isin(anchor_names)]),
     ]:
         for pred in predictors:
             if pred not in subset.columns:

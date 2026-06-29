@@ -2538,6 +2538,7 @@ Suggested threshold (best Spearman with >=80% coverage):
 ```commandline
 $ python openfe/scripts/17_compare_methods.py \
     --phase1-docking docking/docking_analysis_extended/phase1_with_docking_scores.csv \
+    --receptor-best docking/docking_analysis_extended/docking_receptor_best.csv \
     --rbfe-pred openfe/rbfe_predictions.csv \
     --test-full openfe/test_full_with_clusters_and_anchors.csv \
     --train data/pxr-challenge_TRAIN.csv \
@@ -2546,19 +2547,15 @@ $ python openfe/scripts/17_compare_methods.py \
 ================================================================
 METHOD vs EXPERIMENTAL pEC50
 ================================================================
-      subset         predictor   n   pearson  spearman  mae_vs_pEC50
-      phase1       CNNaffinity 253  0.201702  0.276460           NaN
-      phase1          CNNscore 253  0.045837  0.078285           NaN
-      phase1 minimizedAffinity 253 -0.054565 -0.119920           NaN
-      phase1    pred_pEC50_raw 152  0.146508  0.169341       2.42316
-       train       CNNaffinity   0       NaN       NaN           NaN
-       train          CNNscore   0       NaN       NaN           NaN
-       train minimizedAffinity   0       NaN       NaN           NaN
-       train    pred_pEC50_raw   0       NaN       NaN           NaN
-phase1+train       CNNaffinity 253  0.201702  0.276460           NaN
-phase1+train          CNNscore 253  0.045837  0.078285           NaN
-phase1+train minimizedAffinity 253 -0.054565 -0.119920           NaN
-phase1+train    pred_pEC50_raw 152  0.146508  0.169341       2.42316
+        subset         predictor   n   pearson  spearman  mae_vs_pEC50
+        phase1       CNNaffinity 253  0.243863  0.294047           NaN
+        phase1          CNNscore 253  0.164516  0.149467           NaN
+        phase1 minimizedAffinity 253 -0.111632 -0.199978           NaN
+        phase1    pred_pEC50_raw 152  0.146508  0.169341       2.42316
+anchors_docked       CNNaffinity  89  0.471874  0.438044           NaN
+anchors_docked          CNNscore  89  0.030605  0.101750           NaN
+anchors_docked minimizedAffinity  89 -0.110263 -0.153097           NaN
+anchors_docked    pred_pEC50_raw   0       NaN       NaN           NaN
 
 Wrote openfe\method_comparison.png
 Wrote openfe\method_comparison_metrics.csv
@@ -2593,7 +2590,7 @@ $ python openfe/scripts/18_audit_data_coverage.py
 3. DOCKING NAMING KEYS
 ================================================================
   receptor_best unique ligand_name: 602
-  sample: ['OADMET-0006274', 'OADMET-0006427', 'OADMET-0006266', 'OADMET-0006300']
+  sample: ['OADMET-0006344', 'OADMET-0006599', 'OADMET-0006504', 'OADMET-0006398']
   ligand_name ∩ Set1:  253
   ligand_name ∩ Set2:  260
   ligand_name ∩ train: 0
@@ -2603,9 +2600,10 @@ $ python openfe/scripts/18_audit_data_coverage.py
 4. DOCKING COVERAGE (best CNNaffinity per compound)
 ================================================================
   Compounds with >=1 docking score: 602
-    Set1 covered: 253/253
-    Set2 covered: 260/260
-    train covered: 0/4139
+    (of which OADMET test: 513, OCNT anchors: 89)
+    Set1 covered:    253/253
+    Set2 covered:    260/260
+    Anchors covered: 89/89  (only anchors were docked, not all 4139 training compounds)
 
 ================================================================
 5. RBFE COVERAGE

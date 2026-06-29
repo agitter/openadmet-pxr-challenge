@@ -113,18 +113,39 @@ def main():
     print("\n" + "=" * 64)
     print("4. DOCKING COVERAGE (best CNNaffinity per compound)")
     print("=" * 64)
+    # Anchors = the OCNT compounds used as RBFE references. Only these
+    # training compounds were docked, NOT all 4139. Report against the
+    # correct denominator.
+    anchor_ocnt = set()
+    if test_full is not None and train is not None:
+        for _, row in test_full.drop_duplicates("anchor_ligand_id").iterrows():
+            try:
+                idx = int(str(row["anchor_ligand_id"])[1:])
+                anchor_ocnt.add(train.iloc[idx]["OCNT_ID"])
+            except (ValueError, IndexError):
+                pass
     if best is not None:
         # best CNNaffinity per ligand across all receptors/poses
         per_cmpd = best.groupby("ligand_name")["CNNaffinity"].max()
         scored = set(per_cmpd.index)
+        scored_oadmet = {n for n in scored if str(n).startswith("OADMET")}
+        scored_ocnt = {n for n in scored if str(n).startswith("OCNT")}
         print(f"  Compounds with >=1 docking score: {len(scored)}")
-        print(f"    Set1 covered: {len(set1 & scored)}/{len(set1)}")
-        print(f"    Set2 covered: {len(set2 & scored)}/{len(set2)}")
-        print(f"    train covered: {len(train_names & scored)}/{len(train_names)}")
+        print(f"    (of which OADMET test: {len(scored_oadmet)}, "
+              f"OCNT anchors: {len(scored_ocnt)})")
+        print(f"    Set1 covered:    {len(set1 & scored)}/{len(set1)}")
+        print(f"    Set2 covered:    {len(set2 & scored)}/{len(set2)}")
+        print(f"    Anchors covered: {len(anchor_ocnt & scored)}/"
+              f"{len(anchor_ocnt)}  (only anchors were docked, "
+              f"not all {len(train_names)} training compounds)")
         missing2 = set2 - scored
         if missing2:
             print(f"  [WARN] Set2 compounds with NO docking: {len(missing2)}")
             print(f"    sample: {list(missing2)[:5]}")
+        missing_anchor = anchor_ocnt - scored
+        if missing_anchor:
+            print(f"  [WARN] Anchors with NO docking: {len(missing_anchor)}")
+            print(f"    sample: {list(missing_anchor)[:5]}")
 
     # ---- RBFE coverage ----
     print("\n" + "=" * 64)
