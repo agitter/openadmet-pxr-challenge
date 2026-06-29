@@ -2691,3 +2691,22 @@ Best model: docking_only (RAE 0.970 +/- 0.030)
 Wrote openfe\model_tuning_diagnostics.png
 Wrote openfe\chosen_model.json (complete frozen model: docking_only)
 ```
+
+```commandline
+$ python openfe/scripts/20_select_blend_weight.py \
+    --rbfe-pred openfe/rbfe_predictions.csv \
+    --receptor-best docking/docking_analysis_extended/docking_receptor_best.csv \
+    --phase1 data/pxr-challenge_TEST_PHASE_1_UNBLINDED.csv \
+    --choice elbow \
+    --outdir openfe
+Phase 1: 253 compounds (152 with RBFE)
+
+Candidate blend weights:
+  optimal   : w=0.125  RAE=0.9679 +/- 0.0288
+  tolerance : w=0.600  RAE=0.9726 +/- 0.0279
+  elbow     : w=0.500  RAE=0.9704 +/- 0.0279
+
+Chosen (elbow): w=0.500
+Wrote openfe\blend_weight_selection.png
+Wrote openfe\chosen_model.json (fixed_blend, w=0.500)
+```

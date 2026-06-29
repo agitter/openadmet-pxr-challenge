@@ -1,12 +1,6 @@
 {
-  "winner": "docking_only",
-  "gate_features": [
-    "path_ddg_error",
-    "min_overlap_on_path",
-    "max_edge_error_on_path",
-    "n_hops",
-    "std_CNNscore_across_receptors"
-  ],
+  "winner": "fixed_blend",
+  "selection_method": "elbow",
   "calibrations": {
     "dock_slope": 0.8050568583923888,
     "dock_intercept": -1.3740655404014075,
@@ -14,10 +8,16 @@
     "rbfe_intercept": 4.384300885591099,
     "train_mean": 4.664110671936759
   },
-  "winner_params": {},
+  "winner_params": {
+    "w": 0.5
+  },
+  "candidate_weights": {
+    "optimal": 0.125,
+    "tolerance": 0.6000000000000001,
+    "elbow": 0.5
+  },
   "docking_input": "best_CNNaffinity_per_compound",
   "rbfe_input": "pred_pEC50_raw",
-  "rae_cv_mean": 0.9702135687601572,
-  "rae_cv_std": 0.02986359951187576,
-  "apply_rule": "pred = dock_cal where no RBFE; otherwise apply winner model. dock_cal = dock_slope*CNNaffinity + dock_intercept. rbfe_cal = rbfe_slope*pred_pEC50_raw + rbfe_intercept."
+  "apply_rule": "pred = w*rbfe_cal + (1-w)*dock_cal where RBFE present, else dock_cal. dock_cal=dock_slope*CNNaffinity+dock_intercept; rbfe_cal=rbfe_slope*pred_pEC50_raw+rbfe_intercept.",
+  "note": "Blend weight deliberately set above the RAE optimum to give RBFE a meaningful voice for methods evaluation. RBFE is expected to underperform docking on this target; see writeup."
 }
