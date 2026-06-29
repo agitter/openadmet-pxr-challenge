@@ -34,6 +34,7 @@ Usage:
 """
 
 import argparse
+import math
 import re
 from collections import defaultdict, deque
 from pathlib import Path
@@ -54,9 +55,11 @@ def parse_edge_ligands(edge_name):
     return None, None
 
 
-def build_graph(cluster_edges):
-    """Directed-ddG adjacency: node -> {neighbor: ddG}.
-    A->B stores ddG; B->A stores -ddG so a path sum is consistent."""
+def build_graph(cluster_edges, edge_error=None):
+    """Directed-ddG adjacency: node -> {neighbor: (ddG, edge_err)}.
+    A->B stores ddG; B->A stores -ddG so a path sum is consistent.
+    edge_err is the propagated ddG MBAR error for that edge (same in
+    both directions), looked up from edge_error dict keyed by edge name."""
     graph = defaultdict(dict)
     for _, row in cluster_edges.iterrows():
         if not row["both_done"]:
@@ -65,30 +68,47 @@ def build_graph(cluster_edges):
         if a is None:
             continue
         ddg = row["ddg"]
-        graph[a][b] = ddg
-        graph[b][a] = -ddg
+        err = None
+        if edge_error is not None:
+            err = edge_error.get(row["edge"])
+        graph[a][b] = (ddg, err)
+        graph[b][a] = (-ddg, err)
     return graph
 
 
 def bfs_paths(graph, start):
-    """BFS from start; return {node: (cumulative_ddg, n_hops, path)}.
-    Fewest-hops path to each node (unique in an MST)."""
-    visited = {start: (0.0, 0, [start])}
+    """BFS from start; fewest-hops path to each node (unique in an MST).
+    Returns {node: (cumulative_ddg, n_hops, path, path_err_quad,
+    max_edge_err)} where path_err_quad is the sqrt-sum-of-squares of
+    per-edge errors along the path and max_edge_err is the worst single
+    edge error on the path."""
+    visited = {start: (0.0, 0, [start], 0.0, 0.0)}
     queue = deque([start])
     while queue:
         node = queue.popleft()
-        curr_ddg, curr_hops, curr_path = visited[node]
-        for neighbor, ddg in graph[node].items():
+        curr_ddg, curr_hops, curr_path, curr_var, curr_max = visited[node]
+        for neighbor, (ddg, err) in graph[node].items():
             if neighbor not in visited:
-                visited[neighbor] = (curr_ddg + ddg, curr_hops + 1,
-                                     curr_path + [neighbor])
+                e = err if (err is not None and not math.isnan(err)) else 0.0
+                new_var = curr_var + e * e          # accumulate variance
+                new_max = max(curr_max, e)
+                visited[neighbor] = (
+                    curr_ddg + ddg, curr_hops + 1,
+                    curr_path + [neighbor], new_var, new_max)
                 queue.append(neighbor)
-    return visited
+    # convert accumulated variance to standard error (sqrt)
+    return {n: (d, h, p, math.sqrt(v), m)
+            for n, (d, h, p, v, m) in visited.items()}
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--edge-results", default="openfe/all_edge_results.csv")
+    ap.add_argument("--edge-convergence",
+                    default="openfe/edge_convergence.csv",
+                    help="Per-edge MBAR errors (from 15_convergence_analysis). "
+                         "Used to compute path_ddg_error and "
+                         "max_edge_error_on_path. Optional.")
     ap.add_argument("--test-full",
                     default="openfe/test_full_with_clusters_and_anchors.csv")
     ap.add_argument("--train", default="data/pxr-challenge_TRAIN.csv")
@@ -99,6 +119,21 @@ def main():
     edge_df = pd.read_csv(args.edge_results)
     test_df = pd.read_csv(args.test_full)
     train_df = pd.read_csv(args.train)
+
+    # Build per-edge ddG error lookup: sqrt(complex_err^2 + solvent_err^2)
+    edge_error = {}
+    conv_path = Path(args.edge_convergence)
+    if conv_path.exists():
+        conv = pd.read_csv(conv_path)
+        ecols = [c for c in conv.columns if c.endswith("_dG_error")]
+        for _, r in conv.iterrows():
+            errs = [r[c] for c in ecols if pd.notna(r[c])]
+            if errs:
+                edge_error[r["edge"]] = math.sqrt(sum(e * e for e in errs))
+        print(f"Loaded per-edge errors for {len(edge_error)} edges")
+    else:
+        print(f"No edge-convergence file at {conv_path}; "
+              f"path error columns will be 0.")
 
     # Build anchor OCNT_ID -> pEC50 mapping.
     # anchor_ligand_id is "A####" = row index into the training set.
@@ -113,7 +148,7 @@ def main():
     n_clusters_with_anchor = 0
 
     for cluster_id, cluster_edges in edge_df.groupby("cluster_id"):
-        graph = build_graph(cluster_edges)
+        graph = build_graph(cluster_edges, edge_error=edge_error)
         if not graph:
             continue
 
@@ -126,16 +161,18 @@ def main():
         n_clusters_with_anchor += 1
 
         # For each test compound, take the nearest anchor (fewest hops)
-        best = {}  # compound -> (path_ddg, n_hops, anchor, path)
+        best = {}  # compound -> (path_ddg, n_hops, anchor, path, perr, pmax)
         for anchor in anchors:
             paths = bfs_paths(graph, anchor)
             for compound in test_compounds:
                 if compound in paths:
-                    path_ddg, n_hops, path = paths[compound]
+                    path_ddg, n_hops, path, perr, pmax = paths[compound]
                     if compound not in best or n_hops < best[compound][1]:
-                        best[compound] = (path_ddg, n_hops, anchor, path)
+                        best[compound] = (path_ddg, n_hops, anchor, path,
+                                          perr, pmax)
 
-        for compound, (path_ddg, n_hops, anchor, path) in best.items():
+        for compound, (path_ddg, n_hops, anchor, path, perr, pmax) in \
+                best.items():
             pec50_anchor = anchor_pec50[anchor]
             pred = pec50_anchor - path_ddg / RT_LN10
             rows.append({
@@ -147,6 +184,8 @@ def main():
                 "n_hops": n_hops,
                 "path": " -> ".join(path),
                 "pred_pEC50_raw": pred,
+                "path_ddg_error": perr,
+                "max_edge_error_on_path": pmax,
             })
 
     rbfe_df = pd.DataFrame(rows)

@@ -2633,3 +2633,36 @@ $ python openfe/scripts/18_audit_data_coverage.py
 AUDIT COMPLETE
 ================================================================
 ```
+
+```commandline
+$ python openfe/scripts/12_propagate_pec50.py \
+    --edge-results openfe/all_edge_results.csv \
+    --edge-convergence openfe/edge_convergence.csv \
+    --test-full openfe/test_full_with_clusters_and_anchors.csv \
+    --train data/pxr-challenge_TRAIN.csv \
+    --outdir openfe
+Loaded per-edge errors for 316 edges
+Anchor pEC50 mappings: 89
+Clusters with at least one anchor: 71
+RBFE-connected test compounds: 292
+
+Raw pEC50 prediction distribution:
+  mean=5.32  median=5.22  min=-5.02  max=15.72
+
+Path length distribution (hops from anchor):
+n_hops
+1    101
+2     96
+3     59
+4     21
+5     10
+6      2
+7      1
+8      1
+9      1
+
+ddG path magnitude:
+  mean |ddG_path|=3.70  max |ddG_path|=15.66
+
+Wrote openfe\rbfe_predictions.csv
+```
