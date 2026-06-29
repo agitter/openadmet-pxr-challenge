@@ -1,0 +1,23 @@
+{
+  "winner": "docking_only",
+  "gate_features": [
+    "path_ddg_error",
+    "min_overlap_on_path",
+    "max_edge_error_on_path",
+    "n_hops",
+    "std_CNNscore_across_receptors"
+  ],
+  "calibrations": {
+    "dock_slope": 0.8050568583923888,
+    "dock_intercept": -1.3740655404014075,
+    "rbfe_slope": 0.05210266892870819,
+    "rbfe_intercept": 4.384300885591099,
+    "train_mean": 4.664110671936759
+  },
+  "winner_params": {},
+  "docking_input": "best_CNNaffinity_per_compound",
+  "rbfe_input": "pred_pEC50_raw",
+  "rae_cv_mean": 0.9702135687601572,
+  "rae_cv_std": 0.02986359951187576,
+  "apply_rule": "pred = dock_cal where no RBFE; otherwise apply winner model. dock_cal = dock_slope*CNNaffinity + dock_intercept. rbfe_cal = rbfe_slope*pred_pEC50_raw + rbfe_intercept."
+}

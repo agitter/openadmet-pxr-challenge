@@ -2666,3 +2666,28 @@ ddG path magnitude:
 
 Wrote openfe\rbfe_predictions.csv
 ```
+
+```commandline
+$ python openfe/scripts/19_tune_combined_model.py \
+    --rbfe-pred openfe/rbfe_predictions.csv \
+    --receptor-best docking/docking_analysis_extended/docking_receptor_best.csv \
+    --cluster-summary docking/docking_analysis_extended/docking_cluster_summary.csv \
+    --phase1 data/pxr-challenge_TEST_PHASE_1_UNBLINDED.csv \
+    --outdir openfe
+Phase 1 compounds: 253  (with RBFE: 152, docking-only: 101)
+
+================================================================
+MODEL COMPARISON (5-fold CV, bootstrapped RAE, lower=better)
+================================================================
+         model  rae_boot_mean  rae_boot_std  rae_point  spearman      mae
+  docking_only       0.970214      0.029864   0.966267  0.284705 0.771722
+   fixed_blend       0.974331      0.029283   0.970320  0.270836 0.774959
+  sigmoid_gate       0.974673      0.028766   0.970762  0.267090 0.775312
+threshold_gate       0.978728      0.029564   0.974688  0.269599 0.778447
+     rbfe_only       1.011804      0.027238   1.008266  0.046388 0.805265
+
+Best model: docking_only (RAE 0.970 +/- 0.030)
+
+Wrote openfe\model_tuning_diagnostics.png
+Wrote openfe\chosen_model.json (complete frozen model: docking_only)
+```
