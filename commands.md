@@ -2641,13 +2641,13 @@ $ python openfe/scripts/12_propagate_pec50.py \
     --test-full openfe/test_full_with_clusters_and_anchors.csv \
     --train data/pxr-challenge_TRAIN.csv \
     --outdir openfe
-Loaded per-edge errors for 316 edges
+Loaded per-edge errors for 316 edges, overlaps for 316 edges
 Anchor pEC50 mappings: 89
 Clusters with at least one anchor: 71
 RBFE-connected test compounds: 292
 
 Raw pEC50 prediction distribution:
-  mean=5.32  median=5.22  min=-5.02  max=15.72
+  mean=5.18  median=5.06  min=-5.02  max=14.14
 
 Path length distribution (hops from anchor):
 n_hops
@@ -2662,7 +2662,7 @@ n_hops
 9      1
 
 ddG path magnitude:
-  mean |ddG_path|=3.70  max |ddG_path|=15.66
+  mean |ddG_path|=3.50  max |ddG_path|=15.66
 
 Wrote openfe\rbfe_predictions.csv
 ```

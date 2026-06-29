@@ -55,11 +55,12 @@ def parse_edge_ligands(edge_name):
     return None, None
 
 
-def build_graph(cluster_edges, edge_error=None):
-    """Directed-ddG adjacency: node -> {neighbor: (ddG, edge_err)}.
+def build_graph(cluster_edges, edge_error=None, edge_overlap=None):
+    """Directed-ddG adjacency: node -> {neighbor: (ddG, edge_err, overlap)}.
     A->B stores ddG; B->A stores -ddG so a path sum is consistent.
-    edge_err is the propagated ddG MBAR error for that edge (same in
-    both directions), looked up from edge_error dict keyed by edge name."""
+    edge_err is the propagated ddG MBAR error for that edge; overlap is
+    the min MBAR overlap scalar across the edge's two legs. Both are the
+    same in either direction."""
     graph = defaultdict(dict)
     for _, row in cluster_edges.iterrows():
         if not row["both_done"]:
@@ -68,37 +69,43 @@ def build_graph(cluster_edges, edge_error=None):
         if a is None:
             continue
         ddg = row["ddg"]
-        err = None
-        if edge_error is not None:
-            err = edge_error.get(row["edge"])
-        graph[a][b] = (ddg, err)
-        graph[b][a] = (-ddg, err)
+        err = edge_error.get(row["edge"]) if edge_error is not None else None
+        ovl = edge_overlap.get(row["edge"]) if edge_overlap is not None else None
+        graph[a][b] = (ddg, err, ovl)
+        graph[b][a] = (-ddg, err, ovl)
     return graph
 
 
 def bfs_paths(graph, start):
     """BFS from start; fewest-hops path to each node (unique in an MST).
     Returns {node: (cumulative_ddg, n_hops, path, path_err_quad,
-    max_edge_err)} where path_err_quad is the sqrt-sum-of-squares of
-    per-edge errors along the path and max_edge_err is the worst single
-    edge error on the path."""
-    visited = {start: (0.0, 0, [start], 0.0, 0.0)}
+    max_edge_err, min_overlap)} where path_err_quad is the sqrt-sum-of-
+    squares of per-edge errors, max_edge_err is the worst single edge
+    error, and min_overlap is the smallest MBAR overlap on the path."""
+    visited = {start: (0.0, 0, [start], 0.0, 0.0, float("inf"))}
     queue = deque([start])
     while queue:
         node = queue.popleft()
-        curr_ddg, curr_hops, curr_path, curr_var, curr_max = visited[node]
-        for neighbor, (ddg, err) in graph[node].items():
+        (curr_ddg, curr_hops, curr_path, curr_var,
+         curr_max, curr_minov) = visited[node]
+        for neighbor, (ddg, err, ovl) in graph[node].items():
             if neighbor not in visited:
                 e = err if (err is not None and not math.isnan(err)) else 0.0
-                new_var = curr_var + e * e          # accumulate variance
+                new_var = curr_var + e * e
                 new_max = max(curr_max, e)
+                if ovl is not None and not math.isnan(ovl):
+                    new_minov = min(curr_minov, ovl)
+                else:
+                    new_minov = curr_minov
                 visited[neighbor] = (
                     curr_ddg + ddg, curr_hops + 1,
-                    curr_path + [neighbor], new_var, new_max)
+                    curr_path + [neighbor], new_var, new_max, new_minov)
                 queue.append(neighbor)
-    # convert accumulated variance to standard error (sqrt)
-    return {n: (d, h, p, math.sqrt(v), m)
-            for n, (d, h, p, v, m) in visited.items()}
+    out = {}
+    for n, (d, h, p, v, m, mo) in visited.items():
+        min_ov = mo if mo != float("inf") else None
+        out[n] = (d, h, p, math.sqrt(v), m, min_ov)
+    return out
 
 
 def main():
@@ -121,19 +128,26 @@ def main():
     train_df = pd.read_csv(args.train)
 
     # Build per-edge ddG error lookup: sqrt(complex_err^2 + solvent_err^2)
+    # and per-edge min overlap (min of the two legs' overlap scalars).
     edge_error = {}
+    edge_overlap = {}
     conv_path = Path(args.edge_convergence)
     if conv_path.exists():
         conv = pd.read_csv(conv_path)
         ecols = [c for c in conv.columns if c.endswith("_dG_error")]
+        ocols = [c for c in conv.columns if c.endswith("_min_overlap")]
         for _, r in conv.iterrows():
             errs = [r[c] for c in ecols if pd.notna(r[c])]
             if errs:
                 edge_error[r["edge"]] = math.sqrt(sum(e * e for e in errs))
-        print(f"Loaded per-edge errors for {len(edge_error)} edges")
+            ovls = [r[c] for c in ocols if pd.notna(r[c])]
+            if ovls:
+                edge_overlap[r["edge"]] = min(ovls)
+        print(f"Loaded per-edge errors for {len(edge_error)} edges, "
+              f"overlaps for {len(edge_overlap)} edges")
     else:
         print(f"No edge-convergence file at {conv_path}; "
-              f"path error columns will be 0.")
+              f"path error/overlap columns will be 0/None.")
 
     # Build anchor OCNT_ID -> pEC50 mapping.
     # anchor_ligand_id is "A####" = row index into the training set.
@@ -148,7 +162,8 @@ def main():
     n_clusters_with_anchor = 0
 
     for cluster_id, cluster_edges in edge_df.groupby("cluster_id"):
-        graph = build_graph(cluster_edges, edge_error=edge_error)
+        graph = build_graph(cluster_edges, edge_error=edge_error,
+                            edge_overlap=edge_overlap)
         if not graph:
             continue
 
@@ -161,17 +176,17 @@ def main():
         n_clusters_with_anchor += 1
 
         # For each test compound, take the nearest anchor (fewest hops)
-        best = {}  # compound -> (path_ddg, n_hops, anchor, path, perr, pmax)
+        best = {}  # compound -> (path_ddg, n_hops, anchor, path, perr, pmax, pmo)
         for anchor in anchors:
             paths = bfs_paths(graph, anchor)
             for compound in test_compounds:
                 if compound in paths:
-                    path_ddg, n_hops, path, perr, pmax = paths[compound]
+                    path_ddg, n_hops, path, perr, pmax, pmo = paths[compound]
                     if compound not in best or n_hops < best[compound][1]:
                         best[compound] = (path_ddg, n_hops, anchor, path,
-                                          perr, pmax)
+                                          perr, pmax, pmo)
 
-        for compound, (path_ddg, n_hops, anchor, path, perr, pmax) in \
+        for compound, (path_ddg, n_hops, anchor, path, perr, pmax, pmo) in \
                 best.items():
             pec50_anchor = anchor_pec50[anchor]
             pred = pec50_anchor - path_ddg / RT_LN10
@@ -186,6 +201,7 @@ def main():
                 "pred_pEC50_raw": pred,
                 "path_ddg_error": perr,
                 "max_edge_error_on_path": pmax,
+                "min_overlap_on_path": pmo,
             })
 
     rbfe_df = pd.DataFrame(rows)
