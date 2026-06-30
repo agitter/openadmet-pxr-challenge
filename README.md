@@ -1,15 +1,18 @@
-# OpenADMET PXR Blind Challenge
+# OpenADMET Predicting PXR Induction Blind Challenge
+An OpenFE-based approach to the [OpenADMET Predicting PXR Induction Blind Challenge](https://huggingface.co/spaces/openadmet/pxr-challenge).
+The [writeup](writeup.md) describes the full methodology and results.
+
 - `/claude`: Scripts and files downloaded from a Claude session
 - `/data`: Data files from [Hugging Face](https://huggingface.co/datasets/openadmet/pxr-challenge-train-test)
 - `/docking`: Files for docking with [GNINA](https://github.com/gnina/gnina)
 - `/external`: Refined PXR structures as a [submodule](https://github.com/OpenADMET/pxr_xtal_re-refinement) and files from the [organizers](https://github.com/OpenADMET/PXR-Challenge-Tutorial/tree/main/evaluation).
 - `/openfe`: Files for running [OpenFE](https://github.com/OpenFreeEnergy/openfe)
 
-Most code written or drafted by Claude Sonnet 4.6, Claude Opus 4.6, and GPT-5.5 Instant.
+Most code was written or drafted by Claude Sonnet 4.6, Claude Opus 4.6, Claude Opus 4.8, and GPT-5.5 Instant.
 
 ## Docking notes
 Initially only cluster representatives were run with GNINA.
-To compare docking results with OpenFE results a second round of docking tested all test compounds and selected training compounds (anchors), including reruning the previous cluster representatives.
+To compare docking results with OpenFE results, a second round of docking tested all test compounds and selected training compounds (anchors), including reruning the previous cluster representatives.
 The original run used numeric cluster ID subdirectories.
 The second run used zero-padded ligand IDs prefixed with T (test) or A (training anchor).
 
