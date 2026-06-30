@@ -2,7 +2,7 @@
 - `/claude`: Scripts and files downloaded from a Claude session
 - `/data`: Data files from [Hugging Face](https://huggingface.co/datasets/openadmet/pxr-challenge-train-test)
 - `/docking`: Files for docking with [GNINA](https://github.com/gnina/gnina)
-- `/external`: Refined PXR structures as a [submodule](https://github.com/OpenADMET/pxr_xtal_re-refinement) and evaluation files from the [organizers](https://github.com/OpenADMET/PXR-Challenge-Tutorial/tree/main/evaluation).
+- `/external`: Refined PXR structures as a [submodule](https://github.com/OpenADMET/pxr_xtal_re-refinement) and files from the [organizers](https://github.com/OpenADMET/PXR-Challenge-Tutorial/tree/main/evaluation).
 - `/openfe`: Files for running [OpenFE](https://github.com/OpenFreeEnergy/openfe)
 
 Most code written or drafted by Claude Sonnet 4.6, Claude Opus 4.6, and GPT-5.5 Instant.

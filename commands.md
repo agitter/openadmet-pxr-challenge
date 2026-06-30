@@ -2710,3 +2710,49 @@ Chosen (elbow): w=0.500
 Wrote openfe\blend_weight_selection.png
 Wrote openfe\chosen_model.json (fixed_blend, w=0.500)
 ```
+
+```commandline
+$ python openfe/scripts/21_apply_model_submission.py \
+    --model openfe/chosen_model.json \
+    --blinded data/pxr-challenge_TEST_BLINDED.csv \
+    --rbfe-pred openfe/rbfe_predictions.csv \
+    --receptor-best docking/docking_analysis_extended/docking_receptor_best.csv \
+    --phase1 data/pxr-challenge_TEST_PHASE_1_UNBLINDED.csv \
+    --outdir openfe
+Loaded model: fixed_blend (w=0.5)
+  dock_cal: 0.8051*CNNaffinity + -1.3741
+  rbfe_cal: 0.0521*pred_pEC50_raw + 4.3843
+Submission validation: PASSED (513 rows, no NaN/inf, no duplicates, SMILES present)
+
+Submission: 513 compounds
+  Set 1 (Phase 1): 253
+  Set 2 (Phase 2): 260
+  blend (has RBFE): 292
+  docking only:     221
+
+Predicted pEC50 distribution:
+  mean=4.69  median=4.70  min=3.81  max=5.49
+
+Set 2 (scored) pEC50: mean=4.73 min=3.81 max=5.44
+
+Wrote openfe\submission.csv
+Wrote openfe\submission_detailed.csv
+Wrote openfe\submission_visualizations.png
+```
+
+```commandline
+python -c "
+import pandas as pd
+from activity_validation import validate_activity_submission
+ok, errs = validate_activity_submission('openfe/submission.csv')
+print('VALID' if ok else 'INVALID')
+for e in errs: print(' ', e)
+
+expected = set(pd.read_csv('data/pxr-challenge_TEST_BLINDED.csv')['Molecule Name'])
+ok, errs = validate_activity_submission('openfe/submission.csv', expected_ids=expected)
+print('VALID' if ok else 'INVALID')
+for e in errs: print(' ', e)
+"
+VALID
+VALID
+```
