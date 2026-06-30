@@ -3128,3 +3128,430 @@ Sample .out:
 (If a .out aggregates all attempts of a leg, marker COUNTS tell us
  how many fast-fail rejections vs confirmed runs happened per leg.)
 ```
+
+```commandline
+$ python openfe/scripts/22_compute_accounting.py \
+    --production-dir openfe/production \
+    --outdir openfe
+Found 2050 .log files
+Parsed 13666 execution attempts across 1067 legs
+
+================================================================
+TOTAL GPU BURN (all attempts)
+================================================================
+  Total GPU-hours (all attempts):  3,928.8
+  Total attempts:                  13,666
+  Total legs:                      1,067
+  Mean attempts per leg:           12.8
+
+  --- Attempt-kind split (the -o output-conflict churn) ---
+  'ran' attempts (>= 5 min):       5,198  (3,898.8 GPU-h)
+  'immediate_fail' (< 5 min evict): 8,468  (30.0 GPU-h)
+  -> immediate-fail churn is 62% of attempts but only 0.8% of GPU-hours
+  -> genuine-compute GPU-hours:    3,898.8
+
+  Final-attempt-only GPU-hours:    1,728.8
+  Retry/churn overhead:            2,200.0 (56.0% of total)
+
+================================================================
+BURN BY CAMPAIGN
+================================================================
+ campaign  attempts   gpu_hours
+kartograf     12478 3051.446944
+  salvage      1188  877.335556
+
+================================================================
+BURN BY SLOT TYPE
+================================================================
+  slot_type  attempts   gpu_hours  mean_attempt_h  ran_gpu_hours
+   backfill      4346 1463.098056        0.336654    1453.558056
+        osg      3011 1325.456389        0.440205    1318.366944
+     shared      5319  688.912222        0.129519     676.943889
+prioritized       990  451.315833        0.455875     449.905278
+
+================================================================
+BURN BY GPU DEVICE TYPE
+================================================================
+                           device  attempts  gpu_hours  mean_attempt_h
+                      NVIDIA L40S      3078 755.926667        0.245590
+       NVIDIA GeForce RTX 2080 Ti      2582 480.566667        0.186122
+                       NVIDIA L40      2463 457.528056        0.185760
+            NVIDIA H100 80GB HBM3      1202 359.462500        0.299054
+            NVIDIA A100-SXM4-40GB       744 322.538611        0.433520
+                 NVIDIA RTX A5000       588 318.621389        0.541873
+                      NVIDIA H200       583 256.704444        0.440316
+            NVIDIA A100-SXM4-80GB       598 206.437222        0.345213
+                       NVIDIA A40       410 199.904444        0.487572
+       NVIDIA GeForce GTX 1080 Ti       406 183.219722        0.451280
+                  Quadro RTX 6000       225 129.171389        0.574095
+             Tesla P100-PCIE-16GB       145  81.201667        0.560011
+            NVIDIA A100 80GB PCIe        92  62.956667        0.684312
+NVIDIA A100-SXM4-80GB MIG 3g.40gb       373  50.468889        0.135305
+             Tesla V100-PCIE-16GB       106  41.508611        0.391591
+             Tesla V100-PCIE-32GB        16   8.840556        0.552535
+                  NVIDIA H100 NVL        46   8.335556        0.181208
+          NVIDIA GeForce RTX 3060         9   5.389444        0.598827
+
+================================================================
+BURN BY GPU CAPABILITY
+================================================================
+ capability  attempts   gpu_hours  mean_attempt_h
+        6.0       145   81.201667        0.560011
+        6.1       406  183.219722        0.451280
+        7.0       122   50.349167        0.412698
+        7.5      2807  609.738056        0.217221
+        8.0      1807  642.401389        0.355507
+        8.6      1007  523.915278        0.520273
+        8.9      5541 1213.454722        0.218996
+        9.0      1831  624.502500        0.341072
+
+================================================================
+SUCCESSFUL-LEG TIMING (one run per leg with result.json)
+================================================================
+  Legs with result.json:        1067
+  Legs with a timed 'ran' attempt: 1067
+  Mean: 1.56h  median: 0.96h  min: 0.00h  max: 21.28h
+
+  By GPU device:
+                           device   n   mean_h  median_h    min_h     max_h
+          NVIDIA GeForce RTX 3060   3 0.631759  0.823889 0.002222  1.069167
+                       NVIDIA L40 135 1.169809  0.749444 0.004444 11.551389
+                 NVIDIA RTX A5000  84 1.412083  0.926528 0.006389  4.471944
+       NVIDIA GeForce RTX 2080 Ti 128 1.441545  0.998056 0.007778  4.653056
+                      NVIDIA L40S 227 1.448327  0.819167 0.003611 11.212222
+                  Quadro RTX 6000  65 1.461239  1.173056 0.095556  3.791111
+            NVIDIA H100 80GB HBM3 104 1.472866  0.959167 0.007500  3.493056
+                      NVIDIA H200  65 1.517658  0.881667 0.003611  3.954167
+             Tesla P100-PCIE-16GB  22 1.638119  1.021806 0.024722  5.478056
+            NVIDIA A100 80GB PCIe  20 1.690583  0.987778 0.711389  3.826111
+                       NVIDIA A40  37 1.805503  1.103333 0.708889  4.101111
+            NVIDIA A100-SXM4-40GB  72 1.856161  1.042778 0.005556 11.527500
+             Tesla V100-PCIE-16GB   8 2.008021  1.285556 0.666944  3.985000
+                  NVIDIA H100 NVL   2 2.011250  2.011250 0.933611  3.088889
+NVIDIA A100-SXM4-80GB MIG 3g.40gb  13 2.114145  1.160556 0.889722  6.680833
+            NVIDIA A100-SXM4-80GB  44 2.413737  3.140694 0.007222  5.665833
+       NVIDIA GeForce GTX 1080 Ti  35 2.659397  1.002500 0.838611 21.280556
+             Tesla V100-PCIE-32GB   3 2.836667  3.706944 1.035833  3.767222
+
+  By capability:
+ capability   n   mean_h  median_h
+        6.0  22 1.638119  1.021806
+        6.1  35 2.659397  1.002500
+        7.0  11 2.234015  1.321667
+        7.5 193 1.448178  1.074167
+        8.0 149 2.021098  1.083056
+        8.6 124 1.510596  0.940972
+        8.9 362 1.344460  0.809167
+        9.0 171 1.496189  0.933611
+
+================================================================
+WHERE JOBS RAN (by host, top 25 by GPU-hours)
+================================================================
+                               host  attempts  gpu_hours
+           gitter0000.chtc.wisc.edu       406 183.219722
+           gpulab2001.chtc.wisc.edu       511 178.908889
+         ahlquist0000.chtc.wisc.edu       342 136.388611
+      jcaicedogpu0002.chtc.wisc.edu       390 126.651667
+             gpu014.rci.montana.edu       248 121.396944
+      jcaicedogpu0000.chtc.wisc.edu       343 115.950278
+        vetsigian0001.chtc.wisc.edu       504 104.090833
+              gpu4000.chtc.wisc.edu       428  92.521111
+       mkhodakgpu4000.chtc.wisc.edu       223  83.087778
+dbrundage-chtcgpu5000.chtc.wisc.edu       185  81.850278
+                              gpu03       195  78.953889
+    blengerichgpu4000.chtc.wisc.edu       348  78.386389
+     zliu-chtcgpu5000.chtc.wisc.edu       227  78.101667
+              gpu2008.chtc.wisc.edu       115  76.788611
+                              gpu09       135  75.696111
+                              gpu01       139  75.543333
+                              gpu08        86  73.063889
+       amuraligpu4000.chtc.wisc.edu       246  68.570556
+                              gpu05       139  65.499444
+             gpu021.rci.montana.edu       156  65.071111
+      jcaicedogpu0004.chtc.wisc.edu       237  64.911111
+                            rails04       227  61.967500
+                              gpu04       115  61.151667
+        xhuanggpu4001.chtc.wisc.edu       143  60.223889
+      jcaicedogpu0003.chtc.wisc.edu       259  56.593611
+
+================================================================
+COST PER USABLE RESULT
+================================================================
+  Total GPU-hours / usable edge (316):       12.4
+  Total GPU-hours / connected compound (292): 13.5
+
+Wrote openfe\compute_accounting.png
+Wrote openfe\compute_timeline.png
+
+Wall-clock span:           6 days 04:57:56
+Peak concurrent (ran-only): 191 GPUs
+Peak concurrent (all attempts, churn-inflated): 193
+Wrote openfe\compute_accounting_attempts.csv
+```
+
+```commandline
+$ python diagnose_short_legs.py
+================================================================
+Legs whose LONGEST ran attempt is < 0.1h (6 min): 53
+================================================================
+                                               leg  duration_h end_reason  retval                                host                  device
+  rbfe_OCNT-2312754_solvent_OADMET-0006120_solvent    0.002222 terminated     1.0           UA-LR-ITS-EP.a504ed64cd40 NVIDIA GeForce RTX 3060
+rbfe_OADMET-0006349_solvent_OADMET-0006171_solvent    0.003611 terminated     1.0      zliu-chtcgpu5000.chtc.wisc.edu             NVIDIA L40S
+rbfe_OADMET-0006436_solvent_OADMET-0006193_solvent    0.003611 terminated     1.0       gchrysosgpu4000.chtc.wisc.edu             NVIDIA L40S
+rbfe_OADMET-0006435_solvent_OADMET-0006227_solvent    0.003611 terminated     1.0 dbrundage-chtcgpu5000.chtc.wisc.edu             NVIDIA H200
+rbfe_OADMET-0006479_solvent_OADMET-0006315_solvent    0.003889 terminated     1.0        ssilwalgpu4000.chtc.wisc.edu             NVIDIA H200
+  rbfe_OADMET-0006443_solvent_OCNT-2310646_solvent    0.004167 terminated     1.0        amuraligpu4000.chtc.wisc.edu             NVIDIA L40S
+rbfe_OADMET-0006435_solvent_OADMET-0006121_solvent    0.004167 terminated     1.0        mkhodakgpu4000.chtc.wisc.edu             NVIDIA L40S
+rbfe_OADMET-0006193_solvent_OADMET-0006175_solvent    0.004167 terminated     1.0        ssilwalgpu4000.chtc.wisc.edu             NVIDIA H200
+rbfe_OADMET-0006391_solvent_OADMET-0006377_solvent    0.004444 terminated     1.0       jcaicedogpu0000.chtc.wisc.edu              NVIDIA L40
+rbfe_OADMET-0006390_solvent_OADMET-0006193_solvent    0.004444 terminated     1.0     blengerichgpu4000.chtc.wisc.edu             NVIDIA L40S
+  rbfe_OCNT-2309093_solvent_OADMET-0006292_solvent    0.004444 terminated     1.0       jcaicedogpu0000.chtc.wisc.edu              NVIDIA L40
+  rbfe_OADMET-0006608_solvent_OCNT-2315710_solvent    0.004722 terminated     1.0            dsigpu4001.chtc.wisc.edu              NVIDIA L40
+  rbfe_OCNT-2311864_solvent_OADMET-0004674_solvent    0.004722 terminated     1.0               gpu4002.chtc.wisc.edu              NVIDIA L40
+  rbfe_OCNT-2314792_solvent_OADMET-0006285_solvent    0.004722 terminated     1.0            dsigpu4000.chtc.wisc.edu              NVIDIA L40
+rbfe_OADMET-0006447_solvent_OADMET-0006212_solvent    0.004722 terminated     1.0            dsigpu4001.chtc.wisc.edu              NVIDIA L40
+  rbfe_OCNT-2314792_solvent_OADMET-0006430_solvent    0.004722 terminated     1.0               gpu4002.chtc.wisc.edu              NVIDIA L40
+  rbfe_OCNT-2315950_solvent_OADMET-0006194_solvent    0.004722 terminated     1.0            dsigpu4002.chtc.wisc.edu              NVIDIA L40
+rbfe_OADMET-0006352_solvent_OADMET-0006193_solvent    0.005556 terminated     1.0       mcdanielgpu4000.chtc.wisc.edu   NVIDIA A100-SXM4-40GB
+rbfe_OADMET-0006449_solvent_OADMET-0006453_solvent    0.005833 terminated     1.0         xhuanggpu4001.chtc.wisc.edu              NVIDIA L40
+  rbfe_OCNT-2315472_solvent_OADMET-0006534_solvent    0.006389 terminated     1.0                               gpu08        NVIDIA RTX A5000
+
+================================================================
+FULL ATTEMPT STRUCTURE FOR 3 SHORTEST 'SUCCESSFUL' LEGS
+================================================================
+
+--- leg: rbfe_OCNT-2312754_solvent_OADMET-0006120_solvent ---
+                     log  duration_h  end_reason  retval   attempt_kind                                host
+quickrun.8017966.767.log    0.008889 was evicted     1.0 immediate_fail             qa-rtx6k-030.crc.nd.edu
+quickrun.8180963.280.log    0.008889 was evicted     1.0 immediate_fail              gpu014.rci.montana.edu
+quickrun.8180963.280.log    0.007778 was evicted     1.0 immediate_fail                               gpu09
+quickrun.8180963.280.log    0.005833 was evicted     1.0 immediate_fail              gpu019.rci.montana.edu
+quickrun.8180963.280.log    0.005556 was evicted     1.0 immediate_fail       mcdanielgpu4000.chtc.wisc.edu
+quickrun.8180963.280.log    0.004444 was evicted     1.0 immediate_fail               gpu2008.chtc.wisc.edu
+quickrun.8180963.280.log    0.004167 was evicted     1.0 immediate_fail       jcaicedogpu0002.chtc.wisc.edu
+quickrun.8180963.280.log    0.003611 was evicted     1.0 immediate_fail      dbrundagegpu5000.chtc.wisc.edu
+quickrun.8180963.280.log    0.003611 was evicted     1.0 immediate_fail dbrundage-chtcgpu5000.chtc.wisc.edu
+quickrun.8180963.280.log    0.003611 was evicted     1.0 immediate_fail      dbrundagegpu5000.chtc.wisc.edu
+quickrun.8017966.767.log    0.003056 was evicted     2.0 immediate_fail              gpu021.rci.montana.edu
+quickrun.8180963.280.log    0.002500 was evicted     1.0 immediate_fail           UA-LR-ITS-EP.a504ed64cd40
+quickrun.8180963.280.log    0.002222  terminated     1.0            ran           UA-LR-ITS-EP.a504ed64cd40
+quickrun.8017966.767.log    0.001389 was evicted     2.0 immediate_fail            gpulab2003.chtc.wisc.edu
+quickrun.8017966.767.log    0.001389 was evicted     2.0 immediate_fail                               gpu04
+  total attempts: 33  | ran attempts: 3
+  longest single ran attempt: 0.0022h
+  SUM of ran attempts:        0.0042h
+
+--- leg: rbfe_OADMET-0006349_solvent_OADMET-0006171_solvent ---
+                     log  duration_h  end_reason  retval   attempt_kind                            host
+quickrun.8180963.235.log    0.008333 was evicted     1.0 immediate_fail         qa-rtx6k-036.crc.nd.edu
+quickrun.8180963.235.log    0.008333 was evicted     1.0 immediate_fail     vetsigian0001.chtc.wisc.edu
+quickrun.8180963.235.log    0.008056 was evicted     1.0 immediate_fail     vetsigian0001.chtc.wisc.edu
+quickrun.8180963.235.log    0.008056 was evicted     1.0 immediate_fail         qa-rtx6k-036.crc.nd.edu
+quickrun.8180963.235.log    0.007222 was evicted     1.0 immediate_fail                           gpu06
+quickrun.8017966.582.log    0.005556 was evicted     1.0 immediate_fail          coba2000.chtc.wisc.edu
+quickrun.8180963.235.log    0.004722 was evicted     1.0 immediate_fail        dsigpu4001.chtc.wisc.edu
+quickrun.8180963.235.log    0.004722 was evicted     1.0 immediate_fail   jcaicedogpu0002.chtc.wisc.edu
+quickrun.8180963.235.log    0.004722 was evicted     1.0 immediate_fail   jcaicedogpu0000.chtc.wisc.edu
+quickrun.8180963.235.log    0.004444 was evicted     1.0 immediate_fail    mkhodakgpu4000.chtc.wisc.edu
+quickrun.8180963.235.log    0.003889 was evicted     1.0 immediate_fail blengerichgpu4000.chtc.wisc.edu
+quickrun.8180963.235.log    0.003611  terminated     1.0            ran  zliu-chtcgpu5000.chtc.wisc.edu
+quickrun.8018100.235.log    0.003333 was evicted     2.0 immediate_fail      ahlquist0000.chtc.wisc.edu
+quickrun.8017966.582.log    0.001944 was evicted     2.0 immediate_fail                           gpu01
+quickrun.8017966.582.log    0.001667 was evicted     2.0 immediate_fail                         rails06
+  total attempts: 33  | ran attempts: 3
+  longest single ran attempt: 0.0036h
+  SUM of ran attempts:        0.0058h
+
+--- leg: rbfe_OADMET-0006436_solvent_OADMET-0006193_solvent ---
+                     log  duration_h  end_reason  retval   attempt_kind                            host
+quickrun.8180963.169.log    0.008611 was evicted     1.0 immediate_fail                           gpu09
+quickrun.8180963.169.log    0.007778 was evicted     1.0 immediate_fail                           gpu08
+quickrun.8180963.169.log    0.007500 was evicted     1.0 immediate_fail                           gpu08
+quickrun.8180963.169.log    0.006944 was evicted     1.0 immediate_fail                         rails04
+quickrun.8180963.169.log    0.004722 was evicted     1.0 immediate_fail        dsigpu4002.chtc.wisc.edu
+quickrun.8180963.169.log    0.004722 was evicted     1.0 immediate_fail        dsigpu4002.chtc.wisc.edu
+quickrun.8017966.395.log    0.004444 was evicted     1.0 immediate_fail           gpu4002.chtc.wisc.edu
+quickrun.8180963.169.log    0.004444 was evicted     1.0 immediate_fail   jcaicedogpu0000.chtc.wisc.edu
+quickrun.8180963.169.log    0.004444 was evicted     1.0 immediate_fail   jcaicedogpu0002.chtc.wisc.edu
+quickrun.8180963.169.log    0.003889 was evicted     1.0 immediate_fail blengerichgpu4000.chtc.wisc.edu
+quickrun.8180963.169.log    0.003889 was evicted     1.0 immediate_fail           gpu4006.chtc.wisc.edu
+quickrun.8180963.169.log    0.003611  terminated     1.0            ran   gchrysosgpu4000.chtc.wisc.edu
+quickrun.8018100.169.log    0.002778 was evicted     2.0 immediate_fail      ahlquist0000.chtc.wisc.edu
+quickrun.8017966.395.log    0.002222 was evicted     2.0 immediate_fail         qa-rtx6k-030.crc.nd.edu
+quickrun.8017966.395.log    0.001944 was evicted     2.0 immediate_fail         qa-rtx6k-035.crc.nd.edu
+  total attempts: 33  | ran attempts: 3
+  longest single ran attempt: 0.0036h
+  SUM of ran attempts:        0.0061h
+
+================================================================
+LONGEST-ATTEMPT vs SUM-OF-RAN-ATTEMPTS (all successful legs)
+================================================================
+  legs: 1067
+  longest-attempt metric: mean=1.56h  median=0.96h  min=0.0022h
+  sum-of-ran metric:      mean=3.65h  median=1.26h  min=0.0042h
+
+  legs with >1 ran attempt (fragmented by preemption): 413
+  legs with exactly 1 ran attempt: 654
+
+  Of the 53 legs with longest<0.1h:
+    their SUM-of-ran: mean=0.04h  min=0.0042h  max=0.36h
+    still <0.1h under sum metric: 47
+```
+
+```commandline
+python openfe/scripts/22_compute_accounting.py --production-dir openfe/production --outdir openfe
+Found 2050 .log files
+Parsed 13666 execution attempts across 1067 legs
+
+================================================================
+TOTAL GPU BURN (all attempts)
+================================================================
+  Total GPU-hours (all attempts):  3,928.8
+  Total attempts:                  13,666
+  Total legs:                      1,067
+  Mean attempts per leg:           12.8
+
+  --- Attempt-level split (regime-independent) ---
+  substantial attempts (>= 5 min):  5,198  (3,898.8 GPU-h)
+  trivial attempts (< 5 min evict): 8,468  (30.0 GPU-h)
+  -> trivial -o-conflict thrash is 62% of attempts but only 0.8% of GPU-hours
+
+  NOTE: Legs ran across preempting slots under two checkpointing
+  regimes (--resume and no-resume versions of run_quickrun.sh), so
+  we report total CONSUMED GPU-time, not productive-vs-redundant
+  sampling. Per-leg 'time to complete' is intentionally not claimed.
+
+================================================================
+BURN BY CAMPAIGN
+================================================================
+ campaign  attempts   gpu_hours
+kartograf     12478 3051.446944
+  salvage      1188  877.335556
+
+================================================================
+BURN BY SLOT TYPE
+================================================================
+  slot_type  attempts   gpu_hours  mean_attempt_h  ran_gpu_hours
+   backfill      4346 1463.098056        0.336654    1453.558056
+        osg      3011 1325.456389        0.440205    1318.366944
+     shared      5319  688.912222        0.129519     676.943889
+prioritized       990  451.315833        0.455875     449.905278
+
+================================================================
+BURN BY GPU DEVICE TYPE
+================================================================
+                           device  attempts  gpu_hours  mean_attempt_h
+                      NVIDIA L40S      3078 755.926667        0.245590
+       NVIDIA GeForce RTX 2080 Ti      2582 480.566667        0.186122
+                       NVIDIA L40      2463 457.528056        0.185760
+            NVIDIA H100 80GB HBM3      1202 359.462500        0.299054
+            NVIDIA A100-SXM4-40GB       744 322.538611        0.433520
+                 NVIDIA RTX A5000       588 318.621389        0.541873
+                      NVIDIA H200       583 256.704444        0.440316
+            NVIDIA A100-SXM4-80GB       598 206.437222        0.345213
+                       NVIDIA A40       410 199.904444        0.487572
+       NVIDIA GeForce GTX 1080 Ti       406 183.219722        0.451280
+                  Quadro RTX 6000       225 129.171389        0.574095
+             Tesla P100-PCIE-16GB       145  81.201667        0.560011
+            NVIDIA A100 80GB PCIe        92  62.956667        0.684312
+NVIDIA A100-SXM4-80GB MIG 3g.40gb       373  50.468889        0.135305
+             Tesla V100-PCIE-16GB       106  41.508611        0.391591
+             Tesla V100-PCIE-32GB        16   8.840556        0.552535
+                  NVIDIA H100 NVL        46   8.335556        0.181208
+          NVIDIA GeForce RTX 3060         9   5.389444        0.598827
+
+================================================================
+BURN BY GPU CAPABILITY
+================================================================
+ capability  attempts   gpu_hours  mean_attempt_h
+        6.0       145   81.201667        0.560011
+        6.1       406  183.219722        0.451280
+        7.0       122   50.349167        0.412698
+        7.5      2807  609.738056        0.217221
+        8.0      1807  642.401389        0.355507
+        8.6      1007  523.915278        0.520273
+        8.9      5541 1213.454722        0.218996
+        9.0      1831  624.502500        0.341072
+
+================================================================
+SUBSTANTIAL RUN-ATTEMPT DURATION (per attempt, not per leg)
+================================================================
+  Substantial run-attempts: 5198
+  Mean: 0.75h  median: 0.64h  min: 0.00h  max: 21.28h
+
+  By GPU device:
+                           device    n   mean_h  median_h    min_h     max_h
+NVIDIA A100-SXM4-80GB MIG 3g.40gb  102 0.491476  0.001667 0.001111  6.680833
+                       NVIDIA L40  763 0.587218  0.594444 0.000000 11.551389
+                      NVIDIA L40S 1222 0.614766  0.473194 0.000556 11.212222
+       NVIDIA GeForce RTX 2080 Ti  715 0.665300  0.811111 0.001111  4.653056
+          NVIDIA GeForce RTX 3060    8 0.673368  0.780139 0.002222  1.069167
+            NVIDIA H100 80GB HBM3  474 0.752345  0.698472 0.000833  3.493056
+                      NVIDIA H200  322 0.792918  0.624583 0.000833  3.954167
+            NVIDIA A100-SXM4-80GB  246 0.835884  0.600833 0.000833  5.665833
+            NVIDIA A100-SXM4-40GB  353 0.910505  0.788611 0.001111 11.527500
+                 NVIDIA RTX A5000  338 0.938891  0.819444 0.001111  4.471944
+                       NVIDIA A40  212 0.939344  0.799028 0.001389  4.101111
+             Tesla V100-PCIE-16GB   43 0.962513  0.792500 0.001389  3.985000
+                  NVIDIA H100 NVL    8 1.022014  0.605972 0.553333  3.088889
+             Tesla P100-PCIE-16GB   75 1.078641  0.968333 0.002222  5.478056
+            NVIDIA A100 80GB PCIe   55 1.141672  0.905556 0.001389  3.826111
+       NVIDIA GeForce GTX 1080 Ti  154 1.186457  0.923056 0.001389 21.280556
+                  Quadro RTX 6000  104 1.231565  1.187778 0.001944  3.791111
+             Tesla V100-PCIE-32GB    4 2.192847  2.371389 0.261389  3.767222
+
+  By capability:
+ capability    n   mean_h  median_h
+        6.0   75 1.078641  0.968333
+        6.1  154 1.186457  0.923056
+        7.0   47 1.067222  0.800278
+        7.5  819 0.737206  0.830833
+        8.0  756 0.846506  0.686111
+        8.6  558 0.935256  0.810972
+        8.9 1985 0.604177  0.508056
+        9.0  804 0.771277  0.666389
+
+================================================================
+WHERE JOBS RAN (by host, top 25 by GPU-hours)
+================================================================
+                               host  attempts  gpu_hours
+           gitter0000.chtc.wisc.edu       406 183.219722
+           gpulab2001.chtc.wisc.edu       511 178.908889
+         ahlquist0000.chtc.wisc.edu       342 136.388611
+      jcaicedogpu0002.chtc.wisc.edu       390 126.651667
+             gpu014.rci.montana.edu       248 121.396944
+      jcaicedogpu0000.chtc.wisc.edu       343 115.950278
+        vetsigian0001.chtc.wisc.edu       504 104.090833
+              gpu4000.chtc.wisc.edu       428  92.521111
+       mkhodakgpu4000.chtc.wisc.edu       223  83.087778
+dbrundage-chtcgpu5000.chtc.wisc.edu       185  81.850278
+                              gpu03       195  78.953889
+    blengerichgpu4000.chtc.wisc.edu       348  78.386389
+     zliu-chtcgpu5000.chtc.wisc.edu       227  78.101667
+              gpu2008.chtc.wisc.edu       115  76.788611
+                              gpu09       135  75.696111
+                              gpu01       139  75.543333
+                              gpu08        86  73.063889
+       amuraligpu4000.chtc.wisc.edu       246  68.570556
+                              gpu05       139  65.499444
+             gpu021.rci.montana.edu       156  65.071111
+      jcaicedogpu0004.chtc.wisc.edu       237  64.911111
+                            rails04       227  61.967500
+                              gpu04       115  61.151667
+        xhuanggpu4001.chtc.wisc.edu       143  60.223889
+      jcaicedogpu0003.chtc.wisc.edu       259  56.593611
+
+================================================================
+COST PER USABLE RESULT
+================================================================
+  Total GPU-hours / usable edge (316):       12.4
+  Total GPU-hours / connected compound (292): 13.5
+
+Wrote openfe\compute_accounting.png
+Wrote openfe\compute_timeline.png
+
+Wall-clock span:           6 days 04:57:56
+Peak concurrent (ran-only): 191 GPUs
+Peak concurrent (all attempts, churn-inflated): 193
+Wrote openfe\compute_accounting_attempts.csv
+```

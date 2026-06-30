@@ -46,6 +46,13 @@ import matplotlib.pyplot as plt
 
 PRIORITIZED_HOSTS = {"gitter0000.chtc.wisc.edu", "gitter2003.chtc.wisc.edu",
                      "gpulab2001.chtc.wisc.edu"}
+# dsigpu* machines are also prioritized (a group the user belongs to)
+PRIORITIZED_HOST_PREFIXES = ("dsigpu",)
+
+# Threshold separating a genuine run attempt from the -o output-conflict
+# requeue thrash (the dominant churn cause; see writeup). Attempts shorter
+# than this that evicted are resume/output-conflict failures, not real work.
+IMMEDIATE_FAIL_H = 5.0 / 60.0  # 5 minutes
 
 # Event-log line patterns
 RE_EXEC = re.compile(r'^001 \(([\d.]+)\) (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) '
@@ -53,10 +60,6 @@ RE_EXEC = re.compile(r'^001 \(([\d.]+)\) (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) '
 RE_END = re.compile(r'^00[45] \(([\d.]+)\) (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) '
                     r'Job (was evicted|terminated)')
 RE_SLOT = re.compile(r'SlotName:\s*(\S+)')
-RE_GPU = re.compile(r'Capability = ([\d.]+);\s*CoresPerCU.*?'
-                    r'DeviceName = "([^"]+)"')
-# DeviceName may precede or follow Capability depending on attr order;
-# use a more tolerant two-field search within a GPUs_ classad line.
 RE_CAP = re.compile(r'Capability = ([\d.]+)')
 RE_DEV = re.compile(r'DeviceName = "([^"]+)"')
 RE_RETVAL = re.compile(r'Normal termination \(return value (\d+)\)')
@@ -67,17 +70,34 @@ def parse_ts(s):
 
 
 def classify_slot(slotname):
-    """Return one of: osg, backfill, prioritized, shared, unknown."""
+    """Return one of: osg, backfill, prioritized, shared, unknown.
+
+    Rules (in order):
+      backfill* prefix                      -> backfill
+      glidein_* in name                     -> osg
+      regular slotN_M on a non-CHTC host    -> osg  (OSPool sites:
+          *-EP.* endpoints, montana.edu/nd.edu/amnh.org, short-names)
+      regular slotN_M on dsigpu*/gitter0000/gitter2003/gpulab2001 (CHTC)
+                                            -> prioritized
+      regular slotN_M on other *.chtc.wisc.edu -> shared
+    """
     if slotname is None:
         return "unknown"
     prefix = slotname.split("@")[0]
-    if prefix.startswith("glidein_") or "glidein_" in slotname:
-        return "osg"
+    host = slotname.split("@")[-1]
     if prefix.startswith("backfill"):
         return "backfill"
-    # regular slotN_M -> test host
-    host = slotname.split("@")[-1]
-    if host in PRIORITIZED_HOSTS:
+    if "glidein_" in slotname:
+        return "osg"
+    # Off-CHTC hosts reached with a regular slot are OSPool/OSG sites:
+    #   OSPool endpoints (e.g. Colgate-CCARE-EP.*, GSU-Adonis-EP.*),
+    #   off-site domains (montana.edu, nd.edu, amnh.org),
+    #   and bare short-names (gpu03, rails04, compute-gpu-03, ...).
+    if not host.endswith(".chtc.wisc.edu"):
+        return "osg"
+    # On-CHTC regular slots: prioritized hosts vs shared GPU Lab
+    if host in PRIORITIZED_HOSTS or host.split(".")[0].startswith(
+            PRIORITIZED_HOST_PREFIXES):
         return "prioritized"
     return "shared"
 
@@ -158,19 +178,33 @@ def main():
         is_salvage = "salvage" in str(lp).lower()
         leg_type = ("complex" if leg.endswith("_complex")
                     else "solvent" if leg.endswith("_solvent") else "unknown")
+        # A leg "succeeded" if its transform dir holds a result.json
+        leg_succeeded = (transform_dir / "result.json").exists()
         for a in parse_log_attempts(lp):
             if a["end"] is not None:
                 dur = (a["end"] - a["start"]).total_seconds()
             else:
                 dur = None
+            dur_h = dur / 3600.0 if dur is not None else None
+            # Tag attempt kind: short evicted attempts are the -o output-
+            # conflict requeue thrash; longer ones are genuine compute.
+            # end_reason is "was evicted" or "terminated" (from RE_END group).
+            if dur_h is None:
+                kind = "unknown"
+            elif dur_h < IMMEDIATE_FAIL_H and a["end_reason"] == "was evicted":
+                kind = "immediate_fail"
+            else:
+                kind = "ran"
             rows.append({
                 "leg": leg, "leg_type": leg_type,
                 "campaign": "salvage" if is_salvage else "kartograf",
-                "log": lp.name, "host": a["host"], "slot": a["slot"],
+                "log": lp.name, "start": a["start"], "end": a["end"],
+                "host": a["host"], "slot": a["slot"],
                 "slot_type": classify_slot(a["slot"]),
                 "device": a["device"], "capability": a["capability"],
                 "end_reason": a["end_reason"], "retval": a["retval"],
-                "duration_s": dur,
+                "duration_s": dur, "attempt_kind": kind,
+                "leg_succeeded": leg_succeeded,
             })
 
     df = pd.DataFrame(rows)
@@ -181,6 +215,8 @@ def main():
 
     # ---- Total burn ----
     total_h = df["duration_h"].sum()
+    ran = df[df["attempt_kind"] == "ran"]
+    imm = df[df["attempt_kind"] == "immediate_fail"]
     print("\n" + "=" * 64)
     print("TOTAL GPU BURN (all attempts)")
     print("=" * 64)
@@ -190,18 +226,22 @@ def main():
     print(f"  Mean attempts per leg:           "
           f"{len(df)/df['leg'].nunique():.1f}")
 
-    # final-attempt-only burn (last attempt per leg by start time proxy:
-    # here, the longest or the terminated one). Approx: per leg, the attempt
-    # whose end_reason=='terminated' is the final; else the longest.
-    def final_attempt_h(g):
-        term = g[g["end_reason"] == "terminated"]
-        if len(term):
-            return term["duration_h"].sum()
-        return g["duration_h"].max() if len(g) else 0
-    final_h = df.groupby("leg").apply(final_attempt_h).sum()
-    print(f"\n  Final-attempt-only GPU-hours:    {final_h:,.1f}")
-    print(f"  Retry/churn overhead:            {total_h - final_h:,.1f} "
-          f"({100*(total_h-final_h)/total_h:.1f}% of total)")
+    # Attempt-level split: substantial run-attempts vs the seconds-long
+    # -o output-conflict thrash. This is regime-independent: it just measures
+    # GPU-hours in substantial vs trivial attempts, without claiming whether
+    # substantial attempts accumulated (resume) or restarted (no-resume).
+    print("\n  --- Attempt-level split (regime-independent) ---")
+    print(f"  substantial attempts (>= 5 min):  {len(ran):,}  "
+          f"({ran['duration_h'].sum():,.1f} GPU-h)")
+    print(f"  trivial attempts (< 5 min evict): {len(imm):,}  "
+          f"({imm['duration_h'].sum():,.1f} GPU-h)")
+    print(f"  -> trivial -o-conflict thrash is {len(imm)/len(df)*100:.0f}% of "
+          f"attempts but only {imm['duration_h'].sum()/total_h*100:.1f}% "
+          f"of GPU-hours")
+    print("\n  NOTE: Legs ran across preempting slots under two checkpointing")
+    print("  regimes (--resume and no-resume versions of run_quickrun.sh), so")
+    print("  we report total CONSUMED GPU-time, not productive-vs-redundant")
+    print("  sampling. Per-leg 'time to complete' is intentionally not claimed.")
 
     # ---- Burn by campaign ----
     print("\n" + "=" * 64)
@@ -220,6 +260,11 @@ def main():
         attempts=("duration_h", "size"),
         gpu_hours=("duration_h", "sum"),
         mean_attempt_h=("duration_h", "mean")).reset_index()
+    # add genuine-compute (ran) GPU-hours per slot type
+    ran_by_slot = (df[df["attempt_kind"] == "ran"].groupby("slot_type")
+                   ["duration_h"].sum().rename("ran_gpu_hours"))
+    slot = slot.merge(ran_by_slot, on="slot_type", how="left")
+    slot["ran_gpu_hours"] = slot["ran_gpu_hours"].fillna(0)
     slot = slot.sort_values("gpu_hours", ascending=False)
     print(slot.to_string(index=False))
 
@@ -245,33 +290,35 @@ def main():
     cap = cap.sort_values("capability")
     print(cap.to_string(index=False))
 
-    # ---- Successful-leg timing ----
-    # A "successful" attempt: terminated normally with retval 0, OR the
-    # longest attempt of a leg that ultimately produced output. Here we use
-    # attempts that ran a meaningful duration and terminated (not evicted).
-    success = df[(df["end_reason"] == "terminated") &
-                 (df["retval"] == 0)].copy()
+    # ---- Per-ATTEMPT run-duration by GPU (regime-independent) ----
+    # We report the duration distribution of substantial run-attempts
+    # (>= 5 min), grouped by hardware. Each attempt is its own data point;
+    # we do NOT aggregate to a per-leg "time to complete", which would
+    # require resolving the resume/no-resume regime. This is an honest
+    # "how long does a substantial simulation attempt take on each GPU".
+    sub_att = df[df["attempt_kind"] == "ran"].copy()
     print("\n" + "=" * 64)
-    print("SUCCESSFUL-LEG TIMING (terminated, retval 0)")
+    print("SUBSTANTIAL RUN-ATTEMPT DURATION (per attempt, not per leg)")
     print("=" * 64)
-    print(f"  Successful terminations: {len(success)}")
-    if len(success):
-        print(f"  Mean: {success['duration_h'].mean():.2f}h  "
-              f"median: {success['duration_h'].median():.2f}h  "
-              f"min: {success['duration_h'].min():.2f}h  "
-              f"max: {success['duration_h'].max():.2f}h")
+    print(f"  Substantial run-attempts: {len(sub_att)}")
+    if len(sub_att):
+        print(f"  Mean: {sub_att['duration_h'].mean():.2f}h  "
+              f"median: {sub_att['duration_h'].median():.2f}h  "
+              f"min: {sub_att['duration_h'].min():.2f}h  "
+              f"max: {sub_att['duration_h'].max():.2f}h")
         print("\n  By GPU device:")
-        sd = success.groupby("device").agg(
+        sd = sub_att.groupby("device").agg(
             n=("duration_h", "size"), mean_h=("duration_h", "mean"),
             median_h=("duration_h", "median"),
             min_h=("duration_h", "min"),
             max_h=("duration_h", "max")).reset_index()
         print(sd.sort_values("mean_h").to_string(index=False))
         print("\n  By capability:")
-        sc = success.groupby("capability").agg(
+        sc = sub_att.groupby("capability").agg(
             n=("duration_h", "size"), mean_h=("duration_h", "mean"),
             median_h=("duration_h", "median")).reset_index()
         print(sc.sort_values("capability").to_string(index=False))
+    success = sub_att  # used by the timeline/plots below
 
     # ---- Where jobs ran: by host ----
     print("\n" + "=" * 64)
@@ -318,22 +365,32 @@ def main():
     ax.set_xlabel("Capability"); ax.set_ylabel("GPU-hours")
     ax.set_title("Burn by capability")
 
-    # attempts per leg distribution
+    # attempt-kind split: GPU-hours and attempt-counts (the -o churn story)
     ax = axes[1, 0]
-    apl = df.groupby("leg").size()
-    ax.hist(apl, bins=range(1, apl.max() + 2), color="#9e9ac8",
-            edgecolor="k", align="left")
-    ax.set_xlabel("Attempts per leg"); ax.set_ylabel("Legs")
-    ax.set_title(f"Multi-attempt churn (mean {apl.mean():.1f}/leg)")
+    kinds = ["ran", "immediate_fail"]
+    kh = [df[df["attempt_kind"] == k]["duration_h"].sum() for k in kinds]
+    kn = [int((df["attempt_kind"] == k).sum()) for k in kinds]
+    x = np.arange(len(kinds))
+    ax2 = ax.twinx()
+    ax.bar(x - 0.2, kh, width=0.4, color="#41ab5d", edgecolor="k",
+           label="GPU-hours")
+    ax2.bar(x + 0.2, kn, width=0.4, color="#fdae6b", edgecolor="k",
+            label="attempt count")
+    ax.set_xticks(x); ax.set_xticklabels(["ran\n(>=5min)",
+                                          "immediate_fail\n(<5min evict)"])
+    ax.set_ylabel("GPU-hours", color="#41ab5d")
+    ax2.set_ylabel("attempt count", color="#e6550d")
+    ax.set_title("-o conflict churn: hours vs attempt count")
 
-    # successful timing by capability (box-ish: mean bars)
+    # successful timing by capability (mean bars)
     ax = axes[1, 1]
     if len(success):
         sc2 = success.groupby("capability")["duration_h"].mean()
         ax.bar(sc2.index.astype(str), sc2.values, color="#41b6c4",
                edgecolor="k")
-        ax.set_xlabel("Capability"); ax.set_ylabel("Mean successful leg (h)")
-        ax.set_title("Successful-leg time by capability")
+        ax.set_xlabel("Capability")
+        ax.set_ylabel("Mean run-attempt (h)")
+        ax.set_title("Run-attempt duration by capability")
 
     # campaign split
     ax = axes[1, 2]
@@ -345,6 +402,69 @@ def main():
     fig_path = outdir / "compute_accounting.png"
     plt.savefig(fig_path, dpi=130, bbox_inches="tight")
     print(f"\nWrote {fig_path}")
+
+    # ---- Timeline: cumulative GPU-hours + concurrency over wall-clock ----
+    # Concurrency uses RAN attempts only (genuine compute), so the peak
+    # reflects real parallelism, not the -o conflict churn storms. We also
+    # overlay all-attempts concurrency so the churn shows as the gap.
+    tl_all = df.dropna(subset=["start", "end"]).copy()
+    tl_all["start"] = pd.to_datetime(tl_all["start"])
+    tl_all["end"] = pd.to_datetime(tl_all["end"])
+    tl_ran = tl_all[tl_all["attempt_kind"] == "ran"].copy()
+
+    def concurrency_curve(frame):
+        events = []
+        for _, r in frame.iterrows():
+            events.append((r["start"], 1))
+            events.append((r["end"], -1))
+        ev = pd.DataFrame(events, columns=["t", "delta"]).sort_values("t")
+        ev["concurrent"] = ev["delta"].cumsum()
+        ev["dt_h"] = ev["t"].diff().dt.total_seconds().fillna(0) / 3600.0
+        ev["cum_gpu_h"] = (ev["concurrent"].shift(1).fillna(0)
+                           * ev["dt_h"]).cumsum()
+        return ev
+
+    if len(tl_ran):
+        ev_ran = concurrency_curve(tl_ran)
+        ev_all = concurrency_curve(tl_all)
+
+        fig2, (axA, axB) = plt.subplots(2, 1, figsize=(14, 9), sharex=True)
+        # all-attempts concurrency (churn-inflated) as faint background
+        axA.fill_between(ev_all["t"], ev_all["concurrent"], alpha=0.18,
+                         color="#969696", label="all attempts (incl. churn)")
+        # ran-only concurrency (genuine parallelism)
+        axA.plot(ev_ran["t"], ev_ran["concurrent"], color="#3182bd", lw=0.8)
+        axA.fill_between(ev_ran["t"], ev_ran["concurrent"], alpha=0.35,
+                         color="#6baed6", label="ran only (genuine compute)")
+        peak_ran = int(ev_ran["concurrent"].max())
+        peak_all = int(ev_all["concurrent"].max())
+        axA.axhline(peak_ran, color="r", ls="--", lw=0.8,
+                    label=f"peak ran = {peak_ran} GPUs")
+        axA.set_ylabel("Concurrent GPUs in use")
+        axA.set_title("Campaign concurrency over wall-clock time "
+                      "(genuine compute vs churn)")
+        axA.legend(fontsize=9)
+
+        # cumulative GPU-hours: ran-only vs all
+        axB.plot(ev_all["t"], ev_all["cum_gpu_h"], color="#969696", lw=1.2,
+                 label=f"all attempts ({total_h:,.0f} GPU-h)")
+        ran_total = tl_ran["duration_h"].sum()
+        axB.plot(ev_ran["t"], ev_ran["cum_gpu_h"], color="#41ab5d", lw=1.5,
+                 label=f"ran only ({ran_total:,.0f} GPU-h)")
+        axB.set_ylabel("Cumulative GPU-hours")
+        axB.set_xlabel("Wall-clock time")
+        axB.set_title("Cumulative GPU burn: genuine compute vs total")
+        axB.legend(fontsize=9)
+        fig2.autofmt_xdate()
+        plt.tight_layout()
+        tl_path = outdir / "compute_timeline.png"
+        plt.savefig(tl_path, dpi=130, bbox_inches="tight")
+        print(f"Wrote {tl_path}")
+        wall_span = (tl_all["end"].max() - tl_all["start"].min())
+        print(f"\nWall-clock span:           {wall_span}")
+        print(f"Peak concurrent (ran-only): {peak_ran} GPUs")
+        print(f"Peak concurrent (all attempts, churn-inflated): {peak_all}")
+
     print(f"Wrote {outdir/'compute_accounting_attempts.csv'}")
 
 
