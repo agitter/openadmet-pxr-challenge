@@ -2756,3 +2756,375 @@ for e in errs: print(' ', e)
 VALID
 VALID
 ```
+
+```commandline
+bash probe_logs.sh 2>&1 | tee log_probe_output.txt
+```
+
+```commandline
+$ python openfe/scripts/22_compute_accounting.py \
+    --production-dir openfe/production \
+    --outdir openfe
+Found 2050 .log files
+Parsed 13666 execution attempts across 1067 legs
+
+================================================================
+TOTAL GPU BURN (all attempts)
+================================================================
+  Total GPU-hours (all attempts):  3,928.8
+  Total attempts:                  13,666
+  Total legs:                      1,067
+  Mean attempts per leg:           12.8
+
+  Final-attempt-only GPU-hours:    1,728.8
+  Retry/churn overhead:            2,200.0 (56.0% of total)
+
+================================================================
+BURN BY CAMPAIGN
+================================================================
+ campaign  attempts   gpu_hours
+kartograf     12478 3051.446944
+  salvage      1188  877.335556
+
+================================================================
+BURN BY SLOT TYPE
+================================================================
+  slot_type  attempts   gpu_hours  mean_attempt_h
+   backfill      4346 1463.098056        0.336654
+        osg      2852 1272.204444        0.446074
+     shared      5732  848.083056        0.147956
+prioritized       736  345.396944        0.469289
+
+================================================================
+BURN BY GPU DEVICE TYPE
+================================================================
+                           device  attempts  gpu_hours  mean_attempt_h
+                      NVIDIA L40S      3078 755.926667        0.245590
+       NVIDIA GeForce RTX 2080 Ti      2582 480.566667        0.186122
+                       NVIDIA L40      2463 457.528056        0.185760
+            NVIDIA H100 80GB HBM3      1202 359.462500        0.299054
+            NVIDIA A100-SXM4-40GB       744 322.538611        0.433520
+                 NVIDIA RTX A5000       588 318.621389        0.541873
+                      NVIDIA H200       583 256.704444        0.440316
+            NVIDIA A100-SXM4-80GB       598 206.437222        0.345213
+                       NVIDIA A40       410 199.904444        0.487572
+       NVIDIA GeForce GTX 1080 Ti       406 183.219722        0.451280
+                  Quadro RTX 6000       225 129.171389        0.574095
+             Tesla P100-PCIE-16GB       145  81.201667        0.560011
+            NVIDIA A100 80GB PCIe        92  62.956667        0.684312
+NVIDIA A100-SXM4-80GB MIG 3g.40gb       373  50.468889        0.135305
+             Tesla V100-PCIE-16GB       106  41.508611        0.391591
+             Tesla V100-PCIE-32GB        16   8.840556        0.552535
+                  NVIDIA H100 NVL        46   8.335556        0.181208
+          NVIDIA GeForce RTX 3060         9   5.389444        0.598827
+
+================================================================
+BURN BY GPU CAPABILITY
+================================================================
+ capability  attempts   gpu_hours  mean_attempt_h
+        6.0       145   81.201667        0.560011
+        6.1       406  183.219722        0.451280
+        7.0       122   50.349167        0.412698
+        7.5      2807  609.738056        0.217221
+        8.0      1807  642.401389        0.355507
+        8.6      1007  523.915278        0.520273
+        8.9      5541 1213.454722        0.218996
+        9.0      1831  624.502500        0.341072
+
+================================================================
+SUCCESSFUL-LEG TIMING (terminated, retval 0)
+================================================================
+  Successful terminations: 911
+  Mean: 1.67h  median: 0.96h  min: 0.56h  max: 21.28h
+
+  By GPU device:
+                           device   n   mean_h  median_h    min_h     max_h
+          NVIDIA GeForce RTX 3060   1 1.069167  1.069167 1.069167  1.069167
+                       NVIDIA L40 127 1.186724  0.774167 0.601667 11.244722
+                      NVIDIA L40S 246 1.445133  0.809167 0.559722 11.212222
+            NVIDIA H100 80GB HBM3  90 1.456327  0.873333 0.666667  3.493056
+                      NVIDIA H200  62 1.589135  0.892778 0.646389  3.954167
+                       NVIDIA A40  41 1.637148  0.973333 0.801667  4.101111
+                 NVIDIA RTX A5000  55 1.745808  0.953889 0.730000  4.471944
+       NVIDIA GeForce RTX 2080 Ti  90 1.769821  1.128056 0.769722  4.653056
+                  Quadro RTX 6000  39 1.779843  1.202500 0.908611  3.791111
+            NVIDIA A100-SXM4-40GB  52 1.970935  1.080694 0.846389  4.391389
+            NVIDIA A100 80GB PCIe  13 1.995470  1.064444 0.905556  3.826111
+                  NVIDIA H100 NVL   2 2.011250  2.011250 0.933611  3.088889
+NVIDIA A100-SXM4-80GB MIG 3g.40gb  13 2.114145  1.160556 0.889722  6.680833
+             Tesla V100-PCIE-16GB   6 2.447500  2.355278 1.157500  3.985000
+             Tesla P100-PCIE-16GB  11 2.471944  1.416944 1.192222  5.478056
+            NVIDIA A100-SXM4-80GB  43 2.509903  3.193056 0.843611  5.665833
+             Tesla V100-PCIE-32GB   3 2.836667  3.706944 1.035833  3.767222
+       NVIDIA GeForce GTX 1080 Ti  17 4.497239  4.657778 1.078056 21.280556
+
+  By capability:
+ capability   n   mean_h  median_h
+        6.0  11 2.471944  1.416944
+        6.1  17 4.497239  4.657778
+        7.0   9 2.577222  3.388889
+        7.5 129 1.772851  1.131111
+        8.0 121 2.180491  1.095278
+        8.6  97 1.692904  0.970556
+        8.9 373 1.357149  0.802222
+        9.0 154 1.517002  0.886389
+
+================================================================
+WHERE JOBS RAN (by host, top 25 by GPU-hours)
+================================================================
+                               host  attempts  gpu_hours
+           gitter0000.chtc.wisc.edu       406 183.219722
+           gpulab2001.chtc.wisc.edu       511 178.908889
+         ahlquist0000.chtc.wisc.edu       342 136.388611
+      jcaicedogpu0002.chtc.wisc.edu       390 126.651667
+             gpu014.rci.montana.edu       248 121.396944
+      jcaicedogpu0000.chtc.wisc.edu       343 115.950278
+        vetsigian0001.chtc.wisc.edu       504 104.090833
+              gpu4000.chtc.wisc.edu       428  92.521111
+       mkhodakgpu4000.chtc.wisc.edu       223  83.087778
+dbrundage-chtcgpu5000.chtc.wisc.edu       185  81.850278
+                              gpu03       195  78.953889
+    blengerichgpu4000.chtc.wisc.edu       348  78.386389
+     zliu-chtcgpu5000.chtc.wisc.edu       227  78.101667
+              gpu2008.chtc.wisc.edu       115  76.788611
+                              gpu09       135  75.696111
+                              gpu01       139  75.543333
+                              gpu08        86  73.063889
+       amuraligpu4000.chtc.wisc.edu       246  68.570556
+                              gpu05       139  65.499444
+             gpu021.rci.montana.edu       156  65.071111
+      jcaicedogpu0004.chtc.wisc.edu       237  64.911111
+                            rails04       227  61.967500
+                              gpu04       115  61.151667
+        xhuanggpu4001.chtc.wisc.edu       143  60.223889
+      jcaicedogpu0003.chtc.wisc.edu       259  56.593611
+
+================================================================
+COST PER USABLE RESULT
+================================================================
+  Total GPU-hours / usable edge (316):       12.4
+  Total GPU-hours / connected compound (292): 13.5
+
+Wrote openfe\compute_accounting.png
+Wrote openfe\compute_accounting_attempts.csv
+```
+
+```commandline
+$ python diagnose_slots.py
+================================================================
+1. SLOT PREFIX vs ASSIGNED slot_type
+================================================================
+slot_prefix  slot_type
+slot         shared         5732
+backfill     backfill       4346
+slot         osg            2852
+             prioritized     736
+
+================================================================
+2. HOSTS CURRENTLY CLASSIFIED AS 'shared' (top 25 by attempts)
+================================================================
+host
+gpulab2003.chtc.wisc.edu                       1108
+gpu4002.chtc.wisc.edu                           938
+gpu4006.chtc.wisc.edu                           725
+vetsigian0001.chtc.wisc.edu                     466
+gpu4000.chtc.wisc.edu                           428
+gpu2011.chtc.wisc.edu                           373
+gpu4003.chtc.wisc.edu                           285
+dsigpu4001.chtc.wisc.edu                        146
+gpulab2005.chtc.wisc.edu                        132
+gpulab2004.chtc.wisc.edu                        123
+gpu2008.chtc.wisc.edu                           115
+gpu4001.chtc.wisc.edu                           115
+gpu2004.chtc.wisc.edu                            95
+gpu2010.chtc.wisc.edu                            93
+Colgate-CCARE-EP.3dd51df4d4e0                    76
+dsigpu4002.chtc.wisc.edu                         74
+gpu2001.chtc.wisc.edu                            67
+gpu2009.chtc.wisc.edu                            63
+gpu2005.chtc.wisc.edu                            61
+GSU-Adonis-EP.osg-endpoint-74b7c7597f-7qdgv      46
+gpu5000.chtc.wisc.edu                            43
+gpu2003.chtc.wisc.edu                            35
+dsigpu4000.chtc.wisc.edu                         34
+gpu2006.chtc.wisc.edu                            32
+Colgate-CCARE-EP.f47887817dfe                    28
+
+================================================================
+3. RAW SLOT NAMES IN 'shared' BUCKET (distinct samples)
+================================================================
+2           slot2_4@gpulab2003.chtc.wisc.edu
+10             slot2_1@gpu2011.chtc.wisc.edu
+17       slot2_1@vetsigian0001.chtc.wisc.edu
+28         slot2_10@dsigpu4000.chtc.wisc.edu
+29             slot2_6@gpu2011.chtc.wisc.edu
+33       slot2_6@vetsigian0001.chtc.wisc.edu
+43             slot1_2@gpu4002.chtc.wisc.edu
+51             slot2_7@gpu4006.chtc.wisc.edu
+54       slot2_7@vetsigian0001.chtc.wisc.edu
+64             slot2_1@gpu2001.chtc.wisc.edu
+88             slot1_3@gpu4002.chtc.wisc.edu
+97             slot1_6@gpu4002.chtc.wisc.edu
+132            slot2_2@gpu2008.chtc.wisc.edu
+145            slot2_8@gpu4006.chtc.wisc.edu
+146            slot2_4@gpu2008.chtc.wisc.edu
+172            slot2_3@gpu2008.chtc.wisc.edu
+173            slot2_1@gpu4003.chtc.wisc.edu
+180            slot2_1@gpu4006.chtc.wisc.edu
+192    slot1_2@Colgate-CCARE-EP.3dd51df4d4e0
+212            slot2_1@gpu2005.chtc.wisc.edu
+247            slot2_2@gpu2004.chtc.wisc.edu
+274            slot2_3@gpu4001.chtc.wisc.edu
+281            slot2_3@gpu2009.chtc.wisc.edu
+283            slot1_1@gpu4002.chtc.wisc.edu
+285            slot2_2@gpu4003.chtc.wisc.edu
+
+================================================================
+4. SLOT PREFIX BREAKDOWN PER REPRESENTATIVE HOST
+================================================================
+(reveals whether a host uses backfill* or slotN_M* prefixes)
+
+jcaicedogpu0002.chtc.wisc.edu
+  prefixes:   {'backfill': np.int64(390)}
+  slot_types: {'backfill': np.int64(390)}
+  mean attempt duration: 0.325h  (n attempts=390)
+
+vetsigian0001.chtc.wisc.edu
+  prefixes:   {'slot': np.int64(504)}
+  slot_types: {'shared': np.int64(466), 'osg': np.int64(38)}
+  mean attempt duration: 0.207h  (n attempts=504)
+
+ahlquist0000.chtc.wisc.edu
+  prefixes:   {'backfill': np.int64(342)}
+  slot_types: {'backfill': np.int64(342)}
+  mean attempt duration: 0.399h  (n attempts=342)
+
+blengerichgpu4000.chtc.wisc.edu
+  prefixes:   {'backfill': np.int64(348)}
+  slot_types: {'backfill': np.int64(348)}
+  mean attempt duration: 0.225h  (n attempts=348)
+
+mkhodakgpu4000.chtc.wisc.edu
+  prefixes:   {'backfill': np.int64(223)}
+  slot_types: {'backfill': np.int64(223)}
+  mean attempt duration: 0.373h  (n attempts=223)
+
+amuraligpu4000.chtc.wisc.edu
+  prefixes:   {'backfill': np.int64(246)}
+  slot_types: {'backfill': np.int64(246)}
+  mean attempt duration: 0.279h  (n attempts=246)
+
+gpulab2003.chtc.wisc.edu
+  prefixes:   {'slot': np.int64(1184)}
+  slot_types: {'shared': np.int64(1108), 'osg': np.int64(76)}
+  mean attempt duration: 0.028h  (n attempts=1184)
+
+gpulab2005.chtc.wisc.edu
+  prefixes:   {'slot': np.int64(132)}
+  slot_types: {'shared': np.int64(132)}
+  mean attempt duration: 0.173h  (n attempts=132)
+
+gpu4002.chtc.wisc.edu
+  prefixes:   {'slot': np.int64(938)}
+  slot_types: {'shared': np.int64(938)}
+  mean attempt duration: 0.007h  (n attempts=938)
+
+gpu4006.chtc.wisc.edu
+  prefixes:   {'slot': np.int64(725)}
+  slot_types: {'shared': np.int64(725)}
+  mean attempt duration: 0.075h  (n attempts=725)
+
+gpu2008.chtc.wisc.edu
+  prefixes:   {'slot': np.int64(115)}
+  slot_types: {'shared': np.int64(115)}
+  mean attempt duration: 0.668h  (n attempts=115)
+
+gpu2011.chtc.wisc.edu
+  prefixes:   {'slot': np.int64(373)}
+  slot_types: {'shared': np.int64(373)}
+  mean attempt duration: 0.135h  (n attempts=373)
+
+gitter0000.chtc.wisc.edu
+  prefixes:   {'slot': np.int64(320), 'backfill': np.int64(86)}
+  slot_types: {'prioritized': np.int64(320), 'backfill': np.int64(86)}
+  mean attempt duration: 0.451h  (n attempts=406)
+
+gpulab2001.chtc.wisc.edu
+  prefixes:   {'slot': np.int64(416), 'backfill': np.int64(95)}
+  slot_types: {'prioritized': np.int64(416), 'backfill': np.int64(95)}
+  mean attempt duration: 0.350h  (n attempts=511)
+
+================================================================
+5. ALL DISTINCT (slot_prefix, host-domain) COMBINATIONS
+================================================================
+slot_prefix host_domain  attempts  mean_dur_h
+       slot    wisc.edu      6534    0.183040
+   backfill    wisc.edu      4346    0.336654
+       slot  short-name      1766    0.473209
+       slot montana.edu       673    0.378152
+       slot      nd.edu       241    0.572664
+       slot    amnh.org       106    0.391591
+```
+
+```commandline
+bash probe_fastfail.sh 2>&1 | tee fastfail_probe.txt
+============================================================
+1. FIND A SHORT-DURATION ATTEMPT (likely fast-fail)
+============================================================
+gpu4002 had ~25s mean attempt duration - inspect one of its jobs.
+Log: openfe/production/110/rbfe_OADMET-0006503_solvent_OCNT-2317296_solvent/logs/quickrun.8017966.1.log
+
+=== .out: CUDA / platform markers ===
+Host: gpu4002
+nvidia-smi not available
+Available platforms: ['Reference', 'CPU', 'CUDA']
+CUDA platform confirmed available.
+
+=== .out: first 60 lines (full context) ===
+=== openfe quickrun production ===
+Host: gpu4002
+Transformation: rbfe_OADMET-0006503_solvent_OCNT-2317296_solvent.json
+Start: Sat Jun 20 22:33:56 CDT 2026
+nvidia-smi not available
+openfe: openfe, version 1.11.1
+Available platforms: ['Reference', 'CPU', 'CUDA']
+CUDA platform confirmed available.
+Found existing quickrun_cache - this is a RESUME run
+
+=== .err: CUDA / failure markers ===
+Error: Invalid value for '-o': Path 'quickrun_output/result.json' is a file.
+
+============================================================
+2. FREQUENCY OF CUDA MARKERS ACROSS ALL .out FILES
+============================================================
+  'CUDA platform confirmed available' (success marker): 1066
+  'CUDA platform not available' (fast-fail marker):     0
+
+=== Any other CUDA-related phrasings present (counts) ===
+   1066 CUDA platform confirmed available.
+
+============================================================
+3. SAME CHECK IN .err FILES (markers may go to stderr)
+============================================================
+  .err with 'CUDA platform not available': 0
+  .err with 'CUDA platform confirmed available': 0
+
+=== exact fast-fail-related lines from .err (samples) ===
+
+============================================================
+4. HOW MANY .out FILES HAVE NEITHER MARKER?
+============================================================
+  total .out files:           2050
+  with 'confirmed available': 1066
+  with 'not available':       0
+  (a single .out may contain multiple attempts, so these can overlap)
+
+============================================================
+5. DOES A SINGLE .out CONTAIN MULTIPLE CUDA CHECKS?
+============================================================
+Count occurrences of the markers within one multi-attempt .out:
+Sample .out:
+  'confirmed available' count in it:   'not available' count in it:
+(If a .out aggregates all attempts of a leg, marker COUNTS tell us
+ how many fast-fail rejections vs confirmed runs happened per leg.)
+```

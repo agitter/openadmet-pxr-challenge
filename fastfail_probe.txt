@@ -1,0 +1,59 @@
+============================================================
+1. FIND A SHORT-DURATION ATTEMPT (likely fast-fail)
+============================================================
+gpu4002 had ~25s mean attempt duration - inspect one of its jobs.
+Log: openfe/production/110/rbfe_OADMET-0006503_solvent_OCNT-2317296_solvent/logs/quickrun.8017966.1.log
+
+=== .out: CUDA / platform markers ===
+Host: gpu4002
+nvidia-smi not available
+Available platforms: ['Reference', 'CPU', 'CUDA']
+CUDA platform confirmed available.
+
+=== .out: first 60 lines (full context) ===
+=== openfe quickrun production ===
+Host: gpu4002
+Transformation: rbfe_OADMET-0006503_solvent_OCNT-2317296_solvent.json
+Start: Sat Jun 20 22:33:56 CDT 2026
+nvidia-smi not available
+openfe: openfe, version 1.11.1
+Available platforms: ['Reference', 'CPU', 'CUDA']
+CUDA platform confirmed available.
+Found existing quickrun_cache - this is a RESUME run
+
+=== .err: CUDA / failure markers ===
+Error: Invalid value for '-o': Path 'quickrun_output/result.json' is a file.
+
+============================================================
+2. FREQUENCY OF CUDA MARKERS ACROSS ALL .out FILES
+============================================================
+  'CUDA platform confirmed available' (success marker): 1066
+  'CUDA platform not available' (fast-fail marker):     0
+
+=== Any other CUDA-related phrasings present (counts) ===
+   1066 CUDA platform confirmed available.
+
+============================================================
+3. SAME CHECK IN .err FILES (markers may go to stderr)
+============================================================
+  .err with 'CUDA platform not available': 0
+  .err with 'CUDA platform confirmed available': 0
+
+=== exact fast-fail-related lines from .err (samples) ===
+
+============================================================
+4. HOW MANY .out FILES HAVE NEITHER MARKER?
+============================================================
+  total .out files:           2050
+  with 'confirmed available': 1066
+  with 'not available':       0
+  (a single .out may contain multiple attempts, so these can overlap)
+
+============================================================
+5. DOES A SINGLE .out CONTAIN MULTIPLE CUDA CHECKS?
+============================================================
+Count occurrences of the markers within one multi-attempt .out:
+Sample .out: 
+  'confirmed available' count in it:   'not available' count in it:       
+(If a .out aggregates all attempts of a leg, marker COUNTS tell us
+ how many fast-fail rejections vs confirmed runs happened per leg.)
