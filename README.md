@@ -1,4 +1,6 @@
 # OpenADMET Predicting PXR Induction Blind Challenge
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21084637.svg)](https://doi.org/10.5281/zenodo.21084637)
+
 An OpenFE-based approach to the [OpenADMET Predicting PXR Induction Blind Challenge](https://huggingface.co/spaces/openadmet/pxr-challenge).
 The [writeup](writeup.md) describes the full methodology and results.
 
@@ -9,6 +11,19 @@ The [writeup](writeup.md) describes the full methodology and results.
 - `/openfe`: Files for running [OpenFE](https://github.com/OpenFreeEnergy/openfe)
 
 Most code was written or drafted by Claude Sonnet 4.6, Claude Opus 4.6, Claude Opus 4.8, and GPT-5.5 Instant.
+
+## Citation
+```
+@article{gitter_openadmet_pxr_2026,
+	title = {Structure-based drug discovery for the {OpenADMET} {Predicting} {PXR} {Induction} {Blind} {Challenge}},
+	url = {https://github.com/agitter/openadmet-pxr-challenge},
+	doi = {10.5281/zenodo.21084637},
+	journal = {Zenodo},
+	author = {Gitter, Anthony},
+	month = jun,
+	year = {2026},
+}
+```
 
 ## Docking notes
 Initially only cluster representatives were run with GNINA.

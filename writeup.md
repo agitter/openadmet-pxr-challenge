@@ -1,6 +1,6 @@
 # Structure-based drug discovery for the OpenADMET Predicting PXR Induction Blind Challenge
 Anthony Gitter  
-Archived at TBD
+Archived at https://doi.org/10.5281/zenodo.21084637
 
 ## Introduction
 The [OpenADMET Predicting PXR Induction Blind Challenge](https://huggingface.co/spaces/openadmet/pxr-challenge) provided a rich dataset that reflects multiple stages of hit discovery and lead optimization: a primary screen, dose-response screen, counter-screen, and dose-response screen on an analog expansion set.
