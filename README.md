@@ -9,6 +9,7 @@ The [writeup](writeup.md) describes the full methodology and results.
 - `/docking`: Files for docking with [GNINA](https://github.com/gnina/gnina)
 - `/external`: Refined PXR structures as a [submodule](https://github.com/OpenADMET/pxr_xtal_re-refinement) and files from the [organizers](https://github.com/OpenADMET/PXR-Challenge-Tutorial/tree/main/evaluation).
 - `/openfe`: Files for running [OpenFE](https://github.com/OpenFreeEnergy/openfe)
+- `/submissions`: Scraped from [Hugging Face](https://openadmet-pxr-challenge.hf.space/config)
 
 Most code was written or drafted by Claude Sonnet 4.6, Claude Opus 4.6, Claude Opus 4.8, and GPT-5.5 Instant.
 

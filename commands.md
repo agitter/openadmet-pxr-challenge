@@ -3555,3 +3555,86 @@ Peak concurrent (ran-only): 191 GPUs
 Peak concurrent (all attempts, churn-inflated): 193
 Wrote openfe\compute_accounting_attempts.csv
 ```
+
+```commandline
+$ python parse_submissions.py --config 2026-06-30.json --out 2026-06-30.csv
+Total rows found:     358
+With method links:    71
+Not submitted/blank:  287
+
+=== Participants WITH method links ===
+  Asidsal11            2026-06-30 21:13 UTC https://github.com/Asidsal/pxr-challenge/blob/main/README.md
+  BalamuruganThirukonda 2026-06-28 07:19 UTC https://github.com/BalamuruganThirukonda/openadmet-pxr-pec50/blob/main/method_report.md
+  ChAndersen           2026-05-25 22:13 UTC https://github.com/cla71/inductr/blob/main/phase1_reportV15.html
+  DMakarov             2026-06-27 17:14 UTC https://github.com/MDMISC/Predicting-PXR-Induction/tree/main
+  DenaliSchlesinger    2026-06-16 22:22 UTC https://github.com/dschlesinger/openadmet-pxr/blob/main/METHOD_REPORT.md
+  Gashaw               2026-06-28 18:20 UTC https://github.com/gashawmg/openadmet-pxr-pec50-challenge
+  HungryCapybara       2026-05-31 20:42 UTC https://docs.google.com/document/d/1nCNclvq4gwk7UzV7MHiFDA8wgWar8NSTY8sxQzJdk6Q/edit?usp=sharing
+  HungryCapybara       2026-06-01 04:14 UTC https://docs.google.com/document/d/1nCNclvq4gwk7UzV7MHiFDA8wgWar8NSTY8sxQzJdk6Q/edit?tab=t.0
+  IAB                  2026-06-27 04:57 UTC https://github.com/balabin/PXR_Challenge
+  JacksonBurns         2026-06-10 00:51 UTC https://github.com/JacksonBurns/openadmet_pxr_qwen36/tree/40e269cf6560077860d7c20669be567d702071ef
+  JustLeonard          2026-06-21 10:25 UTC https://huggingface.co/datasets/JustLeonard/ML/blob/main/readmePXRv1.pdf
+  KNIMEST              2026-06-24 17:43 UTC https://github.com/Zassou-Syk/OpenADMET_PXR_Challenge_of_KNIMEST/tree/main
+  KalenJosifovski      2026-06-29 14:17 UTC https://gist.github.com/KalenJosifovski/8c0335073e58b900c523823fa44fa098
+  Kutoynash            2026-06-09 15:13 UTC https://github.com/shechtersolutions-coder/openadmet-pxr-phase-2
+  N1NC1O               2026-05-05 08:32 UTC https://gist.github.com/dehaenw/f63f9c9bd42eacbddede706e90d8d8e9
+  N283T                2026-06-28 09:11 UTC https://github.com/N283T/openadmet-pxr-model-report
+  PACE                 2026-06-29 12:46 UTC https://rentry.co/embww5yx
+  PeterBloomingdale    2026-05-25 10:19 UTC https://github.com/PeterBloomingdale/openadmet-pxr
+  QuantNova            2026-05-24 22:16 UTC https://github.com/chaospilot2003/openadmet
+  Schnappi             2026-05-24 21:31 UTC https://huggingface.co/api/resolve-cache/models/Schni-Schnappi/openadmet-pxr-challenge/e25ddff94c1bd01a129758e716c1241483508c83/Method?%2FSchni-Schnappi%2Fopenadmet-pxr-challenge%2Fresolve%2Fmain%2FMethod=&etag=%2280fc24ce17ec0fc2e27a6419019969b93863798e%22
+  Shorku               2026-05-27 00:03 UTC https://github.com/Shorku/OpenADMET_Blind_Challenge_Predicting_PXR_Induction
+  Srajall              2026-06-04 17:50 UTC https://github.com/srajalcodes/ChemHurdle-PXR/tree/main
+  TakuyaPKPD           2026-06-30 11:26 UTC https://github.com/BellOka/openadmet-pxr-challenge
+  Uncertain-Tea        2026-06-28 16:59 UTC https://github.com/un-certain-tea/OpenADMET-pxr-challenge
+  Usagi                2026-05-24 14:13 UTC https://github.com/Usagi-ljy/pxr-challenge-better-baseline
+  Whitebox             2026-05-24 22:06 UTC https://huggingface.co/api/resolve-cache/models/Whitebox2026/openadmet-pxr-challenge/9a117648bede69f060ab2cc7f814293718e50987/README.md?%2FWhitebox2026%2Fopenadmet-pxr-challenge%2Fresolve%2Fmain%2FREADME.md=&etag=%2209d0e2f893a437efb76426707cd9d3b9e28b803d%22
+  Zugspitze            2026-05-24 22:01 UTC https://huggingface.co/api/resolve-cache/models/Zugspitze2026/openadment-pxr-challenge/26934519aca390f48a120da26b54e93167ff6ec2/Methodology?%2FZugspitze2026%2Fopenadment-pxr-challenge%2Fresolve%2Fmain%2FMethodology=&etag=%2243dd843a84b70056aded44bfc81d374ca32c1af2%22
+  adlvdl               2026-06-24 06:23 UTC https://github.com/adlvdl/pxr_challenge
+  agitter              2026-06-30 19:01 UTC https://github.com/agitter/openadmet-pxr-challenge
+  apxjmd               2026-06-26 14:51 UTC https://docs.google.com/document/d/11DAugg36K9IJylRep6N4E1w3W0B_f5i5ciTAdqbaeJ4/edit?usp=sharing
+  asinansaglam         2026-06-25 21:51 UTC https://github.com/ASinanSaglam/OpenADMET_PXR_challenge/blob/main/WRITEUP.md
+  auP7s                2026-05-26 06:14 UTC https://gist.github.com/chemotica/a49b002eda2f7fd5eef2dca4f98f8ad7
+  axelrolov            2026-04-23 09:43 UTC https://github.com/AxelRolov/moltabfm_pxr
+  briford              2026-06-29 15:28 UTC https://supercowpowers.github.io/workbench/blogs/pxr_weekend_experiments/
+  cat554               2026-05-24 20:45 UTC https://github.com/ttll1667/pxr_comp/blob/main/README_pxr_stability_stack_experiment_log.md
+  cc                   2026-06-29 09:04 UTC https://docs.google.com/document/d/1nyxJmuBbRNUWGSlBnTHD3EcZHIt8Fj5wcZ7brZKN4iw/edit?tab=t.0
+  chaospilot           2026-05-25 10:43 UTC https://1drv.ms/t/c/a6144d17cf10bd2e/IQAiYJT7u4i4SaUD8h0K_SBgAWWOcR8yUpp6IgBuh-9APO8?e=kcHwyZ
+  chempxr              2026-06-29 07:50 UTC https://github.com/chem-ops/pxr
+  dargason             2026-06-30 18:54 UTC https://aetherark.com/projects/pxr-modeling/phase2-activity-final-report/
+  discoverybytes       2026-05-29 17:49 UTC https://github.com/discoverybytes/openadmet-pxr-blind-challenge/blob/main/activity-prediction/README.md
+  duod                 2026-05-25 06:59 UTC https://github.com/duoyou666/PXR_report
+  duoduo6              2026-05-25 05:30 UTC https://github.com/duoduo6660/PXR
+  ellieberry           2026-06-30 11:03 UTC https://github.com/etiu/Pxr_challenge1-openadmet
+  firstpass            2026-06-28 11:58 UTC https://huggingface.co/lachrymator/openadmet-pxr-challenge
+  foobar               2026-05-04 13:06 UTC https://model-version.invalid/test1/68
+  hangyodon            2026-05-24 14:23 UTC https://github.com/hangyodon-ljy/pxr-challenge-baseline
+  https://huggingface.co/VIDraft 2026-06-10 23:55 UTC https://huggingface.co/datasets/VIDRAFT/pxr-challenge-method
+  huypn168             2026-06-30 11:17 UTC https://docs.google.com/document/d/14pI7PcKI4mlnt6TxXYBZBj-YeHlzKE9etqb7VR0oUag/edit?usp=sharing
+  itetko               2026-06-29 15:03 UTC https://docs.google.com/document/d/11MsxZAZmmQ4_6VYq16utLmtnp-jz0B6XXE2MUwEGH1s/
+  jaybirdy             2026-06-28 10:44 UTC https://github.com/jjaybird606-blip/pxr
+  jeremy               2026-05-29 13:24 UTC https://github.com/jeremycheminf/openadmet_scripts/tree/main/PXR/2D
+  k3785331526          2026-05-24 14:54 UTC https://github.com/kenny3785331526/PXR.git
+  kulkakulka           2026-06-29 03:38 UTC https://github.com/anairr18/pxr-challenge/blob/main/reports/writeup.md
+  ldbc1999             2026-05-24 01:27 UTC https://github.com/lizyurkewych-git/pxr-challenge
+  leeherman99          2026-06-17 14:11 UTC https://docs.google.com/document/d/1Rhm161zVYxms7FYOXR6zVja5e62jtVTMXY1MXdyTqMM/edit?usp=sharing
+  lxduo                2026-05-25 06:00 UTC https://github.com/duo6660/PXR-report
+  minhpham-2003        2026-06-30 18:36 UTC https://docs.google.com/document/d/1ZBrHOIiTvByB6xTj3tELkHcsyPPAUNx5VQwQeDQmV30/edit?usp=sharing
+  mp-alex              2026-06-17 15:09 UTC https://github.com/mirror-physics/pxr_openadmet_blind_challenge/blob/main/reports/track1_activity/submission_phase2_v3_5model_selftrain_ensemble.md
+  nyota                2026-05-24 14:04 UTC https://github.com/junyigloria-collab/pxr-challenge-method-report
+  objective-santi      2026-06-26 15:34 UTC https://gist.github.com/Kaynier/9ceb7fff33e7b5bcd047fa0735fc2c34
+  pavankum             2026-06-03 16:51 UTC https://gist.github.com/pavankum/c35157f76ef606b5ffee05ee3ccf84f3
+  ranga_31489          2026-04-12 22:11 UTC https://github.com/quantumdolphin/OPENADMET-PXR-activity-pred/blob/c02fd2a86421f9a808327071c2a9d7894aaa4d02/METHOD_REPORT.md
+  sandeepbii           2026-06-28 09:02 UTC https://github.com/spalgit/dockerimages/blob/main/QSARTuna/submission_report.pdf
+  sia                  2026-06-30 17:29 UTC https://docs.google.com/document/d/1W21gxkSEl4Eubn6n1nAHukbfR-aF2qwP54gbCwj-wpM/edit?usp=sharing
+  tguttenb1            2026-06-30 05:37 UTC https://github.com/tguttenb/openadmet-pxr-model-summary
+  toxicity             2026-06-30 22:29 UTC https://docs.google.com/document/d/10wG9RDO7RggWLdqJe0qkcC_eAeHIf7niJROcIcl_gtM/edit?tab=t.0#heading=h.s2yx44dt2a2z
+  volt                 2026-06-26 16:57 UTC https://docs.google.com/document/d/1KT-Jb34A0pj_ofXrZ9tottXsUtnFPZ5Pz5mvesaMi2Y/edit?usp=sharing
+  wuhicky              2026-05-24 17:33 UTC https://github.com/wuhike61-cmd/pxr
+  xX-its-amit-Xx       2026-06-30 16:25 UTC https://github.com/xX-its-amit-Xx/OpenADMET-pxr-challenge
+  zero_da2             2026-06-28 18:02 UTC https://github.com/Bunseki2/ADMETChallenge_PXR/edit/main/README.md
+  zhou-shan-shui       2026-06-30 16:37 UTC https://github.com/sorciosecco/oadmet-pxr-activity-prediction/blob/main/README.md
+
+Wrote 2026-06-30.csv
+Wrote 2026-06-30.urls.txt (71 URLs)
+```
