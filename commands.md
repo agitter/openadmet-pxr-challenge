@@ -3399,7 +3399,7 @@ LONGEST-ATTEMPT vs SUM-OF-RAN-ATTEMPTS (all successful legs)
 ```
 
 ```commandline
-python openfe/scripts/22_compute_accounting.py --production-dir openfe/production --outdir openfe
+$ python openfe/scripts/22_compute_accounting.py --production-dir openfe/production --outdir openfe
 Found 2050 .log files
 Parsed 13666 execution attempts across 1067 legs
 
@@ -3412,9 +3412,9 @@ TOTAL GPU BURN (all attempts)
   Mean attempts per leg:           12.8
 
   --- Attempt-level split (regime-independent) ---
-  substantial attempts (>= 5 min):  5,198  (3,898.8 GPU-h)
-  trivial attempts (< 5 min evict): 8,468  (30.0 GPU-h)
-  -> trivial -o-conflict thrash is 62% of attempts but only 0.8% of GPU-hours
+  substantial attempts (>= 5 min):  4,342  (3,896.4 GPU-h)
+  trivial attempts (< 5 min evict): 9,324  (32.4 GPU-h)
+  -> trivial -o-conflict thrash is 68% of attempts but only 0.8% of GPU-hours
 
   NOTE: Legs ran across preempting slots under two checkpointing
   regimes (--resume and no-resume versions of run_quickrun.sh), so
@@ -3432,10 +3432,10 @@ kartograf     12478 3051.446944
 BURN BY SLOT TYPE
 ================================================================
   slot_type  attempts   gpu_hours  mean_attempt_h  ran_gpu_hours
-   backfill      4346 1463.098056        0.336654    1453.558056
-        osg      3011 1325.456389        0.440205    1318.366944
-     shared      5319  688.912222        0.129519     676.943889
-prioritized       990  451.315833        0.455875     449.905278
+   backfill      4346 1463.098056        0.336654    1453.106389
+        osg      3011 1325.456389        0.440205    1317.772222
+     shared      5319  688.912222        0.129519     675.711389
+prioritized       990  451.315833        0.455875     449.798056
 
 ================================================================
 BURN BY GPU DEVICE TYPE
@@ -3476,40 +3476,40 @@ BURN BY GPU CAPABILITY
 ================================================================
 SUBSTANTIAL RUN-ATTEMPT DURATION (per attempt, not per leg)
 ================================================================
-  Substantial run-attempts: 5198
-  Mean: 0.75h  median: 0.64h  min: 0.00h  max: 21.28h
+  Substantial run-attempts: 4342
+  Mean: 0.90h  median: 0.71h  min: 0.08h  max: 21.28h
 
   By GPU device:
                            device    n   mean_h  median_h    min_h     max_h
-NVIDIA A100-SXM4-80GB MIG 3g.40gb  102 0.491476  0.001667 0.001111  6.680833
-                       NVIDIA L40  763 0.587218  0.594444 0.000000 11.551389
-                      NVIDIA L40S 1222 0.614766  0.473194 0.000556 11.212222
-       NVIDIA GeForce RTX 2080 Ti  715 0.665300  0.811111 0.001111  4.653056
-          NVIDIA GeForce RTX 3060    8 0.673368  0.780139 0.002222  1.069167
-            NVIDIA H100 80GB HBM3  474 0.752345  0.698472 0.000833  3.493056
-                      NVIDIA H200  322 0.792918  0.624583 0.000833  3.954167
-            NVIDIA A100-SXM4-80GB  246 0.835884  0.600833 0.000833  5.665833
-            NVIDIA A100-SXM4-40GB  353 0.910505  0.788611 0.001111 11.527500
-                 NVIDIA RTX A5000  338 0.938891  0.819444 0.001111  4.471944
-                       NVIDIA A40  212 0.939344  0.799028 0.001389  4.101111
-             Tesla V100-PCIE-16GB   43 0.962513  0.792500 0.001389  3.985000
+                      NVIDIA L40S 1088 0.690174  0.482083 0.086667 11.212222
+                       NVIDIA L40  594 0.753148  0.620139 0.085000 11.551389
+          NVIDIA GeForce RTX 3060    7 0.769246  0.781111 0.195000  1.069167
+                      NVIDIA H200  310 0.823513  0.632083 0.090556  3.954167
+            NVIDIA H100 80GB HBM3  403 0.884209  0.729444 0.087500  3.493056
+                 NVIDIA RTX A5000  325 0.975892  0.825556 0.084444  4.471944
+                       NVIDIA A40  204 0.976091  0.802639 0.133333  4.101111
+            NVIDIA A100-SXM4-80GB  206 0.997783  0.622083 0.145000  5.665833
+NVIDIA A100-SXM4-80GB MIG 3g.40gb   50 1.001339  0.643889 0.267500  6.680833
                   NVIDIA H100 NVL    8 1.022014  0.605972 0.553333  3.088889
-             Tesla P100-PCIE-16GB   75 1.078641  0.968333 0.002222  5.478056
-            NVIDIA A100 80GB PCIe   55 1.141672  0.905556 0.001389  3.826111
-       NVIDIA GeForce GTX 1080 Ti  154 1.186457  0.923056 0.001389 21.280556
-                  Quadro RTX 6000  104 1.231565  1.187778 0.001944  3.791111
+             Tesla V100-PCIE-16GB   40 1.034590  0.802500 0.666944  3.985000
+            NVIDIA A100-SXM4-40GB  307 1.046492  0.818056 0.086667 11.527500
+       NVIDIA GeForce RTX 2080 Ti  445 1.067859  0.911389 0.084167  4.653056
+            NVIDIA A100 80GB PCIe   53 1.184696  0.918611 0.130833  3.826111
+             Tesla P100-PCIE-16GB   67 1.206820  1.010556 0.086389  5.478056
+                  Quadro RTX 6000  100 1.280739  1.192222 0.085000  3.791111
+       NVIDIA GeForce GTX 1080 Ti  131 1.394502  0.960833 0.112222 21.280556
              Tesla V100-PCIE-32GB    4 2.192847  2.371389 0.261389  3.767222
 
   By capability:
  capability    n   mean_h  median_h
-        6.0   75 1.078641  0.968333
-        6.1  154 1.186457  0.923056
-        7.0   47 1.067222  0.800278
-        7.5  819 0.737206  0.830833
-        8.0  756 0.846506  0.686111
-        8.6  558 0.935256  0.810972
-        8.9 1985 0.604177  0.508056
-        9.0  804 0.771277  0.666389
+        6.0   67 1.206820  1.010556
+        6.1  131 1.394502  0.960833
+        7.0   44 1.139886  0.805139
+        7.5  545 1.106919  0.935000
+        8.0  616 1.038429  0.747083
+        8.6  536 0.973269  0.818611
+        8.9 1682 0.712413  0.557222
+        9.0  721 0.859642  0.696389
 
 ================================================================
 WHERE JOBS RAN (by host, top 25 by GPU-hours)

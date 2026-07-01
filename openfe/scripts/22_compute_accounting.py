@@ -186,12 +186,18 @@ def main():
             else:
                 dur = None
             dur_h = dur / 3600.0 if dur is not None else None
-            # Tag attempt kind: short evicted attempts are the -o output-
-            # conflict requeue thrash; longer ones are genuine compute.
-            # end_reason is "was evicted" or "terminated" (from RE_END group).
+            # Tag attempt kind. immediate_fail = a short attempt that either
+            # (a) was evicted (preemption) or (b) terminated with a nonzero
+            # return value (an error exit, e.g. the -o output-conflict bug
+            # which exits in seconds via HTCondor event 005, NOT 004). Both
+            # are non-productive thrash. Everything else is a genuine 'ran'
+            # attempt. end_reason is "was evicted" or "terminated".
             if dur_h is None:
                 kind = "unknown"
-            elif dur_h < IMMEDIATE_FAIL_H and a["end_reason"] == "was evicted":
+            elif dur_h < IMMEDIATE_FAIL_H and (
+                    a["end_reason"] == "was evicted"
+                    or (a["end_reason"] == "terminated"
+                        and a["retval"] not in (0, None))):
                 kind = "immediate_fail"
             else:
                 kind = "ran"
