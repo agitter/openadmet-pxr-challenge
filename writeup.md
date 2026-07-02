@@ -17,19 +17,46 @@ That combination of factors motivated me to select [OpenFE](https://docs.openfre
 To preview my results, the rest of this report could be characterized as what my clinical biostatistics colleagues call a [_futility analysis_](https://pubmed.ncbi.nlm.nih.gov/17128426/).
 It became clear pre-submission that my approach had failed.
 However, the process was educational.
-I confirmed OpenFE is a great match for the computing infrastructure I have available, and I could see myself returning to RBFE analysis again (in closer consultation with my molecular simulation colleagues).
+I confirmed OpenFE is a great match for the computing infrastructure I have available, and I could see myself returning to RBFE analysis again (in closer consultation with collaborators who have expertise in molecular simulation).
 
 ## Methods
-Outline to be expanded:
-- Select refined PXR structures
-- Run [GNINA](https://github.com/gnina/gnina) docking
-- Run OpenFE RBFE simulations
-- Analyze docking and RBFE results and RBFE failures
-- Calibrate docking and RBFE scores and sweep over ensemble models
-- Select a final ensemble model and score test compounds
+The initial steps involved preparing for the OpenFE RBFE calculations.
+I assessed the 66 PXR PDB structures that the [OpenADMET team](https://openadmet.ghost.io/pregnane-x-receptor-pdb-structure-rerefinement/) [refined](https://github.com/OpenADMET/pxr_xtal_re-refinement), of which 62 for were available and had `.pdb` files.
+I prepared these for docking.
+I clustered the 513 test compounds using ECFP4 fingerprints and Tanimoto similarity and then associated each test compound with its most similar anchor compound in the training set.
+Then, I docked all test compounds and the 89 training anchors with [GNINA](https://github.com/gnina/gnina), scanning over all PXR structures to find the structure with the most favorable score.
+I used the docking results to select a structure for each compound and a starting pose for RBFE.
+This also produced the GNINA scores, which were used later in the submitted ensemble model.
+I checked the correlation of the GNINA CNNaffinity, minimizedAffinity, and CNNscore scores with the training anchor and phase 1 test compounds' pEC50.
 
-Most code was written or drafted by Claude Sonnet 4.6, Claude Opus 4.6, or Claude Opus 4.8.
+I started the OpenFE stage on June 17 by creating a perturbation network within each compound cluster with a minimum spanning tree.
+This produced the ligand transformation edges and simulations required.
+I was concerned about the short amount of time left before the challenge end date and how I would be left empty-handed if I could not finish all the OpenFE runs in time.
+This strongly influenced the OpenFE planning settings, such as using only 1 protocol repeat.
+I ran a OpenFE pilot to assess GPU runtime and compatibility with the diverse GPU hardware I had access to, which spanned multiple CUDA capabilities.
+Then, I launched the full scale RBFE run across these GPUs.
+Many RBFE calculations finished in this initial batch of jobs, but some did not succeed and checkpointing partially completed work was implemented incorrectly.
+I reran the failed jobs and analyzed the initial RBFE output.
+Many transformations executed to completion with OpenFE but produced NaN results.
+I switched from a KartografAtomMapper to a LOMAP mapper to see if different settings could recover some of the failed transformations.
+The new mapper did not help.
+I proceeded to collect the OpenFE results and propagate known pEC50 values along the connected parts of the RBFE network, using both training anchor compounds' pEC50 values.
+I evaluated these estimated pEC50 values for the phase 1 test compounds.
+
+Given the docking scores and partial RBFE-based pEC50 values, I considered multiple ways to ensemble the scores: docking-only, RBFE-only, a linear blend, an error-based threshold, or a weight estimated from RBFE reliability features (`path_ddg_error`, `min_overlap_on_path`, `max_edge_error_on_path`, `n_hops`, and `std_CNNscore_across_receptors`).
+I also derived a linear calibration for the docking scores and RBFE scores.
+Both the ensembles and calibration were assessed with 5-fold cross validation on the phase 1 test compounds.
+Some phase 1 test compounds did not have RBFE-based pEC50 values, so the training fold mean to impute missing data.
+Despite the docking-only predictions having the best Relative Absolute Error (RAE) by a small margin, I opted for a linear blend of docking and RBFE.
+This was motivated by the desire to evaluate whether RBFE could contribute to this analysis versus docking-only, which is similar to a expected baseline algorithm, and the small RAE difference.
+I performed an additional round of hyperparameter optimization to choose the docking versus RBFE contribution in the linear ensemble and applied that model to the phase 2 test compounds.
+
+Finally, I analyzed how the OpenFE computing workload was distributed across different GPUs.
+
+Most code was written or drafted by Claude (Sonnet 4.6, Opus 4.6, or Opus 4.8), as well as some of the direct analysis.
+Claude's [methods outline](claude/methods_outline.md) contains more information about some of these steps.
 I also used GPT-5.5 Instant to prepare and test the OpenFE Singularity image and scripts.
+High throughput computing was run at the University of Wisconsin-Madison Center for High Throughput Computing, which connects to the Open Science Pool.
 
 ## Results
 Text to come
