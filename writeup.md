@@ -50,3 +50,6 @@ Text to come
 
 ## Discussion
 - Summarize the auto-generated limitations document
+
+## Acknowledgements
+This project used the computing resources of the University of Wisconsin-Madison [Center for High Throughput Computing](https://chtc.cs.wisc.edu/uw-research-computing/cite-chtc) (doi:10.21231/GNT1-HW21) and the [Open Science Pool](https://osg-htc.org/acknowledging) (doi:10.21231/906P-4D78), which is supported by the National Science Foundation awards #2030508 and #2323298.
