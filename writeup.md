@@ -181,7 +181,7 @@ I come from a ligand-based machine learning modeling background, so attempting d
 
 Based on the phase 1 test set results above, I do not expect my phase 2 submission to be better than the mean pEC50.
 The core problem with my workflow was that I sacrificed too much in the OpenFE configuration for the goal of completing the submission with enough time remaining.
-As detailed in Claude's [limiations document](claude/limitations_and_lessons.md), there were opportunities to construct a more robust perturbation network, improve the starting poses, add repeats, modify the equilibration protocol, scale the sampling length, and so on.
+As detailed in Claude's [limitations document](claude/limitations_and_lessons.md), there were opportunities to construct a more robust perturbation network, improve the starting poses, add repeats, modify the equilibration protocol, scale the sampling length, and so on.
 Some of these choices also reflect my inexperience with RBFE calculations.
 I do not have intuition into how to construct appropriate OpenFE settings or to flag settings that are likely to produce noisy, useless results.
 In the era of AI scientists, this highlights the difference between running a tool to completion and running it in an appropriate way for the dataset and problem at hand.
