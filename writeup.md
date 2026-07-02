@@ -174,9 +174,19 @@ Over a week, I completed all the OpenFE jobs with three major batches of submiss
 ![GPU computing timeline](openfe/compute_timeline.png)
 
 ## Discussion
-- Summarize the auto-generated limitations document
+Starting with the positive outcomes (glass half full!), I once again used the OpenADMET challenge to learn about a new computational method that may influence my core research in the future.
+With AI assistance, it was reasonably easy to deploy OpenFE at scale on GPUs in my research computing infrastructure.
+Its compatibility with many GPU hardware generations and older GPUs and support for checkpointing (which I set up incorrectly) make it an excellent candidate for opportunistic computing on idle GPUs.
+I come from a ligand-based machine learning modeling background, so attempting docking and RBFE calculations was enlightening.
 
-Any academic or non-profit researcher who is interested in the Open Science Pool should reach out to me or [contact](https://osg-htc.org/contact.html) their staff.
+Based on the phase 1 test set results above, I do not expect my phase 2 submission to be better than the mean pEC50.
+The core problem with my workflow was that I sacrificed too much in the OpenFE configuration for the goal of completing the submission with enough time remaining.
+As detailed in Claude's [limiations document](claude/limitations_and_lessons.md), there were opportunities to construct a more robust perturbation network, improve the starting poses, add repeats, modify the equilibration protocol, scale the sampling length, and so on.
+Some of these choices also reflect my inexperience with RBFE calculations.
+I do not have intuition into how to construct appropriate OpenFE settings or to flag settings that are likely to produce noisy, useless results.
+In the era of AI scientists, this highlights the difference between running a tool to completion and running it in an appropriate way for the dataset and problem at hand.
+
+Any academic or non-profit researcher who is interested in this type of (free) high throughput computing with CPUs or GPUs in the Open Science Pool should reach out to [me](https://gitterlab.org/) or [contact](https://osg-htc.org/contact.html) their staff.
 
 ## Acknowledgements
 This project used the computing resources of the University of Wisconsin-Madison [Center for High Throughput Computing](https://chtc.cs.wisc.edu/uw-research-computing/cite-chtc) (doi:10.21231/GNT1-HW21) and the [Open Science Pool](https://osg-htc.org/acknowledging) (doi:10.21231/906P-4D78), which is supported by the National Science Foundation awards #2030508 and #2323298.
