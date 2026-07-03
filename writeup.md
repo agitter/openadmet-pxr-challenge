@@ -5,7 +5,7 @@ Archived at https://doi.org/10.5281/zenodo.21084637
 ## Introduction
 The [OpenADMET Predicting PXR Induction Blind Challenge](https://huggingface.co/spaces/openadmet/pxr-challenge) provided a rich dataset that reflects multiple stages of hit discovery and lead optimization: a primary screen, dose-response screen, counter-screen, and dose-response screen on an analog expansion set.
 The goal was to use any of that data to predict pEC50 (-log of EC50) for the 513 compound analog expansion set that served as the test set.
-My strategy was formed based on a few goals, assumptions and constraints.
+My strategy was formed based on a few goals, assumptions, and constraints.
 I started late on June 12, just two and a half weeks before the deadline.
 This was after phase 1 ended, so I did not have opportunities for feedback on the live leaderboard, but I did have the unblinded analog set 1 data to use.
 Because the target compounds were intentionally structurally similar to the 63 active compounds, I was skeptical of how well supervised learning approaches could model the precise quantitative structure activity relationships.
@@ -21,7 +21,7 @@ I confirmed OpenFE is a great match for the computing infrastructure I have avai
 
 ## Methods
 The initial steps involved preparing for the OpenFE RBFE calculations.
-I assessed the 66 PXR PDB structures that the [OpenADMET team](https://openadmet.ghost.io/pregnane-x-receptor-pdb-structure-rerefinement/) [refined](https://github.com/OpenADMET/pxr_xtal_re-refinement), of which 62 for were available and had `.pdb` files.
+I assessed the 66 PXR PDB structures that the [OpenADMET team](https://openadmet.ghost.io/pregnane-x-receptor-pdb-structure-rerefinement/) [refined](https://github.com/OpenADMET/pxr_xtal_re-refinement), of which 62 were available and had `.pdb` files.
 I prepared these for docking.
 I clustered the 513 test compounds using ECFP4 fingerprints and Tanimoto similarity and then associated each test compound with its most similar anchor compound in the training set.
 Then, I docked all test compounds and the 89 training anchors with [GNINA](https://github.com/gnina/gnina), scanning over all PXR structures to find the structure with the most favorable score.
@@ -33,22 +33,23 @@ I started the OpenFE stage on June 17 by creating a perturbation network within 
 This produced the ligand transformation edges and simulations required.
 I was concerned about the short amount of time left before the challenge end date and how I would be left empty-handed if I could not finish all the OpenFE runs in time.
 This strongly influenced the OpenFE planning settings, such as using only 1 protocol repeat.
-I ran a OpenFE pilot to assess GPU runtime and compatibility with the diverse GPU hardware I had access to, which spanned multiple CUDA capabilities.
+I ran an OpenFE pilot to assess GPU runtime and compatibility with the diverse GPU hardware I had access to, which spanned multiple CUDA capabilities.
 Then, I launched the full scale RBFE run across these GPUs.
-Many RBFE calculations finished in this initial batch of jobs, but some did not succeed and checkpointing partially completed work was implemented incorrectly.
+Many RBFE calculations finished in this initial batch of jobs, but some did not succeed.
+In addition, checkpointing partially completed work was implemented incorrectly.
 I reran the failed jobs and analyzed the initial RBFE output.
 Many transformations executed to completion with OpenFE but produced NaN results.
 I switched from a KartografAtomMapper to a LOMAP mapper to see if different settings could recover some of the failed transformations.
-The new mapper did not help.
-I proceeded to collect the OpenFE results and propagate known pEC50 values along the connected parts of the RBFE network, using both training anchor compounds' pEC50 values.
-I evaluated these estimated pEC50 values for the phase 1 test compounds.
+The new mapper did not help, and the same edges failed again.
+I proceeded to collect the OpenFE results and propagate known pEC50 values along the connected parts of the RBFE network, using training anchor compounds' pEC50 values.
+Because the phase 1 test compounds' pEC50 values were not used in the propagation, I evaluated these estimated pEC50 values for those test compounds.
 
 Given the docking scores and partial RBFE-based pEC50 values, I considered multiple ways to ensemble the scores: docking-only, RBFE-only, a linear blend, an error-based threshold, or a weight estimated from RBFE reliability features (`path_ddg_error`, `min_overlap_on_path`, `max_edge_error_on_path`, `n_hops`, and `std_CNNscore_across_receptors`).
 I also derived a linear calibration for the docking scores and RBFE scores.
 Both the ensembles and calibration were assessed with 5-fold cross validation with bootstrapping on the phase 1 test compounds.
-Some phase 1 test compounds did not have RBFE-based pEC50 values, so the training fold mean to impute missing data.
+Some phase 1 test compounds did not have RBFE-based pEC50 values, so I used the training fold mean to impute missing data.
 Despite the docking-only predictions having the best Relative Absolute Error (RAE) by a small margin, I opted for a linear blend of docking and RBFE.
-This was motivated by the desire to evaluate whether RBFE could contribute to this analysis versus docking-only, which is similar to a expected baseline algorithm, and the small RAE difference.
+This was motivated by the desire to evaluate whether RBFE could contribute to this analysis versus docking-only, which is similar to an expected baseline algorithm, and the small RAE difference.
 I performed an additional round of hyperparameter optimization to choose the docking versus RBFE contribution in the linear ensemble and applied that model to the phase 2 test compounds.
 
 Finally, I analyzed how the OpenFE computing workload was distributed across different GPUs.
@@ -84,9 +85,11 @@ CNNaffinity was the most-correlated docking score.
 The 124 compound clusters produced 1,066 OpenFE transformation jobs.
 Ultimately, 819 succeeded and 247 failed.
 The failures were composed of `SimulationNaNError` (188), `IndexError` (54), and `OpenMMException` (5) errors.
+There was a solvent and complex job for each of the 533 edges.
 Mapping the successes and failures back onto the RBFE perturbation network yielded 316 successful transformations and 217 incomplete edges.
+The minimum spanning tree perturbation network was a weakness here because individual failed edges could block pEC50 propagation.
 This corresponded to 152 of 253 phase 1 test set compounds and 140 of 260 phase 2 test set compounds that could potentially have RBFE-derived pEC50s.
-However, some of the results were flagged as having implausible results due to the high magnitude ddG values or the scale of the derived pEC50 values.
+However, some of the results were flagged as implausible due to the high magnitude ddG values or the scale of the derived pEC50 values.
 ```commandline
 |ddG| > 3: 128 edges (40.5%)
 |ddG| > 4: 83 edges (26.3%)
@@ -94,9 +97,9 @@ However, some of the results were flagged as having implausible results due to t
 |ddG| > 7: 24 edges (7.6%)
 |ddG| > 10: 5 edges (1.6%)
 ```
-Further exploration highlighted large MBAR error values and other signs of poor convergence.
+Further exploration highlighted large Multistate Bennett Acceptance Ratio error values (median 1.31 kcal/mol) and other signs of poor convergence (median 0.003 phase-space overlap between adjacent lambda windows, see [Klimovich et al. 2015](https://doi.org/10.1007/s10822-015-9840-9) for guidelines and context).
 
-Cross-validation indciated that docking had a slightly better RAE than ensembles or RBFE alone on the phase 1 test set compounds:
+Cross-validation indicated that docking had a slightly better RAE than ensembles or RBFE alone on the phase 1 test set compounds:
 ```commandline
          model  rae_boot_mean  rae_boot_std  rae_point  spearman      mae
   docking_only       0.970214      0.029864   0.966267  0.284705 0.771722
@@ -111,6 +114,7 @@ threshold_gate       0.978728      0.029564   0.974688  0.269599 0.778447
 
 However, from another perspective, the performance was objectively bad in all cases.
 The OpenFE diagnostics had already raised major concerns about how well the results had converged under the settings used, and these phase 1 test set results confirmed that the RBFE scores were uninformative.
+The RAEs were close to the RAE from predicting the mean value.
 
 Nevertheless, I was uninterested in submitting pure GNINA scores, so I selected a linear scaling factor to combine the calibrated docking and RBFE scores.
 The elbow method suggested an even weighting of w=0.5.
@@ -128,14 +132,15 @@ The values had an unrealistic narrow range in part because the RAE-based calibra
 ![Submission score inspections](openfe/submission_visualizations.png)
 
 The most interesting result was in how the OpenFE GPU jobs were distributed across Center for High Throughput Computing and Open Science Pool resources.
-This analysis required some subtlety because some of those jobs were evicted before completion and had to be restarted.
+This analysis required some subtlety because some of those jobs were evicted before completion and had to be restarted, leading to multiple attempts per job.
 Others terminated quickly because of environment or misconfigured checkpointing errors.
 Overall, the project used 3,928.8 GPU hours.
 The majority of the runtime came from opportunistic usage on idle GPUs that I do not own and are not allocated for shared use in the Center for High Throughput Computing.
 ![Summary of GPU computing for RBFE simulations](openfe/compute_accounting.png)
 
 There was variability in the mean runtime per job by GPU device and CUDA capability.
-However, this could be attributed to job complexity or missed job failures more than a relationship between computing resources and runtime:
+However, this could be attributed to job complexity or missed job failures more than a relationship between computing resources and runtime.
+The following results characterize individual attempts within each job:
 ```commandline
                            device    n   mean_h  median_h    min_h     max_h
                       NVIDIA L40S 1088 0.690174  0.482083 0.086667 11.212222
@@ -182,6 +187,8 @@ I come from a ligand-based machine learning modeling background, so attempting d
 Based on the phase 1 test set results above, I do not expect my phase 2 submission to be better than the mean pEC50.
 The core problem with my workflow was that I sacrificed too much in the OpenFE configuration for the goal of completing the submission with enough time remaining.
 As detailed in Claude's [limitations document](claude/limitations_and_lessons.md), there were opportunities to construct a more robust perturbation network, improve the starting poses, add repeats, modify the equilibration protocol, scale the sampling length, and so on.
+RBFE could have been an appropriate strategy for this test set.
+However, the true ddG values for this analog expansion set were likely small relative to the noise level of my OpenFE protocol.
 Some of these choices also reflect my inexperience with RBFE calculations.
 I do not have intuition into how to construct appropriate OpenFE settings or to flag settings that are likely to produce noisy, useless results.
 In the era of AI scientists, this highlights the difference between running a tool to completion and running it in an appropriate way for the dataset and problem at hand.
