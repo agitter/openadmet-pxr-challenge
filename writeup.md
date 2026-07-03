@@ -195,5 +195,8 @@ In the era of AI scientists, this highlights the difference between running a to
 
 Any academic or non-profit researcher who is interested in this type of (free) high throughput computing with CPUs or GPUs in the Open Science Pool should reach out to [me](https://gitterlab.org/) or [contact](https://osg-htc.org/contact.html) their staff.
 
+The [final](https://openadmet.ghost.io/its-the-end-of-the-pxr-challenge-as-we-know-it-and-i-feel-fine/) [results](https://huggingface.co/spaces/openadmet/pxr-challenge) were in line with my expectations before submission.
+My submission ranked 94 of 95 with RAE of 0.9964.
+
 ## Acknowledgements
 This project used the computing resources of the University of Wisconsin-Madison [Center for High Throughput Computing](https://chtc.cs.wisc.edu/uw-research-computing/cite-chtc) (doi:10.21231/GNT1-HW21) and the [Open Science Pool](https://osg-htc.org/acknowledging) (doi:10.21231/906P-4D78), which is supported by the National Science Foundation awards #2030508 and #2323298.
